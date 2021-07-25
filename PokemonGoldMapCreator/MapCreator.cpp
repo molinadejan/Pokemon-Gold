@@ -15,7 +15,7 @@ bool MapCreator::ViewDrag()
 {
 	static int dragCnt = 0;
 
-	if (GetAsyncKeyState(VK_MENU) & 0x8001 && GetAsyncKeyState(VK_LBUTTON) & 0x8001)
+	if(InputManager::GetKeyHold(VK_MENU) && InputManager::GetKeyHold(VK_LBUTTON))
 	{
 		if (dragCnt < 5)
 			++dragCnt;
