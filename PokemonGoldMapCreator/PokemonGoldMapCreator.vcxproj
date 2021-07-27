@@ -153,17 +153,18 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Datas.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="MapCreator.h" />
     <ClInclude Include="PokemonGoldMapCreator.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="targetver.h" />
-    <ClInclude Include="Timer.h" />
+    <ClInclude Include="TilesetManager.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="MapCreator.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Timer.cpp" />
+    <ClCompile Include="TilesetManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="PokemonGoldMapCreator.rc" />

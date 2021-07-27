@@ -5,6 +5,8 @@
 
 #include <windows.h>
 #include "framework.h"
+#include "Datas.h"
+#include "TilesetManager.h"
 
 #include <vector>
 
@@ -14,6 +16,7 @@ using std::vector;
 class MapCreator
 {
 private:
+	TilesetManager* tm;
 
 	RECT rect;
 
@@ -23,19 +26,28 @@ private:
 	POINT oldPos;
 	POINT newPos;
 
-	vector<vector<Color>> tiles;
+	POINT curSelectPos;
 
-	bool ViewDrag();
+	vector<vector<Tile>> tiles;
+
+	void DrawGrid(Graphics* graphic);
+	void DrawBack(Graphics* graphic);
 
 public:
 	MapCreator();
 
+	void SetOldPos(POINT p);
+	void SetNewPos(POINT p);
+
+	void SetTilesetManager(TilesetManager *_tm);
+	void SetMapSize(int x, int y);
+
+	void SelectTile(POINT mPos);
+
 	void SetSreenSize(HWND hWnd);
-
-	void DrawGrid(Graphics* g);
 	void Draw(HDC hdc);
-
-	void Update();
+	void ViewDrag(HWND hWnd);
+	void Update(HWND hWnd);
 };
 
 #endif // !__MAPCREATOR_H__
