@@ -1,6 +1,7 @@
 ﻿#include "framework.h"
 #include "PokemonGoldMapCreator.h"
 #include "MapCreator.h"
+#include "TilesetManager.h"
 
 #define MAX_LOADSTRING 100
 
@@ -10,14 +11,17 @@ WCHAR szWindowClass[MAX_LOADSTRING];
 
 ULONG_PTR g_GdiToken;
 
+HWND mainWnd;
 HWND tileSetWnd;
 
 MapCreator mc;
+TilesetManager tm;
 
 ATOM                MyRegisterClass(HINSTANCE hInstance);
 BOOL                InitInstance(HINSTANCE, int);
 LRESULT CALLBACK    WndProc(HWND, UINT, WPARAM, LPARAM);
-LRESULT CALLBACK    TileSetProc(HWND, UINT, WPARAM, LPARAM);
+LRESULT CALLBACK    TilesetProc(HWND, UINT, WPARAM, LPARAM);
+BOOL CALLBACK    CreateDlgProc(HWND, UINT, WPARAM, LPARAM);
 
 int APIENTRY wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _In_ LPWSTR lpCmdLine, _In_ int nCmdShow)
 {
@@ -34,7 +38,6 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance
     HACCEL hAccelTable = LoadAccelerators(hInstance, MAKEINTRESOURCE(IDC_POKEMONGOLDMAPCREATOR));
 
     MSG msg;
-	Timer::Reset();
 
 	while (true)
 	{
@@ -50,8 +53,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance
 		}
 		else
 		{
-			Timer::Update();
-			mc.Update();
+			//mc.Update(mainWnd);
+			//tm.Update(tileSetWnd);
 		}
 	}
 
@@ -72,14 +75,14 @@ ATOM MyRegisterClass(HINSTANCE hInstance)
     wcex.hIcon          = LoadIcon(hInstance, MAKEINTRESOURCE(IDI_POKEMONGOLDMAPCREATOR));
     wcex.hCursor        = LoadCursor(nullptr, IDC_ARROW);
     wcex.hbrBackground  = (HBRUSH)(COLOR_WINDOW + 1);
-    wcex.lpszMenuName   = MAKEINTRESOURCEW(IDR_MENU1);
+    wcex.lpszMenuName   = MAKEINTRESOURCEW(IDR_MAIN_MENU);
     wcex.lpszClassName  = szWindowClass;
     wcex.hIconSm        = LoadIcon(wcex.hInstance, MAKEINTRESOURCE(IDI_SMALL));
 
     RegisterClassExW(&wcex);
 
-	wcex.lpfnWndProc = TileSetProc;
-	wcex.lpszMenuName = NULL;
+	wcex.lpfnWndProc = TilesetProc;
+	wcex.lpszMenuName = 0;
 	wcex.lpszClassName = _T("TileSet Window");
 
 	RegisterClassExW(&wcex);
@@ -91,14 +94,14 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 {
    hInst = hInstance;
 
-   HWND hWnd = CreateWindowW(szWindowClass, szTitle,  WS_OVERLAPPEDWINDOW | WS_CLIPCHILDREN,
+   mainWnd = CreateWindowW(szWindowClass, szTitle,  WS_OVERLAPPEDWINDOW | WS_CLIPCHILDREN,
       CW_USEDEFAULT, 0, 1000, 500, nullptr, nullptr, hInstance, nullptr);
 
-   if (!hWnd)
+   if (!mainWnd)
       return FALSE;
 
-   ShowWindow(hWnd, nCmdShow);
-   UpdateWindow(hWnd);
+   ShowWindow(mainWnd, nCmdShow);
+   UpdateWindow(mainWnd);
 
    return TRUE;
 }
@@ -106,30 +109,26 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
 	static RECT rectView;
-	static int tileSetWndW;
-	static HCURSOR hCursor;
-	static int boundary;
+	static bool isDrag;
 
     switch (message)
     {
 		case WM_CREATE:
 		{
-			GetClientRect(hWnd, &rectView);
-
-			tileSetWndW = rectView.right / 3;
-			boundary = rectView.right - tileSetWndW;
-
-			hCursor = LoadCursor(NULL, MAKEINTRESOURCE(IDC_SIZEWE));
-
-			tileSetWnd = CreateWindowEx(0, _T("TileSet Window"), szWindowClass,
-				WS_CHILD | WS_VISIBLE | WS_BORDER,
-				rectView.right  - tileSetWndW, 0, tileSetWndW, rectView.bottom,
-				hWnd, NULL, hInst, NULL);
+			isDrag = false;
 
 			Gdiplus::GdiplusStartupInput gpsi;
 			Gdiplus::GdiplusStartup(&g_GdiToken, &gpsi, NULL);
 
+			GetClientRect(hWnd, &rectView);
+
+			tileSetWnd = CreateWindowEx(0, _T("TileSet Window"), szWindowClass,
+				WS_VISIBLE | WS_OVERLAPPED | WS_BORDER,
+				0, 0, 200, 200,
+				hWnd, NULL, hInst, NULL);
+
 			mc.SetSreenSize(hWnd);
+			mc.SetTilesetManager(&tm);
 
 			SetTimer(hWnd, 1, 8, NULL);
 		}
@@ -139,46 +138,38 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 		{
 			mc.SetSreenSize(hWnd);
 			GetClientRect(hWnd, &rectView);
-
-			boundary = rectView.right - tileSetWndW;
-			MoveWindow(tileSetWnd, rectView.right - tileSetWndW - 1, 0, tileSetWndW, rectView.bottom, TRUE);
-		}
-		break;
-
-		case WM_MOUSEMOVE:
-		{
-			int mx = LOWORD(lParam);
-
-			if (boundary - 10 <= mx && boundary + 10 >= mx)
-			{
-				SetCursor(hCursor);
-
-				if (wParam == MK_LBUTTON)
-				{
-					GetClientRect(hWnd, &rectView);
-
-					if (mx > 0 && mx < rectView.right)
-					{
-						boundary = mx;
-						tileSetWndW = rectView.right - boundary;
-					}
-
-					MoveWindow(tileSetWnd, rectView.right - tileSetWndW - 1, 0, tileSetWndW, rectView.bottom, TRUE);
-				}
-			}
 		}
 		break;
 
 		case WM_LBUTTONDOWN:
 		{
-			SetCursor(hCursor);
-			SetCapture(hWnd);
+			POINT mPos = { LOWORD(lParam), HIWORD(lParam) };
+
+			if (GetAsyncKeyState(VK_LMENU) & 0x8001)
+			{
+				isDrag = true;
+				mc.SetOldPos(mPos);
+				return 0;
+			}
+			
+			isDrag = false;
+			mc.SelectTile(mPos);
+		}
+		break;
+
+		case WM_MOUSEMOVE:
+		{
+			if (isDrag && (GetAsyncKeyState(VK_LMENU) & 0x8001))
+			{
+				mc.SetNewPos({ LOWORD(lParam), HIWORD(lParam) });
+				mc.ViewDrag(hWnd);
+			}
 		}
 		break;
 
 		case WM_LBUTTONUP:
 		{
-			ReleaseCapture();
+			isDrag = false;
 		}
 		break;
 
@@ -191,6 +182,12 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 				case IDM_EXIT:
 				{
 					DestroyWindow(hWnd);
+				}
+				break;
+
+				case ID_CREATE:
+				{
+					DialogBox(hInst, MAKEINTRESOURCE(IDD_DIALOG_CREATE), hWnd, CreateDlgProc);
 				}
 				break;
 
@@ -234,13 +231,42 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
     return 0;
 }
 
-LRESULT CALLBACK TileSetProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
+LRESULT CALLBACK TilesetProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
+	static RECT rectView;
+
 	switch (message)
 	{
 		case WM_CREATE:
 		{
+			tm.LoadTileset(hWnd);
+			tm.SetSreenSize(hWnd);
 
+			SetTimer(hWnd, 2, 128, NULL);
+		}
+		break;
+
+		case WM_TIMER:
+		{
+			InvalidateRect(hWnd, NULL, false);
+		}
+		break;
+
+		case WM_LBUTTONDOWN:
+		{
+			tm.SelectTile(hWnd);
+		}
+		break;
+
+		case WM_KEYDOWN:
+		{
+			switch (wParam)
+			{
+				case VK_ESCAPE:
+				{
+					tm.SetIsSelect(false);
+				}
+			}
 		}
 		break;
 
@@ -249,11 +275,7 @@ LRESULT CALLBACK TileSetProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lPar
 			PAINTSTRUCT ps;
 			HDC hdc = BeginPaint(hWnd, &ps);
 
-			Graphics graphic(hdc);
-
-			Image image(_T("Resource/tileset_day.png"));
-
-			graphic.DrawImage(&image, 0, 0, image.GetWidth(), image.GetHeight());
+			tm.Draw(hWnd, hdc);
 
 			EndPaint(hWnd, &ps);
 		}
@@ -269,6 +291,49 @@ LRESULT CALLBACK TileSetProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lPar
 		default:
 		{
 			return DefWindowProc(hWnd, message, wParam, lParam);
+		}
+		break;
+	}
+
+	return 0;
+}
+
+BOOL CALLBACK CreateDlgProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
+{
+	switch (message)
+	{
+		case WM_INITDIALOG:
+		{
+
+		}
+		break;
+
+		case WM_COMMAND:
+		{
+			switch (LOWORD(wParam))
+			{
+				case IDOK:
+				{
+					HWND editX, editY;
+
+					editX = GetDlgItem(hDlg, IDC_EDIT_X);
+					editY = GetDlgItem(hDlg, IDC_EDIT_Y);
+
+					UINT x = GetDlgItemInt(hDlg, IDC_EDIT_X, NULL, FALSE);
+					UINT y = GetDlgItemInt(hDlg, IDC_EDIT_Y, NULL, FALSE);
+
+					mc.SetMapSize(x, y);
+
+					EndDialog(hDlg, 0);
+				}
+				break;
+
+				case IDCANCEL:
+				{
+					EndDialog(hDlg, 0);
+				}
+				break;
+			}
 		}
 		break;
 	}
