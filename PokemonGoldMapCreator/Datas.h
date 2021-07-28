@@ -4,22 +4,34 @@
 #define __DATAS_H__
 
 #include <string>
+#include <vector>
+
 #include "framework.h"
 
 using std::string;
+using std::vector;
 using namespace Gdiplus;
 
 struct Tile
 {
-	string tileset;
+	//string tileset;
 	POINT tilePos;
 
 	// 0 : 이동 불가능
 	// 1 : 이동 가능
-	// 2 ~ : 해당 포켓몬 기술이 있을 경우 이동 가능
 	int moveable;
+	int interactID;
 
-	Tile() : tileset(""), tilePos{ -1, -1 }, moveable(false) { }
+	Tile() : tilePos{ -1, -1 }, moveable(1), interactID(-1) { }
+};
+
+struct Map
+{
+	string ID;
+	POINT mapSize;
+	vector<vector<Tile>> tiles;
+
+	Map() : ID(""), mapSize{ -1, -1 } { }
 };
 
 #endif // !__DATAS_H__
