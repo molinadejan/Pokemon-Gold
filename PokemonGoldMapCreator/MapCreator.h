@@ -21,33 +21,51 @@ private:
 	RECT rect;
 
 	POINT cameraPos;
-	POINT mapSize;
 
 	POINT oldPos;
 	POINT newPos;
 
 	POINT curSelectPos;
 
-	vector<vector<Tile>> tiles;
+	Map mapData;
+
+	Bitmap *mapImage;
+	Bitmap *coliImage;
+
+	bool PosInGrid(POINT pos);
+
+	void DrawToCollider(int moveable, int x, int y);
+	void DrawToMap(Image* img, int x, int y, int srcx, int srcy);
 
 	void DrawGrid(Graphics* graphic);
 	void DrawBack(Graphics* graphic);
+	void DrawMap(Graphics* graphic);
+	void DrawCollider(Graphics* graphic);
+
+	void InitMap(int x, int y);
+	void InitMap(TCHAR *filepath);
+	void InitCollider(int x, int y);
 
 public:
 	MapCreator();
 
-	void SetOldPos(POINT p);
-	void SetNewPos(POINT p);
+	void SetOldPos(POINT p) { oldPos = p; }
+	void SetNewPos(POINT p) { newPos = p; }
 
-	void SetTilesetManager(TilesetManager *_tm);
-	void SetMapSize(int x, int y);
+	void SetTilesetManager(TilesetManager *_tm) { tm = _tm; }
 
 	void SelectTile(POINT mPos);
+	void SelectCollider(POINT mPos);
 
 	void SetSreenSize(HWND hWnd);
 	void Draw(HDC hdc);
 	void ViewDrag(HWND hWnd);
-	void Update(HWND hWnd);
+
+	void MapCreate(TCHAR *id, int x, int y);
+	void FileOpen(TCHAR* filename);
+	void FileSave(TCHAR* filename);
+
+	string GetMapID() const { return mapData.ID; }
 };
 
 #endif // !__MAPCREATOR_H__
