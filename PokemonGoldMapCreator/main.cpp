@@ -3,6 +3,8 @@
 #include "MapCreator.h"
 #include "TilesetManager.h"
 
+#include <atlstr.h>
+
 #define MAX_LOADSTRING 100
 
 HINSTANCE hInst;
@@ -21,7 +23,10 @@ ATOM                MyRegisterClass(HINSTANCE hInstance);
 BOOL                InitInstance(HINSTANCE, int);
 LRESULT CALLBACK    WndProc(HWND, UINT, WPARAM, LPARAM);
 LRESULT CALLBACK    TilesetProc(HWND, UINT, WPARAM, LPARAM);
+
 BOOL CALLBACK    CreateDlgProc(HWND, UINT, WPARAM, LPARAM);
+BOOL CALLBACK    SaveDlgProc(HWND, UINT, WPARAM, LPARAM);
+BOOL CALLBACK    OpenDlgProc(HWND, UINT, WPARAM, LPARAM);
 
 int APIENTRY wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _In_ LPWSTR lpCmdLine, _In_ int nCmdShow)
 {
@@ -173,6 +178,12 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 		}
 		break;
 
+		case WM_RBUTTONDOWN:
+		{
+			mc.SelectCollider({ LOWORD(lParam), HIWORD(lParam) });
+		}
+		break;
+
 		case WM_COMMAND:
 		{
 			int wmId = LOWORD(wParam);
@@ -188,6 +199,18 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 				case ID_CREATE:
 				{
 					DialogBox(hInst, MAKEINTRESOURCE(IDD_DIALOG_CREATE), hWnd, CreateDlgProc);
+				}
+				break;
+
+				case ID_SAVE:
+				{
+					DialogBox(hInst, MAKEINTRESOURCE(IDD_DIALOG_SAVE), hWnd, SaveDlgProc);
+				}
+				break;
+
+				case ID_OPEN:
+				{
+					DialogBox(hInst, MAKEINTRESOURCE(IDD_DIALOG_OPEN), hWnd, OpenDlgProc);
 				}
 				break;
 
@@ -314,15 +337,13 @@ BOOL CALLBACK CreateDlgProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lPara
 			{
 				case IDOK:
 				{
-					HWND editX, editY;
-
-					editX = GetDlgItem(hDlg, IDC_EDIT_X);
-					editY = GetDlgItem(hDlg, IDC_EDIT_Y);
-
 					UINT x = GetDlgItemInt(hDlg, IDC_EDIT_X, NULL, FALSE);
 					UINT y = GetDlgItemInt(hDlg, IDC_EDIT_Y, NULL, FALSE);
 
-					mc.SetMapSize(x, y);
+					TCHAR id[64];
+					GetDlgItemText(hDlg, IDC_EDIT_ID, id, 64);
+
+					mc.MapCreate(id, x, y);
 
 					EndDialog(hDlg, 0);
 				}
@@ -336,6 +357,84 @@ BOOL CALLBACK CreateDlgProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lPara
 			}
 		}
 		break;
+	}
+
+	return 0;
+}
+
+BOOL CALLBACK SaveDlgProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
+{
+	switch (message)
+	{
+	case WM_INITDIALOG:
+	{
+		TCHAR id[64];
+
+		_tcscpy_s(id, CA2T(mc.GetMapID().c_str()));
+		SetDlgItemText(hDlg, IDC_EDIT_SAVE_NAME, id);
+	}
+	break;
+
+	case WM_COMMAND:
+	{
+		switch (LOWORD(wParam))
+		{
+		case IDOK:
+		{
+			TCHAR filename[128];
+
+			GetDlgItemText(hDlg, IDC_EDIT_SAVE_NAME, filename, 128);
+
+			mc.FileSave(filename);
+			EndDialog(hDlg, 0);
+		}
+		break;
+
+		case IDCANCEL:
+		{
+			EndDialog(hDlg, 0);
+		}
+		break;
+		}
+	}
+	break;
+	}
+
+	return 0;
+}
+
+BOOL CALLBACK OpenDlgProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
+{
+	switch (message)
+	{
+	case WM_INITDIALOG:
+	{
+
+	}
+	break;
+
+	case WM_COMMAND:
+	{
+		switch (LOWORD(wParam))
+		{
+		case IDOK:
+		{
+			TCHAR filename[128];
+			GetDlgItemText(hDlg, IDC_EDIT_LOAD_NAME, filename, 128);
+
+			mc.FileOpen(filename);
+			EndDialog(hDlg, 0);
+		}
+		break;
+
+		case IDCANCEL:
+		{
+			EndDialog(hDlg, 0);
+		}
+		break;
+		}
+	}
+	break;
 	}
 
 	return 0;

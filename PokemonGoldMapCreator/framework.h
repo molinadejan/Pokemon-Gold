@@ -17,5 +17,5 @@
 #include "Timer.h"
 #include <cmath>
 
-#pragma comment(lib, "./lib/InputManager.lib")
-#include "./lib/header/InputManager.h"
+//#pragma comment(lib, "./lib/InputManager.lib")
+//#include "./lib/header/InputManager.h"
