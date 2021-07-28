@@ -34,7 +34,7 @@ TilesetManager::TilesetManager()
 
 TilesetManager::~TilesetManager()
 {
-	delete tileset;
+	//delete tileset;
 }
 
 void TilesetManager::LoadTileset(HWND hWnd)
@@ -94,32 +94,4 @@ void TilesetManager::Draw(HWND hWnd, HDC hdc)
 	DeleteObject(newBit);
 
 	DeleteDC(memDC);
-}
-
-void TilesetManager::Update(HWND hWnd)
-{
-	if (InputManager::GetKeyUp(VK_LBUTTON))
-	{
-		POINT mPos;
-		GetCursorPos(&mPos);
-		ScreenToClient(hWnd, &mPos);
-
-		if (mPos.x >= rect.left && mPos.x <= rect.right && mPos.y >= rect.top && mPos.y <= rect.bottom)
-		{
-			if (!isSelect)
-				isSelect = true;
-
-			curSelectPos.x = mPos.x - mPos.x % 16;
-			curSelectPos.y = mPos.y - mPos.y % 16;
-		}
-	}
-	else if (InputManager::GetKeyDown(VK_ESCAPE))
-	{
-		isSelect = false;
-	}
-}
-
-Image * TilesetManager::GetTileset()
-{
-	return tileset;
 }

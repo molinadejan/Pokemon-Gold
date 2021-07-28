@@ -28,6 +28,11 @@ public:
 	TilesetManager();
 	~TilesetManager();
 
+	bool GetIsSelect() const { return isSelect; }
+
+	POINT GetCurSelectPos() const { return curSelectPos; }
+	Image* GetTileset() const { return tileset; }
+
 	void LoadTileset(HWND hWnd);
 	void SetSreenSize(HWND hWnd);
 
@@ -35,9 +40,6 @@ public:
 	void SelectTile(HWND hWnd);
 
 	void Draw(HWND hWnd, HDC hdc);
-	void Update(HWND hWnd);
-
-	Image* GetTileset();
 };
 
 #endif // !__TILESETMANAGER_H__
