@@ -46,7 +46,7 @@ void TilesetManager::SetSreenSize(HWND hWnd)
 {
 	SetRect(&totalRect, 0, 0, tileset->GetWidth(), tileset->GetHeight());
 	AdjustWindowRect(&totalRect, WS_VISIBLE | WS_OVERLAPPED | WS_THICKFRAME, TRUE);
-	MoveWindow(hWnd, 1000, 100, totalRect.right - totalRect.left + 3, totalRect.bottom - totalRect.top + 6, TRUE);
+	MoveWindow(hWnd, 1000, 10, totalRect.right - totalRect.left + 3, totalRect.bottom - totalRect.top + 6, TRUE);
 	GetClientRect(hWnd, &rect);
 }
 

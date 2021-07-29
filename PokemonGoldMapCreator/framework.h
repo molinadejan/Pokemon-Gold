@@ -19,3 +19,5 @@
 
 //#pragma comment(lib, "./lib/InputManager.lib")
 //#include "./lib/header/InputManager.h"
+
+#define WM_SELECT_TILE WM_USER + 1

@@ -10,11 +10,12 @@
 
 using std::string;
 using std::vector;
+
 using namespace Gdiplus;
 
 struct Tile
 {
-	//string tileset;
+	POINT pos;
 	POINT tilePos;
 
 	// 0 : 이동 불가능
@@ -22,16 +23,19 @@ struct Tile
 	int moveable;
 	int interactID;
 
-	Tile() : tilePos{ -1, -1 }, moveable(1), interactID(-1) { }
+	Tile() : pos{ 0, 0 }, tilePos{ -1, -1 }, moveable(1), interactID(-1) { }
 };
 
 struct Map
 {
 	string ID;
+	POINT worldPos;
 	POINT mapSize;
 	vector<vector<Tile>> tiles;
 
-	Map() : ID(""), mapSize{ -1, -1 } { }
+	// vector<int> pokeList;
+
+	Map() : ID(""), worldPos{ 0, 0 }, mapSize{ -1, -1 } { }
 };
 
 #endif // !__DATAS_H__

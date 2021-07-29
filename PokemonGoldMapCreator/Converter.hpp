@@ -7,30 +7,41 @@
 
 void JsonToTile(Tile &tile, Json::Value &value)
 {
-	tile.tilePos.x = value["posX"].asInt();
-	tile.tilePos.y = value["posY"].asInt();
+	tile.pos.x = value["posX"].asInt();
+	tile.pos.y = value["posY"].asInt();
+
+	tile.tilePos.x = value["tilePosX"].asInt();
+	tile.tilePos.y = value["tilePosY"].asInt();
 
 	tile.moveable = value["moveable"].asInt();
-	tile.interactID = value["Interact ID"].asInt();
+	tile.interactID = value["interact ID"].asInt();
 }
 
 void TileToJson(Tile &tile, Json::Value &value)
 {
-	value["posX"] = tile.tilePos.x;
-	value["posY"] = tile.tilePos.y;
+	value["posX"] = tile.pos.x;
+	value["posY"] = tile.pos.y;
+
+	value["tilePosX"] = tile.tilePos.x;
+	value["tilePosY"] = tile.tilePos.y;
+
 	value["moveable"] = tile.moveable;
-	value["Interact ID"] = tile.interactID;
+	value["interact ID"] = tile.interactID;
 }
 
 void JsonToMap(Map &map, Json::Value &value)
 {
 	map.ID = value["ID"].asString();
-	map.mapSize.x = value["MapSizeX"].asInt();
-	map.mapSize.y = value["MapSizeY"].asInt();
+
+	map.worldPos.x = value["worldPosX"].asInt();
+	map.worldPos.y = value["worldPosY"].asInt();
+
+	map.mapSize.x = value["mapSizeX"].asInt();
+	map.mapSize.y = value["mapSizeY"].asInt();
 
 	map.tiles = vector<vector<Tile>>(map.mapSize.y, vector<Tile>(map.mapSize.x, Tile()));
 
-	Json::Value saveTiles = value["Tiles"];
+	Json::Value saveTiles = value["tiles"];
 
 	for (int i = 0; i < saveTiles.size(); ++i)
 	{
@@ -42,8 +53,12 @@ void JsonToMap(Map &map, Json::Value &value)
 void MapToJson(Map &map, Json::Value &value)
 {
 	value["ID"] = map.ID;
-	value["MapSizeX"] = map.mapSize.x;
-	value["MapSizeY"] = map.mapSize.y;
+
+	value["worldPosX"] = map.worldPos.x;
+	value["worldPosY"] = map.worldPos.y;
+
+	value["mapSizeX"] = map.mapSize.x;
+	value["mapSizeY"] = map.mapSize.y;
 
 	Json::Value saveTiles;
 
@@ -57,7 +72,7 @@ void MapToJson(Map &map, Json::Value &value)
 		}
 	}
 
-	value["Tiles"] = saveTiles;
+	value["tiles"] = saveTiles;
 }
 
 //https://docs.microsoft.com/ko-kr/windows/win32/gdiplus/-gdiplus-retrieving-the-class-identifier-for-an-encoder-use?redirectedfrom=MSDN

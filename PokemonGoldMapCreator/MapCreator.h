@@ -32,15 +32,19 @@ private:
 	Bitmap *mapImage;
 	Bitmap *coliImage;
 
+	bool isSelect;
+
 	bool PosInGrid(POINT pos);
 
 	void DrawToCollider(int moveable, int x, int y);
 	void DrawToMap(Image* img, int x, int y, int srcx, int srcy);
+	void EraseToMap(int x, int y);
 
 	void DrawGrid(Graphics* graphic);
 	void DrawBack(Graphics* graphic);
 	void DrawMap(Graphics* graphic);
 	void DrawCollider(Graphics* graphic);
+	void DrawCurSelect(Graphics* graphic);
 
 	void InitMap(int x, int y);
 	void InitMap(TCHAR *filepath);
@@ -55,7 +59,11 @@ public:
 	void SetTilesetManager(TilesetManager *_tm) { tm = _tm; }
 
 	void SelectTile(POINT mPos);
-	void SelectCollider(POINT mPos);
+	void SetTile(POINT mPos);
+	void EraseTile(POINT mPos);
+	void SetCollider(POINT mPos);
+
+	Tile* GetSelectTile();
 
 	void SetSreenSize(HWND hWnd);
 	void Draw(HDC hdc);

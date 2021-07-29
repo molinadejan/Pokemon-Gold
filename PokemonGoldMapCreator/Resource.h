@@ -18,11 +18,19 @@
 #define IDD_DIALOG_CREATE               131
 #define IDD_DIALOG_SAVE                 132
 #define IDD_DIALOG_OPEN                 133
+#define IDD_DIALOG_TILEINFO             134
 #define IDC_EDIT_X                      1000
 #define IDC_EDIT_Y                      1001
 #define IDC_EDIT_SAVE_NAME              1001
 #define IDC_EDIT_LOAD_NAME              1002
 #define IDC_EDIT_ID                     1002
+#define IDSAVE                          1003
+#define IDC_EDIT_XPOS                   1005
+#define IDC_EDIT_YPOS                   1006
+#define IDC_EDIT_TXPOS                  1007
+#define IDC_EDIT_TYPOS                  1008
+#define IDC_EDIT_MOVEABLE               1009
+#define IDC_EDIT_INID                   1010
 #define IDM_OPEN                        32771
 #define IDM_SAVE                        32772
 #define ID_32773                        32773
@@ -37,9 +45,9 @@
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NO_MFC                     1
-#define _APS_NEXT_RESOURCE_VALUE        134
+#define _APS_NEXT_RESOURCE_VALUE        135
 #define _APS_NEXT_COMMAND_VALUE         32778
-#define _APS_NEXT_CONTROL_VALUE         1003
+#define _APS_NEXT_CONTROL_VALUE         1006
 #define _APS_NEXT_SYMED_VALUE           110
 #endif
 #endif

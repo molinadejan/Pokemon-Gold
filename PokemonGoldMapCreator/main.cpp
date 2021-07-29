@@ -2,6 +2,7 @@
 #include "PokemonGoldMapCreator.h"
 #include "MapCreator.h"
 #include "TilesetManager.h"
+#include "Datas.h"
 
 #include <atlstr.h>
 
@@ -15,6 +16,7 @@ ULONG_PTR g_GdiToken;
 
 HWND mainWnd;
 HWND tileSetWnd;
+HWND tileInfoDlg;
 
 MapCreator mc;
 TilesetManager tm;
@@ -27,6 +29,7 @@ LRESULT CALLBACK    TilesetProc(HWND, UINT, WPARAM, LPARAM);
 BOOL CALLBACK    CreateDlgProc(HWND, UINT, WPARAM, LPARAM);
 BOOL CALLBACK    SaveDlgProc(HWND, UINT, WPARAM, LPARAM);
 BOOL CALLBACK    OpenDlgProc(HWND, UINT, WPARAM, LPARAM);
+BOOL CALLBACK    TileInfoDlgProc(HWND, UINT, WPARAM, LPARAM);
 
 int APIENTRY wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _In_ LPWSTR lpCmdLine, _In_ int nCmdShow)
 {
@@ -100,7 +103,7 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
    hInst = hInstance;
 
    mainWnd = CreateWindowW(szWindowClass, szTitle,  WS_OVERLAPPEDWINDOW | WS_CLIPCHILDREN,
-      CW_USEDEFAULT, 0, 1000, 500, nullptr, nullptr, hInstance, nullptr);
+      10, 10, 1000, 500, nullptr, nullptr, hInstance, nullptr);
 
    if (!mainWnd)
       return FALSE;
@@ -111,10 +114,18 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
    return TRUE;
 }
 
+enum MODE 
+{
+	TileImage,
+	Collider,
+	Select,
+};
+
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
 	static RECT rectView;
 	static bool isDrag;
+	static MODE state;
 
     switch (message)
     {
@@ -129,11 +140,16 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 
 			tileSetWnd = CreateWindowEx(0, _T("TileSet Window"), szWindowClass,
 				WS_VISIBLE | WS_OVERLAPPED | WS_BORDER,
-				0, 0, 200, 200,
+				0, 0, 0, 0,
 				hWnd, NULL, hInst, NULL);
+
+			tileInfoDlg = CreateDialog(hInst, MAKEINTRESOURCE(IDD_DIALOG_TILEINFO), hWnd, TileInfoDlgProc);
+			ShowWindow(tileInfoDlg, SW_SHOW);
 
 			mc.SetSreenSize(hWnd);
 			mc.SetTilesetManager(&tm);
+
+			state = MODE::Select;
 
 			SetTimer(hWnd, 1, 8, NULL);
 		}
@@ -143,6 +159,25 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 		{
 			mc.SetSreenSize(hWnd);
 			GetClientRect(hWnd, &rectView);
+		}
+		break;
+
+		case WM_KEYDOWN:
+		{
+			switch (wParam)
+			{
+				case 'T':
+					state = MODE::TileImage;
+					break;
+
+				case 'C':
+					state = MODE::Collider;
+					break;
+
+				case 'S':
+					state = MODE::Select;
+					break;
+			}
 		}
 		break;
 
@@ -158,7 +193,23 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 			}
 			
 			isDrag = false;
-			mc.SelectTile(mPos);
+
+			PostMessage(tileInfoDlg, WM_SELECT_TILE, 0, 0);
+
+			switch (state)
+			{
+				case MODE::TileImage:
+					mc.SetTile(mPos);
+					break;
+
+				case MODE::Collider:
+					mc.SetCollider(mPos);
+					break;
+
+				case MODE::Select:
+					mc.SelectTile(mPos);
+					break;
+			}
 		}
 		break;
 
@@ -180,7 +231,21 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 
 		case WM_RBUTTONDOWN:
 		{
-			mc.SelectCollider({ LOWORD(lParam), HIWORD(lParam) });
+			POINT mPos = { LOWORD(lParam), HIWORD(lParam) };
+
+			switch (state)
+			{
+				case MODE::TileImage:
+					mc.EraseTile(mPos);
+					break;
+
+				case MODE::Collider:
+					break;
+
+				case MODE::Select:
+					mc.SelectTile(mPos);
+					break;
+			}
 		}
 		break;
 
@@ -366,38 +431,38 @@ BOOL CALLBACK SaveDlgProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
 {
 	switch (message)
 	{
-	case WM_INITDIALOG:
-	{
-		TCHAR id[64];
-
-		_tcscpy_s(id, CA2T(mc.GetMapID().c_str()));
-		SetDlgItemText(hDlg, IDC_EDIT_SAVE_NAME, id);
-	}
-	break;
-
-	case WM_COMMAND:
-	{
-		switch (LOWORD(wParam))
+		case WM_INITDIALOG:
 		{
-		case IDOK:
-		{
-			TCHAR filename[128];
+			TCHAR id[64];
 
-			GetDlgItemText(hDlg, IDC_EDIT_SAVE_NAME, filename, 128);
-
-			mc.FileSave(filename);
-			EndDialog(hDlg, 0);
+			_tcscpy_s(id, CA2T(mc.GetMapID().c_str()));
+			SetDlgItemText(hDlg, IDC_EDIT_SAVE_NAME, id);
 		}
 		break;
 
-		case IDCANCEL:
+		case WM_COMMAND:
 		{
-			EndDialog(hDlg, 0);
+			switch (LOWORD(wParam))
+			{
+				case IDOK:
+				{
+					TCHAR filename[128];
+
+					GetDlgItemText(hDlg, IDC_EDIT_SAVE_NAME, filename, 128);
+
+					mc.FileSave(filename);
+					EndDialog(hDlg, 0);
+				}
+				break;
+
+				case IDCANCEL:
+				{
+					EndDialog(hDlg, 0);
+				}
+				break;
+			}
 		}
 		break;
-		}
-	}
-	break;
 	}
 
 	return 0;
@@ -407,34 +472,92 @@ BOOL CALLBACK OpenDlgProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
 {
 	switch (message)
 	{
-	case WM_INITDIALOG:
-	{
-
-	}
-	break;
-
-	case WM_COMMAND:
-	{
-		switch (LOWORD(wParam))
+		case WM_INITDIALOG:
 		{
-		case IDOK:
-		{
-			TCHAR filename[128];
-			GetDlgItemText(hDlg, IDC_EDIT_LOAD_NAME, filename, 128);
 
-			mc.FileOpen(filename);
-			EndDialog(hDlg, 0);
 		}
 		break;
 
-		case IDCANCEL:
+		case WM_COMMAND:
 		{
-			EndDialog(hDlg, 0);
+			switch (LOWORD(wParam))
+			{
+				case IDOK:
+				{
+					TCHAR filename[128];
+					GetDlgItemText(hDlg, IDC_EDIT_LOAD_NAME, filename, 128);
+
+					mc.FileOpen(filename);
+					EndDialog(hDlg, 0);
+				}
+				break;
+
+				case IDCANCEL:
+				{
+					EndDialog(hDlg, 0);
+				}
+				break;
+			}
 		}
 		break;
-		}
 	}
-	break;
+
+	return 0;
+}
+
+BOOL CALLBACK TileInfoDlgProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
+{
+	static Tile* tile;
+
+	switch (message)
+	{
+		case WM_INITDIALOG:
+		{
+			tile = NULL;
+		}
+		break;
+
+		case WM_COMMAND:
+		{
+			switch (LOWORD(wParam))
+			{
+				case IDSAVE:
+				{
+					if (tile != NULL)
+					{
+						int id = GetDlgItemInt(hDlg, IDC_EDIT_INID, NULL, TRUE);
+						tile->interactID = id;
+					}
+				}
+				break;
+			}
+		}
+		break;
+
+		case WM_SELECT_TILE:
+		{
+			tile = mc.GetSelectTile();
+
+			if (tile == NULL)
+			{
+				SetDlgItemText(hDlg, IDC_EDIT_XPOS, _T(""));
+				SetDlgItemText(hDlg, IDC_EDIT_YPOS, _T(""));
+				SetDlgItemText(hDlg, IDC_EDIT_TXPOS, _T(""));
+				SetDlgItemText(hDlg, IDC_EDIT_TYPOS, _T(""));
+				SetDlgItemText(hDlg, IDC_EDIT_MOVEABLE, _T(""));
+				SetDlgItemText(hDlg, IDC_EDIT_INID, _T(""));
+			}
+			else
+			{
+				SetDlgItemInt(hDlg, IDC_EDIT_XPOS, tile->pos.x, FALSE);
+				SetDlgItemInt(hDlg, IDC_EDIT_YPOS, tile->pos.y, FALSE);
+				SetDlgItemInt(hDlg, IDC_EDIT_TXPOS, tile->tilePos.x, TRUE);
+				SetDlgItemInt(hDlg, IDC_EDIT_TYPOS, tile->tilePos.y, TRUE);
+				SetDlgItemInt(hDlg, IDC_EDIT_MOVEABLE, tile->moveable, FALSE);
+				SetDlgItemInt(hDlg, IDC_EDIT_INID, tile->interactID, TRUE);
+			}
+		}
+		break;
 	}
 
 	return 0;
