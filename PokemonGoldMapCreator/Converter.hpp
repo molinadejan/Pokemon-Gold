@@ -4,6 +4,8 @@
 
 #include <json/json.h>
 #include "Datas.h"
+#include <atlstr.h>
+#include "framework.h"
 
 void JsonToTile(Tile &tile, Json::Value &value)
 {
@@ -29,6 +31,28 @@ void TileToJson(Tile &tile, Json::Value &value)
 	value["interact ID"] = tile.interactID;
 }
 
+void JsonToMovePoint(MovePoint &mp, Json::Value &value)
+{
+	mp.targetID = value["targetID"].asString();
+
+	mp.pos.x = value["posX"].asInt();
+	mp.pos.y = value["posY"].asInt();
+
+	mp.targetPos.x = value["targetPosX"].asInt();
+	mp.targetPos.y = value["targetPosY"].asInt();
+}
+
+void MovePointToJson(MovePoint &mp, Json::Value &value)
+{
+	value["targetID"] = mp.targetID;
+
+	value["posX"] = mp.pos.x;
+	value["posY"] = mp.pos.y;
+
+	value["targetPosX"] = mp.targetPos.x;
+	value["targetPosY"] = mp.targetPos.y;
+}
+
 void JsonToMap(Map &map, Json::Value &value)
 {
 	map.ID = value["ID"].asString();
@@ -43,10 +67,28 @@ void JsonToMap(Map &map, Json::Value &value)
 
 	Json::Value saveTiles = value["tiles"];
 
-	for (int i = 0; i < saveTiles.size(); ++i)
+	for (int i = 0; i < (int)saveTiles.size(); ++i)
 	{
 		Tile &tile = map.tiles[i / map.mapSize.x][i % map.mapSize.x];
 		JsonToTile(tile, saveTiles[i]);
+	}
+
+	map.neighbors = vector<string>();
+
+	Json::Value n = value["neighbors"];
+
+	for (int i = 0; i < (int)n.size(); ++i)
+		map.neighbors.push_back(n[i].asString());
+
+	map.movePoints = vector<MovePoint>();
+
+	Json::Value m = value["movePoints"];
+
+	for (int i = 0; i < (int)m.size(); ++i)
+	{
+		MovePoint newMp;
+		JsonToMovePoint(newMp, m[i]);
+		map.movePoints.push_back(newMp);
 	}
 }
 
@@ -73,6 +115,24 @@ void MapToJson(Map &map, Json::Value &value)
 	}
 
 	value["tiles"] = saveTiles;
+
+	Json::Value n;
+
+	for (int i = 0; i < (int)map.neighbors.size(); ++i)
+		n.append(map.neighbors[i]);
+
+	value["neighbors"] = n;
+
+	Json::Value m;
+
+	for (int i = 0; i < (int)map.movePoints.size(); ++i)
+	{
+		Json::Value mp;
+		MovePointToJson(map.movePoints[i], mp);
+		m.append(mp);
+	}
+
+	value["movePoints"] = m;
 }
 
 //https://docs.microsoft.com/ko-kr/windows/win32/gdiplus/-gdiplus-retrieving-the-class-identifier-for-an-encoder-use?redirectedfrom=MSDN
@@ -106,6 +166,5 @@ int GetEncoderClsid(const WCHAR * format, CLSID * pClsid)
 	free(pImageCodecInfo);
 	return -1;
 }
-
 
 #endif // !__CONVERTER_HPP_

@@ -19,6 +19,7 @@
 #define IDD_DIALOG_SAVE                 132
 #define IDD_DIALOG_OPEN                 133
 #define IDD_DIALOG_TILEINFO             134
+#define IDD_DIALOG_MAPINFO              135
 #define IDC_EDIT_X                      1000
 #define IDC_EDIT_Y                      1001
 #define IDC_EDIT_SAVE_NAME              1001
@@ -30,7 +31,15 @@
 #define IDC_EDIT_TXPOS                  1007
 #define IDC_EDIT_TYPOS                  1008
 #define IDC_EDIT_MOVEABLE               1009
+#define IDC_EDIT_POSX                   1009
 #define IDC_EDIT_INID                   1010
+#define IDC_EDIT_POSY                   1010
+#define IDC_EDIT_MAPSIZEX               1011
+#define IDC_EDIT_TARGETID               1011
+#define IDC_EDIT_MAPSIZEY               1012
+#define IDC_EDIT_TARGETPOSX             1012
+#define IDC_EDIT_N                      1013
+#define IDC_EDIT_TARGETPOSY             1013
 #define IDM_OPEN                        32771
 #define IDM_SAVE                        32772
 #define ID_32773                        32773
@@ -45,9 +54,9 @@
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NO_MFC                     1
-#define _APS_NEXT_RESOURCE_VALUE        135
+#define _APS_NEXT_RESOURCE_VALUE        136
 #define _APS_NEXT_COMMAND_VALUE         32778
-#define _APS_NEXT_CONTROL_VALUE         1006
+#define _APS_NEXT_CONTROL_VALUE         1009
 #define _APS_NEXT_SYMED_VALUE           110
 #endif
 #endif

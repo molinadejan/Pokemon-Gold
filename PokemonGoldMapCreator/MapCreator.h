@@ -31,6 +31,7 @@ private:
 
 	Bitmap *mapImage;
 	Bitmap *coliImage;
+	Bitmap *mpImage;
 
 	bool isSelect;
 
@@ -39,16 +40,19 @@ private:
 	void DrawToCollider(int moveable, int x, int y);
 	void DrawToMap(Image* img, int x, int y, int srcx, int srcy);
 	void EraseToMap(int x, int y);
+	void DrawToMp(int isPoint, int x, int y);
 
 	void DrawGrid(Graphics* graphic);
 	void DrawBack(Graphics* graphic);
 	void DrawMap(Graphics* graphic);
 	void DrawCollider(Graphics* graphic);
+	void DrawMp(Graphics* graphic);
 	void DrawCurSelect(Graphics* graphic);
 
 	void InitMap(int x, int y);
 	void InitMap(TCHAR *filepath);
 	void InitCollider(int x, int y);
+	void InitMp(int x, int y);
 
 public:
 	MapCreator();
@@ -62,8 +66,11 @@ public:
 	void SetTile(POINT mPos);
 	void EraseTile(POINT mPos);
 	void SetCollider(POINT mPos);
+	void SetMp(POINT mPos);
 
 	Tile* GetSelectTile();
+	MovePoint* GetMP();
+	Map* GetMap() { return &mapData; }
 
 	void SetSreenSize(HWND hWnd);
 	void Draw(HDC hdc);
