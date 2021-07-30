@@ -11,11 +11,10 @@ class Player
 {
 private:
 
-	Point tilePos;
+	Point pos;
+	PointF posF;
+
 	Point nextTilePos;
-
-	PointF worldPos;
-
 	Point moveDir;
 
 	float speed;
@@ -26,8 +25,11 @@ public:
 	Player();
 	~Player();
 
-	Point GetTilePos() const { return tilePos; }
-	PointF GetWorldPos() const { return worldPos; }
+	Point GetPos() const { return pos; }
+	PointF GetPosF() const { return posF; }
+
+	void SetPos(int x, int y) { pos = { x, y }; }
+	void SetPosF(float x, float y) { posF = { x, y }; }
 
 	void DrawPlayer(Graphics &g, PointF origin);
 	void MovePlayer(Point dir);

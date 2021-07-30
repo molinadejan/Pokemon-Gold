@@ -19,13 +19,17 @@
 #include "Timer.h"
 #include <cmath>
 
+// json
 #include <json/json.h>
+
+
+#include <atlstr.h>
 
 const int SCREEN_MUL = 5;
 const int PIXEL = 16;
 
 const int ROW = 9;
-const int COL = 16;
+const int COL = 10;
 
 const int SCREEN_SIZE_X = PIXEL * COL * SCREEN_MUL;
 const int SCREEN_SIZE_Y = PIXEL * ROW * SCREEN_MUL;

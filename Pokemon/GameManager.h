@@ -5,6 +5,7 @@
 
 #include "framework.h"
 #include "Player.h"
+#include "Datas.h"
 
 using namespace Gdiplus;
 
@@ -25,11 +26,19 @@ private:
 
 	Player player;
 
+	Map curData;
+	Map neighborData[4];
+
 private:
 
 	void InitGdiPlus();
 	void SetScreen(HWND hWnd);
+
+	void LoadData(string ID, Map &map);
+
 	void DrawMap(Graphics &g, PointF origin);
+
+	void DrawGamePlay(Graphics &g);
 
 public:
 

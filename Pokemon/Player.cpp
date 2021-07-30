@@ -2,7 +2,7 @@
 #include <cmath>
 
 Player::Player()
-	: tilePos{ 0, 0 }, worldPos{ tilePos.X, tilePos.Y }, moveDir{ 0, 0 }, speed(4.0f), isMoving(false) { }
+	: pos{ 0, 2 }, posF{ pos.X, pos.Y }, moveDir{ 0, 0 }, speed(3.0f), isMoving(false) { }
 
 Player::~Player() { }
 
@@ -15,23 +15,20 @@ void Player::DrawPlayer(Graphics &g, PointF origin)
 
 void Player::MovePlayer(Point dir)
 {
-	/*worldPos.X += dir.X * speed * Timer::DeltaTime();
-	worldPos.Y += dir.Y * speed * Timer::DeltaTime();*/
-
 	if (dir.X != 0 && dir.Y != 0) dir.X = 0;
 
 	if (isMoving)
 	{
-		worldPos.X += moveDir.X * speed * Timer::DeltaTime();
-		worldPos.Y += moveDir.Y * speed * Timer::DeltaTime();
+		posF.X += moveDir.X * speed * Timer::DeltaTime();
+		posF.Y += moveDir.Y * speed * Timer::DeltaTime();
 
-		if (fabs(worldPos.X - nextTilePos.X) <= 0.025f && fabs(worldPos.Y - nextTilePos.Y) <= 0.025f)
+		if (fabs(posF.X - nextTilePos.X) <= 0.05f && fabs(posF.Y - nextTilePos.Y) <= 0.05f)
 		{
-			worldPos.X = nextTilePos.X;
-			worldPos.Y = nextTilePos.Y;
+			posF.X = nextTilePos.X;
+			posF.Y = nextTilePos.Y;
 
-			tilePos.X = nextTilePos.X;
-			tilePos.Y = nextTilePos.Y;
+			pos.X = (int)nextTilePos.X;
+			pos.Y = (int)nextTilePos.Y;
 
 			isMoving = false;
 		}
@@ -43,8 +40,8 @@ void Player::MovePlayer(Point dir)
 
 		moveDir = dir;
 
-		nextTilePos.X = tilePos.X + dir.X;
-		nextTilePos.Y = tilePos.Y + dir.Y;
+		nextTilePos.X = pos.X + dir.X;
+		nextTilePos.Y = pos.Y + dir.Y;
 
 		isMoving = true;
 	}

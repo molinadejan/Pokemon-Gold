@@ -1,5 +1,8 @@
 #include "GameManager.h"
 #include "InputManager.h"
+#include "Converter.hpp"
+
+#include <fstream>
 
 // 持失切, 社瑚切 //
 GameManager::GameManager() { }
@@ -24,11 +27,61 @@ void GameManager::SetScreen(HWND hWnd)
 	MoveWindow(hWnd, 100, 100, rect.right - rect.left, rect.bottom - rect.top, TRUE);
 }
 
+void GameManager::LoadData(string ID, Map &map)
+{
+	TCHAR id[64];
+	_tcscpy_s(id, CA2T(ID.c_str()));
+
+	TCHAR dataName[256];
+	_stprintf_s(dataName, _T("data/map/%s.mapData"), id);
+
+	Json::Value root;
+	std::ifstream readFile(dataName);
+
+	if (readFile.is_open())
+	{
+		readFile >> root;
+		readFile.close();
+
+		JsonToMap(map, root);
+	}
+}
+
 void GameManager::DrawMap(Graphics &g, PointF origin)
 {
-	Image img(L"data/map/map0.png");
+	TCHAR id[64], imgName[128];
+
+	_tcscpy_s(id, CA2T(curData.ID.c_str()));
+	_stprintf_s(imgName, _T("data/map/%s.png"), id);
+
+	Image img(imgName);
 	Rect expansion(-origin.X * PIXEL * SCREEN_MUL, -origin.Y * PIXEL * SCREEN_MUL, img.GetWidth() * SCREEN_MUL, img.GetHeight() * SCREEN_MUL);
 	g.DrawImage(&img, expansion);
+
+	for (int i = 0; i < curData.neighbors.size(); ++i)
+	{
+		_tcscpy_s(id, CA2T(curData.neighbors[i].c_str()));
+		_stprintf_s(imgName, _T("data/map/%s.png"), id);
+
+		Image tmp(imgName);
+
+		int diffX = curData.worldPos.x - neighborData[i].worldPos.x;
+		int diffY = curData.worldPos.y - neighborData[i].worldPos.y;
+
+		Rect expansion2(-(origin.X + diffX) * PIXEL * SCREEN_MUL, -(origin.Y + diffY) * PIXEL * SCREEN_MUL, tmp.GetWidth() * SCREEN_MUL, tmp.GetHeight() * SCREEN_MUL);
+		g.DrawImage(&tmp, expansion2);
+	}
+}
+
+void GameManager::DrawGamePlay(Graphics &g)
+{
+	PointF playerPos = player.GetPosF();
+	playerPos.X -= COL / 2;
+	playerPos.Y -= ROW / 2;
+	DrawMap(g, playerPos);
+
+	PointF origin((COL / 2) * PIXEL * SCREEN_MUL, (ROW / 2) * PIXEL * SCREEN_MUL);
+	player.DrawPlayer(g, origin);
 }
 
 
@@ -38,7 +91,7 @@ void GameManager::Init(HWND hWnd)
 	InitGdiPlus();
 	SetScreen(hWnd);
 
-	state = STATE::GAMEPLAY;
+	state = STATE::INTRO;
 }
 
 void GameManager::Update()
@@ -47,13 +100,18 @@ void GameManager::Update()
 	{
 		case STATE::INTRO:
 		{
-
+			state = STATE::LOADORNEW;
 		}
 		break;
 
 		case STATE::LOADORNEW:
 		{
+			LoadData("map0", curData);
 
+			for (int i = 0; i < curData.neighbors.size(); ++i)
+				LoadData(curData.neighbors[i], neighborData[i]);
+
+			state = STATE::GAMEPLAY;
 		}
 		break;
 
@@ -84,13 +142,26 @@ void GameManager::Draw(HWND hWnd)
 	graphic.SetInterpolationMode(InterpolationMode::InterpolationModeNearestNeighbor);
 	graphic.SetPixelOffsetMode(PixelOffsetMode::PixelOffsetModeHalf);
 
-	PointF playerPos = player.GetWorldPos();
-	playerPos.X -= COL / 2;
-	playerPos.Y -= ROW / 2;
-	DrawMap(graphic, playerPos);
+	switch (state)
+	{
+		case STATE::INTRO:
+		{
 
-	PointF origin((COL / 2) * PIXEL * SCREEN_MUL, (ROW / 2) * PIXEL * SCREEN_MUL);
-	player.DrawPlayer(graphic, origin);
+		}
+		break;
+
+		case STATE::LOADORNEW:
+		{
+
+		}
+		break;
+
+		case STATE::GAMEPLAY:
+		{
+			DrawGamePlay(graphic);
+		}
+		break;
+	}
 
 	BitBlt(hdc, 0, 0, SCREEN_SIZE_X, SCREEN_SIZE_Y, memDC, 0, 0, SRCCOPY);
 	SelectObject(memDC, oldBit);
