@@ -109,7 +109,7 @@ void MapCreator::SetTile(POINT mPos)
 		curSelectPos.y = mPos.y - mPos.y % 16;
 
 		int idxX = curSelectPos.x / 16;
-		int idxY = mapData.mapSize.y - curSelectPos.y / 16 - 1;
+		int idxY = curSelectPos.y / 16;
 
 		if (tm->GetIsSelect())
 		{
@@ -133,7 +133,7 @@ void MapCreator::EraseTile(POINT mPos)
 		curSelectPos.y = mPos.y - mPos.y % 16;
 
 		int idxX = curSelectPos.x / 16;
-		int idxY = mapData.mapSize.y - curSelectPos.y / 16 - 1;
+		int idxY = curSelectPos.y / 16;
 
 		mapData.tiles[idxY][idxX].tilePos = { -1, -1 };
 		EraseToMap(curSelectPos.x, curSelectPos.y);
@@ -154,7 +154,7 @@ void MapCreator::SetCollider(POINT mPos)
 		curSelectPos.y = mPos.y - mPos.y % 16;
 
 		int idxX = curSelectPos.x / 16;
-		int idxY = mapData.mapSize.y - curSelectPos.y / 16 - 1;
+		int idxY = curSelectPos.y / 16;
 
 		Tile &curTile = mapData.tiles[idxY][idxX];
 
@@ -178,7 +178,7 @@ void MapCreator::SetMp(POINT mPos)
 		curSelectPos.y = mPos.y - mPos.y % 16;
 
 		int idxX = curSelectPos.x / 16;
-		int idxY = mapData.mapSize.y - curSelectPos.y / 16 - 1;
+		int idxY = curSelectPos.y / 16;
 
 		for(int i = 0; i < (int)mapData.movePoints.size(); ++i)
 		{
@@ -203,7 +203,7 @@ Tile* MapCreator::GetSelectTile()
 	if (!isSelect) return NULL;
 
 	int idxX = curSelectPos.x / 16;
-	int idxY = mapData.mapSize.y - curSelectPos.y / 16 - 1;
+	int idxY = curSelectPos.y / 16;
 
 	return &(mapData.tiles[idxY][idxX]);
 }
@@ -213,7 +213,7 @@ MovePoint* MapCreator::GetMP()
 	if (!isSelect) return NULL;
 
 	int idxX = curSelectPos.x / 16;
-	int idxY = mapData.mapSize.y - curSelectPos.y / 16 - 1;
+	int idxY = curSelectPos.y / 16;
 
 	for (auto& e : mapData.movePoints)
 		if (e.pos.x == idxX && e.pos.y == idxY)
@@ -280,7 +280,7 @@ void MapCreator::DrawCollider(Graphics* graphic)
 void MapCreator::DrawMp(Graphics * graphic)
 {
 	if (mpImage != NULL)
-		graphic->DrawImage(mpImage, 0, 0, cameraPos.x, cameraPos.y, coliImage->GetWidth() - cameraPos.x, coliImage->GetHeight() - cameraPos.y, Unit::UnitPixel);
+		graphic->DrawImage(mpImage, 0, 0, cameraPos.x, cameraPos.y, mpImage->GetWidth() - cameraPos.x, mpImage->GetHeight() - cameraPos.y, Unit::UnitPixel);
 }
 
 void MapCreator::DrawCurSelect(Graphics * graphic)
@@ -398,10 +398,10 @@ void MapCreator::FileOpen(TCHAR *filename)
 
 		for (int i = 0; i < mapData.mapSize.y; ++i)
 			for (int j = 0; j < mapData.mapSize.x; ++j)
-				DrawToCollider(mapData.tiles[i][j].moveable, j * 16, (mapData.mapSize.y - i - 1) * 16);
+				DrawToCollider(mapData.tiles[i][j].moveable, j * 16, i * 16);
 
 		for (const auto& e : mapData.movePoints)
-			DrawToMp(1, e.pos.x * 16, (mapData.mapSize.y - e.pos.y - 1) * 16);
+			DrawToMp(1, e.pos.x * 16, e.pos.y * 16);
 	}
 }
 

@@ -541,6 +541,7 @@ BOOL CALLBACK TileInfoDlgProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lPa
 			EnableWindow(GetDlgItem(hDlg, IDC_EDIT_TARGETID), FALSE);
 			EnableWindow(GetDlgItem(hDlg, IDC_EDIT_TARGETPOSX), FALSE);
 			EnableWindow(GetDlgItem(hDlg, IDC_EDIT_TARGETPOSY), FALSE);
+			EnableWindow(GetDlgItem(hDlg, IDC_EDIT_MOVETYPE), FALSE);
 		}
 		break;
 
@@ -566,6 +567,7 @@ BOOL CALLBACK TileInfoDlgProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lPa
 						mp->targetID = sTargetId;
 						mp->targetPos.x = GetDlgItemInt(hDlg, IDC_EDIT_TARGETPOSX, NULL, TRUE);
 						mp->targetPos.y = GetDlgItemInt(hDlg, IDC_EDIT_TARGETPOSY, NULL, TRUE);
+						mp->moveType = GetDlgItemInt(hDlg, IDC_EDIT_MOVETYPE, NULL, TRUE);
 					}
 				}
 				break;
@@ -603,16 +605,19 @@ BOOL CALLBACK TileInfoDlgProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lPa
 				EnableWindow(GetDlgItem(hDlg, IDC_EDIT_TARGETID), FALSE);
 				EnableWindow(GetDlgItem(hDlg, IDC_EDIT_TARGETPOSX), FALSE);
 				EnableWindow(GetDlgItem(hDlg, IDC_EDIT_TARGETPOSY), FALSE);
+				EnableWindow(GetDlgItem(hDlg, IDC_EDIT_MOVETYPE), FALSE);
 
 				SetDlgItemText(hDlg, IDC_EDIT_TARGETID, _T(""));
 				SetDlgItemText(hDlg, IDC_EDIT_TARGETPOSX, _T(""));
 				SetDlgItemText(hDlg, IDC_EDIT_TARGETPOSY, _T(""));
+				SetDlgItemText(hDlg, IDC_EDIT_MOVETYPE, _T(""));
 			}
 			else
 			{
 				EnableWindow(GetDlgItem(hDlg, IDC_EDIT_TARGETID), TRUE);
 				EnableWindow(GetDlgItem(hDlg, IDC_EDIT_TARGETPOSX), TRUE);
 				EnableWindow(GetDlgItem(hDlg, IDC_EDIT_TARGETPOSY), TRUE);
+				EnableWindow(GetDlgItem(hDlg, IDC_EDIT_MOVETYPE), TRUE);
 
 				TCHAR targetId[64];
 				_tcscpy_s(targetId, CA2T(mp->targetID.c_str()));
@@ -620,7 +625,7 @@ BOOL CALLBACK TileInfoDlgProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lPa
 				SetDlgItemText(hDlg, IDC_EDIT_TARGETID, targetId);
 				SetDlgItemInt(hDlg, IDC_EDIT_TARGETPOSX, mp->targetPos.x, TRUE);
 				SetDlgItemInt(hDlg, IDC_EDIT_TARGETPOSY, mp->targetPos.y, TRUE);
-
+				SetDlgItemInt(hDlg, IDC_EDIT_MOVETYPE, mp->moveType, TRUE);
 			}
 		}
 		break;

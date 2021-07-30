@@ -40,6 +40,8 @@
 #define IDC_EDIT_TARGETPOSX             1012
 #define IDC_EDIT_N                      1013
 #define IDC_EDIT_TARGETPOSY             1013
+#define IDC_EDIT_TARGETPOSY2            1014
+#define IDC_EDIT_MOVETYPE               1014
 #define IDM_OPEN                        32771
 #define IDM_SAVE                        32772
 #define ID_32773                        32773

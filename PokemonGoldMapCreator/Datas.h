@@ -23,6 +23,8 @@ struct Tile
 	int moveable;
 	int interactID;
 
+	// bool isPokeMon?
+
 	Tile() : pos{ 0, 0 }, tilePos{ -1, -1 }, moveable(0), interactID(-1) { }
 };
 
@@ -31,8 +33,7 @@ struct MovePoint
 	string targetID;
 	POINT pos;
 	POINT targetPos;
-
-	// int moveType;
+	int moveType;
 };
 
 struct Map
@@ -44,18 +45,23 @@ struct Map
 	vector<string> neighbors;
 	vector<MovePoint> movePoints;
 
-	// vector<int> pokeList;
+	// 맵에서 등장하는 포켓몬 아이디
+	// vector<???> pokeData;
+
+	// 맵에서 등장하는 엔피씨 아이디
+	// vector<???> npcData
 
 	Map() : ID(""), worldPos{ 0, 0 }, mapSize{ -1, -1 } { }
+
 	Map(string _ID, int x, int y) : ID(_ID), worldPos{ 0, 0 }, mapSize{ x, y }
 	{
 		tiles = vector<vector<Tile>>(y, vector<Tile>(x, Tile()));
 		neighbors = vector<string>();
 		movePoints = vector<MovePoint>();
 
-		for (int i = 0; i < x; ++i)
-			for (int j = 0; j < y; ++j)
-				tiles[i][j].pos = { i, j };
+		for (int i = 0; i < y; ++i)
+			for (int j = 0; j < x; ++j)
+				tiles[i][j].pos = { j, i };
 	}
 };
 

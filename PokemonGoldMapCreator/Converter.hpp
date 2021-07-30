@@ -40,6 +40,8 @@ void JsonToMovePoint(MovePoint &mp, Json::Value &value)
 
 	mp.targetPos.x = value["targetPosX"].asInt();
 	mp.targetPos.y = value["targetPosY"].asInt();
+
+	mp.moveType = value["moveType"].asInt();
 }
 
 void MovePointToJson(MovePoint &mp, Json::Value &value)
@@ -51,6 +53,8 @@ void MovePointToJson(MovePoint &mp, Json::Value &value)
 
 	value["targetPosX"] = mp.targetPos.x;
 	value["targetPosY"] = mp.targetPos.y;
+
+	value["moveType"] = mp.moveType;
 }
 
 void JsonToMap(Map &map, Json::Value &value)
