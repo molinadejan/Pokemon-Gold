@@ -1,192 +1,190 @@
 {
-	"ID" : "map0",
+	"ID" : "map1",
 	"mapSizeX" : 11,
 	"mapSizeY" : 11,
 	"movePoints" : null,
   "neighbors": 
   [
-    "map1",
-    "map2",
-    "map3"
+    "map0"
   ],
     "tiles"
     :
     [
       {
         "interact ID": -1,
-        "moveable": 1,
+        "moveable": 0,
         "posX": 0,
         "posY": 0,
-        "tilePosX": 32,
-        "tilePosY": 48
+        "tilePosX": 528,
+        "tilePosY": 16
       },
       {
         "interact ID": -1,
-        "moveable": 1,
+        "moveable": 0,
         "posX": 1,
         "posY": 0,
-        "tilePosX": 32,
-        "tilePosY": 48
+        "tilePosX": 528,
+        "tilePosY": 16
       },
       {
         "interact ID": -1,
-        "moveable": 1,
+        "moveable": 0,
         "posX": 2,
         "posY": 0,
-        "tilePosX": 32,
-        "tilePosY": 48
+        "tilePosX": 528,
+        "tilePosY": 16
       },
       {
         "interact ID": -1,
-        "moveable": 1,
+        "moveable": 0,
         "posX": 3,
         "posY": 0,
-        "tilePosX": 32,
-        "tilePosY": 48
+        "tilePosX": 528,
+        "tilePosY": 16
       },
       {
         "interact ID": -1,
-        "moveable": 1,
+        "moveable": 0,
         "posX": 4,
         "posY": 0,
-        "tilePosX": 32,
-        "tilePosY": 48
+        "tilePosX": 528,
+        "tilePosY": 16
       },
       {
         "interact ID": -1,
-        "moveable": 1,
+        "moveable": 0,
         "posX": 5,
         "posY": 0,
-        "tilePosX": 32,
-        "tilePosY": 48
+        "tilePosX": 528,
+        "tilePosY": 16
       },
       {
         "interact ID": -1,
-        "moveable": 1,
+        "moveable": 0,
         "posX": 6,
         "posY": 0,
-        "tilePosX": 32,
-        "tilePosY": 48
+        "tilePosX": 528,
+        "tilePosY": 16
       },
       {
         "interact ID": -1,
-        "moveable": 1,
+        "moveable": 0,
         "posX": 7,
         "posY": 0,
-        "tilePosX": 32,
-        "tilePosY": 48
+        "tilePosX": 528,
+        "tilePosY": 16
       },
       {
         "interact ID": -1,
-        "moveable": 1,
+        "moveable": 0,
         "posX": 8,
         "posY": 0,
-        "tilePosX": 32,
-        "tilePosY": 48
+        "tilePosX": 528,
+        "tilePosY": 16
       },
       {
         "interact ID": -1,
-        "moveable": 1,
+        "moveable": 0,
         "posX": 9,
         "posY": 0,
-        "tilePosX": 32,
-        "tilePosY": 48
+        "tilePosX": 528,
+        "tilePosY": 16
       },
       {
         "interact ID": -1,
-        "moveable": 1,
+        "moveable": 0,
         "posX": 10,
         "posY": 0,
-        "tilePosX": 32,
-        "tilePosY": 48
+        "tilePosX": 528,
+        "tilePosY": 16
       },
       {
         "interact ID": -1,
-        "moveable": 1,
+        "moveable": 0,
         "posX": 0,
         "posY": 1,
-        "tilePosX": 624,
-        "tilePosY": 48
+        "tilePosX": 528,
+        "tilePosY": 16
       },
       {
         "interact ID": -1,
-        "moveable": 1,
+        "moveable": 0,
         "posX": 1,
         "posY": 1,
-        "tilePosX": 624,
-        "tilePosY": 48
+        "tilePosX": 528,
+        "tilePosY": 16
       },
       {
         "interact ID": -1,
-        "moveable": 1,
+        "moveable": 0,
         "posX": 2,
         "posY": 1,
-        "tilePosX": 624,
-        "tilePosY": 48
+        "tilePosX": 528,
+        "tilePosY": 16
       },
       {
         "interact ID": -1,
-        "moveable": 1,
+        "moveable": 0,
         "posX": 3,
         "posY": 1,
-        "tilePosX": 624,
-        "tilePosY": 48
+        "tilePosX": 528,
+        "tilePosY": 16
       },
       {
         "interact ID": -1,
-        "moveable": 1,
+        "moveable": 0,
         "posX": 4,
         "posY": 1,
-        "tilePosX": 624,
-        "tilePosY": 48
+        "tilePosX": 528,
+        "tilePosY": 16
       },
       {
         "interact ID": -1,
-        "moveable": 1,
+        "moveable": 0,
         "posX": 5,
         "posY": 1,
-        "tilePosX": 624,
-        "tilePosY": 48
+        "tilePosX": 528,
+        "tilePosY": 16
       },
       {
         "interact ID": -1,
-        "moveable": 1,
+        "moveable": 0,
         "posX": 6,
         "posY": 1,
-        "tilePosX": 624,
-        "tilePosY": 48
+        "tilePosX": 528,
+        "tilePosY": 16
       },
       {
         "interact ID": -1,
-        "moveable": 1,
+        "moveable": 0,
         "posX": 7,
         "posY": 1,
-        "tilePosX": 624,
-        "tilePosY": 48
+        "tilePosX": 528,
+        "tilePosY": 16
       },
       {
         "interact ID": -1,
-        "moveable": 1,
+        "moveable": 0,
         "posX": 8,
         "posY": 1,
-        "tilePosX": 624,
-        "tilePosY": 48
+        "tilePosX": 528,
+        "tilePosY": 16
       },
       {
         "interact ID": -1,
-        "moveable": 1,
+        "moveable": 0,
         "posX": 9,
         "posY": 1,
-        "tilePosX": 624,
-        "tilePosY": 48
+        "tilePosX": 528,
+        "tilePosY": 16
       },
       {
         "interact ID": -1,
-        "moveable": 1,
+        "moveable": 0,
         "posX": 10,
         "posY": 1,
-        "tilePosX": 624,
-        "tilePosY": 48
+        "tilePosX": 528,
+        "tilePosY": 16
       },
       {
         "interact ID": -1,
@@ -382,59 +380,59 @@
       },
       {
         "interact ID": -1,
-        "moveable": 1,
+        "moveable": 0,
         "posX": 2,
         "posY": 4,
-        "tilePosX": 0,
+        "tilePosX": 624,
         "tilePosY": 16
       },
       {
         "interact ID": -1,
-        "moveable": 1,
+        "moveable": 0,
         "posX": 3,
         "posY": 4,
-        "tilePosX": 80,
-        "tilePosY": 48
+        "tilePosX": 624,
+        "tilePosY": 16
       },
       {
         "interact ID": -1,
-        "moveable": 1,
+        "moveable": 0,
         "posX": 4,
         "posY": 4,
-        "tilePosX": 80,
-        "tilePosY": 48
+        "tilePosX": 624,
+        "tilePosY": 16
       },
       {
         "interact ID": -1,
-        "moveable": 1,
+        "moveable": 0,
         "posX": 5,
         "posY": 4,
-        "tilePosX": 80,
-        "tilePosY": 48
+        "tilePosX": 624,
+        "tilePosY": 16
       },
       {
         "interact ID": -1,
-        "moveable": 1,
+        "moveable": 0,
         "posX": 6,
         "posY": 4,
-        "tilePosX": 80,
-        "tilePosY": 48
+        "tilePosX": 624,
+        "tilePosY": 16
       },
       {
         "interact ID": -1,
-        "moveable": 1,
+        "moveable": 0,
         "posX": 7,
         "posY": 4,
-        "tilePosX": 80,
-        "tilePosY": 48
+        "tilePosX": 624,
+        "tilePosY": 16
       },
       {
         "interact ID": -1,
-        "moveable": 1,
+        "moveable": 0,
         "posX": 8,
         "posY": 4,
-        "tilePosX": 672,
-        "tilePosY": 0
+        "tilePosX": 624,
+        "tilePosY": 16
       },
       {
         "interact ID": -1,
@@ -470,59 +468,59 @@
       },
       {
         "interact ID": -1,
-        "moveable": 1,
+        "moveable": 0,
         "posX": 2,
         "posY": 5,
-        "tilePosX": 80,
-        "tilePosY": 32
+        "tilePosX": 624,
+        "tilePosY": 16
       },
       {
         "interact ID": -1,
         "moveable": 0,
         "posX": 3,
         "posY": 5,
-        "tilePosX": 0,
-        "tilePosY": 32
+        "tilePosX": 624,
+        "tilePosY": 16
       },
       {
         "interact ID": -1,
         "moveable": 0,
         "posX": 4,
         "posY": 5,
-        "tilePosX": 0,
-        "tilePosY": 32
+        "tilePosX": 624,
+        "tilePosY": 16
       },
       {
         "interact ID": -1,
         "moveable": 0,
         "posX": 5,
         "posY": 5,
-        "tilePosX": 0,
-        "tilePosY": 32
+        "tilePosX": 624,
+        "tilePosY": 16
       },
       {
         "interact ID": -1,
         "moveable": 0,
         "posX": 6,
         "posY": 5,
-        "tilePosX": 0,
-        "tilePosY": 32
+        "tilePosX": 624,
+        "tilePosY": 16
       },
       {
         "interact ID": -1,
         "moveable": 0,
         "posX": 7,
         "posY": 5,
-        "tilePosX": 0,
-        "tilePosY": 32
+        "tilePosX": 624,
+        "tilePosY": 16
       },
       {
         "interact ID": -1,
-        "moveable": 1,
+        "moveable": 0,
         "posX": 8,
         "posY": 5,
-        "tilePosX": 64,
-        "tilePosY": 32
+        "tilePosX": 624,
+        "tilePosY": 16
       },
       {
         "interact ID": -1,
@@ -558,59 +556,59 @@
       },
       {
         "interact ID": -1,
-        "moveable": 1,
+        "moveable": 0,
         "posX": 2,
         "posY": 6,
-        "tilePosX": 80,
-        "tilePosY": 32
+        "tilePosX": 624,
+        "tilePosY": 16
       },
       {
         "interact ID": -1,
-        "moveable": 1,
+        "moveable": 0,
         "posX": 3,
         "posY": 6,
-        "tilePosX": 0,
-        "tilePosY": 32
+        "tilePosX": 624,
+        "tilePosY": 16
       },
       {
         "interact ID": -1,
-        "moveable": 1,
+        "moveable": 0,
         "posX": 4,
         "posY": 6,
-        "tilePosX": 0,
-        "tilePosY": 32
+        "tilePosX": 624,
+        "tilePosY": 16
       },
       {
         "interact ID": -1,
-        "moveable": 1,
+        "moveable": 0,
         "posX": 5,
         "posY": 6,
-        "tilePosX": 0,
-        "tilePosY": 32
+        "tilePosX": 624,
+        "tilePosY": 16
       },
       {
         "interact ID": -1,
-        "moveable": 1,
+        "moveable": 0,
         "posX": 6,
         "posY": 6,
-        "tilePosX": 0,
-        "tilePosY": 32
+        "tilePosX": 624,
+        "tilePosY": 16
       },
       {
         "interact ID": -1,
-        "moveable": 1,
+        "moveable": 0,
         "posX": 7,
         "posY": 6,
-        "tilePosX": 0,
-        "tilePosY": 32
+        "tilePosX": 624,
+        "tilePosY": 16
       },
       {
         "interact ID": -1,
-        "moveable": 1,
+        "moveable": 0,
         "posX": 8,
         "posY": 6,
-        "tilePosX": 64,
-        "tilePosY": 32
+        "tilePosX": 624,
+        "tilePosY": 16
       },
       {
         "interact ID": -1,
@@ -685,12 +683,12 @@
         "tilePosY": 16
       },
       {
-        "interact ID": 1,
-        "moveable": 1,
+        "interact ID": -1,
+        "moveable": 0,
         "posX": 7,
         "posY": 7,
-        "tilePosX": 592,
-        "tilePosY": 0
+        "tilePosX": 624,
+        "tilePosY": 16
       },
       {
         "interact ID": -1,
@@ -806,184 +804,184 @@
       },
       {
         "interact ID": -1,
-        "moveable": 1,
+        "moveable": 0,
         "posX": 0,
         "posY": 9,
-        "tilePosX": 32,
-        "tilePosY": 48
+        "tilePosX": 528,
+        "tilePosY": 16
       },
       {
         "interact ID": -1,
-        "moveable": 1,
+        "moveable": 0,
         "posX": 1,
         "posY": 9,
-        "tilePosX": 32,
-        "tilePosY": 48
+        "tilePosX": 528,
+        "tilePosY": 16
       },
       {
         "interact ID": -1,
-        "moveable": 1,
+        "moveable": 0,
         "posX": 2,
         "posY": 9,
-        "tilePosX": 32,
-        "tilePosY": 48
+        "tilePosX": 528,
+        "tilePosY": 16
       },
       {
         "interact ID": -1,
-        "moveable": 1,
+        "moveable": 0,
         "posX": 3,
         "posY": 9,
-        "tilePosX": 32,
-        "tilePosY": 48
+        "tilePosX": 528,
+        "tilePosY": 16
       },
       {
         "interact ID": -1,
-        "moveable": 1,
+        "moveable": 0,
         "posX": 4,
         "posY": 9,
-        "tilePosX": 32,
-        "tilePosY": 48
+        "tilePosX": 528,
+        "tilePosY": 16
       },
       {
         "interact ID": -1,
-        "moveable": 1,
+        "moveable": 0,
         "posX": 5,
         "posY": 9,
-        "tilePosX": 32,
-        "tilePosY": 48
+        "tilePosX": 528,
+        "tilePosY": 16
       },
       {
         "interact ID": -1,
-        "moveable": 1,
+        "moveable": 0,
         "posX": 6,
         "posY": 9,
-        "tilePosX": 32,
-        "tilePosY": 48
+        "tilePosX": 528,
+        "tilePosY": 16
       },
       {
         "interact ID": -1,
-        "moveable": 1,
+        "moveable": 0,
         "posX": 7,
         "posY": 9,
-        "tilePosX": 32,
-        "tilePosY": 48
+        "tilePosX": 528,
+        "tilePosY": 16
       },
       {
         "interact ID": -1,
-        "moveable": 1,
+        "moveable": 0,
         "posX": 8,
         "posY": 9,
-        "tilePosX": 32,
-        "tilePosY": 48
+        "tilePosX": 528,
+        "tilePosY": 16
       },
       {
         "interact ID": -1,
-        "moveable": 1,
+        "moveable": 0,
         "posX": 9,
         "posY": 9,
-        "tilePosX": 32,
-        "tilePosY": 48
+        "tilePosX": 528,
+        "tilePosY": 16
       },
       {
         "interact ID": -1,
-        "moveable": 1,
+        "moveable": 0,
         "posX": 10,
         "posY": 9,
-        "tilePosX": 32,
-        "tilePosY": 48
+        "tilePosX": 528,
+        "tilePosY": 16
       },
       {
         "interact ID": -1,
-        "moveable": 1,
+        "moveable": 0,
         "posX": 0,
         "posY": 10,
-        "tilePosX": 624,
-        "tilePosY": 48
+        "tilePosX": 528,
+        "tilePosY": 16
       },
       {
         "interact ID": -1,
-        "moveable": 1,
+        "moveable": 0,
         "posX": 1,
         "posY": 10,
-        "tilePosX": 624,
-        "tilePosY": 48
+        "tilePosX": 528,
+        "tilePosY": 16
       },
       {
         "interact ID": -1,
-        "moveable": 1,
+        "moveable": 0,
         "posX": 2,
         "posY": 10,
-        "tilePosX": 624,
-        "tilePosY": 48
+        "tilePosX": 528,
+        "tilePosY": 16
       },
       {
         "interact ID": -1,
-        "moveable": 1,
+        "moveable": 0,
         "posX": 3,
         "posY": 10,
-        "tilePosX": 624,
-        "tilePosY": 48
+        "tilePosX": 528,
+        "tilePosY": 16
       },
       {
         "interact ID": -1,
-        "moveable": 1,
+        "moveable": 0,
         "posX": 4,
         "posY": 10,
-        "tilePosX": 624,
-        "tilePosY": 48
+        "tilePosX": 528,
+        "tilePosY": 16
       },
       {
         "interact ID": -1,
-        "moveable": 1,
+        "moveable": 0,
         "posX": 5,
         "posY": 10,
-        "tilePosX": 624,
-        "tilePosY": 48
+        "tilePosX": 528,
+        "tilePosY": 16
       },
       {
         "interact ID": -1,
-        "moveable": 1,
+        "moveable": 0,
         "posX": 6,
         "posY": 10,
-        "tilePosX": 624,
-        "tilePosY": 48
+        "tilePosX": 528,
+        "tilePosY": 16
       },
       {
         "interact ID": -1,
-        "moveable": 1,
+        "moveable": 0,
         "posX": 7,
         "posY": 10,
-        "tilePosX": 624,
-        "tilePosY": 48
+        "tilePosX": 528,
+        "tilePosY": 16
       },
       {
         "interact ID": -1,
-        "moveable": 1,
+        "moveable": 0,
         "posX": 8,
         "posY": 10,
-        "tilePosX": 624,
-        "tilePosY": 48
+        "tilePosX": 528,
+        "tilePosY": 16
       },
       {
         "interact ID": -1,
-        "moveable": 1,
+        "moveable": 0,
         "posX": 9,
         "posY": 10,
-        "tilePosX": 624,
-        "tilePosY": 48
+        "tilePosX": 528,
+        "tilePosY": 16
       },
       {
         "interact ID": -1,
-        "moveable": 1,
+        "moveable": 0,
         "posX": 10,
         "posY": 10,
-        "tilePosX": 624,
-        "tilePosY": 48
+        "tilePosX": 528,
+        "tilePosY": 16
       }
     ],
     "worldPosX"
     :
-    0,
+    -11,
     "worldPosY"
     :
     0
