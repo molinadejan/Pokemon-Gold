@@ -3,7 +3,10 @@
 	"mapSizeX" : 20,
 	"mapSizeY" : 10,
 	"movePoints" : null,
-	"neighbors" : null,
+  "neighbors": [
+    "map0",
+    "map3"
+  ],
 	"tiles" : 
 	[
 		{
