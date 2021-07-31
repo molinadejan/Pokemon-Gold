@@ -33,16 +33,19 @@
     <ClInclude Include="TilesetManager.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Datas.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="dist\json\json.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="dist\json\json-forwards.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Converter.hpp">
+    <ClInclude Include="Converter.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Datas.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="PointOperator.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
@@ -57,6 +60,15 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="dist\jsoncpp.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Converter.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Datas.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="PointOperator.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>

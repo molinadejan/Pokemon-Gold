@@ -22,7 +22,7 @@
 // json
 #include <json/json.h>
 
-
+// string to TCHAR
 #include <atlstr.h>
 
 const int SCREEN_MUL = 5;

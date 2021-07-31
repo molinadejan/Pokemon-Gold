@@ -13,12 +13,7 @@
 #include <gdiplus.h>
 #pragma comment(lib, "Gdiplus.lib")
 
-// delatTime
-#include "Timer.h"
 #include <cmath>
-
-//#pragma comment(lib, "./lib/InputManager.lib")
-//#include "./lib/header/InputManager.h"
 
 #define WM_SELECT_TILE WM_USER + 1
 #define WM_SELECT_MAP  WM_USER + 2

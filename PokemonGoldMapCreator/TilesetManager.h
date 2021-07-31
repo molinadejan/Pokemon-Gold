@@ -16,7 +16,7 @@ private:
 
 	Image *tileset;
 	
-	POINT curSelectPos;
+	Point curSelectPos;
 	bool isSelect;
 
 	void DrawSelect(Graphics *graphic);
@@ -30,7 +30,7 @@ public:
 
 	bool GetIsSelect() const { return isSelect; }
 
-	POINT GetCurSelectPos() const { return curSelectPos; }
+	Point GetCurSelectPos() const { return curSelectPos; }
 	Image* GetTileset() const { return tileset; }
 
 	void LoadTileset(HWND hWnd);

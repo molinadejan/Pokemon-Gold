@@ -15,51 +15,11 @@ private:
 
 	private:
 
-		Input()
-		{
-			Reset();
-		}
-
+		Input();
 		~Input() = default;
 
-		void Reset()
-		{
-			is_key_up = false;
-			is_key_down = false;
-			is_key_left = false;
-			is_key_right = false;
-
-			is_key_z = false;
-			is_key_x = false;
-			is_key_enter = false;
-		}
-
-		void Update()
-		{
-			Reset();
-
-			if (GetAsyncKeyState(VK_LEFT) & 0x8000)
-				is_key_left = true;
-
-			if (GetAsyncKeyState(VK_RIGHT) & 0x8000)
-				is_key_right = true;
-
-			if (GetAsyncKeyState(VK_DOWN) & 0x8000)
-				is_key_down = true;
-
-			if (GetAsyncKeyState(VK_UP) & 0x8000)
-				is_key_up = true;
-
-
-			if (GetAsyncKeyState('Z') & 0x8000)
-				is_key_z = true;
-
-			if (GetAsyncKeyState('X') & 0x8000)
-				is_key_x = true;
-
-			if (GetAsyncKeyState(VK_RETURN) & 0x8000)
-				is_key_enter = true;
-		}
+		void Reset();
+		void Update();
 
 	private:
 		bool is_key_up;
@@ -78,41 +38,18 @@ private:
 
 public:
 
-	static bool GetUp   () { return s_MainInput.is_key_up;   }
-	static bool GetDown () { return s_MainInput.is_key_down; }
-	static bool GetLeft () { return s_MainInput.is_key_left; }
-	static bool GetRight() { return s_MainInput.is_key_right;}
-	static bool GetZ    () { return s_MainInput.is_key_z;    }
-	static bool GetX    () { return s_MainInput.is_key_x;    }
-	static bool GetEnter() { return s_MainInput.is_key_enter;}
+	static bool GetUp();
+	static bool GetDown();
+	static bool GetLeft();
+	static bool GetRight();
+	static bool GetZ();
+	static bool GetX();
+	static bool GetEnter();
 
-	static int GetHorizontal() 
-	{
-		int ret = 0;
-
-		if (s_MainInput.is_key_left)
-			ret = -1;
-		else if(s_MainInput.is_key_right)
-			ret = 1;
-
-		return ret;
-	}
-
-	static int GetVertical()
-	{
-		int ret = 0;
-
-		if (s_MainInput.is_key_up)
-			ret = -1;
-		else if(s_MainInput.is_key_down)
-			ret = 1;
-
-		return ret;
-	}
-
-	static void Update  () { s_MainInput.Update();           }
-
-	static void Reset   () { s_MainInput.Reset();            }
+	static int GetHorizontal();
+	static int GetVertical();
+	static void Update();
+	static void Reset();
 };
 
 #endif // !__IN

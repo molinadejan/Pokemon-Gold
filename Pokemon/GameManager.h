@@ -26,17 +26,16 @@ private:
 
 	Player player;
 
-	Map curData;
-	Map neighborData[4];
+	Map* curData;
+	//Map* neighborData[4];
 
 private:
 
 	void InitGdiPlus();
 	void SetScreen(HWND hWnd);
 
-	void LoadData(string ID, Map &map);
-
 	void DrawMap(Graphics &g, PointF origin);
+	void DrawDebug(Graphics &g);
 
 	void DrawGamePlay(Graphics &g);
 

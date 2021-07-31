@@ -20,12 +20,11 @@ private:
 
 	RECT rect;
 
-	POINT cameraPos;
+	Point cameraPos;
+	Point oldPos;
+	Point newPos;
 
-	POINT oldPos;
-	POINT newPos;
-
-	POINT curSelectPos;
+	Point curSelectPos;
 
 	Map mapData;
 
@@ -35,7 +34,7 @@ private:
 
 	bool isSelect;
 
-	bool PosInGrid(POINT pos);
+	bool PosInGrid(Point pos);
 
 	void DrawToCollider(int moveable, int x, int y);
 	void DrawToMap(Image* img, int x, int y, int srcx, int srcy);
@@ -57,16 +56,16 @@ private:
 public:
 	MapCreator();
 
-	void SetOldPos(POINT p) { oldPos = p; }
-	void SetNewPos(POINT p) { newPos = p; }
+	void SetOldPos(Point p) { oldPos = p; }
+	void SetNewPos(Point p) { newPos = p; }
 
 	void SetTilesetManager(TilesetManager *_tm) { tm = _tm; }
 
-	void SelectTile(POINT mPos);
-	void SetTile(POINT mPos);
-	void EraseTile(POINT mPos);
-	void SetCollider(POINT mPos);
-	void SetMp(POINT mPos);
+	void SelectTile(Point mPos);
+	void SetTile(Point mPos);
+	void EraseTile(Point mPos);
+	void SetCollider(Point mPos);
+	void SetMp(Point mPos);
 
 	Tile* GetSelectTile();
 	MovePoint* GetMP();

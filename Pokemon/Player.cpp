@@ -2,7 +2,7 @@
 #include <cmath>
 
 Player::Player()
-	: pos{ 0, 2 }, posF{ pos.X, pos.Y }, moveDir{ 0, 0 }, speed(3.0f), isMoving(false) { }
+	: pos{ 0, 0 }, posF{ pos.X, pos.Y }, moveDir{ 0, 0 }, speed(3.0f), isMoving(false) { }
 
 Player::~Player() { }
 

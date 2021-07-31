@@ -5,18 +5,15 @@
 #include <string>
 #include <cstdio>
 
-#include "Converter.hpp"
+#include "Converter.h"
 
 MapCreator::MapCreator()
 	: cameraPos{ 0, 0 }, curSelectPos{0, 0}, mapImage(NULL), coliImage(NULL), mpImage(NULL), isSelect(false)
-{ 
-	mapData.ID = "";
-	mapData.mapSize = { 0, 0 };
-}
+{ }
 
-bool MapCreator::PosInGrid(POINT pos)
+bool MapCreator::PosInGrid(Point pos)
 {
-	if (pos.x < rect.left || pos.x > rect.right || pos.y < rect.top || pos.y > rect.bottom || pos.x / 16 >= mapData.mapSize.x || pos.y / 16 >= mapData.mapSize.y)
+	if (pos.X < rect.left || pos.X > rect.right || pos.Y < rect.top || pos.Y > rect.bottom || pos.X / 16 >= mapData.mapSize.X || pos.Y / 16 >= mapData.mapSize.Y)
 		return false;
 
 	return true;
@@ -81,118 +78,113 @@ void MapCreator::DrawToMp(int isPoint, int x, int y)
 	}
 }
 
-void MapCreator::SelectTile(POINT mPos)
+void MapCreator::SelectTile(Point mPos)
 {
-	mPos.x += cameraPos.x;
-	mPos.y += cameraPos.y;
+	mPos = mPos + cameraPos;
 
 	if (PosInGrid(mPos))
 	{
 		isSelect = true;
 
-		curSelectPos.x = mPos.x - mPos.x % 16;
-		curSelectPos.y = mPos.y - mPos.y % 16;
+		curSelectPos.X = mPos.X - mPos.X % 16;
+		curSelectPos.Y = mPos.Y - mPos.Y % 16;
 	}
 	else isSelect = false;
 }
 
-void MapCreator::SetTile(POINT mPos)
+void MapCreator::SetTile(Point mPos)
 {
-	mPos.x += cameraPos.x;
-	mPos.y += cameraPos.y;
+	mPos = mPos + cameraPos;
 
 	if(PosInGrid(mPos))
 	{
 		isSelect = true;
 
-		curSelectPos.x = mPos.x - mPos.x % 16;
-		curSelectPos.y = mPos.y - mPos.y % 16;
+		curSelectPos.X = mPos.X - mPos.X % 16;
+		curSelectPos.Y = mPos.Y - mPos.Y % 16;
 
-		int idxX = curSelectPos.x / 16;
-		int idxY = curSelectPos.y / 16;
+		int idxX = curSelectPos.X / 16;
+		int idxY = curSelectPos.Y / 16;
 
 		if (tm->GetIsSelect())
 		{
-			POINT src = mapData.tiles[idxY][idxX].tilePos = tm->GetCurSelectPos();
-			DrawToMap(tm->GetTileset(), curSelectPos.x, curSelectPos.y, src.x, src.y);
+			Point src = mapData.tiles[idxY][idxX].tilePos = tm->GetCurSelectPos();
+			DrawToMap(tm->GetTileset(), curSelectPos.X, curSelectPos.Y, src.X, src.Y);
 		}
 	}
 	else isSelect = false;
 }
 
-void MapCreator::EraseTile(POINT mPos)
+void MapCreator::EraseTile(Point mPos)
 {
-	mPos.x += cameraPos.x;
-	mPos.y += cameraPos.y;
+	mPos = mPos + cameraPos;
 
 	if (PosInGrid(mPos))
 	{
 		isSelect = true;
 
-		curSelectPos.x = mPos.x - mPos.x % 16;
-		curSelectPos.y = mPos.y - mPos.y % 16;
+		curSelectPos.X = mPos.X - mPos.X % 16;
+		curSelectPos.Y = mPos.Y - mPos.Y % 16;
 
-		int idxX = curSelectPos.x / 16;
-		int idxY = curSelectPos.y / 16;
+		int idxX = curSelectPos.X / 16;
+		int idxY = curSelectPos.Y / 16;
 
 		mapData.tiles[idxY][idxX].tilePos = { -1, -1 };
-		EraseToMap(curSelectPos.x, curSelectPos.y);
+		EraseToMap(curSelectPos.X, curSelectPos.Y);
 	}
 	else isSelect = false;
 }
 
-void MapCreator::SetCollider(POINT mPos)
+void MapCreator::SetCollider(Point mPos)
 {
-	mPos.x += cameraPos.x;
-	mPos.y += cameraPos.y;
+	mPos = mPos + cameraPos;
 
 	if (PosInGrid(mPos))
 	{
 		isSelect = true;
 
-		curSelectPos.x = mPos.x - mPos.x % 16;
-		curSelectPos.y = mPos.y - mPos.y % 16;
+		curSelectPos.X = mPos.X - mPos.X % 16;
+		curSelectPos.Y = mPos.Y - mPos.Y % 16;
 
-		int idxX = curSelectPos.x / 16;
-		int idxY = curSelectPos.y / 16;
+		int idxX = curSelectPos.X / 16;
+		int idxY = curSelectPos.Y / 16;
 
 		Tile &curTile = mapData.tiles[idxY][idxX];
 
 		++curTile.moveable;
 		curTile.moveable %= 5;
-		DrawToCollider(curTile.moveable, curSelectPos.x, curSelectPos.y);
+		DrawToCollider(curTile.moveable, curSelectPos.X, curSelectPos.Y);
 	}
 	else isSelect = false;
 }
 
-void MapCreator::SetMp(POINT mPos)
+void MapCreator::SetMp(Point mPos)
 {
-	mPos.x += cameraPos.x;
-	mPos.y += cameraPos.y;
+	mPos = mPos + cameraPos;
 
 	if (PosInGrid(mPos))
 	{
 		isSelect = true;
 
-		curSelectPos.x = mPos.x - mPos.x % 16;
-		curSelectPos.y = mPos.y - mPos.y % 16;
+		curSelectPos.X = mPos.X - mPos.X % 16;
+		curSelectPos.Y = mPos.Y - mPos.Y % 16;
 
-		int idxX = curSelectPos.x / 16;
-		int idxY = curSelectPos.y / 16;
+		int idxX = curSelectPos.X / 16;
+		int idxY = curSelectPos.Y / 16;
 
 		for(int i = 0; i < (int)mapData.movePoints.size(); ++i)
 		{
 			MovePoint mp = mapData.movePoints[i];
 
-			if (mp.pos.x == idxX && mp.pos.y == idxY)
+			if (mp.pos.X == idxX && mp.pos.Y == idxY)
 			{
-				DrawToMp(0, curSelectPos.x, curSelectPos.y);
+				DrawToMp(0, curSelectPos.X, curSelectPos.Y);
 				mapData.movePoints.erase(mapData.movePoints.begin() + i);
 				return;
 			}
 		}
 
-		DrawToMp(1, curSelectPos.x, curSelectPos.y);
+		DrawToMp(1, curSelectPos.X, curSelectPos.Y);
 		mapData.movePoints.push_back({ "", {idxX, idxY}, {-1, -1} });
 	}
 	else isSelect = false;
@@ -202,8 +194,8 @@ Tile* MapCreator::GetSelectTile()
 {
 	if (!isSelect) return NULL;
 
-	int idxX = curSelectPos.x / 16;
-	int idxY = curSelectPos.y / 16;
+	int idxX = curSelectPos.X / 16;
+	int idxY = curSelectPos.Y / 16;
 
 	return &(mapData.tiles[idxY][idxX]);
 }
@@ -212,11 +204,11 @@ MovePoint* MapCreator::GetMP()
 {
 	if (!isSelect) return NULL;
 
-	int idxX = curSelectPos.x / 16;
-	int idxY = curSelectPos.y / 16;
+	int idxX = curSelectPos.X / 16;
+	int idxY = curSelectPos.Y / 16;
 
 	for (auto& e : mapData.movePoints)
-		if (e.pos.x == idxX && e.pos.y == idxY)
+		if (e.pos.X == idxX && e.pos.Y == idxY)
 			return &e;
 
 	return NULL;
@@ -224,11 +216,10 @@ MovePoint* MapCreator::GetMP()
 
 void MapCreator::ViewDrag(HWND hWnd)
 {
-	cameraPos.x -= newPos.x - oldPos.x;
-	cameraPos.y -= newPos.y - oldPos.y;
+	cameraPos = cameraPos - (newPos - oldPos);
 
-	if (cameraPos.x < 0) cameraPos.x = 0;
-	if (cameraPos.y < 0) cameraPos.y = 0;
+	if (cameraPos.X < 0) cameraPos.X = 0;
+	if (cameraPos.Y < 0) cameraPos.Y = 0;
 
 	oldPos = newPos;
 }
@@ -244,19 +235,19 @@ void MapCreator::DrawGrid(Graphics *graphic)
 
 	int startX, startY;
 
-	if (cameraPos.x % 16 == 0) startX = 0;
-	else startX = 16 - cameraPos.x % 16;
+	if (cameraPos.X % 16 == 0) startX = 0;
+	else startX = 16 - cameraPos.X % 16;
 
-	if (cameraPos.y % 16 == 0) startY = 0;
-	else startY = 16 - cameraPos.y % 16;
+	if (cameraPos.Y % 16 == 0) startY = 0;
+	else startY = 16 - cameraPos.Y % 16;
 
 	// 세로선
-	for (int i = startX; i <= rect.right && cameraPos.x + i <= mapData.mapSize.x * 16; i += 16)
-		graphic->DrawLine(&pen, i, 0, i, mapData.mapSize.y * 16 - cameraPos.y);
+	for (int i = startX; i <= rect.right && cameraPos.X + i <= mapData.mapSize.X * 16; i += 16)
+		graphic->DrawLine(&pen, i, 0, i, mapData.mapSize.Y * 16 - cameraPos.Y);
 
 	// 가로선
-	for (int i = startY; i <= rect.bottom && cameraPos.y + i <= mapData.mapSize.y * 16; i += 16)
-		graphic->DrawLine(&pen, 0, i, mapData.mapSize.x * 16 - cameraPos.x, i);
+	for (int i = startY; i <= rect.bottom && cameraPos.Y + i <= mapData.mapSize.Y * 16; i += 16)
+		graphic->DrawLine(&pen, 0, i, mapData.mapSize.X * 16 - cameraPos.X, i);
 }
 
 void MapCreator::DrawBack(Graphics* graphic)
@@ -268,19 +259,19 @@ void MapCreator::DrawBack(Graphics* graphic)
 void MapCreator::DrawMap(Graphics* graphic)
 {
 	if(mapImage != NULL)
-		graphic->DrawImage(mapImage, 0, 0, cameraPos.x, cameraPos.y, mapImage->GetWidth() - cameraPos.x, mapImage->GetHeight() - cameraPos.y, Unit::UnitPixel);
+		graphic->DrawImage(mapImage, 0, 0, cameraPos.X, cameraPos.Y, mapImage->GetWidth() - cameraPos.X, mapImage->GetHeight() - cameraPos.Y, Unit::UnitPixel);
 }
 
 void MapCreator::DrawCollider(Graphics* graphic)
 {
 	if (coliImage != NULL)
-		graphic->DrawImage(coliImage, 0, 0, cameraPos.x, cameraPos.y, coliImage->GetWidth() - cameraPos.x, coliImage->GetHeight() - cameraPos.y, Unit::UnitPixel);
+		graphic->DrawImage(coliImage, 0, 0, cameraPos.X, cameraPos.Y, coliImage->GetWidth() - cameraPos.X, coliImage->GetHeight() - cameraPos.Y, Unit::UnitPixel);
 }
 
 void MapCreator::DrawMp(Graphics * graphic)
 {
 	if (mpImage != NULL)
-		graphic->DrawImage(mpImage, 0, 0, cameraPos.x, cameraPos.y, mpImage->GetWidth() - cameraPos.x, mpImage->GetHeight() - cameraPos.y, Unit::UnitPixel);
+		graphic->DrawImage(mpImage, 0, 0, cameraPos.X, cameraPos.Y, mpImage->GetWidth() - cameraPos.X, mpImage->GetHeight() - cameraPos.Y, Unit::UnitPixel);
 }
 
 void MapCreator::DrawCurSelect(Graphics * graphic)
@@ -288,7 +279,7 @@ void MapCreator::DrawCurSelect(Graphics * graphic)
 	if (!isSelect) return;
 
 	Pen pen(Color(255, 0, 0));
-	graphic->DrawRectangle(&pen, curSelectPos.x - cameraPos.x, curSelectPos.y - cameraPos.y, 15, 15);
+	graphic->DrawRectangle(&pen, curSelectPos.X - cameraPos.X, curSelectPos.Y - cameraPos.Y, 15, 15);
 }
 
 void MapCreator::InitMap(int x, int y)
@@ -391,17 +382,17 @@ void MapCreator::FileOpen(TCHAR *filename)
 		JsonToMap(mapData, root);
 
 		InitMap(imgName);
-		InitCollider(mapData.mapSize.x * 16, mapData.mapSize.y * 16);
-		InitMp(mapData.mapSize.x * 16, mapData.mapSize.y * 16);
+		InitCollider(mapData.mapSize.X * 16, mapData.mapSize.Y * 16);
+		InitMp(mapData.mapSize.X * 16, mapData.mapSize.Y * 16);
 
 		cameraPos = curSelectPos = oldPos = newPos = { 0, 0 };
 
-		for (int i = 0; i < mapData.mapSize.y; ++i)
-			for (int j = 0; j < mapData.mapSize.x; ++j)
+		for (int i = 0; i < mapData.mapSize.Y; ++i)
+			for (int j = 0; j < mapData.mapSize.X; ++j)
 				DrawToCollider(mapData.tiles[i][j].moveable, j * 16, i * 16);
 
 		for (const auto& e : mapData.movePoints)
-			DrawToMp(1, e.pos.x * 16, e.pos.y * 16);
+			DrawToMp(1, e.pos.X * 16, e.pos.Y * 16);
 	}
 }
 

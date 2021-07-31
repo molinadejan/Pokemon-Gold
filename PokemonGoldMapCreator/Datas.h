@@ -15,8 +15,8 @@ using namespace Gdiplus;
 
 struct Tile
 {
-	POINT pos;
-	POINT tilePos;
+	Point pos;
+	Point tilePos;
 
 	// 0 : 이동 불가능
 	// 1 : 이동 가능
@@ -25,22 +25,22 @@ struct Tile
 
 	// bool isPokeMon?
 
-	Tile() : pos{ 0, 0 }, tilePos{ -1, -1 }, moveable(0), interactID(-1) { }
+	Tile();
 };
 
 struct MovePoint
 {
 	string targetID;
-	POINT pos;
-	POINT targetPos;
+	Point pos;
+	Point targetPos;
 	int moveType;
 };
 
 struct Map
 {
 	string ID;
-	POINT worldPos;
-	POINT mapSize;
+	Point worldPos;
+	Point mapSize;
 	vector<vector<Tile>> tiles;
 	vector<string> neighbors;
 	vector<MovePoint> movePoints;
@@ -51,18 +51,8 @@ struct Map
 	// 맵에서 등장하는 엔피씨 아이디
 	// vector<???> npcData
 
-	Map() : ID(""), worldPos{ 0, 0 }, mapSize{ -1, -1 } { }
-
-	Map(string _ID, int x, int y) : ID(_ID), worldPos{ 0, 0 }, mapSize{ x, y }
-	{
-		tiles = vector<vector<Tile>>(y, vector<Tile>(x, Tile()));
-		neighbors = vector<string>();
-		movePoints = vector<MovePoint>();
-
-		for (int i = 0; i < y; ++i)
-			for (int j = 0; j < x; ++j)
-				tiles[i][j].pos = { j, i };
-	}
+	Map();
+	Map(string _ID, int x, int y);
 };
 
 #endif // !__DATAS_H__

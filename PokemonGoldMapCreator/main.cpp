@@ -61,11 +61,6 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance
 				DispatchMessage(&msg);
 			}
 		}
-		else
-		{
-			//mc.Update(mainWnd);
-			//tm.Update(tileSetWnd);
-		}
 	}
 
     return (int) msg.wParam;
@@ -193,7 +188,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 
 		case WM_LBUTTONDOWN:
 		{
-			POINT mPos = { LOWORD(lParam), HIWORD(lParam) };
+			Point mPos = { LOWORD(lParam), HIWORD(lParam) };
 
 			if (GetAsyncKeyState(VK_LMENU) & 0x8001)
 			{
@@ -245,7 +240,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 
 		case WM_RBUTTONDOWN:
 		{
-			POINT mPos = { LOWORD(lParam), HIWORD(lParam) };
+			Point mPos = { LOWORD(lParam), HIWORD(lParam) };
 
 			switch (state)
 			{
@@ -565,8 +560,8 @@ BOOL CALLBACK TileInfoDlgProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lPa
 						std::string sTargetId(wTargetId.begin(), wTargetId.end());
 
 						mp->targetID = sTargetId;
-						mp->targetPos.x = GetDlgItemInt(hDlg, IDC_EDIT_TARGETPOSX, NULL, TRUE);
-						mp->targetPos.y = GetDlgItemInt(hDlg, IDC_EDIT_TARGETPOSY, NULL, TRUE);
+						mp->targetPos.X = GetDlgItemInt(hDlg, IDC_EDIT_TARGETPOSX, NULL, TRUE);
+						mp->targetPos.Y = GetDlgItemInt(hDlg, IDC_EDIT_TARGETPOSY, NULL, TRUE);
 						mp->moveType = GetDlgItemInt(hDlg, IDC_EDIT_MOVETYPE, NULL, TRUE);
 					}
 				}
@@ -590,10 +585,10 @@ BOOL CALLBACK TileInfoDlgProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lPa
 			}
 			else
 			{
-				SetDlgItemInt(hDlg, IDC_EDIT_XPOS, tile->pos.x, FALSE);
-				SetDlgItemInt(hDlg, IDC_EDIT_YPOS, tile->pos.y, FALSE);
-				SetDlgItemInt(hDlg, IDC_EDIT_TXPOS, tile->tilePos.x, TRUE);
-				SetDlgItemInt(hDlg, IDC_EDIT_TYPOS, tile->tilePos.y, TRUE);
+				SetDlgItemInt(hDlg, IDC_EDIT_XPOS, tile->pos.X, FALSE);
+				SetDlgItemInt(hDlg, IDC_EDIT_YPOS, tile->pos.Y, FALSE);
+				SetDlgItemInt(hDlg, IDC_EDIT_TXPOS, tile->tilePos.X, TRUE);
+				SetDlgItemInt(hDlg, IDC_EDIT_TYPOS, tile->tilePos.Y, TRUE);
 				SetDlgItemInt(hDlg, IDC_EDIT_MOVEABLE, tile->moveable, FALSE);
 				SetDlgItemInt(hDlg, IDC_EDIT_INID, tile->interactID, TRUE);
 			}
@@ -623,8 +618,8 @@ BOOL CALLBACK TileInfoDlgProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lPa
 				_tcscpy_s(targetId, CA2T(mp->targetID.c_str()));
 
 				SetDlgItemText(hDlg, IDC_EDIT_TARGETID, targetId);
-				SetDlgItemInt(hDlg, IDC_EDIT_TARGETPOSX, mp->targetPos.x, TRUE);
-				SetDlgItemInt(hDlg, IDC_EDIT_TARGETPOSY, mp->targetPos.y, TRUE);
+				SetDlgItemInt(hDlg, IDC_EDIT_TARGETPOSX, mp->targetPos.X, TRUE);
+				SetDlgItemInt(hDlg, IDC_EDIT_TARGETPOSY, mp->targetPos.Y, TRUE);
 				SetDlgItemInt(hDlg, IDC_EDIT_MOVETYPE, mp->moveType, TRUE);
 			}
 		}
@@ -656,10 +651,10 @@ BOOL CALLBACK MapInfoDlgProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lPar
 			SetDlgItemText(hDlg, IDC_EDIT_SAVE_NAME, id);
 
 			SetDlgItemText(hDlg, IDC_EDIT_ID, id);
-			SetDlgItemInt(hDlg, IDC_EDIT_POSX, map->worldPos.x, FALSE);
-			SetDlgItemInt(hDlg, IDC_EDIT_POSY, map->worldPos.y, FALSE);
-			SetDlgItemInt(hDlg, IDC_EDIT_MAPSIZEX, map->mapSize.x, FALSE);
-			SetDlgItemInt(hDlg, IDC_EDIT_MAPSIZEY, map->mapSize.y, FALSE);
+			SetDlgItemInt(hDlg, IDC_EDIT_POSX, map->worldPos.X, FALSE);
+			SetDlgItemInt(hDlg, IDC_EDIT_POSY, map->worldPos.Y, FALSE);
+			SetDlgItemInt(hDlg, IDC_EDIT_MAPSIZEX, map->mapSize.X, FALSE);
+			SetDlgItemInt(hDlg, IDC_EDIT_MAPSIZEY, map->mapSize.Y, FALSE);
 		}
 		break;
 
@@ -671,8 +666,8 @@ BOOL CALLBACK MapInfoDlgProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lPar
 				{
 					if (map != NULL)
 					{
-						map->worldPos.x = GetDlgItemInt(hDlg, IDC_EDIT_POSX, NULL, FALSE);
-						map->worldPos.y = GetDlgItemInt(hDlg, IDC_EDIT_POSY, NULL, FALSE);
+						map->worldPos.X = GetDlgItemInt(hDlg, IDC_EDIT_POSX, NULL, FALSE);
+						map->worldPos.Y = GetDlgItemInt(hDlg, IDC_EDIT_POSY, NULL, FALSE);
 					}
 				}
 				break;

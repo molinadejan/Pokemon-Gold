@@ -30,12 +30,6 @@
     <ClInclude Include="Timer.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="dist\json\json.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="dist\json\json-forwards.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="GameManager.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
@@ -45,21 +39,27 @@
     <ClInclude Include="InputManager.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Datas.h">
+    <ClInclude Include="DataLoadManager.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Converter.hpp">
+    <ClInclude Include="MyUtils.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="..\PokemonGoldMapCreator\Converter.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="..\PokemonGoldMapCreator\dist\json\json.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="..\PokemonGoldMapCreator\dist\json\json-forwards.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="..\PokemonGoldMapCreator\Datas.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Pokemon.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="Timer.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="dist\jsoncpp.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="GameManager.cpp">
@@ -69,6 +69,24 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Player.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="DataLoadManager.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="MyUtils.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="..\PokemonGoldMapCreator\Converter.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="..\PokemonGoldMapCreator\dist\jsoncpp.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="..\PokemonGoldMapCreator\Datas.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>

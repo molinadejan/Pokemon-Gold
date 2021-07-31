@@ -1,19 +1,16 @@
-#pragma once
-#ifndef __CONVERTER_HPP_
-#define __CONVERTER_HPP_
+#include "Converter.h"
 
-#include <json/json.h>
-#include "Datas.h"
 #include <atlstr.h>
 #include "framework.h"
+#include <json/json.h>
 
 void JsonToTile(Tile &tile, Json::Value &value)
 {
-	tile.pos.x = value["posX"].asInt();
-	tile.pos.y = value["posY"].asInt();
+	tile.pos.X = value["posX"].asInt();
+	tile.pos.Y = value["posY"].asInt();
 
-	tile.tilePos.x = value["tilePosX"].asInt();
-	tile.tilePos.y = value["tilePosY"].asInt();
+	tile.tilePos.X = value["tilePosX"].asInt();
+	tile.tilePos.Y = value["tilePosY"].asInt();
 
 	tile.moveable = value["moveable"].asInt();
 	tile.interactID = value["interact ID"].asInt();
@@ -21,11 +18,11 @@ void JsonToTile(Tile &tile, Json::Value &value)
 
 void TileToJson(Tile &tile, Json::Value &value)
 {
-	value["posX"] = tile.pos.x;
-	value["posY"] = tile.pos.y;
+	value["posX"] = tile.pos.X;
+	value["posY"] = tile.pos.Y;
 
-	value["tilePosX"] = tile.tilePos.x;
-	value["tilePosY"] = tile.tilePos.y;
+	value["tilePosX"] = tile.tilePos.X;
+	value["tilePosY"] = tile.tilePos.Y;
 
 	value["moveable"] = tile.moveable;
 	value["interact ID"] = tile.interactID;
@@ -35,11 +32,11 @@ void JsonToMovePoint(MovePoint &mp, Json::Value &value)
 {
 	mp.targetID = value["targetID"].asString();
 
-	mp.pos.x = value["posX"].asInt();
-	mp.pos.y = value["posY"].asInt();
+	mp.pos.X = value["posX"].asInt();
+	mp.pos.Y = value["posY"].asInt();
 
-	mp.targetPos.x = value["targetPosX"].asInt();
-	mp.targetPos.y = value["targetPosY"].asInt();
+	mp.targetPos.X = value["targetPosX"].asInt();
+	mp.targetPos.Y = value["targetPosY"].asInt();
 
 	mp.moveType = value["moveType"].asInt();
 }
@@ -48,11 +45,11 @@ void MovePointToJson(MovePoint &mp, Json::Value &value)
 {
 	value["targetID"] = mp.targetID;
 
-	value["posX"] = mp.pos.x;
-	value["posY"] = mp.pos.y;
+	value["posX"] = mp.pos.X;
+	value["posY"] = mp.pos.Y;
 
-	value["targetPosX"] = mp.targetPos.x;
-	value["targetPosY"] = mp.targetPos.y;
+	value["targetPosX"] = mp.targetPos.X;
+	value["targetPosY"] = mp.targetPos.Y;
 
 	value["moveType"] = mp.moveType;
 }
@@ -61,19 +58,19 @@ void JsonToMap(Map &map, Json::Value &value)
 {
 	map.ID = value["ID"].asString();
 
-	map.worldPos.x = value["worldPosX"].asInt();
-	map.worldPos.y = value["worldPosY"].asInt();
+	map.worldPos.X = value["worldPosX"].asInt();
+	map.worldPos.Y = value["worldPosY"].asInt();
 
-	map.mapSize.x = value["mapSizeX"].asInt();
-	map.mapSize.y = value["mapSizeY"].asInt();
+	map.mapSize.X = value["mapSizeX"].asInt();
+	map.mapSize.Y = value["mapSizeY"].asInt();
 
-	map.tiles = vector<vector<Tile>>(map.mapSize.y, vector<Tile>(map.mapSize.x, Tile()));
+	map.tiles = vector<vector<Tile>>(map.mapSize.Y, vector<Tile>(map.mapSize.X, Tile()));
 
 	Json::Value saveTiles = value["tiles"];
 
 	for (int i = 0; i < (int)saveTiles.size(); ++i)
 	{
-		Tile &tile = map.tiles[i / map.mapSize.x][i % map.mapSize.x];
+		Tile &tile = map.tiles[i / map.mapSize.X][i % map.mapSize.X];
 		JsonToTile(tile, saveTiles[i]);
 	}
 
@@ -100,17 +97,17 @@ void MapToJson(Map &map, Json::Value &value)
 {
 	value["ID"] = map.ID;
 
-	value["worldPosX"] = map.worldPos.x;
-	value["worldPosY"] = map.worldPos.y;
+	value["worldPosX"] = map.worldPos.X;
+	value["worldPosY"] = map.worldPos.Y;
 
-	value["mapSizeX"] = map.mapSize.x;
-	value["mapSizeY"] = map.mapSize.y;
+	value["mapSizeX"] = map.mapSize.X;
+	value["mapSizeY"] = map.mapSize.Y;
 
 	Json::Value saveTiles;
 
-	for (int i = 0; i < map.mapSize.y; ++i)
+	for (int i = 0; i < map.mapSize.Y; ++i)
 	{
-		for (int j = 0; j < map.mapSize.x; ++j)
+		for (int j = 0; j < map.mapSize.X; ++j)
 		{
 			Json::Value tileJson;
 			TileToJson(map.tiles[i][j], tileJson);
@@ -170,5 +167,3 @@ int GetEncoderClsid(const WCHAR * format, CLSID * pClsid)
 	free(pImageCodecInfo);
 	return -1;
 }
-
-#endif // !__CONVERTER_HPP_

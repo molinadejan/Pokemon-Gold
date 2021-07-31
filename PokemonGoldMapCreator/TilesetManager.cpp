@@ -6,7 +6,7 @@ void TilesetManager::DrawSelect(Graphics *graphic)
 	if (isSelect)
 	{
 		Pen pen(Color(255, 0, 0));
-		graphic->DrawRectangle(&pen, curSelectPos.x, curSelectPos.y, 15, 15);
+		graphic->DrawRectangle(&pen, curSelectPos.X, curSelectPos.Y, 15, 15);
 	}
 }
 
@@ -66,8 +66,8 @@ void TilesetManager::SelectTile(HWND hWnd)
 		if (!isSelect)
 			isSelect = true;
 
-		curSelectPos.x = mPos.x - mPos.x % 16;
-		curSelectPos.y = mPos.y - mPos.y % 16;
+		curSelectPos.X = mPos.x - mPos.x % 16;
+		curSelectPos.Y = mPos.y - mPos.y % 16;
 	}
 }
 

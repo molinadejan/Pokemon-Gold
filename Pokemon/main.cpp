@@ -2,6 +2,7 @@
 #include "Pokemon.h"
 #include "GameManager.h"
 #include "InputManager.h"
+#include "DataLoadManager.h"
 
 #define MAX_LOADSTRING 100
 
@@ -34,6 +35,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance
 
 	Timer::Reset();
 	InputManager::Reset();
+	DataLoadManager::Reset();
 
 	while (true)
 	{

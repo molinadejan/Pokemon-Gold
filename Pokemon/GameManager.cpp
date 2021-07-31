@@ -1,11 +1,13 @@
 #include "GameManager.h"
 #include "InputManager.h"
-#include "Converter.hpp"
+//#include "Converter.h"
+#include "MyUtils.h"
+#include "DataLoadManager.h"
 
 #include <fstream>
 
 // 생성자, 소멸자 //
-GameManager::GameManager() { }
+GameManager::GameManager() : curData(NULL), state(STATE::INTRO) { }
 
 GameManager::~GameManager() 
 {
@@ -27,61 +29,53 @@ void GameManager::SetScreen(HWND hWnd)
 	MoveWindow(hWnd, 100, 100, rect.right - rect.left, rect.bottom - rect.top, TRUE);
 }
 
-void GameManager::LoadData(string ID, Map &map)
+void GameManager::DrawMap(Graphics &g, PointF origin)
 {
-	TCHAR id[64];
-	_tcscpy_s(id, CA2T(ID.c_str()));
+	Image* img = DataLoadManager::GetMapImage(curData->ID);
 
-	TCHAR dataName[256];
-	_stprintf_s(dataName, _T("data/map/%s.mapData"), id);
+	Rect expansion(-origin.X * PIXEL * SCREEN_MUL, -origin.Y * PIXEL * SCREEN_MUL, img->GetWidth() * SCREEN_MUL, img->GetHeight() * SCREEN_MUL);
+	g.DrawImage(img, expansion);
 
-	Json::Value root;
-	std::ifstream readFile(dataName);
-
-	if (readFile.is_open())
+	for(string& nID : curData->neighbors)
 	{
-		readFile >> root;
-		readFile.close();
+		Image *nImg = DataLoadManager::GetMapImage(nID);
+		Map* n = DataLoadManager::GetMapData(nID);
 
-		JsonToMap(map, root);
+		Point diff = curData->worldPos - n->worldPos;
+
+		Rect expansion2(-(origin.X + diff.X) * PIXEL * SCREEN_MUL, -(origin.Y + diff.Y) * PIXEL * SCREEN_MUL, nImg->GetWidth() * SCREEN_MUL, nImg->GetHeight() * SCREEN_MUL);
+		g.DrawImage(nImg, expansion2);
 	}
 }
 
-void GameManager::DrawMap(Graphics &g, PointF origin)
+void GameManager::DrawDebug(Graphics & g)
 {
-	TCHAR id[64], imgName[128];
+	TCHAR buffer[32];
+	_tcscpy_s(buffer, CA2T(curData->ID.c_str()));
 
-	_tcscpy_s(id, CA2T(curData.ID.c_str()));
-	_stprintf_s(imgName, _T("data/map/%s.png"), id);
+	Font font(&FontFamily(L"Arial"), 16, FontStyleBold, UnitPoint);
+	SolidBrush strBrush(Color(255, 255, 255, 255));
 
-	Image img(imgName);
-	Rect expansion(-origin.X * PIXEL * SCREEN_MUL, -origin.Y * PIXEL * SCREEN_MUL, img.GetWidth() * SCREEN_MUL, img.GetHeight() * SCREEN_MUL);
-	g.DrawImage(&img, expansion);
+	RectF rectF1(0, 0, 128, 32);
+	g.DrawString(buffer, -1, &font, rectF1, NULL, &strBrush);
 
-	for (int i = 0; i < curData.neighbors.size(); ++i)
-	{
-		_tcscpy_s(id, CA2T(curData.neighbors[i].c_str()));
-		_stprintf_s(imgName, _T("data/map/%s.png"), id);
+	_stprintf_s(buffer, _T("%d %d"), player.GetPos().X, player.GetPos().Y);
 
-		Image tmp(imgName);
-
-		int diffX = curData.worldPos.x - neighborData[i].worldPos.x;
-		int diffY = curData.worldPos.y - neighborData[i].worldPos.y;
-
-		Rect expansion2(-(origin.X + diffX) * PIXEL * SCREEN_MUL, -(origin.Y + diffY) * PIXEL * SCREEN_MUL, tmp.GetWidth() * SCREEN_MUL, tmp.GetHeight() * SCREEN_MUL);
-		g.DrawImage(&tmp, expansion2);
-	}
+	RectF rectF2(0, 32, 128, 32);
+	g.DrawString(buffer, -1, &font, rectF2, NULL, &strBrush);
 }
 
 void GameManager::DrawGamePlay(Graphics &g)
 {
 	PointF playerPos = player.GetPosF();
-	playerPos.X -= COL / 2;
-	playerPos.Y -= ROW / 2;
-	DrawMap(g, playerPos);
+	PointF mapOrigin(playerPos.X - REAL(COL / 2) , playerPos.Y - REAL(ROW / 2));
 
-	PointF origin((COL / 2) * PIXEL * SCREEN_MUL, (ROW / 2) * PIXEL * SCREEN_MUL);
+	DrawMap(g, mapOrigin);
+
+	PointF origin(REAL((COL / 2) * PIXEL * SCREEN_MUL), REAL((ROW / 2) * PIXEL * SCREEN_MUL));
 	player.DrawPlayer(g, origin);
+
+	DrawDebug(g);
 }
 
 
@@ -90,8 +84,6 @@ void GameManager::Init(HWND hWnd)
 {
 	InitGdiPlus();
 	SetScreen(hWnd);
-
-	state = STATE::INTRO;
 }
 
 void GameManager::Update()
@@ -106,11 +98,8 @@ void GameManager::Update()
 
 		case STATE::LOADORNEW:
 		{
-			LoadData("map0", curData);
-
-			for (int i = 0; i < curData.neighbors.size(); ++i)
-				LoadData(curData.neighbors[i], neighborData[i]);
-
+			player.SetPos(0, 2);
+			curData = DataLoadManager::GetMapData("map0");
 			state = STATE::GAMEPLAY;
 		}
 		break;
@@ -118,6 +107,29 @@ void GameManager::Update()
 		case STATE::GAMEPLAY:
 		{
 			player.MovePlayer({ InputManager::GetHorizontal(), InputManager::GetVertical() });
+
+			if (!player.GetIsMoving())
+			{
+				Point pos = player.GetPos();
+
+				// 지역이 바뀌었는지 체크
+				if(!IsIn(pos, curData->mapSize))
+				{
+					Point worldPos = pos + curData->worldPos;
+
+					for (string &nID : curData->neighbors)
+					{
+						Map *n = DataLoadManager::GetMapData(nID);
+
+						if (IsIn(worldPos, n->worldPos, n->mapSize))
+						{
+							curData = n;
+							player.SetPos(worldPos - curData->worldPos);
+							break;
+						}
+					}
+				}
+			}
 		}
 		break;
 	}
