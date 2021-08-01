@@ -25,11 +25,11 @@
 // string to TCHAR
 #include <atlstr.h>
 
-const int SCREEN_MUL = 5;
+const int SCREEN_MUL = 4;
 const int PIXEL = 16;
 
-const int ROW = 9;
-const int COL = 10;
+const int ROW = 11;
+const int COL = 11;
 
 const int SCREEN_SIZE_X = PIXEL * COL * SCREEN_MUL;
 const int SCREEN_SIZE_Y = PIXEL * ROW * SCREEN_MUL;

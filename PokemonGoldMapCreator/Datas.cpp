@@ -16,3 +16,8 @@ Map::Map(string _ID, int x, int y) : ID(_ID), worldPos{ 0, 0 }, mapSize{ x, y }
 		for (int j = 0; j < x; ++j)
 			tiles[i][j].pos = { j, i };
 }
+
+Tile* Map::GetTile(Point pos)
+{
+	return NULL;
+}

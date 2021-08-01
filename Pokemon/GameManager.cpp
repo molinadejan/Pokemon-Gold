@@ -33,7 +33,7 @@ void GameManager::DrawMap(Graphics &g, PointF origin)
 {
 	Image* img = DataLoadManager::GetMapImage(curData->ID);
 
-	Rect expansion(-origin.X * PIXEL * SCREEN_MUL, -origin.Y * PIXEL * SCREEN_MUL, img->GetWidth() * SCREEN_MUL, img->GetHeight() * SCREEN_MUL);
+	Rect expansion(INT(-origin.X * PIXEL * SCREEN_MUL), INT(-origin.Y * PIXEL * SCREEN_MUL), img->GetWidth() * SCREEN_MUL, img->GetHeight() * SCREEN_MUL);
 	g.DrawImage(img, expansion);
 
 	for(string& nID : curData->neighbors)
@@ -43,7 +43,7 @@ void GameManager::DrawMap(Graphics &g, PointF origin)
 
 		Point diff = curData->worldPos - n->worldPos;
 
-		Rect expansion2(-(origin.X + diff.X) * PIXEL * SCREEN_MUL, -(origin.Y + diff.Y) * PIXEL * SCREEN_MUL, nImg->GetWidth() * SCREEN_MUL, nImg->GetHeight() * SCREEN_MUL);
+		Rect expansion2((INT)(-(origin.X + diff.X) * PIXEL * SCREEN_MUL), (INT)(-(origin.Y + diff.Y) * PIXEL * SCREEN_MUL), nImg->GetWidth() * SCREEN_MUL, nImg->GetHeight() * SCREEN_MUL);
 		g.DrawImage(nImg, expansion2);
 	}
 }
@@ -71,9 +71,7 @@ void GameManager::DrawGamePlay(Graphics &g)
 	PointF mapOrigin(playerPos.X - REAL(COL / 2) , playerPos.Y - REAL(ROW / 2));
 
 	DrawMap(g, mapOrigin);
-
-	PointF origin(REAL((COL / 2) * PIXEL * SCREEN_MUL), REAL((ROW / 2) * PIXEL * SCREEN_MUL));
-	player.DrawPlayer(g, origin);
+	player.DrawPlayer(g);
 
 	DrawDebug(g);
 }
@@ -106,7 +104,8 @@ void GameManager::Update()
 
 		case STATE::GAMEPLAY:
 		{
-			player.MovePlayer({ InputManager::GetHorizontal(), InputManager::GetVertical() });
+			int h = InputManager::GetHorizontal();
+			int v = InputManager::GetVertical();
 
 			if (!player.GetIsMoving())
 			{
@@ -130,6 +129,8 @@ void GameManager::Update()
 					}
 				}
 			}
+
+			player.MovePlayer({ h, v }, curData);
 		}
 		break;
 	}

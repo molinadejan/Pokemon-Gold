@@ -1,19 +1,20 @@
 #include "Player.h"
+#include "MyUtils.h"
 #include <cmath>
 
 Player::Player()
-	: pos{ 0, 0 }, posF{ pos.X, pos.Y }, moveDir{ 0, 0 }, speed(3.0f), isMoving(false) { }
+	: pos{ 0, 0 }, posF{ (REAL)pos.X, (REAL)pos.Y }, moveDir{ 0, 0 }, speed(3.0f), isMoving(false) { }
 
 Player::~Player() { }
 
-void Player::DrawPlayer(Graphics &g, PointF origin)
+void Player::DrawPlayer(Graphics &g)
 {
 	SolidBrush brush(Color(255, 0, 0));
-	Rect r(origin.X, origin.Y, PIXEL * SCREEN_MUL, PIXEL * SCREEN_MUL);
+	Rect r((COL / 2) * PIXEL * SCREEN_MUL, (ROW / 2) * PIXEL * SCREEN_MUL, PIXEL * SCREEN_MUL, PIXEL * SCREEN_MUL);
 	g.FillRectangle(&brush, r);
 }
 
-void Player::MovePlayer(Point dir)
+void Player::MovePlayer(Point dir, Map* m)
 {
 	if (dir.X != 0 && dir.Y != 0) dir.X = 0;
 
@@ -24,11 +25,8 @@ void Player::MovePlayer(Point dir)
 
 		if (fabs(posF.X - nextTilePos.X) <= 0.05f && fabs(posF.Y - nextTilePos.Y) <= 0.05f)
 		{
-			posF.X = nextTilePos.X;
-			posF.Y = nextTilePos.Y;
-
-			pos.X = (int)nextTilePos.X;
-			pos.Y = (int)nextTilePos.Y;
+			posF = { (REAL)nextTilePos.X , (REAL)nextTilePos.Y };
+			pos = nextTilePos;
 
 			isMoving = false;
 		}
@@ -38,11 +36,14 @@ void Player::MovePlayer(Point dir)
 		if (dir.X == 0 && dir.Y == 0) 
 			return;
 
-		moveDir = dir;
+		Point nextPos = pos + dir;
 
-		nextTilePos.X = pos.X + dir.X;
-		nextTilePos.Y = pos.Y + dir.Y;
-
-		isMoving = true;
+		// Map에 Gettile메서드 하나 만들자
+		if (IsIn(nextPos, m->mapSize) && m->tiles[nextPos.Y][nextPos.X].moveable == 0)
+		{
+			moveDir = dir;
+			nextTilePos = pos + dir;
+			isMoving = true;
+		}
 	}
 }

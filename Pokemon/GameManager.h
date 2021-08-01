@@ -23,11 +23,8 @@ private:
 
 	ULONG_PTR token;
 	STATE state;
-
 	Player player;
-
 	Map* curData;
-	//Map* neighborData[4];
 
 private:
 

@@ -4,6 +4,7 @@
 #define __PLAYER_H__
 
 #include "framework.h"
+#include "Datas.h"
 
 using namespace Gdiplus;
 
@@ -34,8 +35,8 @@ public:
 
 	bool GetIsMoving() const { return isMoving; }
 
-	void DrawPlayer(Graphics &g, PointF origin);
-	void MovePlayer(Point dir);
+	void DrawPlayer(Graphics &g);
+	void MovePlayer(Point dir, Map* m);
 };
 
 #endif // !__PLAYER_H__
