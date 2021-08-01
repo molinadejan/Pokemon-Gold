@@ -17,7 +17,10 @@ Map::Map(string _ID, int x, int y) : ID(_ID), worldPos{ 0, 0 }, mapSize{ x, y }
 			tiles[i][j].pos = { j, i };
 }
 
-Tile* Map::GetTile(Point pos)
+Tile* Map::GetTile(Point localPos)
 {
-	return NULL;
+	if(localPos.X < 0 || localPos.Y < 0 || localPos.X >= mapSize.X || localPos.Y >= mapSize.Y)
+		return NULL;
+
+	return &(tiles[localPos.Y][localPos.X]);
 }

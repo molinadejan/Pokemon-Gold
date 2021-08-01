@@ -26,12 +26,14 @@ private:
 
 	private:
 
+		void LoadMap();
 		void Reset();
 
 	private:
 
 		unordered_map<string, Map> mapDatas;
 		unordered_map<string, Image*> mapImages;
+		Image* player_game;
 	};
 
 private:
@@ -44,6 +46,7 @@ public:
 
 	static Map* GetMapData(string ID);
 	static Image* GetMapImage(string ID);
+	static Image* GetPlayer_game();
 };
 
 #endif // !__DATALOADMANAGER_H__

@@ -53,7 +53,7 @@ struct Map
 
 	Map();
 	Map(string _ID, int x, int y);
-	Tile* GetTile(Point pos);
+	Tile* GetTile(Point localPos);
 };
 
 #endif // !__DATAS_H__

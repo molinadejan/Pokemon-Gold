@@ -20,13 +20,13 @@ DataLoadManager::DataLoad::DataLoad()
 
 DataLoadManager::DataLoad::~DataLoad()
 {
-	for (auto &e : mapImages)
+	/*for (auto &e : mapImages)
 	{
 		delete e.second;
-	}
+	}*/
 }
 
-void DataLoadManager::DataLoad::Reset()
+void DataLoadManager::DataLoad::LoadMap()
 {
 	WIN32_FIND_DATA findData;
 	HANDLE hFind = INVALID_HANDLE_VALUE;
@@ -68,6 +68,14 @@ void DataLoadManager::DataLoad::Reset()
 	}
 }
 
+void DataLoadManager::DataLoad::Reset()
+{
+	LoadMap();
+
+	TCHAR fullPath[] = _T("data/sprite/player/player_game.png");
+	player_game = new Image(fullPath);
+}
+
 void DataLoadManager::Reset()
 {
 	dataLoad.Reset();
@@ -81,4 +89,9 @@ Map* DataLoadManager::GetMapData(string ID)
 Image* DataLoadManager::GetMapImage(string ID)
 {
 	return dataLoad.mapImages[ID];
+}
+
+Image* DataLoadManager::GetPlayer_game()
+{
+	return dataLoad.player_game;
 }

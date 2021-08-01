@@ -5,6 +5,7 @@
 #include "DataLoadManager.h"
 
 #include <fstream>
+#include <cmath>
 
 // 持失切, 社瑚切 //
 GameManager::GameManager() : curData(NULL), state(STATE::INTRO) { }
@@ -33,7 +34,7 @@ void GameManager::DrawMap(Graphics &g, PointF origin)
 {
 	Image* img = DataLoadManager::GetMapImage(curData->ID);
 
-	Rect expansion(INT(-origin.X * PIXEL * SCREEN_MUL), INT(-origin.Y * PIXEL * SCREEN_MUL), img->GetWidth() * SCREEN_MUL, img->GetHeight() * SCREEN_MUL);
+	Rect expansion((INT)round(-origin.X * PIXEL * SCREEN_MUL), (INT)round(-origin.Y * PIXEL * SCREEN_MUL), img->GetWidth() * SCREEN_MUL, img->GetHeight() * SCREEN_MUL);
 	g.DrawImage(img, expansion);
 
 	for(string& nID : curData->neighbors)
@@ -43,7 +44,7 @@ void GameManager::DrawMap(Graphics &g, PointF origin)
 
 		Point diff = curData->worldPos - n->worldPos;
 
-		Rect expansion2((INT)(-(origin.X + diff.X) * PIXEL * SCREEN_MUL), (INT)(-(origin.Y + diff.Y) * PIXEL * SCREEN_MUL), nImg->GetWidth() * SCREEN_MUL, nImg->GetHeight() * SCREEN_MUL);
+		Rect expansion2((INT)round(-(origin.X + diff.X) * PIXEL * SCREEN_MUL), (INT)round(-(origin.Y + diff.Y) * PIXEL * SCREEN_MUL), nImg->GetWidth() * SCREEN_MUL, nImg->GetHeight() * SCREEN_MUL);
 		g.DrawImage(nImg, expansion2);
 	}
 }
@@ -53,15 +54,15 @@ void GameManager::DrawDebug(Graphics & g)
 	TCHAR buffer[32];
 	_tcscpy_s(buffer, CA2T(curData->ID.c_str()));
 
-	Font font(&FontFamily(L"Arial"), 16, FontStyleBold, UnitPoint);
+	Font font(&FontFamily(L"Arial"), 4 * SCREEN_MUL, FontStyleBold, UnitPoint);
 	SolidBrush strBrush(Color(255, 255, 255, 255));
 
-	RectF rectF1(0, 0, 128, 32);
+	RectF rectF1(0, 0, 32 * SCREEN_MUL, 8 * SCREEN_MUL);
 	g.DrawString(buffer, -1, &font, rectF1, NULL, &strBrush);
 
 	_stprintf_s(buffer, _T("%d %d"), player.GetPos().X, player.GetPos().Y);
 
-	RectF rectF2(0, 32, 128, 32);
+	RectF rectF2(0, 8 * SCREEN_MUL, 32 * SCREEN_MUL, 8 * SCREEN_MUL);
 	g.DrawString(buffer, -1, &font, rectF2, NULL, &strBrush);
 }
 
@@ -104,6 +105,8 @@ void GameManager::Update()
 
 		case STATE::GAMEPLAY:
 		{
+			player.FrameUpdate();
+
 			int h = InputManager::GetHorizontal();
 			int v = InputManager::GetVertical();
 
