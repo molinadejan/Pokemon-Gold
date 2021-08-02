@@ -34,6 +34,11 @@ struct MovePoint
 	Point pos;
 	Point targetPos;
 	int moveType;
+
+	Point GetDir();
+
+	bool isDoor();
+	bool isCarpet();
 };
 
 struct Map
@@ -53,7 +58,9 @@ struct Map
 
 	Map();
 	Map(string _ID, int x, int y);
-	Tile* GetTile(Point localPos);
+
+	Tile* GetTile(const Point &localPos);
+	MovePoint* GetMovePoint(const Point &localPos);
 };
 
 #endif // !__DATAS_H__

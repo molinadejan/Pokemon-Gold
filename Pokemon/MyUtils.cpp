@@ -1,4 +1,5 @@
 #include "MyUtils.h"
+#include "DataLoadManager.h"
 
 //bool IsIn(Point pos, int originX, int originY, int w, int h)
 //{
@@ -7,6 +8,16 @@
 //
 //	return true;
 //}
+
+bool operator==(const Point & p1, const Point & p2)
+{
+	return p1.X == p2.X && p1.Y == p2.Y;
+}
+
+PointF operator*(const Point& p1, const float& f)
+{
+	return PointF(p1.X * f, p1.Y * f);
+}
 
 bool IsIn(Point worldPos, Point origin, Point mapSize)
 {
@@ -31,3 +42,39 @@ bool IsIn(Point localPos, Point mapSize)
 
 	return true;
 }
+
+Tile* GetTile(Map* m, Point pos)
+{
+	if (IsIn(pos, m->mapSize))
+		return &(m->tiles[pos.Y][pos.X]);
+
+	Point worldPos = pos + m->worldPos;
+
+	for (const string& n : m->neighbors)
+	{
+		Map* nMap = DataLoadManager::GetMapData(n);
+		Point nLocal = worldPos - nMap->worldPos;
+
+		if (IsIn(nLocal, nMap->mapSize))
+			return &(nMap->tiles[nLocal.Y][nLocal.X]);
+	}
+
+	return NULL;
+}
+
+Map* GetNMap(Map* m, Point pos)
+{
+	Point worldPos = pos + m->worldPos;
+
+	for (const string& nID : m->neighbors)
+	{
+		Map* n = DataLoadManager::GetMapData(nID);
+
+		if (IsIn(worldPos, n->worldPos, n->mapSize))
+			return n;
+	}
+
+	return NULL;
+}
+
+

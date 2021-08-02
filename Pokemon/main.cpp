@@ -105,7 +105,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 		case WM_CREATE:
 		{
 			gm.Init(hWnd);
-			SetTimer(hWnd, 0, 16, NULL);
+			SetTimer(hWnd, 0, 32, NULL);
 		}
 		break;
 

@@ -1,0 +1,414 @@
+{
+	"ID" : "map4",
+	"mapSizeX" : 7,
+	"mapSizeY" : 7,
+	"movePoints" : 
+	[
+		{
+			"moveType" : 2,
+			"posX" : 3,
+			"posY" : 6,
+			"targetID" : "map0",
+			"targetPosX" : 5,
+			"targetPosY" : 1
+		}
+	],
+	"neighbors" : null,
+	"tiles" : 
+	[
+		{
+			"interact ID" : -1,
+			"moveable" : 1,
+			"posX" : 0,
+			"posY" : 0,
+			"tilePosX" : 544,
+			"tilePosY" : 416
+		},
+		{
+			"interact ID" : -1,
+			"moveable" : 1,
+			"posX" : 1,
+			"posY" : 0,
+			"tilePosX" : 544,
+			"tilePosY" : 416
+		},
+		{
+			"interact ID" : -1,
+			"moveable" : 1,
+			"posX" : 2,
+			"posY" : 0,
+			"tilePosX" : 544,
+			"tilePosY" : 416
+		},
+		{
+			"interact ID" : -1,
+			"moveable" : 1,
+			"posX" : 3,
+			"posY" : 0,
+			"tilePosX" : 544,
+			"tilePosY" : 416
+		},
+		{
+			"interact ID" : -1,
+			"moveable" : 1,
+			"posX" : 4,
+			"posY" : 0,
+			"tilePosX" : 544,
+			"tilePosY" : 416
+		},
+		{
+			"interact ID" : -1,
+			"moveable" : 1,
+			"posX" : 5,
+			"posY" : 0,
+			"tilePosX" : 544,
+			"tilePosY" : 416
+		},
+		{
+			"interact ID" : -1,
+			"moveable" : 1,
+			"posX" : 6,
+			"posY" : 0,
+			"tilePosX" : 544,
+			"tilePosY" : 416
+		},
+		{
+			"interact ID" : -1,
+			"moveable" : 1,
+			"posX" : 0,
+			"posY" : 1,
+			"tilePosX" : 544,
+			"tilePosY" : 416
+		},
+		{
+			"interact ID" : -1,
+			"moveable" : 0,
+			"posX" : 1,
+			"posY" : 1,
+			"tilePosX" : 0,
+			"tilePosY" : 0
+		},
+		{
+			"interact ID" : -1,
+			"moveable" : 0,
+			"posX" : 2,
+			"posY" : 1,
+			"tilePosX" : 0,
+			"tilePosY" : 0
+		},
+		{
+			"interact ID" : -1,
+			"moveable" : 0,
+			"posX" : 3,
+			"posY" : 1,
+			"tilePosX" : 0,
+			"tilePosY" : 0
+		},
+		{
+			"interact ID" : -1,
+			"moveable" : 0,
+			"posX" : 4,
+			"posY" : 1,
+			"tilePosX" : 0,
+			"tilePosY" : 0
+		},
+		{
+			"interact ID" : -1,
+			"moveable" : 0,
+			"posX" : 5,
+			"posY" : 1,
+			"tilePosX" : 0,
+			"tilePosY" : 0
+		},
+		{
+			"interact ID" : -1,
+			"moveable" : 1,
+			"posX" : 6,
+			"posY" : 1,
+			"tilePosX" : 544,
+			"tilePosY" : 416
+		},
+		{
+			"interact ID" : -1,
+			"moveable" : 1,
+			"posX" : 0,
+			"posY" : 2,
+			"tilePosX" : 544,
+			"tilePosY" : 416
+		},
+		{
+			"interact ID" : -1,
+			"moveable" : 0,
+			"posX" : 1,
+			"posY" : 2,
+			"tilePosX" : 0,
+			"tilePosY" : 0
+		},
+		{
+			"interact ID" : -1,
+			"moveable" : 0,
+			"posX" : 2,
+			"posY" : 2,
+			"tilePosX" : 0,
+			"tilePosY" : 0
+		},
+		{
+			"interact ID" : -1,
+			"moveable" : 0,
+			"posX" : 3,
+			"posY" : 2,
+			"tilePosX" : 0,
+			"tilePosY" : 0
+		},
+		{
+			"interact ID" : -1,
+			"moveable" : 0,
+			"posX" : 4,
+			"posY" : 2,
+			"tilePosX" : 0,
+			"tilePosY" : 0
+		},
+		{
+			"interact ID" : -1,
+			"moveable" : 0,
+			"posX" : 5,
+			"posY" : 2,
+			"tilePosX" : 0,
+			"tilePosY" : 0
+		},
+		{
+			"interact ID" : -1,
+			"moveable" : 1,
+			"posX" : 6,
+			"posY" : 2,
+			"tilePosX" : 544,
+			"tilePosY" : 416
+		},
+		{
+			"interact ID" : -1,
+			"moveable" : 1,
+			"posX" : 0,
+			"posY" : 3,
+			"tilePosX" : 544,
+			"tilePosY" : 416
+		},
+		{
+			"interact ID" : -1,
+			"moveable" : 0,
+			"posX" : 1,
+			"posY" : 3,
+			"tilePosX" : 0,
+			"tilePosY" : 0
+		},
+		{
+			"interact ID" : -1,
+			"moveable" : 0,
+			"posX" : 2,
+			"posY" : 3,
+			"tilePosX" : 0,
+			"tilePosY" : 0
+		},
+		{
+			"interact ID" : -1,
+			"moveable" : 0,
+			"posX" : 3,
+			"posY" : 3,
+			"tilePosX" : 0,
+			"tilePosY" : 0
+		},
+		{
+			"interact ID" : -1,
+			"moveable" : 0,
+			"posX" : 4,
+			"posY" : 3,
+			"tilePosX" : 0,
+			"tilePosY" : 0
+		},
+		{
+			"interact ID" : -1,
+			"moveable" : 0,
+			"posX" : 5,
+			"posY" : 3,
+			"tilePosX" : 0,
+			"tilePosY" : 0
+		},
+		{
+			"interact ID" : -1,
+			"moveable" : 1,
+			"posX" : 6,
+			"posY" : 3,
+			"tilePosX" : 544,
+			"tilePosY" : 416
+		},
+		{
+			"interact ID" : -1,
+			"moveable" : 1,
+			"posX" : 0,
+			"posY" : 4,
+			"tilePosX" : 544,
+			"tilePosY" : 416
+		},
+		{
+			"interact ID" : -1,
+			"moveable" : 0,
+			"posX" : 1,
+			"posY" : 4,
+			"tilePosX" : 0,
+			"tilePosY" : 0
+		},
+		{
+			"interact ID" : -1,
+			"moveable" : 0,
+			"posX" : 2,
+			"posY" : 4,
+			"tilePosX" : 0,
+			"tilePosY" : 0
+		},
+		{
+			"interact ID" : -1,
+			"moveable" : 0,
+			"posX" : 3,
+			"posY" : 4,
+			"tilePosX" : 0,
+			"tilePosY" : 0
+		},
+		{
+			"interact ID" : -1,
+			"moveable" : 0,
+			"posX" : 4,
+			"posY" : 4,
+			"tilePosX" : 0,
+			"tilePosY" : 0
+		},
+		{
+			"interact ID" : -1,
+			"moveable" : 0,
+			"posX" : 5,
+			"posY" : 4,
+			"tilePosX" : 0,
+			"tilePosY" : 0
+		},
+		{
+			"interact ID" : -1,
+			"moveable" : 1,
+			"posX" : 6,
+			"posY" : 4,
+			"tilePosX" : 544,
+			"tilePosY" : 416
+		},
+		{
+			"interact ID" : -1,
+			"moveable" : 1,
+			"posX" : 0,
+			"posY" : 5,
+			"tilePosX" : 544,
+			"tilePosY" : 416
+		},
+		{
+			"interact ID" : -1,
+			"moveable" : 0,
+			"posX" : 1,
+			"posY" : 5,
+			"tilePosX" : 0,
+			"tilePosY" : 0
+		},
+		{
+			"interact ID" : -1,
+			"moveable" : 0,
+			"posX" : 2,
+			"posY" : 5,
+			"tilePosX" : 0,
+			"tilePosY" : 0
+		},
+		{
+			"interact ID" : -1,
+			"moveable" : 0,
+			"posX" : 3,
+			"posY" : 5,
+			"tilePosX" : 0,
+			"tilePosY" : 0
+		},
+		{
+			"interact ID" : -1,
+			"moveable" : 0,
+			"posX" : 4,
+			"posY" : 5,
+			"tilePosX" : 0,
+			"tilePosY" : 0
+		},
+		{
+			"interact ID" : -1,
+			"moveable" : 0,
+			"posX" : 5,
+			"posY" : 5,
+			"tilePosX" : 0,
+			"tilePosY" : 0
+		},
+		{
+			"interact ID" : -1,
+			"moveable" : 1,
+			"posX" : 6,
+			"posY" : 5,
+			"tilePosX" : 544,
+			"tilePosY" : 416
+		},
+		{
+			"interact ID" : -1,
+			"moveable" : 1,
+			"posX" : 0,
+			"posY" : 6,
+			"tilePosX" : 544,
+			"tilePosY" : 416
+		},
+		{
+			"interact ID" : -1,
+			"moveable" : 1,
+			"posX" : 1,
+			"posY" : 6,
+			"tilePosX" : 544,
+			"tilePosY" : 416
+		},
+		{
+			"interact ID" : -1,
+			"moveable" : 1,
+			"posX" : 2,
+			"posY" : 6,
+			"tilePosX" : 544,
+			"tilePosY" : 416
+		},
+		{
+			"interact ID" : -1,
+			"moveable" : 0,
+			"posX" : 3,
+			"posY" : 6,
+			"tilePosX" : 48,
+			"tilePosY" : 112
+		},
+		{
+			"interact ID" : -1,
+			"moveable" : 1,
+			"posX" : 4,
+			"posY" : 6,
+			"tilePosX" : 544,
+			"tilePosY" : 416
+		},
+		{
+			"interact ID" : -1,
+			"moveable" : 1,
+			"posX" : 5,
+			"posY" : 6,
+			"tilePosX" : 544,
+			"tilePosY" : 416
+		},
+		{
+			"interact ID" : -1,
+			"moveable" : 1,
+			"posX" : 6,
+			"posY" : 6,
+			"tilePosX" : 544,
+			"tilePosY" : 416
+		}
+	],
+	"worldPosX" : 0,
+	"worldPosY" : 0
+}

@@ -77,7 +77,6 @@ void GameManager::DrawGamePlay(Graphics &g)
 	DrawDebug(g);
 }
 
-
 // public 멤버 함수 //
 void GameManager::Init(HWND hWnd)
 {
@@ -106,34 +105,7 @@ void GameManager::Update()
 		case STATE::GAMEPLAY:
 		{
 			player.FrameUpdate();
-
-			int h = InputManager::GetHorizontal();
-			int v = InputManager::GetVertical();
-
-			if (!player.GetIsMoving())
-			{
-				Point pos = player.GetPos();
-
-				// 지역이 바뀌었는지 체크
-				if(!IsIn(pos, curData->mapSize))
-				{
-					Point worldPos = pos + curData->worldPos;
-
-					for (string &nID : curData->neighbors)
-					{
-						Map *n = DataLoadManager::GetMapData(nID);
-
-						if (IsIn(worldPos, n->worldPos, n->mapSize))
-						{
-							curData = n;
-							player.SetPos(worldPos - curData->worldPos);
-							break;
-						}
-					}
-				}
-			}
-
-			player.MovePlayer({ h, v }, curData);
+			player.MovePlayer(curData);
 		}
 		break;
 	}

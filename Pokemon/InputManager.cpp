@@ -95,6 +95,9 @@ int InputManager::GetHorizontal()
 
 int InputManager::GetVertical()
 {
+	if (s_MainInput.is_key_left || s_MainInput.is_key_right)
+		return 0;
+
 	int ret = 0;
 
 	if (s_MainInput.is_key_up)

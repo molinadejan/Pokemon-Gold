@@ -12,42 +12,31 @@ class Player
 {
 private:
 
-	enum DIR
-	{
-		LEFT,
-		RIGHT,
-		TOP,
-		DOWN
-	};
+	const int   DIR_RIGHT_IDX            = 0;
+	const int   DIR_LEFT_IDX             = 2;
+	const int   DIR_DOWN_IDX             = 4;
+	const int   DIR_UP_IDX               = 7;
+
+	const int   DIR_HORIZONTAL_FRAME_CNT = 2;
+	const int   DIR_VERTICAL_FRAME_CNT   = 4;
+
+	const int   MAX_FRAME                = 4;
+	const float FRAME_TIME               = 0.16f;
 
 private:
 
-	const int dir_right_idx = 0;
-	const int dir_left_idx = 2;
-	const int dir_down_idx = 4;
-	const int dir_up_idx = 7;
-
-	const int dir_right_frame_cnt = 2;
-	const int dir_left_frame_cnt = 2;
-	const int dir_down_frame_cnt = 4;
-	const int dir_up_frame_cnt = 4;
-
-	const int MAX_FRAME = 4;
-	const float FRAME_TIME = 0.16f;
-
-private:
-
-	Point pos;
+	Point  pos;
 	PointF posF;
 
 	Point nextTilePos;
 	Point moveDir;
+	Point inputDir;
 
 	float speed;
-	bool isMoving;
+	bool  isMoving;
 
 	float distance;
-	int frameCount;
+	int   frameCount;
 	float frameChangeTime;
 
 public:
@@ -65,7 +54,7 @@ public:
 	bool GetIsMoving() const { return isMoving; }
 
 	void DrawPlayer(Graphics &g);
-	void MovePlayer(Point dir, Map* m);
+	void MovePlayer(Map* &m);
 
 	void FrameUpdate();
 };
