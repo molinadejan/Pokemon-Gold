@@ -50,6 +50,8 @@ public:
 	static int GetVertical();
 	static void Update();
 	static void Reset();
+
+	static bool GetKeyUp(int _key);
 };
 
 #endif // !__IN

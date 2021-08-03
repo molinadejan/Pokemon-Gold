@@ -23,6 +23,14 @@ void InputManager::Input::Update()
 {
 	Reset();
 
+	DWORD newTime = GetTickCount();
+	static DWORD oldTime = newTime;
+
+	if (newTime - oldTime < 16)
+		return;
+
+	oldTime = newTime;
+
 	if (GetAsyncKeyState(VK_LEFT) & 0x8000)
 		is_key_left = true;
 
@@ -39,10 +47,10 @@ void InputManager::Input::Update()
 	if (GetAsyncKeyState('Z') & 0x8000)
 		is_key_z = true;
 
-	if (GetAsyncKeyState('X') & 0x8000)
+	if (GetAsyncKeyState('X') & 0x0001)
 		is_key_x = true;
 
-	if (GetAsyncKeyState(VK_RETURN) & 0x8000)
+	if (GetAsyncKeyState(VK_RETURN) & 0x0001)
 		is_key_enter = true;
 }
 
@@ -116,4 +124,12 @@ void InputManager::Update()
 void InputManager::Reset()
 {
 	s_MainInput.Reset();
+}
+
+bool InputManager::GetKeyUp(int _key)
+{
+	if (GetAsyncKeyState(_key) & 0x0001)
+		return true;
+
+	return false;
 }

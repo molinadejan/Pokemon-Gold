@@ -6,6 +6,7 @@
 #include "framework.h"
 #include "Player.h"
 #include "Datas.h"
+#include "MainMenu.h"
 
 using namespace Gdiplus;
 
@@ -18,6 +19,7 @@ private:
 		LOADORNEW,
 		GAMEPLAY,
 		GAMEPLAYFADE,
+		GAMEPLAYMAINMENU,
 	};
 
 private:
@@ -26,24 +28,26 @@ private:
 
 private:
 
-	ULONG_PTR token;
 	STATE state;
+
 	Player player;
 	Map* curData;
+
+	MainMenu mainMenu;
 
 	bool isMapChange;
 	float fadeTimer;
 
 private:
 
-	void InitGdiPlus();
 	void SetScreen(HWND hWnd);
-
-	void FadeInOut();
 
 	void DrawMap(Graphics &g, PointF origin);
 	void DrawDebug(Graphics &g);
 	void DrawGamePlay(Graphics &g);
+
+	void UpdateSceneChange();
+	void UpdatePlayer();
 
 public:
 

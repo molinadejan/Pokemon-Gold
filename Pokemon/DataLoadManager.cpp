@@ -15,11 +15,17 @@ TCHAR imageFile[128], *token;
 
 DataLoadManager::DataLoad::DataLoad()
 {
-	Reset();
+	//Reset();
 }
 
 DataLoadManager::DataLoad::~DataLoad()
 {
+	delete collection;
+	delete fm;
+	delete fontS;
+	delete fontM;
+	delete fontB;
+
 	/*for (auto &e : mapImages)
 	{
 		delete e.second;
@@ -68,12 +74,39 @@ void DataLoadManager::DataLoad::LoadMap()
 	}
 }
 
+//https://m.blog.naver.com/codbs7/221441864531
+void DataLoadManager::DataLoad::LoadFont()
+{
+	collection = new PrivateFontCollection;
+	collection->AddFontFile(L"data/font/Dot.ttf");
+
+	WCHAR familyName[LF_FACESIZE];
+	int count, found;
+
+	count = collection->GetFamilyCount();
+	fm = new FontFamily[count];
+	collection->GetFamilies(count, fm, &found);
+
+	fm[0].GetFamilyName(familyName);
+
+	fontS = new Font(familyName, 4 * SCREEN_MUL, NULL, UnitPoint, collection);
+	fontM = new Font(familyName, 6 * SCREEN_MUL, NULL, UnitPoint, collection);
+	fontB = new Font(familyName, 8 * SCREEN_MUL, NULL, UnitPoint, collection);
+}
+
 void DataLoadManager::DataLoad::Reset()
 {
 	LoadMap();
+	LoadFont();
 
 	TCHAR fullPath[] = _T("data/sprite/player/player_game.png");
 	player_game = new Image(fullPath);
+
+	UI_menu = new Image(_T("data/sprite/UI/UI_MainMenu.png"));
+
+	UI_Dialog = new Image(_T("data/sprite/UI/UI_Dialog.png"));
+
+	UI_Bag = new Image(_T("data/sprite/UI/UI_Bag.png"));
 }
 
 void DataLoadManager::Reset()

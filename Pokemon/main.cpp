@@ -6,11 +6,14 @@
 
 #define MAX_LOADSTRING 100
 
+using namespace Gdiplus;
+
 HINSTANCE hInst;
 WCHAR szTitle[MAX_LOADSTRING];
 WCHAR szWindowClass[MAX_LOADSTRING];
 
 GameManager gm;
+ULONG_PTR token;
 
 ATOM                MyRegisterClass(HINSTANCE hInstance);
 BOOL                InitInstance(HINSTANCE, int);
@@ -104,6 +107,9 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
     {
 		case WM_CREATE:
 		{
+			GdiplusStartupInput gpsi;
+			GdiplusStartup(&token, &gpsi, NULL);
+
 			gm.Init(hWnd);
 			SetTimer(hWnd, 0, 32, NULL);
 		}
@@ -148,6 +154,8 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 
 		case WM_DESTROY:
 		{
+			GdiplusShutdown(token);
+
 			KillTimer(hWnd, 0);
 			PostQuitMessage(0);
 		}

@@ -62,14 +62,14 @@ void Player::DrawPlayer(Graphics &g)
 
 	int spriteTargetX = 0, curFrameCnt = 0;
 
-	if (moveDir.X != 0 && moveDir.Y == 0)
+	if (inputDir.X != 0 && inputDir.Y == 0)
 	{
-		spriteTargetX = moveDir.X == 1 ? 0 : 2;
+		spriteTargetX = inputDir.X == 1 ? 0 : 2;
 		curFrameCnt = isMoving ? frameCount % DIR_HORIZONTAL_FRAME_CNT : 0;
 	}
-	else if (moveDir.X == 0 && moveDir.Y != 0)
+	else if (inputDir.X == 0 && inputDir.Y != 0)
 	{
-		spriteTargetX = moveDir.Y == 1 ? 4 : 7;
+		spriteTargetX = inputDir.Y == 1 ? 4 : 7;
 
 		if (isMoving)
 		{

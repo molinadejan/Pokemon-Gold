@@ -28,8 +28,8 @@
 const int SCREEN_MUL = 3;
 const int PIXEL = 16;
 
-const int ROW = 11;
-const int COL = 11;
+const int ROW = 9;
+const int COL = 13;
 
 const int SCREEN_SIZE_X = PIXEL * COL * SCREEN_MUL;
 const int SCREEN_SIZE_Y = PIXEL * ROW * SCREEN_MUL;

@@ -1,26 +1,18 @@
+#define MAX_STYLE_SIZE 20
+#define MAX_FACEANDSTYLE_SIZE (LF_FACESIZE + MAX_STYLE_SIZE + 2)
+
 #include "GameManager.h"
 #include "InputManager.h"
-//#include "Converter.h"
 #include "MyUtils.h"
 #include "DataLoadManager.h"
 
 #include <fstream>
 #include <cmath>
+#include <strsafe.h>
 
 // »ý¼ºÀÚ, ¼Ò¸êÀÚ //
 GameManager::GameManager() : curData(NULL), state(STATE::INTRO), isMapChange(false), fadeTimer(0.0f) { }
-
-GameManager::~GameManager() 
-{
-	GdiplusShutdown(token);
-}
-
-// private ¸â¹ö ÇÔ¼ö //
-void GameManager::InitGdiPlus()
-{
-	GdiplusStartupInput gpsi;
-	GdiplusStartup(&token, &gpsi, NULL);
-}
+GameManager::~GameManager() { }
 
 void GameManager::SetScreen(HWND hWnd)
 {
@@ -28,11 +20,6 @@ void GameManager::SetScreen(HWND hWnd)
 	SetRect(&rect, 0, 0, SCREEN_SIZE_X, SCREEN_SIZE_Y);
 	AdjustWindowRect(&rect, WS_OVERLAPPED | WS_CAPTION | WS_SYSMENU | WS_THICKFRAME, FALSE);
 	MoveWindow(hWnd, 100, 100, rect.right - rect.left, rect.bottom - rect.top, TRUE);
-}
-
-void GameManager::FadeInOut()
-{
-
 }
 
 void GameManager::DrawMap(Graphics &g, PointF origin)
@@ -56,24 +43,25 @@ void GameManager::DrawMap(Graphics &g, PointF origin)
 
 void GameManager::DrawDebug(Graphics & g)
 {
-	TCHAR buffer[32];
+	Font* font = DataLoadManager::GetFontS();
+
+	TCHAR buffer[128];
 	_tcscpy_s(buffer, CA2T(curData->ID.c_str()));
 
-	Font font(&FontFamily(L"Arial"), 4 * SCREEN_MUL, FontStyleBold, UnitPoint);
 	SolidBrush strBrush(Color(255, 255, 255, 255));
 
-	RectF rectF1(0, 0, 32 * SCREEN_MUL, 8 * SCREEN_MUL);
-	g.DrawString(buffer, -1, &font, rectF1, NULL, &strBrush);
+	RectF rectF1(0, 0, 64 * SCREEN_MUL, 8 * SCREEN_MUL);
+	g.DrawString(buffer, -1, font, rectF1, NULL, &strBrush);
 
-	_stprintf_s(buffer, _T("%d %d"), player.GetPos().X, player.GetPos().Y);
+	_stprintf_s(buffer, _T("Áö¿ª ÁÂÇ¥ : %d %d"), player.GetPos().X, player.GetPos().Y);
 
-	RectF rectF2(0, 8 * SCREEN_MUL, 32 * SCREEN_MUL, 8 * SCREEN_MUL);
-	g.DrawString(buffer, -1, &font, rectF2, NULL, &strBrush);
+	RectF rectF2(0, 8 * SCREEN_MUL, 64 * SCREEN_MUL, 8 * SCREEN_MUL);
+	g.DrawString(buffer, -1, font, rectF2, NULL, &strBrush);
 
-	_stprintf_s(buffer, _T("%d %d"), player.GetPos().X + curData->worldPos.X, player.GetPos().Y + curData->worldPos.Y);
+	_stprintf_s(buffer, _T("¿ùµå ÁÂÇ¥ : %d %d"), player.GetPos().X + curData->worldPos.X, player.GetPos().Y + curData->worldPos.Y);
 
-	RectF rectF3(0, 16 * SCREEN_MUL, 32 * SCREEN_MUL, 8 * SCREEN_MUL);
-	g.DrawString(buffer, -1, &font, rectF3, NULL, &strBrush);
+	RectF rectF3(0, 16 * SCREEN_MUL, 64 * SCREEN_MUL, 8 * SCREEN_MUL);
+	g.DrawString(buffer, -1, font, rectF3, NULL, &strBrush);
 }
 
 void GameManager::DrawGamePlay(Graphics &g)
@@ -90,14 +78,99 @@ void GameManager::DrawGamePlay(Graphics &g)
 		SolidBrush brush(Color(tp, 0, 0, 0));
 		g.FillRectangle(&brush, 0, 0, SCREEN_SIZE_X, SCREEN_SIZE_Y);
 	}
+	else if (state == STATE::GAMEPLAYMAINMENU)
+	{
+		mainMenu.DrawMainMenu(g);
+	}
 
 	DrawDebug(g);
+}
+
+void GameManager::UpdateSceneChange()
+{
+	fadeTimer += Timer::DeltaTime();
+
+	if (fadeTimer > FADETIME)
+	{
+		fadeTimer = 0.0f;
+		state = STATE::GAMEPLAY;
+	}
+}
+
+void GameManager::UpdatePlayer()
+{
+	player.FrameUpdate();
+
+	if (player.GetIsMoving())
+	{
+		player.MovingPlayer();
+	}
+	else
+	{
+		//// Move To Neighbor Map ////
+		Map* nMap = NULL;
+
+		if (player.IsOnNMap(curData, nMap))
+		{
+			player.SetPos(player.GetPos() + curData->worldPos - nMap->worldPos);
+			curData = nMap;
+			return;
+		}
+
+		//// Move To Door
+		MovePoint* mpDoor = NULL;
+
+		if (player.isOnDoor(curData, mpDoor))
+		{
+			if (isMapChange)
+			{
+				player.MovePlayer(curData, mpDoor->GetDir());
+				isMapChange = false;
+			}
+			else
+			{
+				curData = DataLoadManager::GetMapData(mpDoor->targetID);
+				player.SetPos(mpDoor->targetPos);
+				isMapChange = true;
+
+				state = STATE::GAMEPLAYFADE;
+			}
+
+			return;
+		}
+
+		isMapChange = false;
+
+		//// Input
+		Point inputDir(InputManager::GetHorizontal(), InputManager::GetVertical());
+
+		if (inputDir == Point(0, 0))
+			return;
+
+		//// Move On Carpet
+		MovePoint* mpCarpet = NULL;
+
+		if (player.isOnCarpet(curData, mpCarpet))
+		{
+			if (mpCarpet->GetDir() == inputDir)
+			{
+				curData = DataLoadManager::GetMapData(mpCarpet->targetID);
+				player.SetPos(mpCarpet->targetPos);
+				isMapChange = true;
+
+				state = STATE::GAMEPLAYFADE;
+				return;
+			}
+		}
+
+		//// Move Player
+		player.MovePlayer(curData, inputDir);
+	}
 }
 
 // public ¸â¹ö ÇÔ¼ö //
 void GameManager::Init(HWND hWnd)
 {
-	InitGdiPlus();
 	SetScreen(hWnd);
 }
 
@@ -121,80 +194,30 @@ void GameManager::Update()
 
 		case STATE::GAMEPLAY:
 		{
-			player.FrameUpdate();
+			UpdatePlayer();
 
-			if (player.GetIsMoving())
+			if (InputManager::GetEnter() && !player.GetIsMoving())
 			{
-				player.MovingPlayer();
-			}
-			else
-			{
-				Map* nMap = NULL;
-
-				if (player.IsOnNMap(curData, nMap))
-				{
-					player.SetPos(player.GetPos() + curData->worldPos - nMap->worldPos);
-					curData = nMap;
-					return;
-				}
-
-				MovePoint* mpDoor = NULL;
-
-				if (player.isOnDoor(curData, mpDoor))
-				{
-					if (isMapChange)
-					{
-						player.MovePlayer(curData, mpDoor->GetDir());
-						isMapChange = false;
-					}
-					else
-					{
-						curData = DataLoadManager::GetMapData(mpDoor->targetID);
-						player.SetPos(mpDoor->targetPos);
-						isMapChange = true;
-
-						state = STATE::GAMEPLAYFADE;
-					}
-
-					return;
-				}
-
-				isMapChange = false;
-
-				Point inputDir(InputManager::GetHorizontal(), InputManager::GetVertical());
-
-				if (inputDir == Point(0, 0))
-					return;
-
-				MovePoint* mpCarpet = NULL;
-
-				if (player.isOnCarpet(curData, mpCarpet))
-				{
-					if (mpCarpet->GetDir() == inputDir)
-					{
-						curData = DataLoadManager::GetMapData(mpCarpet->targetID);
-						player.SetPos(mpCarpet->targetPos);
-						isMapChange = true;
-
-						state = STATE::GAMEPLAYFADE;
-						return;
-					}
-				}
-
-				player.MovePlayer(curData, inputDir);
+				mainMenu.Init();
+				state = STATE::GAMEPLAYMAINMENU;
 			}
 		}
 		break;
 
-		case GAMEPLAYFADE:
+		case STATE::GAMEPLAYFADE:
 		{
-			fadeTimer += Timer::DeltaTime();
+			UpdateSceneChange();
+		}
+		break;
 
-			if (fadeTimer > FADETIME)
-			{
-				fadeTimer = 0.0f;
+		case STATE::GAMEPLAYMAINMENU:
+		{
+			if ((InputManager::GetEnter() && mainMenu.GetState() == MainMenu::MainMenuState::Main) || 
+				(InputManager::GetX() && mainMenu.GetState() == MainMenu::MainMenuState::Main) ||
+				 mainMenu.GetState() == MainMenu::MainMenuState::Exit)
 				state = STATE::GAMEPLAY;
-			}
+
+			mainMenu.UpdateMainMenu();
 		}
 		break;
 	}
@@ -235,6 +258,7 @@ void GameManager::Draw(HWND hWnd)
 
 		case STATE::GAMEPLAY:
 		case STATE::GAMEPLAYFADE:
+		case STATE::GAMEPLAYMAINMENU:
 		{
 			DrawGamePlay(graphic);
 		}
