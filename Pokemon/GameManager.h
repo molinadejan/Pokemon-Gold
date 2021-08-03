@@ -17,7 +17,12 @@ private:
 		INTRO,
 		LOADORNEW,
 		GAMEPLAY,
+		GAMEPLAYFADE,
 	};
+
+private:
+
+	const float FADETIME = 0.4f;
 
 private:
 
@@ -26,14 +31,18 @@ private:
 	Player player;
 	Map* curData;
 
+	bool isMapChange;
+	float fadeTimer;
+
 private:
 
 	void InitGdiPlus();
 	void SetScreen(HWND hWnd);
 
+	void FadeInOut();
+
 	void DrawMap(Graphics &g, PointF origin);
 	void DrawDebug(Graphics &g);
-
 	void DrawGamePlay(Graphics &g);
 
 public:

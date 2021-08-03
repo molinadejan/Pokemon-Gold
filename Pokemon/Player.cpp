@@ -9,6 +9,52 @@ Player::Player()
 
 Player::~Player() { }
 
+bool Player::isOnDoor(Map* &m, MovePoint* &mp)
+{
+	mp = NULL;
+	mp = m->GetMovePoint(pos);
+
+	if (mp != NULL && mp->isDoor())
+		return true;
+
+	return false;
+}
+
+bool Player::isOnCarpet(Map *& m, MovePoint *& mp)
+{
+	mp = NULL;
+	mp = m->GetMovePoint(pos);
+
+	if (mp != NULL && mp->isCarpet())
+		return true;
+
+	return false;
+}
+
+bool Player::IsOnNMap(Map *& m, Map *&nMap)
+{
+	nMap = NULL;
+	nMap = GetNMap(m, pos);
+	return nMap != NULL;
+}
+
+void Player::MovingPlayer()
+{
+	posF = posF + moveDir * (speed * Timer::DeltaTime());
+
+	float newDistance = fabs(posF.X - nextTilePos.X) + fabs(posF.Y - nextTilePos.Y);
+
+	if (newDistance < 0.05f || newDistance > distance)
+	{
+		posF = { (REAL)nextTilePos.X , (REAL)nextTilePos.Y };
+		pos = nextTilePos;
+
+		isMoving = false;
+	}
+
+	distance = newDistance;
+}
+
 void Player::DrawPlayer(Graphics &g)
 {
 	Image *img = DataLoadManager::GetPlayer_game();
@@ -36,103 +82,24 @@ void Player::DrawPlayer(Graphics &g)
 	g.DrawImage(img, r, (spriteTargetX + curFrameCnt) * PIXEL, 0, PIXEL, PIXEL, UnitPixel);
 }
 
-void Player::MovePlayer(Map* &m)
+void Player::MovePlayer(Map*& m, Point dir)
 {
-	if (isMoving)
+	inputDir = dir;
+
+	if (inputDir == Point(0, 0))
+		return;
+
+	Point nextPos = pos + inputDir;
+	moveDir = inputDir;
+
+	Tile* tile = GetTile(m, nextPos);
+
+	if (tile != NULL && tile->moveable == 0)
 	{
-		posF = posF + moveDir * (speed * Timer::DeltaTime());
+		nextTilePos = nextPos;
 
-		float newDistance = fabs(posF.X - nextTilePos.X) + fabs(posF.Y - nextTilePos.Y);
-
-		if (newDistance < 0.05f || newDistance > distance)
-		{
-			posF = { (REAL)nextTilePos.X , (REAL)nextTilePos.Y };
-			pos = nextTilePos;
-
-			isMoving = false;
-		}
-
-		distance = newDistance;
-	}
-	else
-	{
-		inputDir = { InputManager::GetHorizontal(), InputManager::GetVertical() };
-
-		if (inputDir == Point(0, 0))
-			return;
-
-		//// Check Move to neighbor map ////
-		Map* nMap = GetNMap(m, pos);
-
-		if (nMap != NULL)
-		{
-			SetPos(pos + m->worldPos - nMap->worldPos);
-			m = nMap;
-		}
-		//// Check Move to neighbor map ////
-
-		//// Check Move to Door ////
-		bool ignoreInput = false;
-
-		MovePoint* mp = m->GetMovePoint(pos);
-
-		if (mp != NULL && mp->isDoor())
-		{
-			m = DataLoadManager::GetMapData(mp->targetID);
-			SetPos(mp->targetPos);
-
-			MovePoint* newMp = m->GetMovePoint(pos);
-
-			if (newMp != NULL && newMp->isDoor())
-			{
-				inputDir = newMp->GetDir();
-				ignoreInput = true;
-			}
-		}
-		//// Check Move to Door ////
-
-		//// Input ////
-		if (!ignoreInput)
-		{
-			/*inputDir = { InputManager::GetHorizontal(), InputManager::GetVertical() };
-
-			if (inputDir == Point(0, 0))
-				return;*/
-
-			//// Check Move on Carpet ////
-			mp = m->GetMovePoint(pos);
-
-			if (mp != NULL && mp->isCarpet())
-			{
-				if (mp->GetDir() == inputDir)
-				{
-					m = DataLoadManager::GetMapData(mp->targetID);
-					SetPos(mp->targetPos);
-
-					MovePoint* newMp = m->GetMovePoint(pos);
-
-					if (newMp != NULL && newMp->isDoor())
-						inputDir = newMp->GetDir();
-				}
-			}
-			//// Check Move on Carpet ////
-		}
-		//// Input ////
-
-		//// Player Move ////
-		Point nextPos = pos + inputDir;
-		moveDir = inputDir;
-
-		Tile* tile = GetTile(m, nextPos);
-
-		if (tile != NULL && tile->moveable == 0)
-		{
-			nextTilePos = nextPos;
-
-			isMoving = true;
-			distance = 1.0f;
-		}
-		//// Player Move ////
+		isMoving = true;
+		distance = 1.0f;
 	}
 }
 

@@ -53,8 +53,14 @@ public:
 
 	bool GetIsMoving() const { return isMoving; }
 
+	bool isOnDoor(Map* &m, MovePoint* &mp);
+	bool isOnCarpet(Map* &m, MovePoint* &mp);
+	bool IsOnNMap(Map *& m, Map *&nMap);
+
+	void MovingPlayer();
+
 	void DrawPlayer(Graphics &g);
-	void MovePlayer(Map* &m);
+	void MovePlayer(Map*& m, Point dir);
 
 	void FrameUpdate();
 };

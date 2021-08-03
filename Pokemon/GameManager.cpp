@@ -8,7 +8,7 @@
 #include <cmath>
 
 // 持失切, 社瑚切 //
-GameManager::GameManager() : curData(NULL), state(STATE::INTRO) { }
+GameManager::GameManager() : curData(NULL), state(STATE::INTRO), isMapChange(false), fadeTimer(0.0f) { }
 
 GameManager::~GameManager() 
 {
@@ -28,6 +28,11 @@ void GameManager::SetScreen(HWND hWnd)
 	SetRect(&rect, 0, 0, SCREEN_SIZE_X, SCREEN_SIZE_Y);
 	AdjustWindowRect(&rect, WS_OVERLAPPED | WS_CAPTION | WS_SYSMENU | WS_THICKFRAME, FALSE);
 	MoveWindow(hWnd, 100, 100, rect.right - rect.left, rect.bottom - rect.top, TRUE);
+}
+
+void GameManager::FadeInOut()
+{
+
 }
 
 void GameManager::DrawMap(Graphics &g, PointF origin)
@@ -64,6 +69,11 @@ void GameManager::DrawDebug(Graphics & g)
 
 	RectF rectF2(0, 8 * SCREEN_MUL, 32 * SCREEN_MUL, 8 * SCREEN_MUL);
 	g.DrawString(buffer, -1, &font, rectF2, NULL, &strBrush);
+
+	_stprintf_s(buffer, _T("%d %d"), player.GetPos().X + curData->worldPos.X, player.GetPos().Y + curData->worldPos.Y);
+
+	RectF rectF3(0, 16 * SCREEN_MUL, 32 * SCREEN_MUL, 8 * SCREEN_MUL);
+	g.DrawString(buffer, -1, &font, rectF3, NULL, &strBrush);
 }
 
 void GameManager::DrawGamePlay(Graphics &g)
@@ -73,6 +83,13 @@ void GameManager::DrawGamePlay(Graphics &g)
 
 	DrawMap(g, mapOrigin);
 	player.DrawPlayer(g);
+
+	if (state == STATE::GAMEPLAYFADE)
+	{
+		int tp = 255 * ((FADETIME - fadeTimer) / (FADETIME));
+		SolidBrush brush(Color(tp, 0, 0, 0));
+		g.FillRectangle(&brush, 0, 0, SCREEN_SIZE_X, SCREEN_SIZE_Y);
+	}
 
 	DrawDebug(g);
 }
@@ -105,7 +122,79 @@ void GameManager::Update()
 		case STATE::GAMEPLAY:
 		{
 			player.FrameUpdate();
-			player.MovePlayer(curData);
+
+			if (player.GetIsMoving())
+			{
+				player.MovingPlayer();
+			}
+			else
+			{
+				Map* nMap = NULL;
+
+				if (player.IsOnNMap(curData, nMap))
+				{
+					player.SetPos(player.GetPos() + curData->worldPos - nMap->worldPos);
+					curData = nMap;
+					return;
+				}
+
+				MovePoint* mpDoor = NULL;
+
+				if (player.isOnDoor(curData, mpDoor))
+				{
+					if (isMapChange)
+					{
+						player.MovePlayer(curData, mpDoor->GetDir());
+						isMapChange = false;
+					}
+					else
+					{
+						curData = DataLoadManager::GetMapData(mpDoor->targetID);
+						player.SetPos(mpDoor->targetPos);
+						isMapChange = true;
+
+						state = STATE::GAMEPLAYFADE;
+					}
+
+					return;
+				}
+
+				isMapChange = false;
+
+				Point inputDir(InputManager::GetHorizontal(), InputManager::GetVertical());
+
+				if (inputDir == Point(0, 0))
+					return;
+
+				MovePoint* mpCarpet = NULL;
+
+				if (player.isOnCarpet(curData, mpCarpet))
+				{
+					if (mpCarpet->GetDir() == inputDir)
+					{
+						curData = DataLoadManager::GetMapData(mpCarpet->targetID);
+						player.SetPos(mpCarpet->targetPos);
+						isMapChange = true;
+
+						state = STATE::GAMEPLAYFADE;
+						return;
+					}
+				}
+
+				player.MovePlayer(curData, inputDir);
+			}
+		}
+		break;
+
+		case GAMEPLAYFADE:
+		{
+			fadeTimer += Timer::DeltaTime();
+
+			if (fadeTimer > FADETIME)
+			{
+				fadeTimer = 0.0f;
+				state = STATE::GAMEPLAY;
+			}
 		}
 		break;
 	}
@@ -145,6 +234,7 @@ void GameManager::Draw(HWND hWnd)
 		break;
 
 		case STATE::GAMEPLAY:
+		case STATE::GAMEPLAYFADE:
 		{
 			DrawGamePlay(graphic);
 		}
