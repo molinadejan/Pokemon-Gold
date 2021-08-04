@@ -5,7 +5,6 @@
 #include "RunManager.h"
 
 #include <cmath>
-#include <strsafe.h>
 
 GamePlay::GamePlay() : curData(NULL), isMapChange(false)
 {
@@ -14,11 +13,6 @@ GamePlay::GamePlay() : curData(NULL), isMapChange(false)
 }
 
 GamePlay::~GamePlay() { }
-
-void GamePlay::SetManager(GameManager * _gm)
-{
-	gm = _gm;
-}
 
 void GamePlay::DrawMap(Graphics & g, PointF origin)
 {
@@ -145,7 +139,7 @@ void GamePlay::Update()
 void GamePlay::Draw(Graphics& g)
 {
 	PointF playerPos = player.GetPosF();
-	PointF mapOrigin(playerPos.X - REAL(COL / 2), playerPos.Y - REAL(ROW / 2));
+	PointF mapOrigin(playerPos.X - REAL(COL / 2 - 1), playerPos.Y - REAL(ROW / 2));
 
 	DrawMap(g, mapOrigin);
 	player.DrawPlayer(g);

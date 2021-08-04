@@ -58,7 +58,7 @@ void Player::MovingPlayer()
 void Player::DrawPlayer(Graphics &g)
 {
 	Image *img = DataLoadManager::GetPlayer_game();
-	Rect r((COL / 2) * PIXEL * SCREEN_MUL, (ROW / 2 - 0.25f) * PIXEL * SCREEN_MUL, PIXEL * SCREEN_MUL, PIXEL * SCREEN_MUL);
+	Rect r((COL / 2 - 1) * PIXEL * SCREEN_MUL, (ROW / 2 - 0.25f) * PIXEL * SCREEN_MUL, PIXEL * SCREEN_MUL, PIXEL * SCREEN_MUL);
 
 	int spriteTargetX = 0, curFrameCnt = 0;
 

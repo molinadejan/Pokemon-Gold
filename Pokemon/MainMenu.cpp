@@ -2,25 +2,22 @@
 #include "DataLoadManager.h"
 #include "InputManager.h"
 #include "UIManager.h"
+#include "RunManager.h"
 
 MainMenu::MainMenu()
-	: curSelect(1), state(MainMenuState::Main)
+	: curSelect(1), state(MainMenuState::Main), BaseClass()
 { }
-
-void MainMenu::SetManager(GameManager* _gm)
-{
-	gm = _gm;
-}
 
 void MainMenu::DrawMain(Graphics & g)
 {
-	Image* ui = DataLoadManager::GetUI_menu();
-
+	// 우측 메뉴 배경 이미지
 	UIManager::DrawDialogUI_IDX(g, COL - 4, 0, 4, ROW);
 
-	SolidBrush brush(Color(255, 255, 255));
-	g.FillRectangle(&brush, 0, (ROW - 2) * MUL, (COL - 4) * MUL, 2 * MUL);
+	// 하단 배경색
+	SolidBrush brush(Color(248, 248, 248));
+	g.FillRectangle(&brush, 0, (INT)((ROW - 2.5f) * MUL), (COL - 4) * MUL, (INT)(2.5f * MUL));
 
+	// 메뉴 항목
 	Font* font = DataLoadManager::GetFontB();
 	SolidBrush strBrush(Color(255, 0, 0, 0));
 
@@ -33,6 +30,13 @@ void MainMenu::DrawMain(Graphics & g)
 		RectF menuItmeRect((COL - 4) * MUL, MUL + MENU_H * i, 4 * MUL, MENU_H);
 		g.DrawString(MENU[i], -1, font, menuItmeRect, &fm, &strBrush);
 	}
+
+	RectF menuDescriptionRect(MUL, (INT)((ROW - 2.5f) * MUL), (COL - 5) * MUL, (INT)(2.5f * MUL));
+
+	fm.SetAlignment(StringAlignmentNear);
+	fm.SetLineAlignment(StringAlignmentCenter);
+
+	g.DrawString(MENU_DESCREIPTION[curSelect - 1], -1, font, menuDescriptionRect, &fm, &strBrush);
 
 	int pointSize = 4;
 	g.FillRectangle(&strBrush, (int)((COL - 3.5f) * MUL), MUL + MENU_H * (curSelect - 1), pointSize * SCREEN_MUL, pointSize * SCREEN_MUL);
@@ -64,13 +68,11 @@ void MainMenu::Update()
 			break;
 
 		case MainMenu::Bag:
-
-			/*if (InputManager::GetX())
-				state = MainMenuState::Main;
-
-			bagMenu.UpdateBag();*/
-
-			break;
+		{
+			state = MainMenuState::Main;
+			RunManager::SetTarget(gm->bagMenu);
+		}
+		break;
 
 		case MainMenu::Pokegear:
 			break;

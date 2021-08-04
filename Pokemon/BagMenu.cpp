@@ -2,21 +2,22 @@
 #include "DataLoadManager.h"
 #include "InputManager.h"
 #include "UIManager.h"
+#include "RunManager.h"
 
 BagMenu::BagMenu() : curSelect(0) { }
 
-void BagMenu::DrawBag(Graphics& g)
+void BagMenu::Draw(Graphics& g)
 {
 	Image* bag = DataLoadManager::GetUI_Bag();
-	//Image* dialog = DataLoadManager::GetUI_Dialog();
 
-	Rect rect1(0, 0, SCREEN_SIZE_X, 6 * PIXEL * SCREEN_MUL);
-	g.DrawImage(bag, rect1, 0, 0, 208, 96, UnitPixel);
+	// 가방 UI
+	Rect rect1(0, 0, SCREEN_SIZE_X, 6 * MUL);
+	g.DrawImage(bag, rect1, 0, 0, 160, 96, UnitPixel);
 
-	//Rect rect2(0, (ROW - 3) * PIXEL * SCREEN_MUL, SCREEN_SIZE_X, 3 * PIXEL * SCREEN_MUL);
-	//g.DrawImage(dialog, rect2, 0, 0, dialog->GetWidth(), dialog->GetHeight(), UnitPixel);
-
+	// 하단 UI 배경
 	UIManager::DrawDialogUI_IDX(g, 0, ROW - 3, COL, 3);
+
+	// 가방 종류
 
 	TCHAR buffer[128];
 	Font* font = DataLoadManager::GetFontB();
@@ -57,7 +58,7 @@ void BagMenu::DrawBag(Graphics& g)
 	g.DrawString(buffer, -1, font, strRect, &format, &brush);
 }
 
-void BagMenu::UpdateBag()
+void BagMenu::Update()
 {
 	if (InputManager::GetKeyUp(VK_LEFT))
 		--curSelect;
@@ -68,4 +69,7 @@ void BagMenu::UpdateBag()
 	if (curSelect > 3) curSelect = 0;
 
 	state = (BagState)curSelect;
+
+	if (InputManager::GetX())
+		RunManager::SetTarget(gm->mainMenu);
 }

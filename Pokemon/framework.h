@@ -31,7 +31,7 @@ const int PIXEL = 16;
 const int MUL = SCREEN_MUL * PIXEL;
 
 const int ROW = 9;
-const int COL = 13;
+const int COL = 10;
 
 const int SCREEN_SIZE_X = PIXEL * COL * SCREEN_MUL;
 const int SCREEN_SIZE_Y = PIXEL * ROW * SCREEN_MUL;

@@ -3,10 +3,12 @@
 #ifndef __RUNMANAGER_H__
 #define __RUNMANAGER_H__
 
-#include "framework.h"
-#include "GamePlay.h"
+#include "BaseClass.h"
 
-using namespace Gdiplus;
+#include "GamePlay.h"
+#include "BagMenu.h"
+#include "MainMenu.h"
+#include "GameFadeInOut.h"
 
 class RunManager
 {

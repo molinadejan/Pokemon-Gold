@@ -34,9 +34,8 @@ private:
 
 		unordered_map<string, Map> mapDatas;
 		unordered_map<string, Image*> mapImages;
+
 		Image* player_game;
-		Image* UI_menu;
-		//Image* UI_Dialog;
 		Image* UI_Dialog_Base;
 		Image* UI_Bag;
 
@@ -60,8 +59,6 @@ public:
 	static Image* GetMapImage(string ID);
 
 	static Image* GetPlayer_game();
-	static Image* GetUI_menu() { return dataLoad.UI_menu; }
-	//static Image* GetUI_Dialog() { return dataLoad.UI_Dialog; }
 	static Image* GetUI_Bag() { return dataLoad.UI_Bag; }
 	static Image* GetUI_Dialog_Base() { return dataLoad.UI_Dialog_Base; }
 

@@ -20,11 +20,11 @@ DataLoadManager::DataLoad::DataLoad()
 
 DataLoadManager::DataLoad::~DataLoad()
 {
-	delete collection;
+	/*delete collection;
 	delete fm;
 	delete fontS;
 	delete fontM;
-	delete fontB;
+	delete fontB;*/
 
 	/*for (auto &e : mapImages)
 	{
@@ -101,10 +101,6 @@ void DataLoadManager::DataLoad::Reset()
 
 	TCHAR fullPath[] = _T("data/sprite/player/player_game.png");
 	player_game = new Image(fullPath);
-
-	UI_menu = new Image(_T("data/sprite/UI/UI_MainMenu.png"));
-
-	//UI_Dialog = new Image(_T("data/sprite/UI/UI_Dialog.png"));
 
 	UI_Bag = new Image(_T("data/sprite/UI/UI_Bag.png"));
 

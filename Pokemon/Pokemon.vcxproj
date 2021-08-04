@@ -180,6 +180,7 @@
     <ClCompile Include="..\PokemonGoldMapCreator\Datas.cpp" />
     <ClCompile Include="..\PokemonGoldMapCreator\dist\jsoncpp.cpp" />
     <ClCompile Include="BagMenu.cpp" />
+    <ClCompile Include="BaseClass.cpp" />
     <ClCompile Include="DataLoadManager.cpp" />
     <ClCompile Include="GameFadeInOut.cpp" />
     <ClCompile Include="RunManager.cpp" />

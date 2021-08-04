@@ -5,11 +5,6 @@ GameFadeInOut::GameFadeInOut()
 	: fadeTimer(0.0f)
 { }
 
-void GameFadeInOut::SetManager(GameManager * _gm)
-{
-	gm = _gm;
-}
-
 void GameFadeInOut::Draw(Graphics & g)
 {
 	gm->gamePlay->Draw(g);
