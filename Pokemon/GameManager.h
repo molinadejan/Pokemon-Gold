@@ -4,59 +4,33 @@
 #define __GAMEMANAGER_H__
 
 #include "framework.h"
-#include "Player.h"
-#include "Datas.h"
+#include "RunManager.h"
+#include "GamePlay.h"
+#include "BaseClass.h"
 #include "MainMenu.h"
+#include "GameFadeInOut.h"
 
 using namespace Gdiplus;
 
+class GamePlay;
+class MainMenu;
+class GameFadeInOut;
+
 class GameManager
 {
-private:
-	enum STATE
-	{
-		INTRO,
-		LOADORNEW,
-		GAMEPLAY,
-		GAMEPLAYFADE,
-		GAMEPLAYMAINMENU,
-	};
+public:
 
-private:
-
-	const float FADETIME = 0.4f;
-
-private:
-
-	STATE state;
-
-	Player player;
-	Map* curData;
-
-	MainMenu mainMenu;
-
-	bool isMapChange;
-	float fadeTimer;
-
-private:
-
-	void SetScreen(HWND hWnd);
-
-	void DrawMap(Graphics &g, PointF origin);
-	void DrawDebug(Graphics &g);
-	void DrawGamePlay(Graphics &g);
-
-	void UpdateSceneChange();
-	void UpdatePlayer();
+	GamePlay *gamePlay;
+	MainMenu *mainMenu;
+	GameFadeInOut *gameFadeInOut;
 
 public:
 
 	GameManager();
 	~GameManager();
 
-	void Init(HWND hWnd);
-	void Update();
-	void Draw(HWND hWnd);
+	void Init();
 };
+
 
 #endif

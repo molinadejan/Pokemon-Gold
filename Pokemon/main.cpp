@@ -1,8 +1,10 @@
 ﻿#include "framework.h"
 #include "Pokemon.h"
-#include "GameManager.h"
 #include "InputManager.h"
 #include "DataLoadManager.h"
+#include "GameManager.h"
+#include "UIManager.h"
+#include "RunManager.h"
 
 #define MAX_LOADSTRING 100
 
@@ -12,7 +14,7 @@ HINSTANCE hInst;
 WCHAR szTitle[MAX_LOADSTRING];
 WCHAR szWindowClass[MAX_LOADSTRING];
 
-GameManager gm;
+GameManager gameManager;
 ULONG_PTR token;
 
 ATOM                MyRegisterClass(HINSTANCE hInstance);
@@ -22,6 +24,15 @@ INT_PTR CALLBACK    About(HWND, UINT, WPARAM, LPARAM);
 
 int APIENTRY wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _In_ LPWSTR lpCmdLine, _In_ int nCmdShow)
 {
+	GdiplusStartupInput gpsi;
+	GdiplusStartup(&token, &gpsi, NULL);
+
+	Timer::Reset();
+	InputManager::Reset();
+	DataLoadManager::Reset();
+	UIManager::Reset();
+	RunManager::Reset();
+
     UNREFERENCED_PARAMETER(hPrevInstance);
     UNREFERENCED_PARAMETER(lpCmdLine);
 
@@ -35,10 +46,6 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance
     HACCEL hAccelTable = LoadAccelerators(hInstance, MAKEINTRESOURCE(IDC_POKEMON));
 
     MSG msg;
-
-	Timer::Reset();
-	InputManager::Reset();
-	DataLoadManager::Reset();
 
 	while (true)
 	{
@@ -56,8 +63,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance
 		{
 			Timer::Update();
 			InputManager::Update();
-
-			gm.Update();
+			RunManager::Update();
 		}
 	}
 
@@ -107,10 +113,13 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
     {
 		case WM_CREATE:
 		{
-			GdiplusStartupInput gpsi;
-			GdiplusStartup(&token, &gpsi, NULL);
+			RECT rect;
+			SetRect(&rect, 0, 0, SCREEN_SIZE_X, SCREEN_SIZE_Y);
+			AdjustWindowRect(&rect, WS_OVERLAPPED | WS_CAPTION | WS_SYSMENU | WS_THICKFRAME, FALSE);
+			MoveWindow(hWnd, 100, 100, rect.right - rect.left, rect.bottom - rect.top, TRUE);
 
-			gm.Init(hWnd);
+			gameManager.Init();
+
 			SetTimer(hWnd, 0, 32, NULL);
 		}
 		break;
@@ -148,7 +157,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 
 		case WM_PAINT:
 		{
-			gm.Draw(hWnd);
+			RunManager::Draw(hWnd);
 		}
 		break;
 

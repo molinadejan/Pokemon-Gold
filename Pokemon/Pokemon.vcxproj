@@ -158,9 +158,12 @@
     <ClInclude Include="..\PokemonGoldMapCreator\dist\json\json-forwards.h" />
     <ClInclude Include="..\PokemonGoldMapCreator\dist\json\json.h" />
     <ClInclude Include="BagMenu.h" />
+    <ClInclude Include="BaseClass.h" />
     <ClInclude Include="DataLoadManager.h" />
     <ClInclude Include="framework.h" />
-    <ClInclude Include="GameManager.h" />
+    <ClInclude Include="GameFadeInOut.h" />
+    <ClInclude Include="RunManager.h" />
+    <ClInclude Include="GamePlay.h" />
     <ClInclude Include="MainMenu.h" />
     <ClInclude Include="InputManager.h" />
     <ClInclude Include="MyUtils.h" />
@@ -169,6 +172,8 @@
     <ClInclude Include="Resource.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="Timer.h" />
+    <ClInclude Include="GameManager.h" />
+    <ClInclude Include="UIManager.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\PokemonGoldMapCreator\Converter.cpp" />
@@ -176,13 +181,17 @@
     <ClCompile Include="..\PokemonGoldMapCreator\dist\jsoncpp.cpp" />
     <ClCompile Include="BagMenu.cpp" />
     <ClCompile Include="DataLoadManager.cpp" />
-    <ClCompile Include="GameManager.cpp" />
+    <ClCompile Include="GameFadeInOut.cpp" />
+    <ClCompile Include="RunManager.cpp" />
+    <ClCompile Include="GamePlay.cpp" />
     <ClCompile Include="MainMenu.cpp" />
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="MyUtils.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Timer.cpp" />
+    <ClCompile Include="GameManager.cpp" />
+    <ClCompile Include="UIManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Pokemon.rc" />

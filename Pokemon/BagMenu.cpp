@@ -1,19 +1,22 @@
 #include "BagMenu.h"
 #include "DataLoadManager.h"
 #include "InputManager.h"
+#include "UIManager.h"
 
 BagMenu::BagMenu() : curSelect(0) { }
 
 void BagMenu::DrawBag(Graphics& g)
 {
 	Image* bag = DataLoadManager::GetUI_Bag();
-	Image* dialog = DataLoadManager::GetUI_Dialog();
+	//Image* dialog = DataLoadManager::GetUI_Dialog();
 
 	Rect rect1(0, 0, SCREEN_SIZE_X, 6 * PIXEL * SCREEN_MUL);
 	g.DrawImage(bag, rect1, 0, 0, 208, 96, UnitPixel);
 
-	Rect rect2(0, (ROW - 3) * PIXEL * SCREEN_MUL, SCREEN_SIZE_X, 3 * PIXEL * SCREEN_MUL);
-	g.DrawImage(dialog, rect2, 0, 0, dialog->GetWidth(), dialog->GetHeight(), UnitPixel);
+	//Rect rect2(0, (ROW - 3) * PIXEL * SCREEN_MUL, SCREEN_SIZE_X, 3 * PIXEL * SCREEN_MUL);
+	//g.DrawImage(dialog, rect2, 0, 0, dialog->GetWidth(), dialog->GetHeight(), UnitPixel);
+
+	UIManager::DrawDialogUI_IDX(g, 0, ROW - 3, COL, 3);
 
 	TCHAR buffer[128];
 	Font* font = DataLoadManager::GetFontB();

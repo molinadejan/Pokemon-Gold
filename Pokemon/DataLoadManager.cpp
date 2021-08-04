@@ -104,9 +104,11 @@ void DataLoadManager::DataLoad::Reset()
 
 	UI_menu = new Image(_T("data/sprite/UI/UI_MainMenu.png"));
 
-	UI_Dialog = new Image(_T("data/sprite/UI/UI_Dialog.png"));
+	//UI_Dialog = new Image(_T("data/sprite/UI/UI_Dialog.png"));
 
 	UI_Bag = new Image(_T("data/sprite/UI/UI_Bag.png"));
+
+	UI_Dialog_Base = new Image(_T("data/sprite/UI/UI_Dialog_Base.png"));
 }
 
 void DataLoadManager::Reset()

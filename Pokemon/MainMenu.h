@@ -1,14 +1,18 @@
 #pragma once
 
-#ifndef __GAMEPLAYMAINMENU_H__
-#define __GAMEPLAYMAINMENU_H__
+#ifndef __MAINMENU_H__
+#define __MAINMENU_H__
 
 #include "framework.h"
 #include "BagMenu.h"
+#include "BaseClass.h"
+#include "GameManager.h"
 
 using namespace Gdiplus;
 
-class MainMenu
+class GameManager;
+
+class MainMenu : public BaseClass
 {
 public:
 	enum MainMenuState
@@ -27,28 +31,28 @@ public:
 
 private:
 	const int MENU_COUNT = 8;
+	const TCHAR* MENU[8] = { _T("도감"), _T("포켓몬"), _T("가방"), _T("포켓기어"), _T("플레이어"), _T("레포트"), _T("설정"), _T("닫기") };
+	const int MENU_H = ((ROW - 2) * MUL) / MENU_COUNT;
 
 private:
+
+	GameManager* gm;
 
 	int curSelect;
 	MainMenuState state;
 
-	BagMenu bagMenu;
-
 private:
 
 	void DrawMain(Graphics &g);
-	void UpdateMain();
 
 public:
 
 	MainMenu();
+	~MainMenu() = default;
 
-	MainMenuState GetState();
-
-	void Init();
-	void DrawMainMenu(Graphics &g);
-	void UpdateMainMenu();
+	void SetManager(GameManager* _gm);
+	void Draw(Graphics &g) override;
+	void Update() override;
 };
 
 #endif // !__GAMEPLAYMAINMENU_H__

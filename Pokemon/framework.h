@@ -25,8 +25,10 @@
 // string to TCHAR
 #include <atlstr.h>
 
-const int SCREEN_MUL = 3;
+const int SCREEN_MUL = 4;
 const int PIXEL = 16;
+
+const int MUL = SCREEN_MUL * PIXEL;
 
 const int ROW = 9;
 const int COL = 13;

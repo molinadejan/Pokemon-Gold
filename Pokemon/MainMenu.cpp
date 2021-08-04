@@ -1,77 +1,61 @@
 #include "MainMenu.h"
 #include "DataLoadManager.h"
 #include "InputManager.h"
-#include "BagMenu.h"
+#include "UIManager.h"
+
+MainMenu::MainMenu()
+	: curSelect(1), state(MainMenuState::Main)
+{ }
+
+void MainMenu::SetManager(GameManager* _gm)
+{
+	gm = _gm;
+}
 
 void MainMenu::DrawMain(Graphics & g)
 {
 	Image* ui = DataLoadManager::GetUI_menu();
 
-	Rect rect((COL - 4) * PIXEL * SCREEN_MUL, 0, ui->GetWidth() * SCREEN_MUL, ui->GetHeight() * SCREEN_MUL);
-	g.DrawImage(ui, rect);
+	UIManager::DrawDialogUI_IDX(g, COL - 4, 0, 4, ROW);
 
 	SolidBrush brush(Color(255, 255, 255));
-	g.FillRectangle(&brush, 0, (ROW - 2) * PIXEL * SCREEN_MUL, (COL - 4) * PIXEL * SCREEN_MUL, 2 * PIXEL * SCREEN_MUL);
+	g.FillRectangle(&brush, 0, (ROW - 2) * MUL, (COL - 4) * MUL, 2 * MUL);
 
 	Font* font = DataLoadManager::GetFontB();
-
-	TCHAR buffer[256];
 	SolidBrush strBrush(Color(255, 0, 0, 0));
 
-	_stprintf_s(buffer, _T("도감\n포켓몬\n가방\n포켓기어\n플레이어\n레포트\n설정\n닫기"));
+	StringFormat fm;
+	fm.SetAlignment(StringAlignmentCenter);
+	fm.SetLineAlignment(StringAlignmentCenter);
 
-	RectF rectF1((COL - 3) * PIXEL * SCREEN_MUL, PIXEL * SCREEN_MUL, 3 * PIXEL * SCREEN_MUL, SCREEN_SIZE_Y);
-	g.DrawString(buffer, -1, font, rectF1, NULL, &strBrush);
-
-	g.FillRectangle(&strBrush, (int)((COL - 3.5f) * PIXEL * SCREEN_MUL), PIXEL * SCREEN_MUL + 12 * (curSelect - 1) * SCREEN_MUL + 8, 4 * SCREEN_MUL, 4 * SCREEN_MUL);
-}
-
-void MainMenu::UpdateMain()
-{
-	if (InputManager::GetKeyUp(VK_DOWN) && curSelect < MENU_COUNT)
-		++curSelect;
-	else if (InputManager::GetKeyUp(VK_UP) && curSelect > 1)
-		--curSelect;
-
-	if (InputManager::GetZ())
-		state = (MainMenuState)curSelect;
-}
-
-MainMenu::MainMenuState MainMenu::GetState()
-{
-	return state;
-}
-
-MainMenu::MainMenu()
-	: curSelect(1)
-{ }
-
-void MainMenu::Init()
-{
-	state = MainMenuState::Main;
-}
-
-void MainMenu::DrawMainMenu(Graphics& g)
-{
-	switch (state)
+	for (int i = 0; i < MENU_COUNT; ++i)
 	{
-		case MainMenuState::Main:
-			DrawMain(g);
-			break;
-
-		case MainMenuState::Bag:
-			bagMenu.DrawBag(g);
-			break;
+		RectF menuItmeRect((COL - 4) * MUL, MUL + MENU_H * i, 4 * MUL, MENU_H);
+		g.DrawString(MENU[i], -1, font, menuItmeRect, &fm, &strBrush);
 	}
+
+	int pointSize = 4;
+	g.FillRectangle(&strBrush, (int)((COL - 3.5f) * MUL), MUL + MENU_H * (curSelect - 1), pointSize * SCREEN_MUL, pointSize * SCREEN_MUL);
 }
 
-void MainMenu::UpdateMainMenu()
+void MainMenu::Update()
 {
 	switch (state)
 	{
 		case MainMenu::Main:
-			UpdateMain();
-			break;
+		{
+			if (InputManager::GetKeyUp(VK_DOWN) && curSelect < MENU_COUNT)
+				++curSelect;
+			else if (InputManager::GetKeyUp(VK_UP) && curSelect > 1)
+				--curSelect;
+
+			if (InputManager::GetZ())
+				state = (MainMenuState)curSelect;
+
+			if (InputManager::GetEnter() || InputManager::GetX())
+				RunManager::SetTarget(gm->gamePlay);
+		}
+		break;
 
 		case MainMenu::PokeDex:
 			break;
@@ -81,10 +65,10 @@ void MainMenu::UpdateMainMenu()
 
 		case MainMenu::Bag:
 
-			if (InputManager::GetX())
+			/*if (InputManager::GetX())
 				state = MainMenuState::Main;
 
-			bagMenu.UpdateBag();
+			bagMenu.UpdateBag();*/
 
 			break;
 
@@ -101,6 +85,16 @@ void MainMenu::UpdateMainMenu()
 			break;
 
 		case MainMenu::Exit:
-			break;
+		{
+			state = MainMenuState::Main;
+			RunManager::SetTarget(gm->gamePlay);
+		}
+		break;
 	}
+}
+
+void MainMenu::Draw(Graphics& g)
+{
+	gm->gamePlay->Draw(g);
+	DrawMain(g);
 }
