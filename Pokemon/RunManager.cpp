@@ -23,6 +23,12 @@ void RunManager::Reset()
 void RunManager::SetTarget(BaseClass * _base)
 {
 	run.target = _base;
+
+	auto funcUpdate = &BaseClass::Update;
+	run.update = static_cast<void(BaseClass::*)()>(funcUpdate);
+
+	auto funcDraw = &BaseClass::Draw;
+	run.draw = static_cast<void(BaseClass::*)(Graphics&)>(funcDraw);
 }
 
 void RunManager::Update()
@@ -30,8 +36,6 @@ void RunManager::Update()
 	if (run.target == NULL)
 		return;
 
-	auto func = &BaseClass::Update;
-	run.update = static_cast<void(BaseClass::*)()>(func);
 	(run.target->*(run.update))();
 }
 
@@ -57,8 +61,6 @@ void RunManager::Draw(HWND hWnd)
 	graphic.SetInterpolationMode(InterpolationMode::InterpolationModeNearestNeighbor);
 	graphic.SetPixelOffsetMode(PixelOffsetMode::PixelOffsetModeHalf);
 
-	auto func = &BaseClass::Draw;
-	run.draw = static_cast<void(BaseClass::*)(Graphics&)>(func);
 	(run.target->*(run.draw))(graphic);
 
 	BitBlt(hdc, 0, 0, SCREEN_SIZE_X, SCREEN_SIZE_Y, memDC, 0, 0, SRCCOPY);

@@ -17,6 +17,8 @@ void JsonToMap(Map &map, Json::Value &value);
 
 void MapToJson(Map &map, Json::Value &value);
 
+void JsonToItemDesc(ItemDesc* itemDesc, Json::Value &value);
+
 //https://docs.microsoft.com/ko-kr/windows/win32/gdiplus/-gdiplus-retrieving-the-class-identifier-for-an-encoder-use?redirectedfrom=MSDN
 int GetEncoderClsid(const WCHAR * format, CLSID * pClsid);
 

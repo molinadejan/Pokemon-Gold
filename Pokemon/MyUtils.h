@@ -21,6 +21,8 @@ bool IsIn(Point worldPos, Point origin, Point mapSize);
 
 bool IsIn(Point localPos, Point mapSize);
 
+void Clamp(int& num, int min, int max);
+
 Tile* GetTile(Map *m, Point pos);
 
 Map* GetNMap(Map* m, Point pos);

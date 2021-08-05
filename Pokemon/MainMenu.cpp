@@ -13,13 +13,9 @@ void MainMenu::DrawMain(Graphics & g)
 	// 우측 메뉴 배경 이미지
 	UIManager::DrawDialogUI_IDX(g, COL - 4, 0, 4, ROW);
 
-	// 하단 배경색
-	SolidBrush brush(Color(248, 248, 248));
-	g.FillRectangle(&brush, 0, (INT)((ROW - 2.5f) * MUL), (COL - 4) * MUL, (INT)(2.5f * MUL));
+	g.FillRectangle(white, 0, (INT)((ROW - 2.5f) * MUL), (COL - 4) * MUL, (INT)(2.5f * MUL));
 
 	// 메뉴 항목
-	Font* font = DataLoadManager::GetFontB();
-	SolidBrush strBrush(Color(255, 0, 0, 0));
 
 	StringFormat fm;
 	fm.SetAlignment(StringAlignmentCenter);
@@ -28,7 +24,7 @@ void MainMenu::DrawMain(Graphics & g)
 	for (int i = 0; i < MENU_COUNT; ++i)
 	{
 		RectF menuItmeRect((COL - 4) * MUL, MUL + MENU_H * i, 4 * MUL, MENU_H);
-		g.DrawString(MENU[i], -1, font, menuItmeRect, &fm, &strBrush);
+		g.DrawString(MENU[i], -1, fontB, menuItmeRect, &fm, black);
 	}
 
 	RectF menuDescriptionRect(MUL, (INT)((ROW - 2.5f) * MUL), (COL - 5) * MUL, (INT)(2.5f * MUL));
@@ -36,10 +32,10 @@ void MainMenu::DrawMain(Graphics & g)
 	fm.SetAlignment(StringAlignmentNear);
 	fm.SetLineAlignment(StringAlignmentCenter);
 
-	g.DrawString(MENU_DESCREIPTION[curSelect - 1], -1, font, menuDescriptionRect, &fm, &strBrush);
+	g.DrawString(MENU_DESCREIPTION[curSelect - 1], -1, fontB, menuDescriptionRect, &fm, black);
 
 	int pointSize = 4;
-	g.FillRectangle(&strBrush, (int)((COL - 3.5f) * MUL), MUL + MENU_H * (curSelect - 1), pointSize * SCREEN_MUL, pointSize * SCREEN_MUL);
+	g.FillRectangle(black, (int)((COL - 3.5f) * MUL), MUL + MENU_H * (curSelect - 1), pointSize * SCREEN_MUL, pointSize * SCREEN_MUL);
 }
 
 void MainMenu::Update()

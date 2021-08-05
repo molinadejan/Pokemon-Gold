@@ -27,6 +27,11 @@ void GameManager::Init()
 	gameFadeInOut->SetManager(this);
 	bagMenu->SetManager(this);
 
+	gamePlay->ResourceInit();
+	mainMenu->ResourceInit();
+	gameFadeInOut->ResourceInit();
+	bagMenu->ResourceInit();
+
 	RunManager::SetTarget(gamePlay);
 }
 

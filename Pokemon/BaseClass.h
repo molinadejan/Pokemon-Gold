@@ -5,6 +5,7 @@
 
 #include "framework.h"
 #include "GameManager.h"
+#include "DataLoadManager.h"
 
 using namespace Gdiplus;
 
@@ -16,10 +17,25 @@ protected:
 
 	GameManager* gm;
 
+	SolidBrush* black;
+	SolidBrush* white;
+
+	Font* fontS;
+	Font* fontM;
+	Font* fontB;
+
+	TCHAR buffer[256];
+
+	StringFormat* leftAlign;
+	StringFormat* centerAlign;
+	StringFormat* rightAlign;
+
 public:
 
 	BaseClass();
 	~BaseClass();
+
+	virtual void ResourceInit();
 
 	void SetManager(GameManager* _gm);
 	virtual void Update();

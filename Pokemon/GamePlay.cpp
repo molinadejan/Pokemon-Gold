@@ -36,25 +36,22 @@ void GamePlay::DrawMap(Graphics & g, PointF origin)
 
 void GamePlay::DrawDebug(Graphics & g)
 {
-	Font* font = DataLoadManager::GetFontS();
-
-	TCHAR buffer[128];
 	_tcscpy_s(buffer, CA2T(curData->ID.c_str()));
 
 	SolidBrush strBrush(Color(255, 255, 255, 255));
 
 	RectF rectF1(0, 0, 64 * SCREEN_MUL, 8 * SCREEN_MUL);
-	g.DrawString(buffer, -1, font, rectF1, NULL, &strBrush);
+	g.DrawString(buffer, -1, fontS, rectF1, NULL, &strBrush);
 
 	_stprintf_s(buffer, _T("Áö¿ª ÁÂÇ¥ : %d %d"), player.GetPos().X, player.GetPos().Y);
 
 	RectF rectF2(0, 8 * SCREEN_MUL, 64 * SCREEN_MUL, 8 * SCREEN_MUL);
-	g.DrawString(buffer, -1, font, rectF2, NULL, &strBrush);
+	g.DrawString(buffer, -1, fontS, rectF2, NULL, &strBrush);
 
 	_stprintf_s(buffer, _T("¿ùµå ÁÂÇ¥ : %d %d"), player.GetPos().X + curData->worldPos.X, player.GetPos().Y + curData->worldPos.Y);
 
 	RectF rectF3(0, 16 * SCREEN_MUL, 64 * SCREEN_MUL, 8 * SCREEN_MUL);
-	g.DrawString(buffer, -1, font, rectF3, NULL, &strBrush);
+	g.DrawString(buffer, -1, fontS, rectF3, NULL, &strBrush);
 }
 
 void GamePlay::UpdatePlayer()

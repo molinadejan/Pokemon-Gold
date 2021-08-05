@@ -136,6 +136,14 @@ void MapToJson(Map &map, Json::Value &value)
 	value["movePoints"] = m;
 }
 
+void JsonToItemDesc(ItemDesc *itemDesc, Json::Value &value)
+{
+	itemDesc->code = value["code"].asInt();
+	itemDesc->desc = value["desc"].asString();
+	itemDesc->name = value["name"].asString();
+	itemDesc->type = value["type"].asInt();
+}
+
 //https://docs.microsoft.com/ko-kr/windows/win32/gdiplus/-gdiplus-retrieving-the-class-identifier-for-an-encoder-use?redirectedfrom=MSDN
 int GetEncoderClsid(const WCHAR * format, CLSID * pClsid)
 {

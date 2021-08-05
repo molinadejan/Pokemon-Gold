@@ -43,6 +43,21 @@ bool IsIn(Point localPos, Point mapSize)
 	return true;
 }
 
+void Clamp(int & num, int min, int max)
+{
+	if (min > max)
+	{
+		Clamp(num, max, min);
+		return;
+	}
+
+	if (num < min)
+		num = min;
+
+	if (num > max)
+		num = max;
+}
+
 Tile* GetTile(Map* m, Point pos)
 {
 	if (IsIn(pos, m->mapSize))

@@ -63,5 +63,31 @@ struct Map
 	MovePoint* GetMovePoint(const Point &localPos);
 };
 
+struct ItemDesc
+{
+	int code;
+	string name;
+	string desc;
+	int type;
+};
+
+struct InventoryData
+{
+	int code;
+	int type;
+	int count;
+
+	InventoryData() : code(-1), type(-1), count(0) { }
+	InventoryData(int _code, int _type, int _count) : code(_code), type(_type), count(_count) { }
+};
+
+struct PlayerData
+{
+	int money;
+
+	// 0 : tool, 1 : ball, 2 : important, 3 : machine
+	vector<InventoryData> iData[4];
+};
+
 #endif // !__DATAS_H__
 

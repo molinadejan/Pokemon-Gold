@@ -30,6 +30,11 @@ DataLoadManager::DataLoad::~DataLoad()
 	{
 		delete e.second;
 	}*/
+
+	for (auto &e : itemDescs)
+		delete e.second;
+
+	delete playerData;
 }
 
 void DataLoadManager::DataLoad::LoadMap()
@@ -94,17 +99,59 @@ void DataLoadManager::DataLoad::LoadFont()
 	fontB = new Font(familyName, 8 * SCREEN_MUL, NULL, UnitPoint, collection);
 }
 
+void DataLoadManager::DataLoad::LoadItemData()
+{
+	fstream openFile("data/table/item_desc.json");
+	Json::Value root;
+
+	openFile >> root;
+	openFile.close();
+
+	for (int i = 0; i < root.size(); ++i)
+	{
+		Json::Value data = root[i];
+		ItemDesc* newDesc = new ItemDesc;
+
+		JsonToItemDesc(newDesc, data);
+
+		itemDescs[newDesc->code] = newDesc;
+	}
+}
+
 void DataLoadManager::DataLoad::Reset()
 {
 	LoadMap();
 	LoadFont();
+	LoadItemData();
 
-	TCHAR fullPath[] = _T("data/sprite/player/player_game.png");
-	player_game = new Image(fullPath);
+	playerData = new PlayerData;
 
+	// others
+
+	player_game = new Image(_T("data/sprite/player/player_game.png"));
 	UI_Bag = new Image(_T("data/sprite/UI/UI_Bag.png"));
-
 	UI_Dialog_Base = new Image(_T("data/sprite/UI/UI_Dialog_Base.png"));
+
+	// test
+	for (int i = 1; i <= 60; ++i)
+		AddItemToInventory(i, rand() % 999 + 1);
+}
+
+void DataLoadManager::DataLoad::AddItemToInventory(int code, int count)
+{
+	ItemDesc* item = itemDescs[code];
+
+	for (auto &e : playerData->iData[item->type])
+	{
+		if (e.code == code)
+		{
+			e.count += count;
+			break;
+		}
+	}
+
+	InventoryData newData(code, item->type, count);
+	playerData->iData[item->type].push_back(newData);
 }
 
 void DataLoadManager::Reset()
