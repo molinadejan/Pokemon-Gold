@@ -31,11 +31,17 @@ private:
 		_T("현재\n당신의 상태"), _T("잠시 쉬는 동안\n상태를 기록"), _T("시합의 룰 등의\n여러가지 변경"), _T("이 메뉴를 닫는다") };
 
 	const int MENU_H = ((ROW - 2) * MUL) / MENU_COUNT;
+	
+	const RectF menuDescRect = { R(MUL), R((ROW - 2.5f) * MUL), R((COL - 5) * MUL), R(2.5f * MUL) };
+
+	Rect GetCursorRect(int i) { return Rect((int)((COL - 4) * MUL), MUL + MENU_H * (i - 1), MUL, MUL); }
+	RectF GetMenuItemRect(int i) { return RectF(R((COL - 3) * MUL), R(MUL + MENU_H * i), R(4 * MUL), R(MENU_H)); }
 
 private:
 
 	int curSelect;
 	MainMenuState state;
+	Image* dialog;
 
 private:
 
@@ -46,6 +52,7 @@ public:
 	MainMenu();
 	~MainMenu() = default;
 
+	void ResourceInit() override;
 	void Draw(Graphics &g) override;
 	void Update() override;
 };
