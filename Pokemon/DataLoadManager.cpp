@@ -94,9 +94,9 @@ void DataLoadManager::DataLoad::LoadFont()
 
 	fm[0].GetFamilyName(familyName);
 
-	fontS = new Font(familyName, 4 * SCREEN_MUL, NULL, UnitPoint, collection);
-	fontM = new Font(familyName, 6 * SCREEN_MUL, NULL, UnitPoint, collection);
-	fontB = new Font(familyName, 8 * SCREEN_MUL, NULL, UnitPoint, collection);
+	fontS = new Font(familyName, 4 * SCREEN_MUL, FontStyleBold, UnitPoint, collection);
+	fontM = new Font(familyName, 6 * SCREEN_MUL, FontStyleBold, UnitPoint, collection);
+	fontB = new Font(familyName, 8 * SCREEN_MUL, FontStyleBold, UnitPoint, collection);
 }
 
 void DataLoadManager::DataLoad::LoadItemData()

@@ -8,27 +8,29 @@ MainMenu::MainMenu()
 	: curSelect(1), state(MainMenuState::Main)
 { }
 
+void MainMenu::ResourceInit()
+{
+	BaseClass::ResourceInit();
+	dialog = DataLoadManager::GetUI_Dialog_Base();
+}
+
 void MainMenu::DrawMain(Graphics & g)
 {
-	// 우측 메뉴 배경 이미지
+	// 우측 메뉴 UI
 	UIManager::DrawDialogUI_IDX(g, COL - 4, 0, 4, ROW);
 
+	// 하단 UI
 	g.FillRectangle(white, 0, (INT)((ROW - 2.5f) * MUL), (COL - 4) * MUL, (INT)(2.5f * MUL));
 
 	// 메뉴 항목
-
 	for (int i = 0; i < MENU_COUNT; ++i)
-	{
-		RectF menuItmeRect((COL - 4) * MUL, MUL + MENU_H * i, 4 * MUL, MENU_H);
-		g.DrawString(MENU[i], -1, fontB, menuItmeRect, centerAlign, black);
-	}
+		g.DrawString(MENU[i], -1, fontB, GetMenuItemRect(i), leftAlign, black);
 
-	RectF menuDescriptionRect(MUL, (INT)((ROW - 2.5f) * MUL), (COL - 5) * MUL, (INT)(2.5f * MUL));
+	// 메뉴 설명
+	g.DrawString(MENU_DESCREIPTION[curSelect - 1], -1, fontB, menuDescRect, leftAlign, black);
 
-	g.DrawString(MENU_DESCREIPTION[curSelect - 1], -1, fontB, menuDescriptionRect, leftAlign, black);
-
-	int pointSize = 4;
-	g.FillRectangle(black, (int)((COL - 3.5f) * MUL), MUL + MENU_H * (curSelect - 1), pointSize * SCREEN_MUL, pointSize * SCREEN_MUL);
+	// 커서
+	g.DrawImage(dialog, GetCursorRect(curSelect), 3 * PIXEL, 0, PIXEL, PIXEL, UnitPixel);
 }
 
 void MainMenu::Update()

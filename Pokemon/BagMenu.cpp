@@ -9,7 +9,7 @@
 // 나중에 아이템이 없어지고 나서 커서 변수들을 조정해주는 
 // 기능 추가 필요로 할듯하다
 
-BagMenu::BagMenu() : curBagSelect(0)
+BagMenu::BagMenu() : poketSelect(0)
 {
 	curSelect[0] = curSelect[1] = curSelect[2] = curSelect[3] = 0;
 	curSelectIdx[0] = curSelectIdx[1] = curSelectIdx[2] = curSelectIdx[3] = 0;
@@ -34,17 +34,17 @@ void BagMenu::DrawBottomDialog(Graphics & g)
 
 void BagMenu::DrawBagTypeAndText(Graphics & g)
 {
-	g.DrawImage(bag, bagTypeImageRect, curBagSelect * bagTypeImage.X, bagTypeImage.Y, bagTypeImage.Width, bagTypeImage.Height, UnitPixel);
+	g.DrawImage(bag, poketImageRect, poketSelect * poketImage.X, poketImage.Y, poketImage.Width, poketImage.Height, UnitPixel);
 
-	_stprintf_s(buffer, ITEM_TYPE[curBagSelect]);
-	g.DrawString(buffer, -1, fontB, bagTypeTextRect, centerAlign, white);
+	_stprintf_s(buffer, ITEM_TYPE[poketSelect]);
+	g.DrawString(buffer, -1, fontB, poketTextRect, centerAlign, white);
 }
 
 void BagMenu::DrawItemList(Graphics & g)
 {
-	int size = pData->iData[curBagSelect].size();
-	int curS = curSelect[curBagSelect];
-	int curSI = curSelectIdx[curBagSelect];
+	int size = pData->iData[poketSelect].size();
+	int curS = curSelect[poketSelect];
+	int curSI = curSelectIdx[poketSelect];
 
 	for (int i = 0; i < 5; ++i)
 	{
@@ -53,8 +53,8 @@ void BagMenu::DrawItemList(Graphics & g)
 		if (itemIdx > size - 1)
 			break;
 
-		int code = pData->iData[curBagSelect][itemIdx].code;
-		int count = pData->iData[curBagSelect][itemIdx].count;
+		int code = pData->iData[poketSelect][itemIdx].code;
+		int count = pData->iData[poketSelect][itemIdx].count;
 
 		// 아이템 이름
 		string itemName = DataLoadManager::GetItemDesc(code)->name;
@@ -72,12 +72,12 @@ void BagMenu::DrawItemList(Graphics & g)
 
 void BagMenu::DrawItemCursor(Graphics & g)
 {
-	g.DrawImage(bag, GetCursorRect(curSelectIdx[curBagSelect]), cursor.X, cursor.Y, cursor.Width, cursor.Height, UnitPixel);
+	g.DrawImage(bag, GetCursorRect(curSelectIdx[poketSelect]), cursor.X, cursor.Y, cursor.Width, cursor.Height, UnitPixel);
 }
 
 void BagMenu::DrawItemDesc(Graphics & g)
 {
-	int code = pData->iData[curBagSelect][curSelect[curBagSelect]].code;
+	int code = pData->iData[poketSelect][curSelect[poketSelect]].code;
 	string descStr = DataLoadManager::GetItemDesc(code)->desc;
 	_tcscpy_s(buffer, CA2T(descStr.c_str()));
 	g.DrawString(buffer, -1, fontB, descRect, leftAlign, black);
@@ -89,7 +89,7 @@ void BagMenu::Draw(Graphics& g)
 	DrawBottomDialog(g);
 	DrawBagTypeAndText(g);
 
-	if (pData->iData[curBagSelect].size() > 0)
+	if (pData->iData[poketSelect].size() > 0)
 	{
 		DrawItemList(g);
 		DrawItemCursor(g);
@@ -97,13 +97,13 @@ void BagMenu::Draw(Graphics& g)
 	}
 }
 
-void BagMenu::UpdateBagSelect()
+void BagMenu::UpdatePoketSelect()
 {
 	// 좌우 가방 종류 선택
-	if (InputManager::GetKeyUp(VK_LEFT) && curBagSelect > 0)
-		--curBagSelect;
-	else if (InputManager::GetKeyUp(VK_RIGHT) && curBagSelect < 3)
-		++curBagSelect;
+	if (InputManager::GetKeyUp(VK_LEFT) && poketSelect > 0)
+		--poketSelect;
+	else if (InputManager::GetKeyUp(VK_RIGHT) && poketSelect < 3)
+		++poketSelect;
 
 	//state = (BagState)curBagSelect;
 }
@@ -112,29 +112,29 @@ void BagMenu::UpdateItemSelect()
 {
 	if (InputManager::GetKeyUp(VK_UP))
 	{
-		--curSelect[curBagSelect];
-		--curSelectIdx[curBagSelect];
+		--curSelect[poketSelect];
+		--curSelectIdx[poketSelect];
 	}
 	else if (InputManager::GetKeyUp(VK_DOWN))
 	{
-		++curSelect[curBagSelect];
-		++curSelectIdx[curBagSelect];
+		++curSelect[poketSelect];
+		++curSelectIdx[poketSelect];
 	}
 
-	int size = pData->iData[curBagSelect].size();
+	int size = pData->iData[poketSelect].size();
 
-	Clamp(curSelect[curBagSelect], 0, size - 1);
-	Clamp(curSelectIdx[curBagSelect], 0, 4);
-	Clamp(curSelectIdx[curBagSelect], 0, size - 1);
+	Clamp(curSelect[poketSelect], 0, size - 1);
+	Clamp(curSelectIdx[poketSelect], 0, 4);
+	Clamp(curSelectIdx[poketSelect], 0, size - 1);
 }
 
 void BagMenu::Update()
 {
-	UpdateBagSelect();
+	UpdatePoketSelect();
 	UpdateItemSelect();
 
 	// 아이템 선택
-	if (InputManager::GetKeyUp('Z') && pData->iData[curBagSelect].size() > 0)
+	if (InputManager::GetKeyUp('Z') && pData->iData[poketSelect].size() > 0)
 		RunManager::SetTarget(gm->bagItemSelect);
 
 	// 가방 나가기
