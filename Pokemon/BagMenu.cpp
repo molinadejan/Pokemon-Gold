@@ -4,70 +4,50 @@
 #include "UIManager.h"
 #include "RunManager.h"
 #include "MyUtils.h"
+#include "BagItemSelect.h"
 
 // 나중에 아이템이 없어지고 나서 커서 변수들을 조정해주는 
 // 기능 추가 필요로 할듯하다
+
+BagMenu::BagMenu() : curBagSelect(0)
+{
+	curSelect[0] = curSelect[1] = curSelect[2] = curSelect[3] = 0;
+	curSelectIdx[0] = curSelectIdx[1] = curSelectIdx[2] = curSelectIdx[3] = 0;
+}
 
 void BagMenu::ResourceInit()
 {
 	BaseClass::ResourceInit();
 	bag = DataLoadManager::GetUI_Bag();
+	pData = DataLoadManager::GetPlayerData();
 }
 
-RectF BagMenu::GetItemTextRectF(int i)
+void BagMenu::DrawBagUI(Graphics & g)
 {
-	return RectF(R(4 * MUL), R((i + 1) * MUL), R(4 * MUL), R(MUL));
-}
-
-Rect BagMenu::GetXRect(int i)
-{
-	return Rect(7 * MUL, (i + 1) * MUL, MUL, MUL);
-}
-
-RectF BagMenu::GetItemCountRectF(int i)
-{
-	return RectF(R(8 * MUL), R((i + 1) * MUL), R(2 * MUL), R(MUL));
-}
-
-Rect BagMenu::GetCursorRect(int i)
-{
-	return Rect(3 * MUL, (i + 1) * MUL, MUL, MUL);
-}
-
-BagMenu::BagMenu() : curBagSelect(0)
-{ 
-	curSelect[0] = curSelect[1] = curSelect[2] = curSelect[3] = 0;
-	curSelectIdx[0] = curSelectIdx[1] = curSelectIdx[2] = curSelectIdx[3] = 0;
-}
-
-void BagMenu::Draw(Graphics& g)
-{
-	// 가방 UI
 	g.DrawImage(bag, bagUIRect, bagUI.X, bagUI.Y, bagUI.Width, bagUI.Height, UnitPixel);
+}
 
-	// 하단 UI 배경
+void BagMenu::DrawBottomDialog(Graphics & g)
+{
 	UIManager::DrawDialogUI_IDX(g, 0, ROW - 3, COL, 3);
+}
 
-	// 가방 종류 이미지
+void BagMenu::DrawBagTypeAndText(Graphics & g)
+{
 	g.DrawImage(bag, bagTypeImageRect, curBagSelect * bagTypeImage.X, bagTypeImage.Y, bagTypeImage.Width, bagTypeImage.Height, UnitPixel);
 
-	// 가방 종류 텍스트
 	_stprintf_s(buffer, ITEM_TYPE[curBagSelect]);
 	g.DrawString(buffer, -1, fontB, bagTypeTextRect, centerAlign, white);
+}
 
-	// 아이템 리스트 
-	PlayerData* pData = DataLoadManager::GetPlayerData();
+void BagMenu::DrawItemList(Graphics & g)
+{
 	int size = pData->iData[curBagSelect].size();
-
-	if (size == 0) 
-		return;
-
 	int curS = curSelect[curBagSelect];
 	int curSI = curSelectIdx[curBagSelect];
 
 	for (int i = 0; i < 5; ++i)
 	{
-		// 아이템 이름 출력
 		int itemIdx = curS + i - curSI;
 
 		if (itemIdx > size - 1)
@@ -88,19 +68,36 @@ void BagMenu::Draw(Graphics& g)
 		_stprintf_s(buffer, _T("%d"), count);
 		g.DrawString(buffer, -1, fontB, GetItemCountRectF(i), rightAlign, black);
 	}
+}
 
-	// 아이템 커서
-	g.DrawImage(bag, GetCursorRect(curSI), cursor.X, cursor.Y, cursor.Width, cursor.Height, UnitPixel);
+void BagMenu::DrawItemCursor(Graphics & g)
+{
+	g.DrawImage(bag, GetCursorRect(curSelectIdx[curBagSelect]), cursor.X, cursor.Y, cursor.Width, cursor.Height, UnitPixel);
+}
 
-	int code = pData->iData[curBagSelect][curS].code;
-
-	// 아이템 설명
+void BagMenu::DrawItemDesc(Graphics & g)
+{
+	int code = pData->iData[curBagSelect][curSelect[curBagSelect]].code;
 	string descStr = DataLoadManager::GetItemDesc(code)->desc;
 	_tcscpy_s(buffer, CA2T(descStr.c_str()));
 	g.DrawString(buffer, -1, fontB, descRect, leftAlign, black);
 }
 
-void BagMenu::Update()
+void BagMenu::Draw(Graphics& g)
+{
+	DrawBagUI(g);
+	DrawBottomDialog(g);
+	DrawBagTypeAndText(g);
+
+	if (pData->iData[curBagSelect].size() > 0)
+	{
+		DrawItemList(g);
+		DrawItemCursor(g);
+		DrawItemDesc(g);
+	}
+}
+
+void BagMenu::UpdateBagSelect()
 {
 	// 좌우 가방 종류 선택
 	if (InputManager::GetKeyUp(VK_LEFT) && curBagSelect > 0)
@@ -108,11 +105,11 @@ void BagMenu::Update()
 	else if (InputManager::GetKeyUp(VK_RIGHT) && curBagSelect < 3)
 		++curBagSelect;
 
-	state = (BagState)curBagSelect;
+	//state = (BagState)curBagSelect;
+}
 
-	// 상하 아이템 선택
-	PlayerData* data = DataLoadManager::GetPlayerData();
-
+void BagMenu::UpdateItemSelect()
+{
 	if (InputManager::GetKeyUp(VK_UP))
 	{
 		--curSelect[curBagSelect];
@@ -124,11 +121,21 @@ void BagMenu::Update()
 		++curSelectIdx[curBagSelect];
 	}
 
-	int size = data->iData[curBagSelect].size();
+	int size = pData->iData[curBagSelect].size();
 
 	Clamp(curSelect[curBagSelect], 0, size - 1);
 	Clamp(curSelectIdx[curBagSelect], 0, 4);
-	Clamp(curSelectIdx[curBagSelect], 0, size -1);
+	Clamp(curSelectIdx[curBagSelect], 0, size - 1);
+}
+
+void BagMenu::Update()
+{
+	UpdateBagSelect();
+	UpdateItemSelect();
+
+	// 아이템 선택
+	if (InputManager::GetKeyUp('Z') && pData->iData[curBagSelect].size() > 0)
+		RunManager::SetTarget(gm->bagItemSelect);
 
 	// 가방 나가기
 	if (InputManager::GetX())

@@ -26,7 +26,7 @@ void InputManager::Input::Update()
 	DWORD newTime = GetTickCount();
 	static DWORD oldTime = newTime;
 
-	if (newTime - oldTime < 16)
+	if (newTime - oldTime < 32)
 		return;
 
 	oldTime = newTime;

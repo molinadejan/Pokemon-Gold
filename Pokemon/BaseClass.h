@@ -7,6 +7,8 @@
 #include "GameManager.h"
 #include "DataLoadManager.h"
 
+#define R(X) (REAL)(X)
+
 using namespace Gdiplus;
 
 class GameManager;

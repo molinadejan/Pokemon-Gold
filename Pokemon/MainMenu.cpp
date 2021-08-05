@@ -5,7 +5,7 @@
 #include "RunManager.h"
 
 MainMenu::MainMenu()
-	: curSelect(1), state(MainMenuState::Main), BaseClass()
+	: curSelect(1), state(MainMenuState::Main)
 { }
 
 void MainMenu::DrawMain(Graphics & g)
@@ -17,22 +17,15 @@ void MainMenu::DrawMain(Graphics & g)
 
 	// 메뉴 항목
 
-	StringFormat fm;
-	fm.SetAlignment(StringAlignmentCenter);
-	fm.SetLineAlignment(StringAlignmentCenter);
-
 	for (int i = 0; i < MENU_COUNT; ++i)
 	{
 		RectF menuItmeRect((COL - 4) * MUL, MUL + MENU_H * i, 4 * MUL, MENU_H);
-		g.DrawString(MENU[i], -1, fontB, menuItmeRect, &fm, black);
+		g.DrawString(MENU[i], -1, fontB, menuItmeRect, centerAlign, black);
 	}
 
 	RectF menuDescriptionRect(MUL, (INT)((ROW - 2.5f) * MUL), (COL - 5) * MUL, (INT)(2.5f * MUL));
 
-	fm.SetAlignment(StringAlignmentNear);
-	fm.SetLineAlignment(StringAlignmentCenter);
-
-	g.DrawString(MENU_DESCREIPTION[curSelect - 1], -1, fontB, menuDescriptionRect, &fm, black);
+	g.DrawString(MENU_DESCREIPTION[curSelect - 1], -1, fontB, menuDescriptionRect, leftAlign, black);
 
 	int pointSize = 4;
 	g.FillRectangle(black, (int)((COL - 3.5f) * MUL), MUL + MENU_H * (curSelect - 1), pointSize * SCREEN_MUL, pointSize * SCREEN_MUL);
@@ -58,10 +51,16 @@ void MainMenu::Update()
 		break;
 
 		case MainMenu::PokeDex:
-			break;
+		{
+			state = MainMenuState::Main;
+		}
+		break;
 
 		case MainMenu::Pokemon:
-			break;
+		{
+			state = MainMenuState::Main;
+		}
+		break;
 
 		case MainMenu::Bag:
 		{
@@ -71,16 +70,28 @@ void MainMenu::Update()
 		break;
 
 		case MainMenu::Pokegear:
-			break;
+		{
+			state = MainMenuState::Main;
+		}
+		break;
 
 		case MainMenu::Player:
-			break;
+		{
+			state = MainMenuState::Main;
+		}
+		break;
 
 		case MainMenu::Report:
-			break;
+		{
+			state = MainMenuState::Main;
+		}
+		break;
 
 		case MainMenu::Option:
-			break;
+		{
+			state = MainMenuState::Main;
+		}
+		break;
 
 		case MainMenu::Exit:
 		{

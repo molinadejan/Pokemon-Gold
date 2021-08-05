@@ -11,6 +11,7 @@ class GamePlay;
 class MainMenu;
 class GameFadeInOut;
 class BagMenu;
+class BagItemSelect;
 
 class GameManager
 {
@@ -20,6 +21,7 @@ public:
 	MainMenu *mainMenu;
 	GameFadeInOut *gameFadeInOut;
 	BagMenu *bagMenu;
+	BagItemSelect *bagItemSelect;
 
 public:
 

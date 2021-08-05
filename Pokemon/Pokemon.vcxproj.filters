@@ -78,6 +78,9 @@
     <ClInclude Include="GameFadeInOut.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="BagItemSelect.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Timer.cpp">
@@ -129,6 +132,9 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="BaseClass.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="BagItemSelect.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
