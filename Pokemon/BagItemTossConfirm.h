@@ -24,32 +24,27 @@ private:
 
 private:
 
-	const float FRAME_LIMIT = 0.05f;
 	const RectF descRect = { MUL, 6 * MUL, (COL - 2) * MUL, 3 * MUL };
 
 private:
 
-	//DialogShow dialogShow;
-	//vector<TCHAR*> dialogText;
+	DialogShow* dialogShow;
 
-	float frameTimer;
-	int dlgLen;
 	int confirmSelect;
 
 	TCHAR tmpBuffer[256];
 	TossConfirmState curState;
-	InventoryItemData* curItemData;
+	InventoryItemData curItemData;
 	Image *bag;
 
 private:
 
-	void UpdateConfirm();
 	void Reset();
 
 public:
 
 	BagItemTossConfirm();
-	~BagItemTossConfirm() = default;
+	~BagItemTossConfirm();
 
 	void ResourceInit() override;
 	void Draw(Graphics& g) override;

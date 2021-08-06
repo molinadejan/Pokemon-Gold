@@ -23,7 +23,9 @@ void StringReplaceMent(string & str, const string & from, const string & to)
 string TransString(TCHAR* buffer, const string& key)
 {
 	string ret = DataLoadManager::GetStringData(key);
-	_tcscpy_s(buffer, ret.length() + 1, CA2T(ret.c_str()));
+
+	if(buffer != NULL)
+		_tcscpy_s(buffer, ret.length() + 1, CA2T(ret.c_str()));
 
 	return ret;
 }
@@ -44,7 +46,8 @@ string TransString(TCHAR* buffer, const string & key, int count, const TokenChan
 
 	va_end(ap);
 
-	_tcscpy_s(buffer, ret.length() + 1, CA2T(ret.c_str()));
+	if(buffer != NULL)
+		_tcscpy_s(buffer, ret.length() + 1, CA2T(ret.c_str()));
 
 	return ret;
 }

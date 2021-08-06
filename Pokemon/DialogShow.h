@@ -28,8 +28,8 @@ private:
 
 	float frameTimer;
 
-	TCHAR buffer1[256];
-	TCHAR buffer2[256];
+	TCHAR buffer1[128];
+	TCHAR buffer2[128];
 
 public:
 
@@ -38,7 +38,7 @@ public:
 
 	void Init(vector<string> _dialogText, RectF _rect);
 
-	bool UpdateDlg();
+	int UpdateDlg();
 	void Draw(Graphics& g);
 };
 

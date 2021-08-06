@@ -3,8 +3,6 @@
 #ifndef __INPUTMANAGER_H__
 #define __INPUTMANAGER_H__
 
-#define IM InputManager
-
 #include <wtypes.h> // USE DWORD
 
 class InputManager
@@ -55,5 +53,15 @@ public:
 
 	static bool GetKeyUp(int _key);
 };
+
+#define IM        InputManager
+
+#define GET_Z     InputManager::GetKeyUp('Z')
+#define GET_X     InputManager::GetKeyUp('X')
+#define GET_ENTER InputManager::GetKeyUp(VK_RETURN)
+#define GET_UP    InputManager::GetKeyUp(VK_UP)
+#define GET_DOWN  InputManager::GetKeyUp(VK_DOWN)
+#define GET_LEFT  InputManager::GetKeyUp(VK_LEFT)
+#define GET_RIGHT InputManager::GetKeyUp(VK_RIGHT)
 
 #endif // !__IN

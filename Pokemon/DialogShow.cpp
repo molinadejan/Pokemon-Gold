@@ -11,12 +11,15 @@ void DialogShow::Init(vector<string> _dialogText, RectF _rect)
 
 	textIdx = 0;
 	textLen = 1;
+
+	memset(buffer1, 0, sizeof(buffer1));
+	memset(buffer2, 0, sizeof(buffer2));
 }
 
-// 출력할 대화가 끝났다는 의미로 true를 반환합니다.
-// false 면 출력할 대화가 남아있지만 잠시 멈춘 상태
-// 다른 클래스에서 이에 대한 처리를 해주면 됩니다.
-bool DialogShow::UpdateDlg()
+// -1 : 아직 진행중
+// 나머지는 남은 대화의 수
+// 다른 클래스에서 값을 받아 각각한 처리를 해주면 됩니다.
+int DialogShow::UpdateDlg()
 {
 	frameTimer -= Timer::DeltaTime();
 
@@ -35,15 +38,20 @@ bool DialogShow::UpdateDlg()
 			++textIdx;
 			textLen = 1;
 
-			if (textIdx == texts.size())
-				return true;
+			return texts.size() - textIdx;
 		}
 	}
 
-	return false;
+	return -1;
 }
 
 void DialogShow::Draw(Graphics& g)
 {
-	//g.DrawString(buffer, -1, fontB, rect, leftAlign, black);
+	StringFormat fm;
+	fm.SetAlignment(StringAlignmentNear);
+	fm.SetLineAlignment(StringAlignmentCenter);
+
+	SolidBrush black(Color(255, 0, 0, 0));
+
+	g.DrawString(buffer2, -1, DM::GetFontB(), rect, &fm, &black);
 }
