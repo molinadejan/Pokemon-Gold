@@ -13,8 +13,20 @@ class BagItemSelect :public BaseClass
 {
 private:
 
-	const TCHAR* CHOICE[4] = { _T("사용하다"), _T("지니게하다"), _T("버리다"), _T("그만두다") };
 	const float CHOICE_H = (5 * MUL) / 5.0f;
+
+	RectF GetChoiceRect(int i) { return RectF(R(MUL), R(1.5f * MUL + CHOICE_H * i), R(2 * MUL), R(MUL)); }
+	Rect  GetCursorRect(int i) { return Rect (0, INT(1.6f * MUL + CHOICE_H * curSelect), MUL, MUL); }
+
+private:
+
+	enum ChoiceState
+	{
+		USE,
+		GIVE,
+		TOSS,
+		QUIT
+	};
 
 private:
 
@@ -23,6 +35,7 @@ private:
 private:
 
 	int curSelect;
+	ChoiceState curState;
 	Image* dialog;
 
 public:

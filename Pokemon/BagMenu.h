@@ -9,8 +9,6 @@ class BagMenu : public BaseClass
 {
 private:
 
-	const TCHAR *ITEM_TYPE[4] = { _T("도구"), _T("볼"), _T("중요한"), _T("기술머신") };
-
 	const Rect  bagUIRect        = { 0                , 0                 , SCREEN_SIZE_X     , 6 * MUL            };
 	const RectF poketTextRect    = { R(2 * SCREEN_MUL), R(58 * SCREEN_MUL), R(36 * SCREEN_MUL), R(20 * SCREEN_MUL) };
 	const RectF poketImageRect   = { R(0)             , R(24 * SCREEN_MUL), R(40 * SCREEN_MUL), R(24 * SCREEN_MUL) };
@@ -66,6 +64,8 @@ public:
 
 	BagMenu();
 	~BagMenu() = default;
+
+	InventoryItemData* GetCurSelectInventoryItemData();
 
 	void ResourceInit() override;
 	void Draw(Graphics& g) override;

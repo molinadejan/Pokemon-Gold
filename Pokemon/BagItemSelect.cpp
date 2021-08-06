@@ -5,6 +5,8 @@
 #include "RunManager.h"
 #include "MyUtils.h"
 #include "DataLoadManager.h"
+#include "BagItemToss.h"
+#include "TransDatas.h"
 
 BagItemSelect::BagItemSelect()
 	: curSelect(0) { }
@@ -21,12 +23,11 @@ void BagItemSelect::DrawChoices(Graphics & g)
 
 	for (int i = 0; i < 4; ++i)
 	{
-		RectF choiceRect(MUL, 1.5f * MUL + CHOICE_H * i, 2 * MUL, MUL);
-		g.DrawString(CHOICE[i], -1, fontS, choiceRect, leftAlign, black);
+		TransString(buffer, "bag_item_choice_" + std::to_string(i));
+		g.DrawString(buffer, -1, fontS, GetChoiceRect(i), leftAlign, black);
 	}
 
-	Rect cursorRect(0, (1.6f * MUL + CHOICE_H * curSelect), MUL, MUL);
-	g.DrawImage(dialog, cursorRect, 3 * PIXEL, 0, PIXEL, PIXEL, UnitPixel);
+	g.DrawImage(dialog, GetCursorRect(curSelect), 3 * PIXEL, 0, PIXEL, PIXEL, UnitPixel);
 }
 
 void BagItemSelect::Draw(Graphics & g)
@@ -49,9 +50,45 @@ void BagItemSelect::Update()
 	else if (InputManager::GetKeyUp(VK_DOWN) && curSelect < 3)
 		++curSelect;
 
-	if (InputManager::GetX())
+	curState = (ChoiceState)curSelect;
+
+	if (InputManager::GetKeyUp('X'))
 	{
 		curSelect = 0;
 		RunManager::SetTarget(gm->bagMenu);
+	}
+
+	if (InputManager::GetKeyUp('Z'))
+	{
+		switch (curState)
+		{
+			case BagItemSelect::USE:
+			{
+				//curSelect = 0;
+				//RunManager::SetTarget(gm->bagMenu);
+			}
+			break;
+
+			case BagItemSelect::GIVE:
+			{
+				//curSelect = 0;
+				//RunManager::SetTarget(gm->bagMenu);
+			}
+			break;
+
+			case BagItemSelect::TOSS:
+			{
+				curSelect = 0;
+				RunManager::SetTarget(gm->bagItemToss);
+			}
+			break;
+
+			case BagItemSelect::QUIT:
+			{
+				curSelect = 0;
+				RunManager::SetTarget(gm->bagMenu);
+			}
+			break;
+		}
 	}
 }

@@ -4,9 +4,12 @@
 #define __MYUTILS_H__
 
 #include <vector>
+#include <string>
 #include "Datas.h"
 #include "framework.h"
 
+
+using std::string;
 using std::vector;
 using namespace Gdiplus;
 

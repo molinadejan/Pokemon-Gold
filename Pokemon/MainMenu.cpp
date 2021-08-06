@@ -3,6 +3,10 @@
 #include "InputManager.h"
 #include "UIManager.h"
 #include "RunManager.h"
+#include "TransDatas.h"
+
+using std::to_string;
+using std::wstring;
 
 MainMenu::MainMenu()
 	: curSelect(1), state(MainMenuState::Main)
@@ -24,10 +28,14 @@ void MainMenu::DrawMain(Graphics & g)
 
 	// 메뉴 항목
 	for (int i = 0; i < MENU_COUNT; ++i)
-		g.DrawString(MENU[i], -1, fontB, GetMenuItemRect(i), leftAlign, black);
+	{
+		TransString(buffer, "main_menu_" + to_string(i));
+		g.DrawString(buffer, -1, fontB, GetMenuItemRect(i), leftAlign, black);
+	}
 
 	// 메뉴 설명
-	g.DrawString(MENU_DESCREIPTION[curSelect - 1], -1, fontB, menuDescRect, leftAlign, black);
+	TransString(buffer, "main_menu_desc_" + to_string(curSelect - 1));
+	g.DrawString(buffer, -1, fontB, menuDescRect, leftAlign, black);
 
 	// 커서
 	g.DrawImage(dialog, GetCursorRect(curSelect), 3 * PIXEL, 0, PIXEL, PIXEL, UnitPixel);

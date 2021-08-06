@@ -36,7 +36,7 @@ void GamePlay::DrawMap(Graphics & g, PointF origin)
 
 void GamePlay::DrawDebug(Graphics & g)
 {
-	_tcscpy_s(buffer, CA2T(curData->ID.c_str()));
+	/*_tcscpy_s(buffer, CA2T(curData->ID.c_str()));
 
 	SolidBrush strBrush(Color(255, 255, 255, 255));
 
@@ -51,7 +51,7 @@ void GamePlay::DrawDebug(Graphics & g)
 	_stprintf_s(buffer, _T("¿ùµå ÁÂÇ¥ : %d %d"), player.GetPos().X + curData->worldPos.X, player.GetPos().Y + curData->worldPos.Y);
 
 	RectF rectF3(0, 16 * SCREEN_MUL, 64 * SCREEN_MUL, 8 * SCREEN_MUL);
-	g.DrawString(buffer, -1, fontS, rectF3, NULL, &strBrush);
+	g.DrawString(buffer, -1, fontS, rectF3, NULL, &strBrush);*/
 }
 
 void GamePlay::UpdatePlayer()

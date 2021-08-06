@@ -5,6 +5,7 @@
 #include "RunManager.h"
 #include "MyUtils.h"
 #include "BagItemSelect.h"
+#include "TransDatas.h"
 
 // 나중에 아이템이 없어지고 나서 커서 변수들을 조정해주는 
 // 기능 추가 필요로 할듯하다
@@ -36,7 +37,7 @@ void BagMenu::DrawBagTypeAndText(Graphics & g)
 {
 	g.DrawImage(bag, poketImageRect, poketSelect * poketImage.X, poketImage.Y, poketImage.Width, poketImage.Height, UnitPixel);
 
-	_stprintf_s(buffer, ITEM_TYPE[poketSelect]);
+	TransString(buffer, "poket_type_" + std::to_string(poketSelect));
 	g.DrawString(buffer, -1, fontB, poketTextRect, centerAlign, white);
 }
 
@@ -140,4 +141,12 @@ void BagMenu::Update()
 	// 가방 나가기
 	if (InputManager::GetX())
 		RunManager::SetTarget(gm->mainMenu);
+}
+
+InventoryItemData* BagMenu::GetCurSelectInventoryItemData()
+{
+	if (pData->iData[poketSelect].empty())
+		return NULL;
+
+	return &(pData->iData[poketSelect][curSelect[poketSelect]]);
 }

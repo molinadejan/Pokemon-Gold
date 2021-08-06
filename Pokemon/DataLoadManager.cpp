@@ -104,17 +104,42 @@ void DataLoadManager::DataLoad::LoadItemData()
 	fstream openFile("data/table/item_desc.json");
 	Json::Value root;
 
-	openFile >> root;
-	openFile.close();
-
-	for (int i = 0; i < root.size(); ++i)
+	if (openFile.is_open())
 	{
-		Json::Value data = root[i];
-		ItemDesc* newDesc = new ItemDesc;
+		openFile >> root;
+		openFile.close();
 
-		JsonToItemDesc(newDesc, data);
+		for (int i = 0; i < root.size(); ++i)
+		{
+			Json::Value data = root[i];
+			ItemDesc* newDesc = new ItemDesc;
 
-		itemDescs[newDesc->code] = newDesc;
+			JsonToItemDesc(newDesc, data);
+
+			itemDescs[newDesc->code] = newDesc;
+		}
+	}
+}
+
+void DataLoadManager::DataLoad::LoadTransData()
+{
+	using std::wstring;
+
+	fstream openFile("data/table/UI_text.json");
+	Json::Value root;
+
+	if (openFile.is_open())
+	{
+		openFile >> root;
+		openFile.close();
+
+		for (int i = 0; i < root.size(); ++i)
+		{
+			string key = root[i]["key"].asString();
+			string value = root[i]["value"].asString();
+
+			transDatas[root[i]["key"].asString()] = root[i]["value"].asString();
+		}
 	}
 }
 
@@ -123,6 +148,7 @@ void DataLoadManager::DataLoad::Reset()
 	LoadMap();
 	LoadFont();
 	LoadItemData();
+	LoadTransData();
 
 	playerData = new PlayerData;
 
@@ -134,7 +160,7 @@ void DataLoadManager::DataLoad::Reset()
 
 	// test
 	for (int i = 1; i <= 60; ++i)
-		AddItemToInventory(i, rand() % 999 + 1);
+		AddItemToInventory(i, rand() % 99 + 1);
 }
 
 void DataLoadManager::DataLoad::AddItemToInventory(int code, int count)
@@ -150,8 +176,27 @@ void DataLoadManager::DataLoad::AddItemToInventory(int code, int count)
 		}
 	}
 
-	InventoryData newData(code, item->type, count);
+	InventoryItemData newData(code, item->type, count);
 	playerData->iData[item->type].push_back(newData);
+}
+
+void DataLoadManager::DataLoad::RemoveItemFromInventory(int code, int count)
+{
+	ItemDesc* item = itemDescs[code];
+	vector<InventoryItemData> &v = playerData->iData[item->type];
+
+	for (int i = 0; i < (int)v.size(); ++i)
+	{
+		if (v[i].code == code)
+		{
+			v[i].count -= count;
+
+			if (v[i].count == 0)
+				v.erase(v.begin() + i);
+
+			break;
+		}
+	}
 }
 
 void DataLoadManager::Reset()

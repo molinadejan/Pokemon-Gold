@@ -3,6 +3,8 @@
 #ifndef __INPUTMANAGER_H__
 #define __INPUTMANAGER_H__
 
+#define IM InputManager
+
 #include <wtypes.h> // USE DWORD
 
 class InputManager

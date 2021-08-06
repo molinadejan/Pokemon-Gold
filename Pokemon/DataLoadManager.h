@@ -3,18 +3,16 @@
 #ifndef __DATALOADMANAGER_H__
 #define __DATALOADMANAGER_H__
 
-#include <unordered_map>
-#include <string>
+#define DM DataLoadManager
 
+#include <unordered_map>
 #include "Datas.h"
 
 using std::unordered_map;
-using std::string;
 
 class DataLoadManager
 {
 private:
-
 	class DataLoad
 	{
 		friend DataLoadManager;
@@ -29,16 +27,19 @@ private:
 		void LoadMap();
 		void LoadFont();
 		void LoadItemData();
+		void LoadTransData();
 		void Reset();
 
 		void AddItemToInventory(int code, int count);
+		void RemoveItemFromInventory(int code, int count);
 
 	private:
 
 		unordered_map<string, Map> mapDatas;
 		unordered_map<string, Image*> mapImages;
-
 		unordered_map<int, ItemDesc*> itemDescs;
+
+		unordered_map<string, string> transDatas;
 
 		Image* player_game;
 		Image* UI_Dialog_Base;
@@ -75,7 +76,11 @@ public:
 
 	static ItemDesc* GetItemDesc(int code) { return dataLoad.itemDescs[code]; }
 	static PlayerData* GetPlayerData() { return dataLoad.playerData; }
-	static void AddItemToInventory(int code, int count = 1) { dataLoad.AddItemToInventory(code, count); };
+
+	static void AddItemToInventory(int code, int count = 1) { dataLoad.AddItemToInventory(code, count); }
+	static void RemoveItemFromInventory(int code, int count = 1) { dataLoad.RemoveItemFromInventory(code, count); }
+
+	static string GetStringData(string key) { return dataLoad.transDatas[key]; }
 };
 
 #endif // !__DATALOADMANAGER_H__
