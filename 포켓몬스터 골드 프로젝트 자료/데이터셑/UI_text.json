@@ -1,0 +1,66 @@
+[
+  {
+    "key": "main_menu_0",
+    "value": "도감"
+  },
+  {
+    "key": "main_menu_desc_0",
+    "value": "포켓몬의 비밀이\\n기록되어져 있다"
+  },
+  {
+    "key": "main_menu_1",
+    "value": "포켓몬"
+  },
+  {
+    "key": "main_menu_desc_1",
+    "value": "같이 있는\\n포켓몬의 상태"
+  },
+  {
+    "key": "main_menu_2",
+    "value": "가방"
+  },
+  {
+    "key": "main_menu_desc_2",
+    "value": "도구를 집어넣는\\n포켓 낚시배낭"
+  },
+  {
+    "key": "main_menu_3",
+    "value": "포켓기어"
+  },
+  {
+    "key": "main_menu_desc_3",
+    "value": "트레이너의 여행에\\n도움이 되는 툴"
+  },
+  {
+    "key": "main_menu_4",
+    "value": "플레이어"
+  },
+  {
+    "key": "main_menu_desc_4",
+    "value": "현재\\n당신의 상태"
+  },
+  {
+    "key": "main_menu_5",
+    "value": "레포트"
+  },
+  {
+    "key": "main_menu_desc_5",
+    "value": "잠시 쉬는 동안\\n상태를 기록"
+  },
+  {
+    "key": "main_menu_6",
+    "value": "설정"
+  },
+  {
+    "key": "main_menu_desc_6",
+    "value": "시합의 룰 등의\\n여러가지 변경"
+  },
+  {
+    "key": "main_menu_7",
+    "value": "닫기"
+  },
+  {
+    "key": "main_menu_desc_7",
+    "value": "이 메뉴를 닫는다"
+  }
+]
