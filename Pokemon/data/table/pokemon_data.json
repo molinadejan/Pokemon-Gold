@@ -1,0 +1,56 @@
+[
+    {
+      "id" : 1,
+      "type1" : 3,
+      "type2" : 7,
+      
+      "evo_id" : 2,
+      "height" : 70,
+      "weight" : 6.9,
+      "catch_rate" : 45,
+      "base_exp" : 64,
+      "exp_growth_group" : 2,
+      "HP" : 45,
+      "ATK" : 49,
+      "DEF" : 49,
+      "SPA" : 65,
+      "SPD" : 65,
+      "SPE" : 45
+    },
+	{
+      "id" : 1,
+      "type1" : 3,
+      "type2" : 7,
+      
+      "evo_id" : 3,
+      "height" : 70,
+      "weight" : 6.9,
+      "catch_rate" : 45,
+      "base_exp" : 141,
+      "exp_growth_group" : 2,
+      "HP" : 60,
+      "ATK" : 62,
+      "DEF" : 63,
+      "SPA" : 80,
+      "SPD" : 80,
+      "SPE" : 60
+    },
+	{
+      "id" : 3,
+      "type1" : 3,
+      "type2" : 7,
+      
+      "evo_id" : -1,
+      "height" : 70,
+      "weight" : 6.9,
+      "catch_rate" : 45,
+      "base_exp" : 208,
+      "exp_growth_group" : 2,
+      "HP" : 80,
+      "ATK" : 82,
+      "DEF" : 83,
+      "SPA" : 100,
+      "SPD" : 100,
+      "SPE" : 80
+    }
+]

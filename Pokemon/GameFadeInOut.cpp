@@ -1,5 +1,6 @@
 #include "GameFadeInOut.h"
 #include "RunManager.h"
+#include "Timer.h"
 
 GameFadeInOut::GameFadeInOut()
 	: fadeTimer(0.0f)

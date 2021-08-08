@@ -15,12 +15,7 @@
 #include <gdiplus.h>
 #pragma comment(lib, "Gdiplus.lib")
 
-// delatTime
-#include "Timer.h"
 #include <cmath>
-
-// json
-#include <json/json.h>
 
 // string to TCHAR
 #include <atlstr.h>

@@ -2,6 +2,7 @@
 #include "MyUtils.h"
 #include "DataLoadManager.h"
 #include "InputManager.h"
+#include "Timer.h"
 #include <cmath>
 
 Player::Player()

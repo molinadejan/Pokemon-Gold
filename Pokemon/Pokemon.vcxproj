@@ -166,6 +166,9 @@
     <ClInclude Include="DialogShow.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="GameFadeInOut.h" />
+    <ClInclude Include="GdiplusElement.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
+    </ClInclude>
     <ClInclude Include="RunManager.h" />
     <ClInclude Include="GamePlay.h" />
     <ClInclude Include="MainMenu.h" />
@@ -192,6 +195,9 @@
     <ClCompile Include="DataLoadManager.cpp" />
     <ClCompile Include="DialogShow.cpp" />
     <ClCompile Include="GameFadeInOut.cpp" />
+    <ClCompile Include="GdiplusElement.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="RunManager.cpp" />
     <ClCompile Include="GamePlay.cpp" />
     <ClCompile Include="MainMenu.cpp" />

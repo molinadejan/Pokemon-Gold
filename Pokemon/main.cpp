@@ -5,6 +5,8 @@
 #include "GameManager.h"
 #include "UIManager.h"
 #include "RunManager.h"
+#include "GdiplusElement.h"
+#include "Timer.h"
 
 #define MAX_LOADSTRING 100
 
@@ -32,6 +34,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance
 	DataLoadManager::Reset();
 	UIManager::Reset();
 	RunManager::Reset();
+
+	GE::Init();
 
     UNREFERENCED_PARAMETER(hPrevInstance);
     UNREFERENCED_PARAMETER(lpCmdLine);
@@ -66,6 +70,10 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance
 			RunManager::Update();
 		}
 	}
+
+	GE::Delete();
+
+	GdiplusShutdown(token);
 
     return (int) msg.wParam;
 }
@@ -163,8 +171,6 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 
 		case WM_DESTROY:
 		{
-			GdiplusShutdown(token);
-
 			KillTimer(hWnd, 0);
 			PostQuitMessage(0);
 		}
