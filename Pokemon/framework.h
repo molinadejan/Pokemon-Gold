@@ -22,6 +22,7 @@
 
 const int SCREEN_MUL = 4;
 const int PIXEL = 16;
+const int POKE_PIXEL = 56;
 
 const int MUL = SCREEN_MUL * PIXEL;
 

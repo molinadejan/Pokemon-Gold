@@ -16,7 +16,7 @@ MainMenu::MainMenu()
 void MainMenu::ResourceInit()
 {
 	BaseClass::ResourceInit();
-	dialog = DM::GetUI_Dialog_Base();
+	dialog = DM::GetDialogBase();
 }
 
 void MainMenu::DrawMain(Graphics & g)

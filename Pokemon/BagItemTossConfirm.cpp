@@ -24,7 +24,7 @@ BagItemTossConfirm::~BagItemTossConfirm()
 void BagItemTossConfirm::ResourceInit()
 {
 	BaseClass::ResourceInit();
-	bag = DM::GetUI_Bag();
+	bag = DM::GetBagUI();
 }
 
 void BagItemTossConfirm::Reset()
@@ -83,7 +83,7 @@ void BagItemTossConfirm::Draw(Graphics & g)
 				g.DrawString(tmpBuffer, -1, FONT_BIG, choiceRect, LEFT_ALIGN, BLACK);
 			}
 
-			Rect cursorRect(7 * MUL, (2.6f + confirmSelect + 1) * MUL, MUL, MUL);
+			Rect cursorRect(7 * MUL, (INT)(2.6f + confirmSelect + 1) * MUL, MUL, MUL);
 			g.DrawImage(bag, cursorRect, 10 * PIXEL, 1 * PIXEL, PIXEL, PIXEL, UnitPixel);
 		}
 		break;

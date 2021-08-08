@@ -154,7 +154,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="..\PokemonGoldMapCreator\Converter.h" />
-    <ClInclude Include="..\PokemonGoldMapCreator\Datas.h" />
     <ClInclude Include="..\PokemonGoldMapCreator\dist\json\json-forwards.h" />
     <ClInclude Include="..\PokemonGoldMapCreator\dist\json\json.h" />
     <ClInclude Include="BagItemSelect.h" />
@@ -162,13 +161,16 @@
     <ClInclude Include="BagItemTossConfirm.h" />
     <ClInclude Include="BagMenu.h" />
     <ClInclude Include="BaseClass.h" />
+    <ClInclude Include="BattleScreen.h" />
     <ClInclude Include="DataLoadManager.h" />
+    <ClInclude Include="Datas.h" />
     <ClInclude Include="DialogShow.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="GameFadeInOut.h" />
     <ClInclude Include="GdiplusElement.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClInclude>
+    <ClInclude Include="PokemonCalculator.h" />
     <ClInclude Include="RunManager.h" />
     <ClInclude Include="GamePlay.h" />
     <ClInclude Include="MainMenu.h" />
@@ -185,19 +187,21 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\PokemonGoldMapCreator\Converter.cpp" />
-    <ClCompile Include="..\PokemonGoldMapCreator\Datas.cpp" />
     <ClCompile Include="..\PokemonGoldMapCreator\dist\jsoncpp.cpp" />
     <ClCompile Include="BagItemSelect.cpp" />
     <ClCompile Include="BagItemToss.cpp" />
     <ClCompile Include="BagItemTossConfirm.cpp" />
     <ClCompile Include="BagMenu.cpp" />
     <ClCompile Include="BaseClass.cpp" />
+    <ClCompile Include="BattleScreen.cpp" />
     <ClCompile Include="DataLoadManager.cpp" />
+    <ClCompile Include="Datas.cpp" />
     <ClCompile Include="DialogShow.cpp" />
     <ClCompile Include="GameFadeInOut.cpp" />
     <ClCompile Include="GdiplusElement.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="PokemonCalculator.cpp" />
     <ClCompile Include="RunManager.cpp" />
     <ClCompile Include="GamePlay.cpp" />
     <ClCompile Include="MainMenu.cpp" />

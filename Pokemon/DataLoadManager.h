@@ -38,8 +38,9 @@ private:
 
 	private:
 
-		unordered_map<string, Map> mapDatas;
 		unordered_map<string, Image*> mapImages;
+
+		unordered_map<string, Map> mapDatas;
 		unordered_map<int, ItemDesc*> itemDescs;
 
 		unordered_map<int, PokemonData*> pokemonDatas;
@@ -47,9 +48,11 @@ private:
 
 		unordered_map<string, string> transDatas;
 
-		Image* player_game;
-		Image* UI_Dialog_Base;
-		Image* UI_Bag;
+		Image* playerInGame;
+		Image* dialogBase;
+		Image* bagUI;
+		Image* battleUI;
+		Image* pokemonPicture;
 
 		PlayerData* playerData;
 	};
@@ -65,12 +68,16 @@ public:
 	static Map* GetMapData(string ID);
 	static Image* GetMapImage(string ID);
 
-	static Image* GetPlayer_game();
-	static Image* GetUI_Bag() { return dataLoad.UI_Bag; }
-	static Image* GetUI_Dialog_Base() { return dataLoad.UI_Dialog_Base; }
+	static Image* GetPlayerInGame() { return dataLoad.playerInGame; }
+	static Image* GetBagUI() { return dataLoad.bagUI; }
+	static Image* GetDialogBase() { return dataLoad.dialogBase; }
+	static Image* GetBattleUI() { return dataLoad.battleUI; }
+	static Image* GetPokemonPicture() { return dataLoad.pokemonPicture; }
 
 	static ItemDesc* GetItemDesc(int code) { return dataLoad.itemDescs[code]; }
 	static PlayerData* GetPlayerData() { return dataLoad.playerData; }
+	static PokemonData* GetPokemonData(int id) { return dataLoad.pokemonDatas[id]; }
+	static PokemonDesc* GetPokemonDesc(int id) { return dataLoad.pokemonDescs[id]; }
 
 	static void AddItemToInventory(int code, int count = 1) { dataLoad.AddItemToInventory(code, count); }
 	static void RemoveItemFromInventory(int code, int count = 1) { dataLoad.RemoveItemFromInventory(code, count); }

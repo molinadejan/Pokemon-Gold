@@ -51,9 +51,6 @@
     <ClInclude Include="..\PokemonGoldMapCreator\dist\json\json-forwards.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="..\PokemonGoldMapCreator\Datas.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="BagMenu.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
@@ -96,6 +93,15 @@
     <ClInclude Include="GdiplusElement.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="BattleScreen.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="PokemonCalculator.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Datas.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Timer.cpp">
@@ -120,9 +126,6 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="..\PokemonGoldMapCreator\dist\jsoncpp.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="..\PokemonGoldMapCreator\Datas.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="BagMenu.cpp">
@@ -165,6 +168,15 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="GdiplusElement.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="BattleScreen.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="PokemonCalculator.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Datas.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>

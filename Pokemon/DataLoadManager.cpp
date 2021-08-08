@@ -95,7 +95,7 @@ void DataLoadManager::DataLoad::LoadItemDesc()
 		openFile >> root;
 		openFile.close();
 
-		for (int i = 0; i < root.size(); ++i)
+		for (int i = 0; i < (int)root.size(); ++i)
 		{
 			Json::Value data = root[i];
 			ItemDesc* newDesc = new ItemDesc;
@@ -117,7 +117,7 @@ void DataLoadManager::DataLoad::LoadTransData()
 		openFile >> root;
 		openFile.close();
 
-		for (int i = 0; i < root.size(); ++i)
+		for (int i = 0; i < (int)root.size(); ++i)
 			transDatas[root[i]["key"].asString()] = root[i]["value"].asString();
 	}
 }
@@ -132,7 +132,7 @@ void DataLoadManager::DataLoad::LoadPokemonData()
 		openFile >> root;
 		openFile.close();
 
-		for (int i = 0; i < root.size(); ++i)
+		for (int i = 0; i < (int)root.size(); ++i)
 		{
 			Json::Value jsonData = root[i];
 			PokemonData* newData = new PokemonData;
@@ -153,7 +153,7 @@ void DataLoadManager::DataLoad::LoadPokemonDesc()
 		openFile >> root;
 		openFile.close();
 
-		for (int i = 0; i < root.size(); ++i)
+		for (int i = 0; i < (int)root.size(); ++i)
 		{
 			Json::Value jsonData = root[i];
 			PokemonDesc* newDesc = new PokemonDesc;
@@ -177,9 +177,12 @@ void DataLoadManager::DataLoad::Init()
 
 	// others
 
-	player_game = new Image(_T("data/sprite/player/player_game.png"));
-	UI_Bag = new Image(_T("data/sprite/UI/UI_Bag.png"));
-	UI_Dialog_Base = new Image(_T("data/sprite/UI/UI_Dialog_Base.png"));
+	playerInGame = new Image(_T("data/sprite/player/playerInGame.png"));
+	bagUI = new Image(_T("data/sprite/UI/bagUI.png"));
+	dialogBase = new Image(_T("data/sprite/UI/dialogBase.png"));
+	battleUI = new Image(_T("data/sprite/UI/battleUI.png"));
+	pokemonPicture = new Image(_T("data/sprite/pokemon/pokemonPicture.png"));
+
 
 	// test
 	for (int i = 1; i <= 60; ++i)
@@ -235,9 +238,4 @@ Map* DataLoadManager::GetMapData(string ID)
 Image* DataLoadManager::GetMapImage(string ID)
 {
 	return dataLoad.mapImages[ID];
-}
-
-Image* DataLoadManager::GetPlayer_game()
-{
-	return dataLoad.player_game;
 }

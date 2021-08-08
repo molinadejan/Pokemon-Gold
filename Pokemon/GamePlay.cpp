@@ -4,6 +4,7 @@
 #include "DataLoadManager.h"
 #include "RunManager.h"
 #include "GdiplusElement.h"
+#include "BattleScreen.h"
 
 #include <cmath>
 
@@ -130,6 +131,12 @@ void GamePlay::Update()
 
 	if (GET_KEY_ENTER && !player.GetIsMoving())
 		RunManager::SetTarget(gm->mainMenu);
+
+	if (IM::GetKeyUp('P'))
+	{
+		gm->battleScreen->InitWildBattle(rand() % 3 + 1, 10);
+		RunManager::SetTarget(gm->battleScreen);
+	}
 }
 
 void GamePlay::Draw(Graphics& g)

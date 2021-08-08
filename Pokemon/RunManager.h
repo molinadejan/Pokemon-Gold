@@ -9,6 +9,7 @@
 #include "BagMenu.h"
 #include "MainMenu.h"
 #include "GameFadeInOut.h"
+#include "BattleScreen.h"
 
 class RunManager
 {

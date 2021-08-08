@@ -29,7 +29,7 @@ int DialogShow::UpdateDlg()
 		++textLen;
 		frameTimer = FRAME_LIMIT;
 
-		int len = texts[textIdx].size();
+		int len = int(texts[textIdx].size());
 
 		_tcscpy_s(buffer1, CA2T(texts[textIdx].c_str()));
 		_tcsncpy_s(buffer2, buffer1, textLen);
@@ -39,7 +39,7 @@ int DialogShow::UpdateDlg()
 			++textIdx;
 			textLen = 1;
 
-			return texts.size() - textIdx;
+			return (int)(texts.size()) - textIdx;
 		}
 	}
 

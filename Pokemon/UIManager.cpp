@@ -19,7 +19,7 @@ void UIManager::UI::_DrawDialogUI_IDX(Graphics& g, int idxX, int idxY, int col, 
 
 	g.FillRectangle(&brush, rect);
 
-	Image* dialog = DataLoadManager::GetUI_Dialog_Base();
+	Image* dialog = DataLoadManager::GetDialogBase();
 	
 	Rect LT(idxX * MUL, idxY * MUL, MUL, MUL);
 	g.DrawImage(dialog, LT, 0, 0, PIXEL, PIXEL, UnitPixel);

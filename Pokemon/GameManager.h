@@ -14,6 +14,7 @@ class BagMenu;
 class BagItemSelect;
 class BagItemToss;
 class BagItemTossConfirm;
+class BattleScreen;
 
 class GameManager
 {
@@ -26,6 +27,7 @@ public:
 	BagItemSelect *bagItemSelect;
 	BagItemToss* bagItemToss;
 	BagItemTossConfirm* bagItemTossConfirm;
+	BattleScreen* battleScreen;
 
 public:
 

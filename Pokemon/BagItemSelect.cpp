@@ -15,7 +15,7 @@ BagItemSelect::BagItemSelect()
 void BagItemSelect::ResourceInit()
 {
 	BaseClass::ResourceInit();
-	dialog = DM::GetUI_Dialog_Base();
+	dialog = DM::GetDialogBase();
 }
 
 void BagItemSelect::DrawChoices(Graphics & g)

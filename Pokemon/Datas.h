@@ -124,14 +124,15 @@ struct PokemonIndiv
 	int exp;
 	int hp;
 
-	int HP_stat;
 	int ATK_stat;
 	int DEF_stat;
 	int SPA_stat;
 	int SPD_stat;
 	int SPE_stat;
 
-	PokemonIndiv(int _id);
+	int statusEffect;
+
+	PokemonIndiv(int _id, int _level);
 };
 
 struct PokemonBattleData

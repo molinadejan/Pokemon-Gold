@@ -7,6 +7,7 @@
 #include "BagItemToss.h"
 #include "RunManager.h"
 #include "BagItemTossConfirm.h"
+#include "BattleScreen.h"
 
 GameManager:: GameManager() { }
 
@@ -19,6 +20,7 @@ GameManager::~GameManager()
 	delete bagItemSelect;
 	delete bagItemToss;
 	delete bagItemTossConfirm;
+	delete battleScreen;
 }
 
 void GameManager::Init()
@@ -30,6 +32,7 @@ void GameManager::Init()
 	bagItemSelect = new BagItemSelect();
 	bagItemToss = new BagItemToss();
 	bagItemTossConfirm = new BagItemTossConfirm();
+	battleScreen = new BattleScreen();
 
 	gamePlay->SetManager(this);
 	mainMenu->SetManager(this);
@@ -38,6 +41,7 @@ void GameManager::Init()
 	bagItemSelect->SetManager(this);
 	bagItemToss->SetManager(this);
 	bagItemTossConfirm->SetManager(this);
+	battleScreen->SetManager(this);
 
 	gamePlay->ResourceInit();
 	mainMenu->ResourceInit();
@@ -46,6 +50,7 @@ void GameManager::Init()
 	bagItemSelect->ResourceInit();
 	bagItemToss->ResourceInit();
 	bagItemTossConfirm->ResourceInit();
+	battleScreen->ResourceInit();
 
 	RunManager::SetTarget(gamePlay);
 }

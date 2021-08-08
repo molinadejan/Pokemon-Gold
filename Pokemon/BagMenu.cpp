@@ -20,7 +20,7 @@ BagMenu::BagMenu() : poketSelect(0)
 void BagMenu::ResourceInit()
 {
 	BaseClass::ResourceInit();
-	bag = DM::GetUI_Bag();
+	bag = DM::GetBagUI();
 	pData = DM::GetPlayerData();
 }
 
@@ -36,7 +36,7 @@ void BagMenu::DrawBottomDialog(Graphics & g)
 
 void BagMenu::DrawBagTypeAndText(Graphics & g)
 {
-	g.DrawImage(bag, poketImageRect, poketSelect * poketImage.X, poketImage.Y, poketImage.Width, poketImage.Height, UnitPixel);
+	g.DrawImage(bag, poketImageRect, R(poketSelect * poketImage.X), R(poketImage.Y), R(poketImage.Width), R(poketImage.Height), UnitPixel);
 
 	TransString(buffer, "poket_type_" + std::to_string(poketSelect));
 	g.DrawString(buffer, -1, FONT_BIG, poketTextRect, CENTER_ALIGN, WHITE);
@@ -44,7 +44,7 @@ void BagMenu::DrawBagTypeAndText(Graphics & g)
 
 void BagMenu::DrawItemList(Graphics & g)
 {
-	int size = pData->iData[poketSelect].size();
+	int size = int(pData->iData[poketSelect].size());
 	int curS = curSelect[poketSelect];
 	int curSI = curSelectIdx[poketSelect];
 
@@ -123,7 +123,7 @@ void BagMenu::UpdateItemSelect()
 		++curSelectIdx[poketSelect];
 	}
 
-	int size = pData->iData[poketSelect].size();
+	int size = int(pData->iData[poketSelect].size());
 
 	Clamp(curSelect[poketSelect], 0, size - 1);
 	Clamp(curSelectIdx[poketSelect], 0, 4);

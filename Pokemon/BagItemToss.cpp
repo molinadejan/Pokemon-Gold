@@ -15,7 +15,7 @@ BagItemToss::BagItemToss()
 void BagItemToss::ResourceInit()
 {
 	BaseClass::ResourceInit();
-	bag = DataLoadManager::GetUI_Bag();
+	bag = DataLoadManager::GetBagUI();
 }
 
 void BagItemToss::DrawTossText(Graphics & g)
@@ -32,7 +32,7 @@ void BagItemToss::DrawTossCount(Graphics & g)
 	_stprintf_s(buffer, _T("%02d"), tossCount);
 	g.DrawString(buffer, -1, FONT_BIG, tossCountRect, RIGHT_ALIGN, BLACK);
 
-	Rect tossXRect(7 * MUL, 4.5f * MUL, 1 * MUL, 1 * MUL);
+	Rect tossXRect(7 * MUL, (INT)(4.5f * MUL), MUL, MUL);
 	g.DrawImage(bag, tossXRect, 10 * PIXEL, 2 * PIXEL, 1 * PIXEL, 1 * PIXEL, UnitPixel);
 }
 

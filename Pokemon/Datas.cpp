@@ -1,4 +1,6 @@
 #include "Datas.h"
+#include "PokemonCalculator.h"
+#include "DataLoadManager.h"
 
 Tile::Tile() 
 	: pos{ 0, 0 }, tilePos{ -1, -1 }, moveable(0), interactID(-1) { }
@@ -57,7 +59,22 @@ bool MovePoint::isCarpet()
 	return moveType < 4;
 }
 
-PokemonIndiv::PokemonIndiv(int _id)
+// 具积器南阁 俺眉 单捞磐 积己
+PokemonIndiv::PokemonIndiv(int _id, int _level)
 {
+	id = _id;
 
+	PokemonData* data = DM::GetPokemonData(_id);
+	level = _level + rand() % 3 - 1;
+	exp = 0;
+
+	hp = CalHP(data->HP, level);
+
+	ATK_stat = CalStat(data->ATK, level);
+	DEF_stat = CalStat(data->DEF, level);
+	SPA_stat = CalStat(data->SPA, level);
+	SPD_stat = CalStat(data->SPD, level);
+	SPE_stat = CalStat(data->SPE, level);
+
+	statusEffect = -1;
 }
