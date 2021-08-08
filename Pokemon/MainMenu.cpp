@@ -4,18 +4,19 @@
 #include "UIManager.h"
 #include "RunManager.h"
 #include "TransDatas.h"
+#include "GdiplusElement.h"
 
 using std::to_string;
 using std::wstring;
 
 MainMenu::MainMenu()
-	: curSelect(1), state(MainMenuState::Main)
+	: curSelect(1), state(Main)
 { }
 
 void MainMenu::ResourceInit()
 {
 	BaseClass::ResourceInit();
-	dialog = DataLoadManager::GetUI_Dialog_Base();
+	dialog = DM::GetUI_Dialog_Base();
 }
 
 void MainMenu::DrawMain(Graphics & g)
@@ -24,18 +25,18 @@ void MainMenu::DrawMain(Graphics & g)
 	UIManager::DrawDialogUI_IDX(g, COL - 4, 0, 4, ROW);
 
 	// 하단 UI
-	g.FillRectangle(white, 0, (INT)((ROW - 2.5f) * MUL), (COL - 4) * MUL, (INT)(2.5f * MUL));
+	g.FillRectangle(WHITE, 0, (INT)((ROW - 2.5f) * MUL), (COL - 4) * MUL, (INT)(2.5f * MUL));
 
 	// 메뉴 항목
 	for (int i = 0; i < MENU_COUNT; ++i)
 	{
 		TransString(buffer, "main_menu_" + to_string(i));
-		g.DrawString(buffer, -1, fontB, GetMenuItemRect(i), leftAlign, black);
+		g.DrawString(buffer, -1, FONT_BIG, GetMenuItemRect(i), LEFT_ALIGN, BLACK);
 	}
 
 	// 메뉴 설명
 	TransString(buffer, "main_menu_desc_" + to_string(curSelect - 1));
-	g.DrawString(buffer, -1, fontB, menuDescRect, leftAlign, black);
+	g.DrawString(buffer, -1, FONT_BIG, menuDescRect, LEFT_ALIGN, BLACK);
 
 	// 커서
 	g.DrawImage(dialog, GetCursorRect(curSelect), 3 * PIXEL, 0, PIXEL, PIXEL, UnitPixel);
@@ -45,67 +46,67 @@ void MainMenu::Update()
 {
 	switch (state)
 	{
-		case MainMenu::Main:
+		case Main:
 		{
-			if (InputManager::GetKeyUp(VK_DOWN) && curSelect < MENU_COUNT)
+			if (GET_KEY_DOWN && curSelect < MENU_COUNT)
 				++curSelect;
-			else if (InputManager::GetKeyUp(VK_UP) && curSelect > 1)
+			else if (GET_KEY_UP && curSelect > 1)
 				--curSelect;
 
-			if (InputManager::GetZ())
+			if (GET_KEY_Z)
 				state = (MainMenuState)curSelect;
 
-			if (InputManager::GetEnter() || InputManager::GetX())
+			if (GET_KEY_ENTER || GET_KEY_X)
 				RunManager::SetTarget(gm->gamePlay);
 		}
 		break;
 
-		case MainMenu::PokeDex:
+		case PokeDex:
 		{
-			state = MainMenuState::Main;
+			state = Main;
 		}
 		break;
 
-		case MainMenu::Pokemon:
+		case Pokemon:
 		{
-			state = MainMenuState::Main;
+			state = Main;
 		}
 		break;
 
-		case MainMenu::Bag:
+		case Bag:
 		{
-			state = MainMenuState::Main;
+			state = Main;
 			RunManager::SetTarget(gm->bagMenu);
 		}
 		break;
 
-		case MainMenu::Pokegear:
+		case Pokegear:
 		{
-			state = MainMenuState::Main;
+			state = Main;
 		}
 		break;
 
-		case MainMenu::Player:
+		case Player:
 		{
-			state = MainMenuState::Main;
+			state = Main;
 		}
 		break;
 
-		case MainMenu::Report:
+		case Report:
 		{
-			state = MainMenuState::Main;
+			state = Main;
 		}
 		break;
 
-		case MainMenu::Option:
+		case Option:
 		{
-			state = MainMenuState::Main;
+			state = Main;
 		}
 		break;
 
-		case MainMenu::Exit:
+		case Exit:
 		{
-			state = MainMenuState::Main;
+			state = Main;
 			RunManager::SetTarget(gm->gamePlay);
 		}
 		break;

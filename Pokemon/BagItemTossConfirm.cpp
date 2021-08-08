@@ -8,9 +8,10 @@
 #include "UIManager.h"
 #include "DataLoadManager.h"
 #include "TransDatas.h"
+#include "GdiplusElement.h"
 
 BagItemTossConfirm::BagItemTossConfirm()
-	: curState(TossConfirmState::Init), confirmSelect(0)
+	: curState(Init), confirmSelect(0)
 { 
 	dialogShow = new DialogShow;
 }
@@ -29,7 +30,7 @@ void BagItemTossConfirm::ResourceInit()
 void BagItemTossConfirm::Reset()
 {
 	memset(tmpBuffer, 0, sizeof(tmpBuffer));
-	curState = TossConfirmState::Init;
+	curState = Init;
 	confirmSelect = 0;
 }
 
@@ -45,7 +46,7 @@ void BagItemTossConfirm::Draw(Graphics & g)
 
 	switch (curState)
 	{
-		case BagItemTossConfirm::Init:
+		case Init:
 		{
 			curItemData = *(gm->bagMenu->GetCurSelectInventoryItemData());
 
@@ -59,17 +60,17 @@ void BagItemTossConfirm::Draw(Graphics & g)
 
 			dialogShow->Init(dialogs, descRect);
 
-			curState = BagItemTossConfirm::OneMoreConfirm;
+			curState = OneMoreConfirm;
 		}
 		break;
 
-		case BagItemTossConfirm::OneMoreConfirm:
+		case OneMoreConfirm:
 		{
 			dialogShow->Draw(g);
 		}
 		break;
 
-		case BagItemTossConfirm::Confirm:
+		case Confirm:
 		{
 			dialogShow->Draw(g);
 
@@ -79,7 +80,7 @@ void BagItemTossConfirm::Draw(Graphics & g)
 			{
 				RectF choiceRect(8 * MUL, (2.6f + i) * MUL, 3 * MUL, 3 * MUL);
 				TransString(tmpBuffer, i == 0 ? "yes" : "no");
-				g.DrawString(tmpBuffer, -1, DM::GetFontB(), choiceRect, leftAlign, black);
+				g.DrawString(tmpBuffer, -1, FONT_BIG, choiceRect, LEFT_ALIGN, BLACK);
 			}
 
 			Rect cursorRect(7 * MUL, (2.6f + confirmSelect + 1) * MUL, MUL, MUL);
@@ -87,15 +88,15 @@ void BagItemTossConfirm::Draw(Graphics & g)
 		}
 		break;
 
-		case BagItemTossConfirm::TossFinish:
+		case TossFinish:
 		{
 			string name = DM::GetItemDesc(curItemData.code)->name;
 			TransString(buffer, "bag_item_toss_finish", 1, TokenChange("item_name", name));
-			g.DrawString(buffer, -1, DM::GetFontB(), descRect, leftAlign, black);
+			g.DrawString(buffer, -1, FONT_BIG, descRect, LEFT_ALIGN, BLACK);
 		}
 		break;
 
-		case BagItemTossConfirm::Pause:
+		case Pause:
 		{
 			dialogShow->Draw(g);
 		}
@@ -120,12 +121,12 @@ void BagItemTossConfirm::Update()
 
 		case Confirm:
 		{
-			if (GET_UP && confirmSelect == 1)
+			if (GET_KEY_UP && confirmSelect == 1)
 				confirmSelect = 0;
-			else if (GET_DOWN && confirmSelect == 0)
+			else if (GET_KEY_DOWN && confirmSelect == 0)
 				confirmSelect = 1;
 
-			if (GET_Z && confirmSelect == 0)
+			if (GET_KEY_Z && confirmSelect == 0)
 			{
 				InventoryItemData* data = gm->bagMenu->GetCurSelectInventoryItemData();
 				int code = data->code;
@@ -134,7 +135,7 @@ void BagItemTossConfirm::Update()
 
 				curState = TossFinish;
 			}
-			else if (GET_X || GET_Z && confirmSelect == 1)
+			else if (GET_KEY_X || GET_KEY_Z && confirmSelect == 1)
 			{
 				gm->bagItemToss->SetTossCount(1);
 				Reset();
@@ -145,7 +146,7 @@ void BagItemTossConfirm::Update()
 
 		case TossFinish:
 		{
-			if (GET_Z)
+			if (GET_KEY_Z)
 			{
 				gm->bagItemToss->SetTossCount(1);
 				Reset();
@@ -156,7 +157,7 @@ void BagItemTossConfirm::Update()
 
 		case Pause:
 		{
-			if (GET_Z)
+			if (GET_KEY_Z)
 				curState = OneMoreConfirm;
 		}
 		break;

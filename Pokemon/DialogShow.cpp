@@ -1,5 +1,6 @@
 #include "DialogShow.h"
 #include "DataLoadManager.h"
+#include "GdiplusElement.h"
 #include "Timer.h"
 
 DialogShow::DialogShow() { }
@@ -47,11 +48,5 @@ int DialogShow::UpdateDlg()
 
 void DialogShow::Draw(Graphics& g)
 {
-	StringFormat fm;
-	fm.SetAlignment(StringAlignmentNear);
-	fm.SetLineAlignment(StringAlignmentCenter);
-
-	SolidBrush black(Color(255, 0, 0, 0));
-
-	g.DrawString(buffer2, -1, DM::GetFontB(), rect, &fm, &black);
+	g.DrawString(buffer2, -1, FONT_BIG, rect, LEFT_ALIGN, BLACK);
 }

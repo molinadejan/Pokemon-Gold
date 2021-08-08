@@ -25,10 +25,13 @@ private:
 	private:
 
 		void LoadMap();
-		void LoadFont();
-		void LoadItemData();
+		void LoadItemDesc();
 		void LoadTransData();
-		void Reset();
+
+		void LoadPokemonData();
+		void LoadPokemonDesc();
+
+		void Init();
 
 		void AddItemToInventory(int code, int count);
 		void RemoveItemFromInventory(int code, int count);
@@ -39,18 +42,14 @@ private:
 		unordered_map<string, Image*> mapImages;
 		unordered_map<int, ItemDesc*> itemDescs;
 
+		unordered_map<int, PokemonData*> pokemonDatas;
+		unordered_map<int, PokemonDesc*> pokemonDescs;
+
 		unordered_map<string, string> transDatas;
 
 		Image* player_game;
 		Image* UI_Dialog_Base;
 		Image* UI_Bag;
-
-		PrivateFontCollection *collection;
-		FontFamily* fm;
-
-		Font* fontS;
-		Font* fontM;
-		Font* fontB;
 
 		PlayerData* playerData;
 	};
@@ -69,10 +68,6 @@ public:
 	static Image* GetPlayer_game();
 	static Image* GetUI_Bag() { return dataLoad.UI_Bag; }
 	static Image* GetUI_Dialog_Base() { return dataLoad.UI_Dialog_Base; }
-
-	static Font* GetFontS() { return dataLoad.fontS; };
-	static Font* GetFontM() { return dataLoad.fontM; };
-	static Font* GetFontB() { return dataLoad.fontB; };
 
 	static ItemDesc* GetItemDesc(int code) { return dataLoad.itemDescs[code]; }
 	static PlayerData* GetPlayerData() { return dataLoad.playerData; }

@@ -175,3 +175,32 @@ int GetEncoderClsid(const WCHAR * format, CLSID * pClsid)
 	free(pImageCodecInfo);
 	return -1;
 }
+
+void JsonToPokemonData(PokemonData *pData, Json::Value &value)
+{
+	pData->id = value["id"].asInt();
+	pData->type1 = value["type1"].asInt();
+	pData->type2 = value["type2"].asInt();
+
+	pData->evo_id = value["evo_id"].asInt();
+	pData->height = value["height"].asInt();
+	pData->weight = value["weight"].asFloat();
+
+	pData->catch_rate = value["catch_rate"].asInt();
+	pData->base_exp = value["base_exp"].asInt();
+	pData->exp_growth_group = value["exp_growth_group"].asInt();
+
+	pData->HP = value["HP"].asInt();
+	pData->ATK = value["ATK"].asInt();
+	pData->DEF = value["DEF"].asInt();
+	pData->SPA = value["SPA"].asInt();
+	pData->SPD = value["SPD"].asInt();
+	pData->SPE = value["SPE"].asInt();
+}
+
+void JsonToPokemonDesc(PokemonDesc *pDesc, Json::Value &value)
+{
+	pDesc->id = value["id"].asInt();
+	pDesc->name = value["name"].asString();
+	pDesc->cc = value["cc"].asString();
+}

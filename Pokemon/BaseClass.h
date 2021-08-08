@@ -19,18 +19,7 @@ protected:
 
 	GameManager* gm;
 
-	SolidBrush* black;
-	SolidBrush* white;
-
-	Font* fontS;
-	Font* fontM;
-	Font* fontB;
-
 	TCHAR buffer[256];
-
-	StringFormat* leftAlign;
-	StringFormat* centerAlign;
-	StringFormat* rightAlign;
 
 public:
 

@@ -56,12 +56,15 @@ public:
 
 #define IM        InputManager
 
-#define GET_Z     InputManager::GetKeyUp('Z')
-#define GET_X     InputManager::GetKeyUp('X')
-#define GET_ENTER InputManager::GetKeyUp(VK_RETURN)
-#define GET_UP    InputManager::GetKeyUp(VK_UP)
-#define GET_DOWN  InputManager::GetKeyUp(VK_DOWN)
-#define GET_LEFT  InputManager::GetKeyUp(VK_LEFT)
-#define GET_RIGHT InputManager::GetKeyUp(VK_RIGHT)
+#define GET_KEY_Z     InputManager::GetKeyUp('Z')
+#define GET_KEY_X     InputManager::GetKeyUp('X')
+#define GET_KEY_ENTER InputManager::GetKeyUp(VK_RETURN)
+#define GET_KEY_UP    InputManager::GetKeyUp(VK_UP)
+#define GET_KEY_DOWN  InputManager::GetKeyUp(VK_DOWN)
+#define GET_KEY_LEFT  InputManager::GetKeyUp(VK_LEFT)
+#define GET_KEY_RIGHT InputManager::GetKeyUp(VK_RIGHT)
+
+#define GET_KEY_HORIZONTAL InputManager::GetHorizontal()
+#define GET_KEY_VERTICAL   InputManager::GetVertical()
 
 #endif // !__IN

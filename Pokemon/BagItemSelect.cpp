@@ -7,6 +7,7 @@
 #include "DataLoadManager.h"
 #include "BagItemToss.h"
 #include "TransDatas.h"
+#include "GdiplusElement.h"
 
 BagItemSelect::BagItemSelect()
 	: curSelect(0) { }
@@ -14,7 +15,7 @@ BagItemSelect::BagItemSelect()
 void BagItemSelect::ResourceInit()
 {
 	BaseClass::ResourceInit();
-	dialog = DataLoadManager::GetUI_Dialog_Base();
+	dialog = DM::GetUI_Dialog_Base();
 }
 
 void BagItemSelect::DrawChoices(Graphics & g)
@@ -24,7 +25,7 @@ void BagItemSelect::DrawChoices(Graphics & g)
 	for (int i = 0; i < 4; ++i)
 	{
 		TransString(buffer, "bag_item_choice_" + std::to_string(i));
-		g.DrawString(buffer, -1, fontS, GetChoiceRect(i), leftAlign, black);
+		g.DrawString(buffer, -1, FONT_SMALL, GetChoiceRect(i), LEFT_ALIGN, BLACK);
 	}
 
 	g.DrawImage(dialog, GetCursorRect(curSelect), 3 * PIXEL, 0, PIXEL, PIXEL, UnitPixel);
@@ -45,45 +46,45 @@ void BagItemSelect::Draw(Graphics & g)
 
 void BagItemSelect::Update()
 {
-	if (InputManager::GetKeyUp(VK_UP) && curSelect > 0)
+	if (GET_KEY_UP && curSelect > 0)
 		--curSelect;
-	else if (InputManager::GetKeyUp(VK_DOWN) && curSelect < 3)
+	else if (GET_KEY_DOWN && curSelect < 3)
 		++curSelect;
 
 	curState = (ChoiceState)curSelect;
 
-	if (InputManager::GetKeyUp('X'))
+	if (GET_KEY_X)
 	{
 		curSelect = 0;
 		RunManager::SetTarget(gm->bagMenu);
 	}
 
-	if (InputManager::GetKeyUp('Z'))
+	if (GET_KEY_Z)
 	{
 		switch (curState)
 		{
-			case BagItemSelect::USE:
+			case USE:
 			{
 				//curSelect = 0;
 				//RunManager::SetTarget(gm->bagMenu);
 			}
 			break;
 
-			case BagItemSelect::GIVE:
+			case GIVE:
 			{
 				//curSelect = 0;
 				//RunManager::SetTarget(gm->bagMenu);
 			}
 			break;
 
-			case BagItemSelect::TOSS:
+			case TOSS:
 			{
 				curSelect = 0;
 				RunManager::SetTarget(gm->bagItemToss);
 			}
 			break;
 
-			case BagItemSelect::QUIT:
+			case QUIT:
 			{
 				curSelect = 0;
 				RunManager::SetTarget(gm->bagMenu);

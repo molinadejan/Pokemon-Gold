@@ -34,6 +34,12 @@ DataLoadManager::DataLoad::~DataLoad()
 	for (auto &e : itemDescs)
 		delete e.second;
 
+	for (auto &e : pokemonDatas)
+		delete e.second;
+
+	for (auto &e : pokemonDescs)
+		delete e.second;
+
 	delete playerData;
 }
 
@@ -79,27 +85,7 @@ void DataLoadManager::DataLoad::LoadMap()
 	}
 }
 
-//https://m.blog.naver.com/codbs7/221441864531
-void DataLoadManager::DataLoad::LoadFont()
-{
-	collection = new PrivateFontCollection;
-	collection->AddFontFile(L"data/font/Dot.ttf");
-
-	WCHAR familyName[LF_FACESIZE];
-	int count, found;
-
-	count = collection->GetFamilyCount();
-	fm = new FontFamily[count];
-	collection->GetFamilies(count, fm, &found);
-
-	fm[0].GetFamilyName(familyName);
-
-	fontS = new Font(familyName, 4 * SCREEN_MUL, FontStyleBold, UnitPoint, collection);
-	fontM = new Font(familyName, 6 * SCREEN_MUL, FontStyleBold, UnitPoint, collection);
-	fontB = new Font(familyName, 8 * SCREEN_MUL, FontStyleBold, UnitPoint, collection);
-}
-
-void DataLoadManager::DataLoad::LoadItemData()
+void DataLoadManager::DataLoad::LoadItemDesc()
 {
 	fstream openFile("data/table/item_desc.json");
 	Json::Value root;
@@ -123,8 +109,6 @@ void DataLoadManager::DataLoad::LoadItemData()
 
 void DataLoadManager::DataLoad::LoadTransData()
 {
-	using std::wstring;
-
 	fstream openFile("data/table/UI_text.json");
 	Json::Value root;
 
@@ -134,21 +118,60 @@ void DataLoadManager::DataLoad::LoadTransData()
 		openFile.close();
 
 		for (int i = 0; i < root.size(); ++i)
-		{
-			string key = root[i]["key"].asString();
-			string value = root[i]["value"].asString();
-
 			transDatas[root[i]["key"].asString()] = root[i]["value"].asString();
+	}
+}
+
+void DataLoadManager::DataLoad::LoadPokemonData()
+{
+	fstream openFile("data/table/pokemon_data.json");
+	Json::Value root;
+
+	if (openFile.is_open())
+	{
+		openFile >> root;
+		openFile.close();
+
+		for (int i = 0; i < root.size(); ++i)
+		{
+			Json::Value jsonData = root[i];
+			PokemonData* newData = new PokemonData;
+
+			JsonToPokemonData(newData, jsonData);
+			pokemonDatas[newData->id] = newData;
 		}
 	}
 }
 
-void DataLoadManager::DataLoad::Reset()
+void DataLoadManager::DataLoad::LoadPokemonDesc()
+{
+	fstream openFile("data/table/pokemon_desc.json");
+	Json::Value root;
+
+	if (openFile.is_open())
+	{
+		openFile >> root;
+		openFile.close();
+
+		for (int i = 0; i < root.size(); ++i)
+		{
+			Json::Value jsonData = root[i];
+			PokemonDesc* newDesc = new PokemonDesc;
+
+			JsonToPokemonDesc(newDesc, jsonData);
+			pokemonDescs[newDesc->id] = newDesc;
+		}
+	}
+}
+
+void DataLoadManager::DataLoad::Init()
 {
 	LoadMap();
-	LoadFont();
-	LoadItemData();
+	LoadItemDesc();
 	LoadTransData();
+
+	LoadPokemonData();
+	LoadPokemonDesc();
 
 	playerData = new PlayerData;
 
@@ -201,7 +224,7 @@ void DataLoadManager::DataLoad::RemoveItemFromInventory(int code, int count)
 
 void DataLoadManager::Reset()
 {
-	dataLoad.Reset();
+	dataLoad.Init();
 }
 
 Map* DataLoadManager::GetMapData(string ID)

@@ -6,6 +6,7 @@
 #include "MyUtils.h"
 #include "BagItemSelect.h"
 #include "TransDatas.h"
+#include "GdiplusElement.h"
 
 // 나중에 아이템이 없어지고 나서 커서 변수들을 조정해주는 
 // 기능 추가 필요로 할듯하다
@@ -19,8 +20,8 @@ BagMenu::BagMenu() : poketSelect(0)
 void BagMenu::ResourceInit()
 {
 	BaseClass::ResourceInit();
-	bag = DataLoadManager::GetUI_Bag();
-	pData = DataLoadManager::GetPlayerData();
+	bag = DM::GetUI_Bag();
+	pData = DM::GetPlayerData();
 }
 
 void BagMenu::DrawBagUI(Graphics & g)
@@ -38,7 +39,7 @@ void BagMenu::DrawBagTypeAndText(Graphics & g)
 	g.DrawImage(bag, poketImageRect, poketSelect * poketImage.X, poketImage.Y, poketImage.Width, poketImage.Height, UnitPixel);
 
 	TransString(buffer, "poket_type_" + std::to_string(poketSelect));
-	g.DrawString(buffer, -1, fontB, poketTextRect, centerAlign, white);
+	g.DrawString(buffer, -1, FONT_BIG, poketTextRect, CENTER_ALIGN, WHITE);
 }
 
 void BagMenu::DrawItemList(Graphics & g)
@@ -58,16 +59,16 @@ void BagMenu::DrawItemList(Graphics & g)
 		int count = pData->iData[poketSelect][itemIdx].count;
 
 		// 아이템 이름
-		string itemName = DataLoadManager::GetItemDesc(code)->name;
+		string itemName = DM::GetItemDesc(code)->name;
 		_tcscpy_s(buffer, CA2T(itemName.c_str()));
-		g.DrawString(buffer, -1, fontB, GetItemTextRectF(i), leftAlign, black);
+		g.DrawString(buffer, -1, FONT_BIG, GetItemTextRectF(i), LEFT_ALIGN, BLACK);
 
 		// X 출력
 		g.DrawImage(bag, GetXRect(i), X.X, X.Y, X.Width, X.Height, UnitPixel);
 
 		// 개수 출력
 		_stprintf_s(buffer, _T("%d"), count);
-		g.DrawString(buffer, -1, fontB, GetItemCountRectF(i), rightAlign, black);
+		g.DrawString(buffer, -1, FONT_BIG, GetItemCountRectF(i), RIGHT_ALIGN, BLACK);
 	}
 }
 
@@ -79,9 +80,9 @@ void BagMenu::DrawItemCursor(Graphics & g)
 void BagMenu::DrawItemDesc(Graphics & g)
 {
 	int code = pData->iData[poketSelect][curSelect[poketSelect]].code;
-	string descStr = DataLoadManager::GetItemDesc(code)->desc;
+	string descStr = DM::GetItemDesc(code)->desc;
 	_tcscpy_s(buffer, CA2T(descStr.c_str()));
-	g.DrawString(buffer, -1, fontB, descRect, leftAlign, black);
+	g.DrawString(buffer, -1, FONT_BIG, descRect, LEFT_ALIGN, BLACK);
 }
 
 void BagMenu::Draw(Graphics& g)
@@ -101,9 +102,9 @@ void BagMenu::Draw(Graphics& g)
 void BagMenu::UpdatePoketSelect()
 {
 	// 좌우 가방 종류 선택
-	if (InputManager::GetKeyUp(VK_LEFT) && poketSelect > 0)
+	if (GET_KEY_LEFT && poketSelect > 0)
 		--poketSelect;
-	else if (InputManager::GetKeyUp(VK_RIGHT) && poketSelect < 3)
+	else if (GET_KEY_RIGHT && poketSelect < 3)
 		++poketSelect;
 
 	//state = (BagState)curBagSelect;
@@ -111,12 +112,12 @@ void BagMenu::UpdatePoketSelect()
 
 void BagMenu::UpdateItemSelect()
 {
-	if (InputManager::GetKeyUp(VK_UP))
+	if (GET_KEY_UP)
 	{
 		--curSelect[poketSelect];
 		--curSelectIdx[poketSelect];
 	}
-	else if (InputManager::GetKeyUp(VK_DOWN))
+	else if (GET_KEY_DOWN)
 	{
 		++curSelect[poketSelect];
 		++curSelectIdx[poketSelect];
@@ -135,11 +136,11 @@ void BagMenu::Update()
 	UpdateItemSelect();
 
 	// 아이템 선택
-	if (InputManager::GetKeyUp('Z') && pData->iData[poketSelect].size() > 0)
+	if (GET_KEY_Z && pData->iData[poketSelect].size() > 0)
 		RunManager::SetTarget(gm->bagItemSelect);
 
 	// 가방 나가기
-	if (InputManager::GetX())
+	if (GET_KEY_X)
 		RunManager::SetTarget(gm->mainMenu);
 }
 

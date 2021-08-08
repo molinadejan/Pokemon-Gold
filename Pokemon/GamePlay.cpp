@@ -3,20 +3,21 @@
 #include "MyUtils.h"
 #include "DataLoadManager.h"
 #include "RunManager.h"
+#include "GdiplusElement.h"
 
 #include <cmath>
 
 GamePlay::GamePlay() : curData(NULL), isMapChange(false)
 {
 	player.SetPos(0, 2);
-	curData = DataLoadManager::GetMapData("map0");
+	curData = DM::GetMapData("map0");
 }
 
 GamePlay::~GamePlay() { }
 
 void GamePlay::DrawMap(Graphics & g, PointF origin)
 {
-	Image* img = DataLoadManager::GetMapImage(curData->ID);
+	Image* img = DM::GetMapImage(curData->ID);
 
 	Rect expansion((INT)round(-origin.X * MUL), (INT)round(-origin.Y * MUL), img->GetWidth() * SCREEN_MUL, img->GetHeight() * SCREEN_MUL);
 
@@ -24,8 +25,8 @@ void GamePlay::DrawMap(Graphics & g, PointF origin)
 
 	for (string& nID : curData->neighbors)
 	{
-		Image *nImg = DataLoadManager::GetMapImage(nID);
-		Map* n = DataLoadManager::GetMapData(nID);
+		Image *nImg = DM::GetMapImage(nID);
+		Map* n = DM::GetMapData(nID);
 
 		Point diff = curData->worldPos - n->worldPos;
 
@@ -36,22 +37,20 @@ void GamePlay::DrawMap(Graphics & g, PointF origin)
 
 void GamePlay::DrawDebug(Graphics & g)
 {
-	/*_tcscpy_s(buffer, CA2T(curData->ID.c_str()));
-
-	SolidBrush strBrush(Color(255, 255, 255, 255));
-
+	_tcscpy_s(buffer, CA2T(curData->ID.c_str()));
+	\
 	RectF rectF1(0, 0, 64 * SCREEN_MUL, 8 * SCREEN_MUL);
-	g.DrawString(buffer, -1, fontS, rectF1, NULL, &strBrush);
+	g.DrawString(buffer, -1, FONT_SMALL, rectF1, NULL, WHITE);
 
 	_stprintf_s(buffer, _T("Áö¿ª ÁÂÇ¥ : %d %d"), player.GetPos().X, player.GetPos().Y);
 
 	RectF rectF2(0, 8 * SCREEN_MUL, 64 * SCREEN_MUL, 8 * SCREEN_MUL);
-	g.DrawString(buffer, -1, fontS, rectF2, NULL, &strBrush);
+	g.DrawString(buffer, -1, FONT_SMALL, rectF2, NULL, WHITE);
 
 	_stprintf_s(buffer, _T("¿ùµå ÁÂÇ¥ : %d %d"), player.GetPos().X + curData->worldPos.X, player.GetPos().Y + curData->worldPos.Y);
 
 	RectF rectF3(0, 16 * SCREEN_MUL, 64 * SCREEN_MUL, 8 * SCREEN_MUL);
-	g.DrawString(buffer, -1, fontS, rectF3, NULL, &strBrush);*/
+	g.DrawString(buffer, -1, FONT_SMALL, rectF3, NULL, WHITE);
 }
 
 void GamePlay::UpdatePlayer()
@@ -86,7 +85,7 @@ void GamePlay::UpdatePlayer()
 			}
 			else
 			{
-				curData = DataLoadManager::GetMapData(mpDoor->targetID);
+				curData = DM::GetMapData(mpDoor->targetID);
 				player.SetPos(mpDoor->targetPos);
 				isMapChange = true;
 
@@ -99,7 +98,7 @@ void GamePlay::UpdatePlayer()
 		isMapChange = false;
 
 		//// Input
-		Point inputDir(InputManager::GetHorizontal(), InputManager::GetVertical());
+		Point inputDir(GET_KEY_HORIZONTAL, GET_KEY_VERTICAL);
 
 		if (inputDir == Point(0, 0))
 			return;
@@ -111,7 +110,7 @@ void GamePlay::UpdatePlayer()
 		{
 			if (mpCarpet->GetDir() == inputDir)
 			{
-				curData = DataLoadManager::GetMapData(mpCarpet->targetID);
+				curData = DM::GetMapData(mpCarpet->targetID);
 				player.SetPos(mpCarpet->targetPos);
 				isMapChange = true;
 
@@ -129,7 +128,7 @@ void GamePlay::Update()
 {
 	UpdatePlayer();
 
-	if (InputManager::GetEnter() && !player.GetIsMoving())
+	if (GET_KEY_ENTER && !player.GetIsMoving())
 		RunManager::SetTarget(gm->mainMenu);
 }
 

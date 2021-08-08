@@ -89,5 +89,33 @@ struct PlayerData
 	vector<InventoryItemData> iData[4];
 };
 
+struct PokemonData
+{
+	int id;
+	int type1;
+	int type2;
+
+	int evo_id;
+	int height;
+	int weight;
+	int catch_rate;
+	int base_exp;
+	int exp_growth_group;
+
+	int HP;
+	int ATK;
+	int DEF;
+	int SPA;
+	int SPD;
+	int SPE;
+};
+
+struct PokemonDesc
+{
+	int id;
+	string name;
+	string cc;
+};
+
 #endif // !__DATAS_H__
 

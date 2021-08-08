@@ -23,6 +23,10 @@ private:
 		void LoadMyFont();
 		void CreateMyFont();
 
+		void CreateStrFormat();
+
+		void CreateBrush();
+
 		void DeleteElements();
 
 	private:
@@ -33,6 +37,13 @@ private:
 		Font* fontS;
 		Font* fontM;
 		Font* fontB;
+
+		StringFormat* leftAlign;
+		StringFormat* centerAlign;
+		StringFormat* rightAlign;
+
+		SolidBrush* black;
+		SolidBrush* white;
 	};
 
 private:
@@ -47,6 +58,13 @@ public:
 	static Font* GetFontS();
 	static Font* GetFontM();
 	static Font* GetFontB();
+
+	static StringFormat* GetLeftAlign();
+	static StringFormat* GetCenterAlign();
+	static StringFormat* GetRightAlign();
+
+	static SolidBrush* GetBlack();
+	static SolidBrush* GetWhite();
 };
 
 #define GE			GdiplusElement
@@ -54,5 +72,12 @@ public:
 #define FONT_SMALL  GdiplusElement::GetFontS()
 #define FONT_MEDIUM GdiplusElement::GetFontM()
 #define FONT_BIG    GdiplusElement::GetFontB()
+
+#define LEFT_ALIGN   GdiplusElement::GetLeftAlign()
+#define CENTER_ALIGN GdiplusElement::GetCenterAlign()
+#define RIGHT_ALIGN  GdiplusElement::GetRightAlign()
+
+#define BLACK GdiplusElement::GetBlack()
+#define WHITE GdiplusElement::GetWhite()
 
 #endif
