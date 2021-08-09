@@ -130,8 +130,11 @@ void GamePlay::Update()
 	UpdatePlayer();
 
 	if (GET_KEY_ENTER && !player.GetIsMoving())
+	{
 		RunManager::SetTarget(gm->mainMenu);
+	}
 
+	// test
 	if (IM::GetKeyUp('P'))
 	{
 		gm->battleScreen->InitWildBattle(rand() % 3 + 1, 10);

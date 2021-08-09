@@ -164,6 +164,48 @@ void DataLoadManager::DataLoad::LoadPokemonDesc()
 	}
 }
 
+void DataLoadManager::DataLoad::LoadSkillData()
+{
+	fstream openFile("data/table/skill_data.json");
+	Json::Value root;
+
+	if (openFile.is_open())
+	{
+		openFile >> root;
+		openFile.close();
+
+		for (int i = 0; i < (int)root.size(); ++i)
+		{
+			Json::Value jsonData = root[i];
+			SkillData* newData = new SkillData;
+
+			JsonToSkillData(newData, jsonData);
+			skillDatas[newData->id] = newData;
+		}
+	}
+}
+
+void DataLoadManager::DataLoad::LoadSkillDesc()
+{
+	fstream openFile("data/table/skill_desc.json");
+	Json::Value root;
+
+	if (openFile.is_open())
+	{
+		openFile >> root;
+		openFile.close();
+
+		for (int i = 0; i < (int)root.size(); ++i)
+		{
+			Json::Value jsonData = root[i];
+			SkillDesc* newData = new SkillDesc;
+
+			JsonToSkillDesc(newData, jsonData);
+			skillDescs[newData->id] = newData;
+		}
+	}
+}
+
 void DataLoadManager::DataLoad::Init()
 {
 	LoadMap();
@@ -172,6 +214,9 @@ void DataLoadManager::DataLoad::Init()
 
 	LoadPokemonData();
 	LoadPokemonDesc();
+
+	LoadSkillData();
+	LoadSkillDesc();
 
 	playerData = new PlayerData;
 
@@ -184,9 +229,13 @@ void DataLoadManager::DataLoad::Init()
 	pokemonPicture = new Image(_T("data/sprite/pokemon/pokemonPicture.png"));
 
 
-	// test
+	// test //
 	for (int i = 1; i <= 60; ++i)
 		AddItemToInventory(i, rand() % 99 + 1);
+
+	playerData->pokemonInBag.push_back(new PokemonIndiv(rand() % 3 + 1, 15));
+
+	// test //
 }
 
 void DataLoadManager::DataLoad::AddItemToInventory(int code, int count)
@@ -195,30 +244,34 @@ void DataLoadManager::DataLoad::AddItemToInventory(int code, int count)
 
 	for (auto &e : playerData->iData[item->type])
 	{
-		if (e.code == code)
+		if (e->code == code)
 		{
-			e.count += count;
+			e->count += count;
 			break;
 		}
 	}
 
-	InventoryItemData newData(code, item->type, count);
+	InventoryItemData* newData = new InventoryItemData(code, item->type, count);
+
 	playerData->iData[item->type].push_back(newData);
 }
 
 void DataLoadManager::DataLoad::RemoveItemFromInventory(int code, int count)
 {
 	ItemDesc* item = itemDescs[code];
-	vector<InventoryItemData> &v = playerData->iData[item->type];
+	vector<InventoryItemData*> &v = playerData->iData[item->type];
 
 	for (int i = 0; i < (int)v.size(); ++i)
 	{
-		if (v[i].code == code)
+		if (v[i]->code == code)
 		{
-			v[i].count -= count;
+			v[i]->count -= count;
 
-			if (v[i].count == 0)
+			if (v[i]->count == 0)
+			{
+				delete v[i];
 				v.erase(v.begin() + i);
+			}
 
 			break;
 		}

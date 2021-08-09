@@ -25,6 +25,7 @@ private:
 		void _Reset();
 
 		void _DrawDialogUI_IDX(Graphics& g, int idxX, int idxY, int col, int row);
+		void _DrawDialogUI_IDX(Graphics& g, float idxX, float idxY, float col, float row);
 
 	};
 
@@ -36,6 +37,7 @@ public:
 
 	static void Reset();
 	static void DrawDialogUI_IDX(Graphics& g, int idxX, int idxY, int col, int row);
+	static void DrawDialogUI_IDX(Graphics& g, float idxX, float idxY, float col, float row);
 
 };
 

@@ -81,14 +81,6 @@ struct InventoryItemData
 	InventoryItemData(int _code, int _type, int _count) : code(_code), type(_type), count(_count) { }
 };
 
-struct PlayerData
-{
-	int money;
-
-	// 0 : tool, 1 : ball, 2 : important, 3 : machine
-	vector<InventoryItemData> iData[4];
-};
-
 struct PokemonData
 {
 	int id;
@@ -108,6 +100,9 @@ struct PokemonData
 	int SPA;
 	int SPD;
 	int SPE;
+
+	// level : id ½Ö
+	vector<std::pair<int, int>> learn_skill;
 };
 
 struct PokemonDesc
@@ -123,6 +118,7 @@ struct PokemonIndiv
 	int level;
 	int exp;
 	int hp;
+	int gender;
 
 	int ATK_stat;
 	int DEF_stat;
@@ -132,16 +128,43 @@ struct PokemonIndiv
 
 	int statusEffect;
 
+	int skills[4];
+
 	PokemonIndiv(int _id, int _level);
 };
 
-struct PokemonBattleData
+//struct PokemonBattleData
+//{
+//	int id;
+//	int statusEffect;
+//
+//	PokemonBattleData(int _id)
+//		: id(_id), statusEffect(-1) { }
+//};
+
+struct SkillData
 {
 	int id;
-	int statusEffect;
+	int type;
+	int cc;
+	int power;
+	float ar;
+	int pp;
+};
 
-	PokemonBattleData(int _id)
-		: id(_id), statusEffect(-1) { }
+struct SkillDesc
+{
+	int id;
+	string name;
+};
+
+struct PlayerData
+{
+	int money;
+
+	// 0 : tool, 1 : ball, 2 : important, 3 : machine
+	vector<InventoryItemData*> iData[4];
+	vector<PokemonIndiv*> pokemonInBag;
 };
 
 #endif // !__DATAS_H__

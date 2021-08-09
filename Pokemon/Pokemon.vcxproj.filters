@@ -42,9 +42,6 @@
     <ClInclude Include="MyUtils.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="..\PokemonGoldMapCreator\Converter.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="..\PokemonGoldMapCreator\dist\json\json.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
@@ -102,6 +99,9 @@
     <ClInclude Include="Datas.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="Converter.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Timer.cpp">
@@ -120,9 +120,6 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="MyUtils.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="..\PokemonGoldMapCreator\Converter.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="..\PokemonGoldMapCreator\dist\jsoncpp.cpp">
@@ -177,6 +174,9 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Datas.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Converter.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>

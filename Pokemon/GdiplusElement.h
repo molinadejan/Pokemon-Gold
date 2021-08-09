@@ -63,6 +63,10 @@ public:
 	static StringFormat* GetCenterAlign();
 	static StringFormat* GetRightAlign();
 
+	static StringFormat* GetLeftBottomAlign();
+	static StringFormat* GetCenterBott0mAlign();
+	static StringFormat* GetRightBottomAlign();
+
 	static SolidBrush* GetBlack();
 	static SolidBrush* GetWhite();
 };
@@ -76,6 +80,10 @@ public:
 #define LEFT_ALIGN   GdiplusElement::GetLeftAlign()
 #define CENTER_ALIGN GdiplusElement::GetCenterAlign()
 #define RIGHT_ALIGN  GdiplusElement::GetRightAlign()
+
+#define LEFT_BOTTOM_ALIGN   GdiplusElement::GetLeftBottomAlign()
+#define CENTER_BOTTOM_ALIGN GdiplusElement::GetCenterBottomAlign()
+#define RIGHT_BOTTOM_ALIGN  GdiplusElement::GetRightBottomAlign()
 
 #define BLACK GdiplusElement::GetBlack()
 #define WHITE GdiplusElement::GetWhite()

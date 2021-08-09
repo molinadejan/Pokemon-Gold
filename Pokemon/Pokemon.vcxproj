@@ -91,7 +91,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\Users\rbtjr\Desktop\Pokemon-Gold\PokemonGoldMapCreator;C:\Users\rbtjr\Desktop\Pokemon-Gold\PokemonGoldMapCreator\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\rbtjr\Desktop\Pokemon-Gold\PokemonGoldMapCreator\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -153,7 +153,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="..\PokemonGoldMapCreator\Converter.h" />
     <ClInclude Include="..\PokemonGoldMapCreator\dist\json\json-forwards.h" />
     <ClInclude Include="..\PokemonGoldMapCreator\dist\json\json.h" />
     <ClInclude Include="BagItemSelect.h" />
@@ -162,6 +161,7 @@
     <ClInclude Include="BagMenu.h" />
     <ClInclude Include="BaseClass.h" />
     <ClInclude Include="BattleScreen.h" />
+    <ClInclude Include="Converter.h" />
     <ClInclude Include="DataLoadManager.h" />
     <ClInclude Include="Datas.h" />
     <ClInclude Include="DialogShow.h" />
@@ -186,7 +186,6 @@
     <ClInclude Include="UIManager.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\PokemonGoldMapCreator\Converter.cpp" />
     <ClCompile Include="..\PokemonGoldMapCreator\dist\jsoncpp.cpp" />
     <ClCompile Include="BagItemSelect.cpp" />
     <ClCompile Include="BagItemToss.cpp" />
@@ -194,6 +193,7 @@
     <ClCompile Include="BagMenu.cpp" />
     <ClCompile Include="BaseClass.cpp" />
     <ClCompile Include="BattleScreen.cpp" />
+    <ClCompile Include="Converter.cpp" />
     <ClCompile Include="DataLoadManager.cpp" />
     <ClCompile Include="Datas.cpp" />
     <ClCompile Include="DialogShow.cpp" />

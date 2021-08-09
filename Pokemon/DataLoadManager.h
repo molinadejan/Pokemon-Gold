@@ -31,6 +31,9 @@ private:
 		void LoadPokemonData();
 		void LoadPokemonDesc();
 
+		void LoadSkillData();
+		void LoadSkillDesc();
+
 		void Init();
 
 		void AddItemToInventory(int code, int count);
@@ -45,6 +48,9 @@ private:
 
 		unordered_map<int, PokemonData*> pokemonDatas;
 		unordered_map<int, PokemonDesc*> pokemonDescs;
+
+		unordered_map<int, SkillData*> skillDatas;
+		unordered_map<int, SkillDesc*> skillDescs;
 
 		unordered_map<string, string> transDatas;
 
@@ -76,8 +82,12 @@ public:
 
 	static ItemDesc* GetItemDesc(int code) { return dataLoad.itemDescs[code]; }
 	static PlayerData* GetPlayerData() { return dataLoad.playerData; }
+
 	static PokemonData* GetPokemonData(int id) { return dataLoad.pokemonDatas[id]; }
 	static PokemonDesc* GetPokemonDesc(int id) { return dataLoad.pokemonDescs[id]; }
+
+	static SkillData* GetSkillData(int id) { return dataLoad.skillDatas[id]; }
+	static SkillDesc* GetSkillDesc(int id) { return dataLoad.skillDescs[id]; }
 
 	static void AddItemToInventory(int code, int count = 1) { dataLoad.AddItemToInventory(code, count); }
 	static void RemoveItemFromInventory(int code, int count = 1) { dataLoad.RemoveItemFromInventory(code, count); }

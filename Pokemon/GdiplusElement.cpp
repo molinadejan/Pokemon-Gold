@@ -105,18 +105,41 @@ Font * GdiplusElement::GetFontB()
 	return e.fontB;
 }
 
+
 StringFormat * GdiplusElement::GetLeftAlign()
 {
+	e.leftAlign->SetLineAlignment(StringAlignmentCenter);
 	return e.leftAlign;
 }
 
 StringFormat * GdiplusElement::GetCenterAlign()
 {
+	e.centerAlign->SetLineAlignment(StringAlignmentCenter);
 	return e.centerAlign;
 }
 
 StringFormat * GdiplusElement::GetRightAlign()
 {
+	e.rightAlign->SetLineAlignment(StringAlignmentCenter);
+	return e.rightAlign;
+}
+
+
+StringFormat * GdiplusElement::GetLeftBottomAlign()
+{
+	e.leftAlign->SetLineAlignment(StringAlignmentFar);
+	return e.leftAlign;
+}
+
+StringFormat * GdiplusElement::GetCenterBott0mAlign()
+{
+	e.centerAlign->SetLineAlignment(StringAlignmentFar);
+	return e.centerAlign;
+}
+
+StringFormat * GdiplusElement::GetRightBottomAlign()
+{
+	e.rightAlign->SetLineAlignment(StringAlignmentFar);
 	return e.rightAlign;
 }
 

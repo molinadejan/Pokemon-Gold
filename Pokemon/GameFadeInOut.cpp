@@ -10,8 +10,8 @@ void GameFadeInOut::Draw(Graphics & g)
 {
 	gm->gamePlay->Draw(g);
 
-	int tp = 255 * int((FADETIME - fadeTimer) / (FADETIME));
-	SolidBrush brush(Color(tp, 0, 0, 0));
+	float tp = 255 * ((FADETIME - fadeTimer) / (FADETIME));
+	SolidBrush brush(Color((int)tp, 0, 0, 0));
 	g.FillRectangle(&brush, 0, 0, SCREEN_SIZE_X, SCREEN_SIZE_Y);
 }
 

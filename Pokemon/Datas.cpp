@@ -67,6 +67,7 @@ PokemonIndiv::PokemonIndiv(int _id, int _level)
 	PokemonData* data = DM::GetPokemonData(_id);
 	level = _level + rand() % 3 - 1;
 	exp = 0;
+	gender = rand() % 2;
 
 	hp = CalHP(data->HP, level);
 
@@ -76,5 +77,16 @@ PokemonIndiv::PokemonIndiv(int _id, int _level)
 	SPD_stat = CalStat(data->SPD, level);
 	SPE_stat = CalStat(data->SPE, level);
 
-	statusEffect = -1;
+	statusEffect = 0;
+
+	int skillCnt = 0;
+
+	for (const auto& e : data->learn_skill)
+	{
+		if (e.first <= level)
+			skills[skillCnt++] = e.second;
+
+		if (skillCnt == 3)
+			break;
+	}
 }

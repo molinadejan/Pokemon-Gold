@@ -55,8 +55,8 @@ void BagMenu::DrawItemList(Graphics & g)
 		if (itemIdx > size - 1)
 			break;
 
-		int code = pData->iData[poketSelect][itemIdx].code;
-		int count = pData->iData[poketSelect][itemIdx].count;
+		int code = pData->iData[poketSelect][itemIdx]->code;
+		int count = pData->iData[poketSelect][itemIdx]->count;
 
 		// 아이템 이름
 		string itemName = DM::GetItemDesc(code)->name;
@@ -79,7 +79,7 @@ void BagMenu::DrawItemCursor(Graphics & g)
 
 void BagMenu::DrawItemDesc(Graphics & g)
 {
-	int code = pData->iData[poketSelect][curSelect[poketSelect]].code;
+	int code = pData->iData[poketSelect][curSelect[poketSelect]]->code;
 	string descStr = DM::GetItemDesc(code)->desc;
 	_tcscpy_s(buffer, CA2T(descStr.c_str()));
 	g.DrawString(buffer, -1, FONT_BIG, descRect, LEFT_ALIGN, BLACK);
@@ -149,5 +149,5 @@ InventoryItemData* BagMenu::GetCurSelectInventoryItemData()
 	if (pData->iData[poketSelect].empty())
 		return NULL;
 
-	return &(pData->iData[poketSelect][curSelect[poketSelect]]);
+	return pData->iData[poketSelect][curSelect[poketSelect]];
 }
