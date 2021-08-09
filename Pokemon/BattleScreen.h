@@ -43,9 +43,6 @@ private:
 	const Rect enemyPokemonInfoRect = { 0, 0, 6 * MUL, 2 * MUL };
 	const Rect playerPokemonInfoRect = { 4 * MUL, 4 * MUL, 6 * MUL, 2 * MUL };
 
-	const RectF enemyPokemonNameRect = { 0, R(0.45f * MUL), R(3 * MUL), R(MUL) };
-	const RectF enemyPokemonLevelRect = { R(3.5f * MUL), R(0.45f * MUL), R(1.5f * MUL), R(MUL) };
-
 	const Rect playerInfoRect = { 0, MUL, 6 * MUL, MUL };
 	const Rect enemyInfoRect = { 4 * MUL, 5 * MUL, 6 * MUL, MUL };
 
@@ -60,10 +57,13 @@ private:
 									       {INT(4.5f * MUL), INT(7.75f * MUL), INT(MUL), INT(MUL)} ,
 									       {INT(7.0f * MUL), INT(7.75f * MUL), INT(MUL), INT(MUL)} };
 
-	const RectF playerPokemonNameRect  = { R(4 * MUL), R(3.95f * MUL), R(3 * MUL), R(MUL) };
+	const RectF playerPokemonNameRect  = { R(4.0f * MUL), R(3.95f * MUL), R(3 * MUL)   , R(MUL) };
 	const RectF playerPokemonLevelRect = { R(7.5f * MUL), R(3.95f * MUL), R(1.5f * MUL), R(MUL) };
-	const RectF playerPokemonCurHPRect = { R(5.5f * MUL), R(5.1f * MUL), R(1.5f * MUL), R(0.6f * MUL) };
-	const RectF playerPokemonMaxHPRect = { R(7.5f * MUL), R(5.1f * MUL), R(1.5f * MUL), R(0.6f * MUL) };
+	const RectF playerPokemonCurHPRect = { R(5.5f * MUL), R(5.1f  * MUL), R(1.5f * MUL), R(0.6f * MUL) };
+	const RectF playerPokemonMaxHPRect = { R(7.5f * MUL), R(5.1f  * MUL), R(1.5f * MUL), R(0.6f * MUL) };
+
+	const RectF enemyPokemonNameRect = { 0, R(0.45f * MUL), R(3 * MUL), R(MUL) };
+	const RectF enemyPokemonLevelRect = { R(3.5f * MUL), R(0.45f * MUL), R(1.5f * MUL), R(MUL) };
 
 	const RectF skillRect[4] = { { R(0.8f * MUL), R(4.6f * MUL), R(3 * MUL), R(MUL) } ,
 								 { R(0.8f * MUL), R(5.6f * MUL), R(3 * MUL), R(MUL) } ,
