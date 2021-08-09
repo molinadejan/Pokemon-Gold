@@ -79,6 +79,8 @@ PokemonIndiv::PokemonIndiv(int _id, int _level)
 
 	statusEffect = 0;
 
+	skills[0] = skills[1] = skills[2] = skills[3] = -1;
+
 	int skillCnt = 0;
 
 	for (const auto& e : data->learn_skill)

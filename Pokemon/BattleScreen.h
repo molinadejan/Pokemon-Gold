@@ -65,6 +65,16 @@ private:
 	const RectF playerPokemonCurHPRect = { R(5.5f * MUL), R(5.1f * MUL), R(1.5f * MUL), R(0.6f * MUL) };
 	const RectF playerPokemonMaxHPRect = { R(7.5f * MUL), R(5.1f * MUL), R(1.5f * MUL), R(0.6f * MUL) };
 
+	const RectF skillRect[4] = { { R(0.8f * MUL), R(4.6f * MUL), R(3 * MUL), R(MUL) } ,
+								 { R(0.8f * MUL), R(5.6f * MUL), R(3 * MUL), R(MUL) } ,
+								 { R(0.8f * MUL), R(6.6f * MUL), R(3 * MUL), R(MUL) } ,
+								 { R(0.8f * MUL), R(7.6f * MUL), R(3 * MUL), R(MUL) } };
+
+	const Rect skillCursorRect[4] = { { INT(0.5f * MUL), INT(4.8f * MUL), INT(MUL), INT(MUL) } ,
+									  { INT(0.5f * MUL), INT(5.8f * MUL), INT(MUL), INT(MUL) } ,
+									  { INT(0.5f * MUL), INT(6.8f * MUL), INT(MUL), INT(MUL) } ,
+									  { INT(0.5f * MUL), INT(7.8f * MUL), INT(MUL), INT(MUL) } };
+
 private:
 
 	Image* battleUI;

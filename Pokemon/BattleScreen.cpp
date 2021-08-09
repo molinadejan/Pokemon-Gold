@@ -154,14 +154,14 @@ void BattleScreen::Update()
 	{
 		case Encounter:
 		{
-			if (GET_KEY_Z)
+			if (GET_KEY_Z || GET_KEY_X)
 				curState = Dispatch;
 		}
 		break;
 
 		case Dispatch:
 		{
-			if (GET_KEY_Z)
+			if (GET_KEY_Z || GET_KEY_X)
 				curState = SelectMenu;
 		}
 		break;
@@ -187,6 +187,25 @@ void BattleScreen::Update()
 					;
 				else if (curMenuSelect == 3)
 					curState = RunSuccess;
+			}
+		}
+		break;
+
+		case FightMenu:
+		{
+			if (GET_KEY_UP && curSkillSelect > 0)
+				--curSkillSelect;
+			else if (GET_KEY_DOWN && curSkillSelect < 3 && playerPokemon->skills[curSkillSelect + 1] != -1)
+				++curSkillSelect;
+
+			if (GET_KEY_Z)
+			{
+
+			}
+
+			if (GET_KEY_X)
+			{
+				curState = SelectMenu;
 			}
 		}
 		break;
@@ -272,6 +291,22 @@ void BattleScreen::Draw(Graphics & g)
 
 			DrawFightMenuDialog(g);
 			DrawBattleMenuDialog(g);
+
+			for (int i = 0; i < 4; ++i)
+			{
+				int id = playerPokemon->skills[i];
+
+				if (id != -1)
+				{
+					string name = DM::GetSkillDesc(id)->name;
+					_tcscpy_s(buffer, name.length() + 1, CA2T(name.c_str()));
+				}
+				else _stprintf_s(buffer, _T("%c"), '-');
+
+				g.DrawString(buffer, -1, FONT_BIG, skillRect[i], LEFT_ALIGN, BLACK);
+			}
+
+			g.DrawImage(battleUI, skillCursorRect[curSkillSelect], 6 * PIXEL, 3 * PIXEL, PIXEL, PIXEL, UnitPixel);
 		}
 		break;
 
