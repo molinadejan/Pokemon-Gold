@@ -61,7 +61,7 @@
   },
   {
     "key": "main_menu_desc_7",
-    "value": "이 메뉴를 닫는다"
+    "value": "이 메뉴를 닫는다\n"
   },
   {
     "key": "poket_type_0",
@@ -105,7 +105,7 @@
   },
   {
     "key": "bag_item_toss_finish",
-    "value": "{item_name}를(을) 버렸습니다!"
+    "value": "{item_name}를(을) 버렸습니다!\n"
   },
   {
     "key": "yes",
@@ -114,5 +114,37 @@
   {
     "key": "no",
     "value": "아니요"
+  },
+  {
+    "key": "wild_encounter",
+    "value": "야생의 {pokemon_name}이(가)\n나타났다!"
+  },
+  {
+    "key": "pokemon_use_skill",
+    "value": "{pokemon_name}의\n{skill_name}!"
+  },
+  {
+    "key": "pokemon_dispatch",
+    "value": "가라!\n{pokemon_name}!"
+  },
+  {
+    "key": "battle_menu_0",
+    "value": "싸우다"
+  },
+  {
+    "key": "battle_menu_1",
+    "value": "포켓몬"
+  },
+  {
+    "key": "battle_menu_2",
+    "value": "가방"
+  },
+  {
+    "key": "battle_menu_3",
+    "value": "도망치다"
+  },
+  {
+	"key": "run_success",
+    "value": "성공적으로 도망쳤다!\n "
   }
 ]
