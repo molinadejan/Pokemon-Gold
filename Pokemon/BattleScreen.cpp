@@ -13,7 +13,7 @@
 void BattleScreen::InitWildBattle(int pokemonID, int level)
 {
 	battleType = Wild;
-	curState = Encounter;
+	curState = InitToEncounter;
 
 	enemyPokemon = new PokemonIndiv(pokemonID, level);
 
@@ -21,6 +21,21 @@ void BattleScreen::InitWildBattle(int pokemonID, int level)
 
 	curMenuSelect = 0;
 	curSkillSelect = 0;
+
+	player = new MovingObject(battleUI, PointF(R(10 * MUL), R(3 * MUL)), Point(3 * MUL, 3 * MUL), Rect(9 * PIXEL, 4 * PIXEL, 3 * PIXEL, 3 * PIXEL));
+	enemy = new MovingObject(pokemonPic, PointF(R(-3 * MUL), R(0)), Point(3 * MUL, 3 * MUL), DM::GetFrontPokemonImageRect(enemyPokemon->id));
+	dialogShow = new DialogShow();
+	anim = new AnimationObject(battleUI, PointF(R(0.5f * MUL), R(3.5f * MUL)), Point(3 * MUL, 3 * MUL), DM::GetAnimRect("pokemon_dispatch"));
+
+
+	player->MoveToInit(PointF(R(0.5f * MUL), R(3 * MUL)), 1.2f);
+	enemy->MoveToInit(PointF(R(6.5f * MUL), R(0)), 1.2f);
+
+	dialogShow->Push(TransString(NULL, "wonder"));
+	dialogShow->Push(TransString(NULL, "wild_encounter", 1, TokenChange("pokemon_name", DM::GetPokemonDesc(enemyPokemon->id)->name)));
+
+	player->Start();
+	enemy->Start();
 }
 
 void BattleScreen::InitTrainerBattle(int trainerID)
@@ -29,12 +44,16 @@ void BattleScreen::InitTrainerBattle(int trainerID)
 	curState = Encounter;
 }
 
-void BattleScreen::DeleteData()
+void BattleScreen::Reset()
 {
 	if (battleType == Wild)
 	{
 		delete enemyPokemon;
-		//delete battleData;
+
+		delete enemy;
+		delete player;
+		delete dialogShow;
+		delete anim;
 	}
 	else if (battleType == Trainer)
 	{
@@ -57,9 +76,23 @@ void BattleScreen::DrawBattleMenuDialog(Graphics & g)
 	UIManager::DrawDialogUI_IDX(g, 4, 6, COL - 4, 3);
 }
 
+void BattleScreen::DrawBattleMenu(Graphics & g)
+{
+	for (int i = 0; i < 4; ++i)
+	{
+		TransString(buffer, "battle_menu_" + std::to_string(i));
+		g.DrawString(buffer, -1, FONT_BIG, battleMenuRect[i], LEFT_ALIGN, BLACK);
+	}
+}
+
 void BattleScreen::DrawMenuCursor(Graphics & g)
 {
 	g.DrawImage(battleUI, battleMenuCursorRect[curMenuSelect], 6 * PIXEL, 3 * PIXEL, PIXEL, PIXEL, UnitPixel);
+}
+
+void BattleScreen::DrawSkillCursor(Graphics & g)
+{
+	g.DrawImage(battleUI, skillCursorRect[curSkillSelect], 6 * PIXEL, 3 * PIXEL, PIXEL, PIXEL, UnitPixel);
 }
 
 void BattleScreen::DrawFightMenuDialog(Graphics & g)
@@ -67,38 +100,74 @@ void BattleScreen::DrawFightMenuDialog(Graphics & g)
 	UIManager::DrawDialogUI_IDX(g, 0.0f, 4.0f, 4.5f, 5.0f);
 }
 
+void BattleScreen::DrawFightMenu(Graphics & g)
+{
+	for (int i = 0; i < 4; ++i)
+	{
+		int id = playerPokemon->skills[i];
+
+		if (id != -1)
+		{
+			string name = DM::GetSkillDesc(id)->name;
+			_tcscpy_s(buffer, name.length() + 1, CA2T(name.c_str()));
+		}
+		else _stprintf_s(buffer, _T("%c"), '-');
+
+		g.DrawString(buffer, -1, FONT_BIG, skillRect[i], LEFT_ALIGN, BLACK);
+	}
+}
+
+void BattleScreen::DrawSkillInfo(Graphics & g)
+{
+	int id = playerPokemon->skills[curSkillSelect];
+
+	SkillData* data = DM::GetSkillData(id);
+
+	int curpp = playerPokemon->pps[curSkillSelect];
+	_stprintf_s(buffer, _T("%2d/%2d"), curpp, data->pp);
+	g.DrawString(buffer, -1, FONT_BIG, maxPPRect, RIGHT_ALIGN, BLACK);
+	
+	_stprintf_s(buffer, _T("기술타입/"));
+	g.DrawString(buffer, -1, FONT_BIG, skillTypeRect, LEFT_ALIGN, BLACK);
+	
+	TransString(buffer, "type_" + std::to_string(data->type));
+	g.DrawString(buffer, -1, FONT_BIG, skillTypeNameRect, LEFT_ALIGN, BLACK);
+}
+
 void BattleScreen::DrawEnemyPokemonInfo(Graphics & g)
 {
 	g.DrawImage(battleUI, enemyPokemonInfoRect, 6 * PIXEL, 0, 6 * PIXEL, 2 * PIXEL, UnitPixel);
+
+	int id = enemyPokemon->id;
+
+	PokemonDesc* desc = DM::GetPokemonDesc(id);
+	PokemonData* data = DM::GetPokemonData(id);
+
+	_tcscpy_s(buffer, desc->name.length() + 1, CA2T(desc->name.c_str()));
+	g.DrawString(buffer, -1, FONT_MEDIUM, enemyPokemonNameRect, RIGHT_ALIGN, BLACK);
+
+	_stprintf_s(buffer, _T("%d"), enemyPokemon->level);
+	g.DrawString(buffer, -1, FONT_MEDIUM, enemyPokemonLevelRect, LEFT_ALIGN, BLACK);
+
+	int maxHP = CalHP(data->HP, enemyPokemon->level);
+	int curHP = enemyPokemon->hp;
+
+	float ratio = curHP / (float)maxHP;
+
+	Rect hpRect = { 2 * MUL, 1 * MUL, INT(3 * MUL * ratio), MUL };
+
+	g.DrawImage(battleUI, hpRect, 10 * PIXEL, 3 * PIXEL, PIXEL, PIXEL, UnitPixel);
 }
 
 void BattleScreen::DrawPlayerPokemonInfo(Graphics & g)
 {
 	g.DrawImage(battleUI, playerPokemonInfoRect, 0, 0, 6 * PIXEL, 2 * PIXEL, UnitPixel);
-}
 
-void BattleScreen::DrawPlayerInfo(Graphics & g)
-{
-	g.DrawImage(battleUI, playerInfoRect, 6 * PIXEL, 2 * PIXEL, 6 * PIXEL, PIXEL, UnitPixel);
-}
-
-void BattleScreen::DrawEnemyInfo(Graphics & g)
-{
-	g.DrawImage(battleUI, enemyInfoRect, 0, 2 * PIXEL, 6 * PIXEL, PIXEL, UnitPixel);
-}
-
-void BattleScreen::DrawPlayerPokemon(Graphics & g)
-{
 	int id = playerPokemon->id;
-
-	int x = (id - 1) % 10;
-	int y = ((id - 1) / 10) * 2 + 1;
-
-	g.DrawImage(pokemonPic, myRect, x * POKE_PIXEL, y * POKE_PIXEL, POKE_PIXEL, POKE_PIXEL, UnitPixel);
 
 	PokemonDesc* desc = DM::GetPokemonDesc(id);
 	PokemonData* data = DM::GetPokemonData(id);
-	
+
 	_tcscpy_s(buffer, desc->name.length() + 1, CA2T(desc->name.c_str()));
 	g.DrawString(buffer, -1, FONT_MEDIUM, playerPokemonNameRect, RIGHT_ALIGN, BLACK);
 
@@ -111,30 +180,63 @@ void BattleScreen::DrawPlayerPokemon(Graphics & g)
 	_stprintf_s(buffer, _T("%d"), CalHP(data->HP, playerPokemon->level));
 	g.DrawString(buffer, -1, FONT_MEDIUM, playerPokemonMaxHPRect, RIGHT_ALIGN, BLACK);
 
+	int maxHP = CalHP(data->HP, playerPokemon->level);
+	int curHP = playerPokemon->hp;
+
+	float ratio = curHP / (float)maxHP;
+
+	Rect hpRect = {6 * MUL, 4 * MUL, INT(3 * MUL * ratio), MUL};
+
+	g.DrawImage(battleUI, hpRect, 8 * PIXEL, 3 * PIXEL, PIXEL, PIXEL, UnitPixel);
 }
 
-void BattleScreen::DrawEnemyPokemon(Graphics & g)
+void BattleScreen::DrawPlayerInfo(Graphics & g)
 {
-	int id = enemyPokemon->id;
-
-	int x = (id - 1) % 10;
-	int y = ((id - 1) / 10) * 2;
-
-	g.DrawImage(pokemonPic, enemyRect, x * POKE_PIXEL, y * POKE_PIXEL, POKE_PIXEL, POKE_PIXEL, UnitPixel);
-
-	PokemonDesc* desc = DM::GetPokemonDesc(id);
-	PokemonData* data = DM::GetPokemonData(id);
-
-	_tcscpy_s(buffer, desc->name.length() + 1, CA2T(desc->name.c_str()));
-	g.DrawString(buffer, -1, FONT_MEDIUM, enemyPokemonNameRect, RIGHT_ALIGN, BLACK);
-
-	_stprintf_s(buffer, _T("%d"), enemyPokemon->level);
-	g.DrawString(buffer, -1, FONT_MEDIUM, enemyPokemonLevelRect, LEFT_ALIGN, BLACK);
+	g.DrawImage(battleUI, playerInfoRect, 0, 2 * PIXEL, 6 * PIXEL, PIXEL, UnitPixel);
 }
+
+void BattleScreen::DrawEnemyInfo(Graphics & g)
+{
+	g.DrawImage(battleUI, enemyInfoRect, 6 * PIXEL, 2 * PIXEL, 6 * PIXEL, PIXEL, UnitPixel);
+}
+
+//void BattleScreen::DrawPlayerPokemon(Graphics & g)
+//{
+//	int id = playerPokemon->id;
+//
+//	PokemonDesc* desc = DM::GetPokemonDesc(id);
+//	PokemonData* data = DM::GetPokemonData(id);
+//	
+//	_tcscpy_s(buffer, desc->name.length() + 1, CA2T(desc->name.c_str()));
+//	g.DrawString(buffer, -1, FONT_MEDIUM, playerPokemonNameRect, RIGHT_ALIGN, BLACK);
+//
+//	_stprintf_s(buffer, _T("%d"), playerPokemon->level);
+//	g.DrawString(buffer, -1, FONT_MEDIUM, playerPokemonLevelRect, LEFT_ALIGN, BLACK);
+//
+//	_stprintf_s(buffer, _T("%d"), playerPokemon->hp);
+//	g.DrawString(buffer, -1, FONT_MEDIUM, playerPokemonCurHPRect, RIGHT_ALIGN, BLACK);
+//
+//	_stprintf_s(buffer, _T("%d"), CalHP(data->HP, playerPokemon->level));
+//	g.DrawString(buffer, -1, FONT_MEDIUM, playerPokemonMaxHPRect, RIGHT_ALIGN, BLACK);
+//}
+//
+//void BattleScreen::DrawEnemyPokemon(Graphics & g)
+//{
+//	int id = enemyPokemon->id;
+//
+//	PokemonDesc* desc = DM::GetPokemonDesc(id);
+//	PokemonData* data = DM::GetPokemonData(id);
+//
+//	_tcscpy_s(buffer, desc->name.length() + 1, CA2T(desc->name.c_str()));
+//	g.DrawString(buffer, -1, FONT_MEDIUM, enemyPokemonNameRect, RIGHT_ALIGN, BLACK);
+//
+//	_stprintf_s(buffer, _T("%d"), enemyPokemon->level);
+//	g.DrawString(buffer, -1, FONT_MEDIUM, enemyPokemonLevelRect, LEFT_ALIGN, BLACK);
+//}
 
 void BattleScreen::DrawPlayer(Graphics & g)
 {
-	g.DrawImage(battleUI, myRect, 9 * PIXEL, 4 * PIXEL, 3 * PIXEL, 3 * PIXEL, UnitPixel);
+	g.DrawImage(battleUI, playerRect, 9 * PIXEL, 4 * PIXEL, 3 * PIXEL, 3 * PIXEL, UnitPixel);
 }
 
 void BattleScreen::DrawNPC(Graphics & g)
@@ -152,16 +254,92 @@ void BattleScreen::Update()
 {
 	switch (curState)
 	{
+		case InitToEncounter:
+		{
+			player->MoveTo();
+			enemy->MoveTo();
+
+			if (!player->IsPlaying())
+			{
+				dialogShow->Start();
+				curState = Encounter;
+			}
+		}
+		break;
+
 		case Encounter:
 		{
-			if (GET_KEY_Z || GET_KEY_X)
-				curState = Dispatch;
+			if(dialogShow->IsPlaying())
+				dialogShow->Update();
+			else if (!dialogShow->IsPlaying() && dialogShow->RemainCount() > 0)
+			{
+				if (GET_KEY_Z || GET_KEY_X)
+					dialogShow->Start();
+			}
+			else if (!dialogShow->IsPlaying() && dialogShow->RemainCount() == 0)
+			{
+				if (GET_KEY_Z || GET_KEY_X)
+				{
+					player->MoveToInit(PointF(R(-3 * MUL), R(3 * MUL)), 0.5f);
+					player->Start();
+
+					dialogShow->Reset();
+					dialogShow->Push(TransString(NULL, "pokemon_dispatch", 1, TokenChange("pokemon_name", DM::GetPokemonDesc(playerPokemon->id)->name)));
+					dialogShow->Start();
+
+					curState = EncounterToDispatch;
+				}
+			}
+		}
+		break;
+
+		case EncounterToDispatch:
+		{
+			if(player->IsPlaying())
+				player->MoveTo();
+			else
+			{
+				if (dialogShow->IsPlaying())
+					dialogShow->Update();
+				else if (!dialogShow->IsPlaying() && dialogShow->RemainCount() > 0)
+				{
+					if (GET_KEY_Z || GET_KEY_X)
+						dialogShow->Start();
+				}
+				else if (!dialogShow->IsPlaying() && dialogShow->RemainCount() == 0)
+				{
+					anim->Start();
+
+					player->SetImage(pokemonPic);
+					player->SetPos(R(0.5f * MUL), R(3 * MUL));
+					player->SetImagePos(DM::GetBehindPokemonImageRect(playerPokemon->id));
+
+					curState = Dispatch;
+				}
+			}
 		}
 		break;
 
 		case Dispatch:
 		{
-			if (GET_KEY_Z || GET_KEY_X)
+			anim->Update();
+
+			if (GET_KEY_Z || GET_KEY_X || !anim->IsPlaying())
+			{
+				dialogShow->Reset();
+				dialogShow->Push("                 ");
+				dialogShow->Start();
+
+				curState = DispatchToSelectMenu;
+			}
+		}
+		break;
+
+		case DispatchToSelectMenu:
+		{
+			dialogShow->Update();
+
+			if (!dialogShow->IsPlaying())
 				curState = SelectMenu;
 		}
 		break;
@@ -186,7 +364,13 @@ void BattleScreen::Update()
 				else if (curMenuSelect == 2)
 					;
 				else if (curMenuSelect == 3)
+				{
+					dialogShow->Reset();
+					dialogShow->Push(TransString(NULL, "run_success"));
+					dialogShow->Start();
+
 					curState = RunSuccess;
+				}
 			}
 		}
 		break;
@@ -212,9 +396,11 @@ void BattleScreen::Update()
 
 		case RunSuccess:
 		{
-			if (GET_KEY_Z)
+			dialogShow->Update();
+
+			if (!dialogShow->IsPlaying() && GET_KEY_Z)
 			{
-				DeleteData();
+				Reset();
 				RunManager::SetTarget(gm->gamePlay);
 			}
 		}
@@ -226,56 +412,87 @@ void BattleScreen::Draw(Graphics & g)
 {
 	switch (curState)
 	{
+		case InitToEncounter:
+		{
+			DrawBackground(g);
+
+			player->Draw(g);
+			enemy->Draw(g);
+
+			DrawMainDialog(g);
+		}
+		break;
+
 		case Encounter:
 		{
 			DrawBackground(g);
-			DrawPlayer(g);
-			DrawEnemyPokemon(g);
 			DrawMainDialog(g);
 
-			DrawPlayerInfo(g);
-			DrawEnemyPokemonInfo(g);
+			player->Draw(g);
+			enemy->Draw(g);
 
-			string wild_pokemon_name = DM::GetPokemonDesc(enemyPokemon->id)->name;
-			TransString(buffer, "wild_encounter", 1, TokenChange("pokemon_name", wild_pokemon_name));
-			g.DrawString(buffer, -1, FONT_BIG, dialogRect, LEFT_ALIGN, BLACK);
+			DrawPlayerInfo(g);
+
+			dialogShow->Draw(g);
+		}
+		break;
+
+		case EncounterToDispatch:
+		{
+			DrawBackground(g);
+			DrawMainDialog(g);
+
+			player->Draw(g);
+			enemy->Draw(g);
+
+			dialogShow->Draw(g);
+
+			DrawEnemyPokemonInfo(g);
 		}
 		break;
 
 		case Dispatch:
 		{
 			DrawBackground(g);
-			DrawPlayerPokemon(g);
-			DrawEnemyPokemon(g);
-			DrawMainDialog(g);
 
+			if (anim->IsPlaying())
+				anim->Draw(g);
+			else
+				player->Draw(g);
+
+			enemy->Draw(g);
+
+			DrawMainDialog(g);
 			DrawEnemyPokemonInfo(g);
-			DrawPlayerPokemonInfo(g);
-			
-			string my_pokemon_name = DM::GetPokemonDesc(playerPokemon->id)->name;
-			TransString(buffer, "pokemon_dispatch", 1, TokenChange("pokemon_name", my_pokemon_name));
-			g.DrawString(buffer, -1, FONT_BIG, dialogRect, LEFT_ALIGN, BLACK);
+			dialogShow->Draw(g);
+		}
+		break;
+
+		case DispatchToSelectMenu:
+		{
+			DrawBackground(g);
+			player->Draw(g);
+			enemy->Draw(g);
+			DrawEnemyPokemonInfo(g);
+
+			DrawMainDialog(g);
 		}
 		break;
 
 		case SelectMenu:
 		{
 			DrawBackground(g);
-			DrawPlayerPokemon(g);
-			DrawEnemyPokemon(g);
 			DrawMainDialog(g);
+
+			player->Draw(g);
+			enemy->Draw(g);
 
 			DrawBattleMenuDialog(g);
 
 			DrawEnemyPokemonInfo(g);
 			DrawPlayerPokemonInfo(g);
 
-			for (int i = 0; i < 4; ++i)
-			{
-				TransString(buffer, "battle_menu_" + std::to_string(i));
-				g.DrawString(buffer, -1, FONT_BIG, battleMenuRect[i], LEFT_ALIGN, BLACK);
-			}
-
+			DrawBattleMenu(g);
 			DrawMenuCursor(g);
 		}
 		break;
@@ -283,8 +500,9 @@ void BattleScreen::Draw(Graphics & g)
 		case FightMenu:
 		{
 			DrawBackground(g);
-			DrawPlayerPokemon(g);
-			DrawEnemyPokemon(g);
+
+			player->Draw(g);
+			enemy->Draw(g);
 
 			DrawEnemyPokemonInfo(g);
 			DrawPlayerPokemonInfo(g);
@@ -292,37 +510,26 @@ void BattleScreen::Draw(Graphics & g)
 			DrawFightMenuDialog(g);
 			DrawBattleMenuDialog(g);
 
-			for (int i = 0; i < 4; ++i)
-			{
-				int id = playerPokemon->skills[i];
+			DrawFightMenu(g);
+			DrawSkillCursor(g);
 
-				if (id != -1)
-				{
-					string name = DM::GetSkillDesc(id)->name;
-					_tcscpy_s(buffer, name.length() + 1, CA2T(name.c_str()));
-				}
-				else _stprintf_s(buffer, _T("%c"), '-');
-
-				g.DrawString(buffer, -1, FONT_BIG, skillRect[i], LEFT_ALIGN, BLACK);
-			}
-
-			g.DrawImage(battleUI, skillCursorRect[curSkillSelect], 6 * PIXEL, 3 * PIXEL, PIXEL, PIXEL, UnitPixel);
+			DrawSkillInfo(g);
 		}
 		break;
 
 		case RunSuccess:
 		{
 			DrawBackground(g);
-			DrawPlayerPokemon(g);
-			DrawEnemyPokemon(g);
+
+			player->Draw(g);
+			enemy->Draw(g);
 
 			DrawEnemyPokemonInfo(g);
 			DrawPlayerPokemonInfo(g);
 
 			DrawMainDialog(g);
 
-			TransString(buffer, "run_success");
-			g.DrawString(buffer, -1, FONT_BIG, dialogRect, LEFT_ALIGN, BLACK);
+			dialogShow->Draw(g);
 		}
 		break;
 	}

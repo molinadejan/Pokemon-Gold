@@ -5,6 +5,9 @@
 
 #include "BaseClass.h"
 #include "Datas.h"
+#include "MovingObject.h"
+#include "DialogShow.h"
+#include "AnimationObject.h"
 
 class BattleScreen : public BaseClass
 {
@@ -18,8 +21,12 @@ public:
 
 	enum BattleState
 	{
+		Init,
+		InitToEncounter,
 		Encounter,
+		EncounterToDispatch,
 		Dispatch,
+		DispatchToSelectMenu,
 		SelectMenu,
 		FightMenu,
 		RunSuccess,
@@ -37,14 +44,14 @@ private:
 
 	RectF dialogRect = { R(0.5f * MUL), R(6.1f * MUL), R(9 * MUL), R(3 * MUL) };
 
-	const Rect myRect = { MUL, 3 * MUL, 3 * MUL, 3 * MUL };
+	const Rect playerRect = { MUL, 3 * MUL, 3 * MUL, 3 * MUL };
 	const Rect enemyRect = { 6 * MUL, 0, 3 * MUL, 3 * MUL };
 
 	const Rect enemyPokemonInfoRect = { 0, 0, 6 * MUL, 2 * MUL };
 	const Rect playerPokemonInfoRect = { 4 * MUL, 4 * MUL, 6 * MUL, 2 * MUL };
 
-	const Rect playerInfoRect = { 0, MUL, 6 * MUL, MUL };
-	const Rect enemyInfoRect = { 4 * MUL, 5 * MUL, 6 * MUL, MUL };
+	const Rect playerInfoRect = { 4 * MUL, 5 * MUL, 6 * MUL, MUL };
+	const Rect enemyInfoRect = { 0, MUL, 6 * MUL, MUL };
 
 	// 0 : fight, 1 : pokemon, 2 : bag, 3 : run
 	const RectF battleMenuRect[4] = { {R(4.8f * MUL), R(6.6f * MUL), R(3 * MUL), R(MUL)} ,
@@ -75,6 +82,10 @@ private:
 									  { INT(0.5f * MUL), INT(6.8f * MUL), INT(MUL), INT(MUL) } ,
 									  { INT(0.5f * MUL), INT(7.8f * MUL), INT(MUL), INT(MUL) } };
 
+	const RectF maxPPRect = { R(7.0f * MUL), R(6.5f * MUL), R(2.5f * MUL), R(MUL) };
+	const RectF skillTypeRect = { R(4.5f * MUL), R(6.8f * MUL), R(5.0f * MUL), R(1.5f * MUL) };
+	const RectF skillTypeNameRect = { R(7.0f * MUL), R(7.5f * MUL), R(3.0f * MUL), R(MUL) };
+
 private:
 
 	Image* battleUI;
@@ -89,16 +100,28 @@ private:
 	int curMenuSelect;
 	int curSkillSelect;
 
+	MovingObject* player;
+	MovingObject* enemy;
+	AnimationObject* anim;
+	DialogShow* dialogShow;
+
 private:
 
-	void DeleteData();
+	void Reset();
 
 	void DrawBackground(Graphics& g);
 	void DrawMainDialog(Graphics& g);
+
 	void DrawBattleMenuDialog(Graphics& g);
+	void DrawBattleMenu(Graphics& g);
+
 	void DrawMenuCursor(Graphics& g);
+	void DrawSkillCursor(Graphics& g);
 
 	void DrawFightMenuDialog(Graphics& g);
+	void DrawFightMenu(Graphics& g);
+
+	void DrawSkillInfo(Graphics& g);
 
 	void DrawEnemyPokemonInfo(Graphics& g);
 	void DrawPlayerPokemonInfo(Graphics& g);
@@ -106,8 +129,8 @@ private:
 	void DrawPlayerInfo(Graphics& g);
 	void DrawEnemyInfo(Graphics& g);
 
-	void DrawPlayerPokemon(Graphics& g);
-	void DrawEnemyPokemon(Graphics& g);
+	//void DrawPlayerPokemon(Graphics& g);
+	//void DrawEnemyPokemon(Graphics& g);
 
 	void DrawPlayer(Graphics& g);
 	void DrawNPC(Graphics& g);

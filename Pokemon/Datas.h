@@ -129,6 +129,7 @@ struct PokemonIndiv
 	int statusEffect;
 
 	int skills[4];
+	int pps[4];
 
 	PokemonIndiv(int _id, int _level);
 };

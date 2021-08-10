@@ -232,3 +232,14 @@ void JsonToSkillDesc(SkillDesc * sDesc, Json::Value & value)
 	sDesc->id = value["id"].asInt();
 	sDesc->name = value["name"].asString();
 }
+
+void JsonToAnimRect(vector<Rect>& rectVec, Json::Value& value)
+{
+	Json::Value e = value["rect"];
+
+	for (int i = 0; i < (int)e.size(); ++i)
+	{
+		Rect newRect(e[i]["x"].asInt(), e[i]["y"].asInt(), e[i]["w"].asInt(), e[i]["h"].asInt());
+		rectVec.push_back(newRect);
+	}
+}

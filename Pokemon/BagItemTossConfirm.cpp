@@ -54,11 +54,8 @@ void BagItemTossConfirm::Draw(Graphics & g)
 			int count = gm->bagItemToss->GetTossCount();
 
 			string dialog = TransString(NULL, "bag_item_toss_confirm", 2, TokenChange("item_name", name), TokenChange("item_count", std::to_string(count)));
-			
-			vector<string> dialogs;
-			dialogs.push_back(dialog);
-
-			dialogShow->Init(dialogs, descRect);
+			dialogShow->Push(dialog);
+			dialogShow->Reset();
 
 			curState = OneMoreConfirm;
 		}
@@ -110,12 +107,12 @@ void BagItemTossConfirm::Update()
 	{
 		case OneMoreConfirm:
 		{
-			int count = dialogShow->UpdateDlg();
+			dialogShow->Update();
 
-			if (count == 0)
+			/*if (count == 0)
 				curState = Confirm;
 			else if(count > 0)
-				curState = Pause;
+				curState = Pause;*/
 		}
 		break;
 

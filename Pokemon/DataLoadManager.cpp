@@ -206,6 +206,27 @@ void DataLoadManager::DataLoad::LoadSkillDesc()
 	}
 }
 
+void DataLoadManager::DataLoad::LoadAnimRect()
+{
+	fstream openFile("data/table/anim_rect.json");
+	Json::Value root;
+
+	if (openFile.is_open())
+	{
+		openFile >> root;
+		openFile.close();
+
+		for (int i = 0; i < (int)root.size(); ++i)
+		{
+			Json::Value jsonData = root[i];
+			vector<Rect> rectVec;
+
+			JsonToAnimRect(rectVec, jsonData);
+			animRects[jsonData["name"].asString()] = rectVec;
+		}
+	}
+}
+
 void DataLoadManager::DataLoad::Init()
 {
 	LoadMap();
@@ -217,6 +238,8 @@ void DataLoadManager::DataLoad::Init()
 
 	LoadSkillData();
 	LoadSkillDesc();
+
+	LoadAnimRect();
 
 	playerData = new PlayerData;
 
@@ -291,4 +314,20 @@ Map* DataLoadManager::GetMapData(string ID)
 Image* DataLoadManager::GetMapImage(string ID)
 {
 	return dataLoad.mapImages[ID];
+}
+
+Rect DataLoadManager::GetFrontPokemonImageRect(int id)
+{
+	int x = (id - 1) % 10;
+	int y = ((id - 1) / 10) * 2;
+
+	return Rect(x * POKE_PIXEL, y * POKE_PIXEL, POKE_PIXEL, POKE_PIXEL);
+}
+
+Rect DataLoadManager::GetBehindPokemonImageRect(int id)
+{
+	int x = (id - 1) % 10;
+	int y = ((id - 1) / 10) * 2 + 1;
+
+	return Rect(x * POKE_PIXEL, y * POKE_PIXEL, POKE_PIXEL, POKE_PIXEL);
 }

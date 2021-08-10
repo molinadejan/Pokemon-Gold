@@ -16,12 +16,12 @@ class DialogShow
 {
 private:
 
-	float FRAME_LIMIT = 0.05f;
+	const float FRAME_LIMIT = 0.05f;
+	const RectF dialogRect = { REAL(0.5f * MUL), REAL(6.1f * MUL), REAL(9 * MUL), REAL(3 * MUL) };
 
 private:
 
 	vector<string> texts;
-	RectF rect;
 
 	int textLen;
 	int textIdx;
@@ -31,14 +31,21 @@ private:
 	TCHAR buffer1[128];
 	TCHAR buffer2[128];
 
+	bool isPlaying;
+
 public:
 
 	DialogShow();
 	~DialogShow() = default;
 
-	void Init(vector<string> _dialogText, RectF _rect);
+	void Reset();
+	void Push(string text);
+	int RemainCount();
 
-	int UpdateDlg();
+	bool IsPlaying();
+
+	void Start();
+	void Update();
 	void Draw(Graphics& g);
 };
 

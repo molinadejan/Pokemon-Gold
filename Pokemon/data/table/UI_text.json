@@ -120,6 +120,10 @@
     "value": "야생의 {pokemon_name}이(가)\n나타났다!"
   },
   {
+    "key": "wonder",
+    "value": "앗!"
+  },
+  {
     "key": "pokemon_use_skill",
     "value": "{pokemon_name}의\n{skill_name}!"
   },
@@ -145,6 +149,70 @@
   },
   {
 	"key": "run_success",
-    "value": "성공적으로 도망쳤다!\n "
+    "value": "성공적으로 도망쳤다! \n "
+  },
+  {
+	"key": "type_0",
+    "value": "노말"
+  },
+  {
+	"key": "type_1",
+    "value": "불꽃"
+  },
+  {
+	"key": "type_2",
+    "value": "물"
+  },
+  {
+	"key": "type_3",
+    "value": "풀"
+  },
+  {
+	"key": "type_4",
+    "value": "전기"
+  },
+  {
+	"key": "type_5",
+    "value": "얼음"
+  },
+  {
+	"key": "type_6",
+    "value": "격투"
+  },
+  {
+	"key": "type_7",
+    "value": "독"
+  },
+  {
+	"key": "type_8",
+    "value": "땅"
+  },
+  {
+	"key": "type_9",
+    "value": "비행"
+  },
+  {
+	"key": "type_10",
+    "value": "에스퍼"
+  },
+  {
+	"key": "type_11",
+    "value": "벌레"
+  },
+  {
+	"key": "type_12",
+    "value": "바위"
+  },
+  {
+	"key": "type_13",
+    "value": "고스트"
+  },
+  {
+	"key": "type_14",
+    "value": "드래곤"
+  },
+  {
+	"key": "type_15",
+    "value": "강철"
   }
 ]

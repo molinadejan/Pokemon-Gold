@@ -128,7 +128,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 
 			gameManager.Init();
 
-			SetTimer(hWnd, 0, 32, NULL);
+			SetTimer(hWnd, 0, 8, NULL);
 		}
 		break;
 

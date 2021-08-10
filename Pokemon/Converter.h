@@ -5,6 +5,8 @@
 #include "Datas.h"
 #include <json/json.h>
 
+using std::vector;
+
 void JsonToTile(Tile &tile, Json::Value &value);
 
 void TileToJson(Tile &tile, Json::Value &value);
@@ -29,5 +31,7 @@ void JsonToPokemonDesc(PokemonDesc *pDesc, Json::Value &value);
 void JsonToSkillData(SkillData* sData, Json::Value &value);
 
 void JsonToSkillDesc(SkillDesc* sDesc, Json::Value &value);
+
+void JsonToAnimRect(vector<Rect>& rectVec, Json::Value &value);
 
 #endif // !__CONVERTER_HPP_

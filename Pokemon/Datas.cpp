@@ -80,6 +80,7 @@ PokemonIndiv::PokemonIndiv(int _id, int _level)
 	statusEffect = 0;
 
 	skills[0] = skills[1] = skills[2] = skills[3] = -1;
+	pps[0] = pps[1] = pps[2] = pps[3] = 0;
 
 	int skillCnt = 0;
 
@@ -90,5 +91,14 @@ PokemonIndiv::PokemonIndiv(int _id, int _level)
 
 		if (skillCnt == 3)
 			break;
+	}
+
+	for (int i = 0; i < 4; ++i)
+	{
+		if (skills[i] != -1)
+		{
+			SkillData* data = DM::GetSkillData(skills[i]);
+			pps[i] = data->pp;
+		}
 	}
 }

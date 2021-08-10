@@ -9,6 +9,7 @@
 #include "Datas.h"
 
 using std::unordered_map;
+using std::vector;
 
 class DataLoadManager
 {
@@ -34,6 +35,8 @@ private:
 		void LoadSkillData();
 		void LoadSkillDesc();
 
+		void LoadAnimRect();
+
 		void Init();
 
 		void AddItemToInventory(int code, int count);
@@ -51,6 +54,8 @@ private:
 
 		unordered_map<int, SkillData*> skillDatas;
 		unordered_map<int, SkillDesc*> skillDescs;
+
+		unordered_map<string, vector<Rect>> animRects;
 
 		unordered_map<string, string> transDatas;
 
@@ -88,6 +93,11 @@ public:
 
 	static SkillData* GetSkillData(int id) { return dataLoad.skillDatas[id]; }
 	static SkillDesc* GetSkillDesc(int id) { return dataLoad.skillDescs[id]; }
+
+	static vector<Rect> GetAnimRect(string id) { return dataLoad.animRects[id]; }
+
+	static Rect GetFrontPokemonImageRect(int id);
+	static Rect GetBehindPokemonImageRect(int id);
 
 	static void AddItemToInventory(int code, int count = 1) { dataLoad.AddItemToInventory(code, count); }
 	static void RemoveItemFromInventory(int code, int count = 1) { dataLoad.RemoveItemFromInventory(code, count); }
