@@ -3,7 +3,7 @@
 #include "GdiplusElement.h"
 #include "Timer.h"
 
-DialogShow::DialogShow() : isPlaying(false) { }
+DialogShow::DialogShow() { }
 
 void DialogShow::Reset()
 {
@@ -11,6 +11,9 @@ void DialogShow::Reset()
 
 	textIdx = 0;
 	textLen = 1;
+
+	isAuto = false;
+	isPlaying = false;
 
 	memset(buffer1, 0, sizeof(buffer1));
 	memset(buffer2, 0, sizeof(buffer2));
@@ -24,6 +27,16 @@ void DialogShow::Push(string text)
 int DialogShow::RemainCount()
 {
 	return (int)texts.size() - textIdx;
+}
+
+void DialogShow::SetIsAuto(bool _isAuto)
+{
+	isAuto = _isAuto;
+}
+
+bool DialogShow::IsAuto()
+{
+	return isAuto;
 }
 
 bool DialogShow::IsPlaying()

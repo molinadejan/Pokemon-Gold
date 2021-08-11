@@ -89,7 +89,7 @@ struct PokemonData
 
 	int evo_id;
 	int height;
-	int weight;
+	float weight;
 	int catch_rate;
 	int base_exp;
 	int exp_growth_group;
@@ -134,14 +134,19 @@ struct PokemonIndiv
 	PokemonIndiv(int _id, int _level);
 };
 
-//struct PokemonBattleData
-//{
-//	int id;
-//	int statusEffect;
-//
-//	PokemonBattleData(int _id)
-//		: id(_id), statusEffect(-1) { }
-//};
+struct PokemonBattleData
+{
+	int ATK_rank;
+	int DEF_rank;
+	int SPA_rank;
+	int SPD_rank;
+	int SPE_rank;
+	int hit_rank;
+	int vital_rank;
+
+	PokemonBattleData();
+	void Reset();
+};
 
 struct SkillData
 {

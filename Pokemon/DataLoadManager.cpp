@@ -256,7 +256,7 @@ void DataLoadManager::DataLoad::Init()
 	for (int i = 1; i <= 60; ++i)
 		AddItemToInventory(i, rand() % 99 + 1);
 
-	playerData->pokemonInBag.push_back(new PokemonIndiv(rand() % 3 + 1, 15));
+	playerData->pokemonInBag.push_back(new PokemonIndiv(1, 11));
 
 	// test //
 }

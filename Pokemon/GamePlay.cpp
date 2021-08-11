@@ -137,7 +137,7 @@ void GamePlay::Update()
 	// test
 	if (IM::GetKeyUp('P'))
 	{
-		gm->battleScreen->InitWildBattle(rand() % 3 + 1, 10);
+		gm->battleScreen->InitWildBattle(1, 10);
 		RunManager::SetTarget(gm->battleScreen);
 	}
 }

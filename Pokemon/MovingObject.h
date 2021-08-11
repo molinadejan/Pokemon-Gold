@@ -27,6 +27,7 @@ protected:
 
 public:
 
+	MovingObject();
 	MovingObject(Image* _image, PointF _pos, Point _screenSize, Rect _imagePos);
 
 	void SetPos(float _x, float _y);

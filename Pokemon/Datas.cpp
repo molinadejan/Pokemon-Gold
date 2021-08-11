@@ -102,3 +102,18 @@ PokemonIndiv::PokemonIndiv(int _id, int _level)
 		}
 	}
 }
+
+PokemonBattleData::PokemonBattleData()
+	: ATK_rank(0), DEF_rank(0), SPA_rank(0), SPD_rank(0), SPE_rank(0), hit_rank(0), vital_rank(0)
+{ }
+
+void PokemonBattleData::Reset()
+{
+	ATK_rank = 0;
+	DEF_rank = 0;
+	SPA_rank = 0;
+	SPD_rank = 0;
+	SPE_rank = 0;
+	hit_rank = 0;
+	vital_rank = 0;
+}

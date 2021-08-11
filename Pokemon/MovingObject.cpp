@@ -1,8 +1,13 @@
 #include "MovingObject.h"
 #include "Timer.h"
 
+MovingObject::MovingObject()
+	: image(NULL), pos{ 0, 0 }, screenSize{ 0, 0 }, imagePos{ 0,0,0,0 }, dir{ 0, 0 }, isPlaying(false), timer(0), time(0), dest{ 0, 0 }
+{ }
+
 MovingObject::MovingObject(Image * _image, PointF _pos, Point _screenSize, Rect _imagePos)
-	: image(_image), pos(_pos), screenSize(_screenSize), imagePos(_imagePos) { }
+	: image(_image), pos(_pos), screenSize(_screenSize), imagePos(_imagePos), dir{ 0, 0 }, isPlaying(false), timer(0), time(0), dest{ 0, 0 } 
+{ }
 
 void MovingObject::SetPos(float _x, float _y)
 {

@@ -214,5 +214,17 @@
   {
 	"key": "type_15",
     "value": "강철"
+  },
+  {
+	"key": "player_pokemon_attack",
+    "value": "{pokemon_name}의\n{skill_name}!"
+  },
+  {
+	"key": "enemy_pokemon_attack",
+    "value": "적 {pokemon_name}의\n{skill_name}!"
+  },
+  {
+	"key": "pokemon_attack_miss",
+    "value": "그러나 {pokemon_name}의\n공격은 빗나갔다!"
   }
 ]

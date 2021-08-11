@@ -32,6 +32,7 @@ private:
 	TCHAR buffer2[128];
 
 	bool isPlaying;
+	bool isAuto;
 
 public:
 
@@ -41,6 +42,9 @@ public:
 	void Reset();
 	void Push(string text);
 	int RemainCount();
+
+	void SetIsAuto(bool _isAuto);
+	bool IsAuto();
 
 	bool IsPlaying();
 

@@ -20,9 +20,13 @@ private:
 
 public:
 
+	AnimationObject();
 	AnimationObject(Image* _image, PointF _pos, Point _screenSize, vector<Rect> _imagePosVec);
 
+	void SetImagePosVec(vector<Rect> _imagePosVec);
 	void Update();
+	void Reset();
+	int GetRemainCount();
 	void Draw(Graphics &g) override;
 };
 

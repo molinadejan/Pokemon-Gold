@@ -8,6 +8,10 @@
 #include "MovingObject.h"
 #include "DialogShow.h"
 #include "AnimationObject.h"
+#include "TweeningObject.h"
+#include <queue>
+
+using std::queue;
 
 class BattleScreen : public BaseClass
 {
@@ -29,6 +33,8 @@ public:
 		DispatchToSelectMenu,
 		SelectMenu,
 		FightMenu,
+		FightMenuToFightProcess,
+		FightProcess,
 		RunSuccess,
 	};
 
@@ -38,6 +44,12 @@ public:
 		Pokemon,
 		Bag,
 		Run,
+	};
+
+	enum BattleTurn
+	{
+		PlayerTurn,
+		EnemyTurn
 	};
 
 private:
@@ -97,6 +109,9 @@ private:
 	PokemonIndiv* enemyPokemon;
 	PokemonIndiv* playerPokemon;
 
+	PokemonBattleData* playerBattleData;
+	PokemonBattleData* enemyBattleData;
+
 	int curMenuSelect;
 	int curSkillSelect;
 
@@ -105,36 +120,82 @@ private:
 	AnimationObject* anim;
 	DialogShow* dialogShow;
 
-private:
+	TweeningObject* tweeningObject;
 
+	//int battleCount;
+	int playerSelectSkillID;
+	int enemySelectSkillID;
+
+	//BattleTurn battleTurn;
+	queue<BattleTurn> battleQ;
+
+	queue<bool(BattleScreen::*)()> updateQ;
+
+private:
 	void Reset();
+
+	bool Step1();
+	bool Step2();
+	bool Step3();
+	bool Step4();
+	bool Step5();
+	bool Step6();
+	bool Step7();
+	bool Step8();
+	bool Step9();
+	bool Step10();
+	bool Step11();
+	bool Step12();
+	bool Step13();
+	bool Step14();
+
+
+	bool DialogShowing();
 
 	void DrawBackground(Graphics& g);
 	void DrawMainDialog(Graphics& g);
 
+	void DrawPlayer(Graphics& g);
+	void DrawEnemy(Graphics& g);
+
+	bool battleMenuDialogSwitch;
 	void DrawBattleMenuDialog(Graphics& g);
+
+	bool battleMenuSwitch;
 	void DrawBattleMenu(Graphics& g);
 
+	bool battleMenuCursorSwitch;
 	void DrawMenuCursor(Graphics& g);
+
+	bool battleMenuSkillCursorSwitch;
 	void DrawSkillCursor(Graphics& g);
 
+	bool fightMenuDialogSwitch;
 	void DrawFightMenuDialog(Graphics& g);
+
+	bool fightMenuSwitch;
 	void DrawFightMenu(Graphics& g);
 
+	bool skillInfoSwitch;
 	void DrawSkillInfo(Graphics& g);
 
+	bool enemyPokemonInfoSwitch;
 	void DrawEnemyPokemonInfo(Graphics& g);
+
+	bool playerPokemonInfoSwitch;
 	void DrawPlayerPokemonInfo(Graphics& g);
 
+	bool playerInfoSwitch;
 	void DrawPlayerInfo(Graphics& g);
+
+	bool enemyInfoSwtich;
 	void DrawEnemyInfo(Graphics& g);
 
-	//void DrawPlayerPokemon(Graphics& g);
-	//void DrawEnemyPokemon(Graphics& g);
+	bool animationSwitch;
+	void DrawAnimation(Graphics& g);
 
-	void DrawPlayer(Graphics& g);
-	void DrawNPC(Graphics& g);
-
+	bool dialogShowSwitch;
+	void DrawDialogShow(Graphics& g);
 
 public:
 
@@ -143,7 +204,7 @@ public:
 
 public:
 
-	BattleScreen() { };
+	BattleScreen();
 	~BattleScreen() = default;
 
 	void ResourceInit() override;

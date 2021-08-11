@@ -1,0 +1,34 @@
+#pragma once
+
+#ifndef __TWEENINGOBJECT_H__
+#define __TWEENINGOBJECT_H__
+
+class TweeningObject
+{
+private:
+
+	int* target;
+	int goalValue;
+	int curValue;
+
+	bool isPlaying;
+
+	float timer;
+	float time;
+
+	bool decrease;
+
+public:
+
+	TweeningObject();
+
+	void SetTarget(int* _target);
+	void SetGoalValue(int _goalValue);
+	void SetTime(float _time);
+	void Update();
+	void Start();
+	
+	bool IsPlaying();
+};
+
+#endif // !__TWEENINGOBJECT_H__
