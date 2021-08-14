@@ -40,7 +40,7 @@ private:
 		void Init();
 
 		void AddItemToInventory(int code, int count);
-		void RemoveItemFromInventory(int code, int count);
+		bool RemoveItemFromInventory(int code, int count);
 
 	private:
 
@@ -100,6 +100,9 @@ public:
 
 	static void Reset();
 
+	static void SetPlayerData(PlayerData* data);
+	//static void CreatePlayerData();
+
 	static Map* GetMapData(string ID);
 	static Image* GetMapImage(string ID);
 
@@ -124,7 +127,7 @@ public:
 	static Rect GetBehindPokemonImageRect(int id);
 
 	static void AddItemToInventory(int code, int count = 1) { dataLoad.AddItemToInventory(code, count); }
-	static void RemoveItemFromInventory(int code, int count = 1) { dataLoad.RemoveItemFromInventory(code, count); }
+	static bool RemoveItemFromInventory(int code, int count = 1) { return dataLoad.RemoveItemFromInventory(code, count); }
 
 	static float GetTypeRevision(int skillType, int pokeType) { return dataLoad.typeTable[skillType][pokeType]; }
 

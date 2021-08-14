@@ -9,14 +9,7 @@
 #include "TransDatas.h"
 #include "GdiplusElement.h"
 
-BagItemToss::BagItemToss()
- : tossCount(1) { }
-
-void BagItemToss::ResourceInit()
-{
-	BaseClass::ResourceInit();
-	bag = DataLoadManager::GetBagUI();
-}
+BagItemToss::BagItemToss() { }
 
 void BagItemToss::DrawTossText(Graphics & g)
 {
@@ -33,7 +26,12 @@ void BagItemToss::DrawTossCount(Graphics & g)
 	g.DrawString(buffer, -1, FONT_BIG, tossCountRect, RIGHT_ALIGN, BLACK);
 
 	Rect tossXRect(7 * MUL, (INT)(4.5f * MUL), MUL, MUL);
-	g.DrawImage(bag, tossXRect, 10 * PIXEL, 2 * PIXEL, 1 * PIXEL, 1 * PIXEL, UnitPixel);
+	g.DrawImage(DM::GetBagUI(), tossXRect, 10 * PIXEL, 2 * PIXEL, PIXEL, PIXEL, UnitPixel);
+}
+
+void BagItemToss::Init()
+{
+	tossCount = 1;
 }
 
 void BagItemToss::Draw(Graphics & g)
@@ -63,12 +61,14 @@ void BagItemToss::Update()
 
 	if (GET_KEY_Z)
 	{
-		RunManager::SetTarget(gm->bagItemTossConfirm);
+		gm->buttonSound->play();
+		RunManager::SetTargetWithoutFade(gm->bagItemTossConfirm);
 	}
 
 	if (GET_KEY_X)
 	{
 		tossCount = 1;
-		RunManager::SetTarget(gm->bagMenu);
+		gm->buttonSound->play();
+		RunManager::SetTargetWithoutFade(gm->bagMenu);
 	}
 }

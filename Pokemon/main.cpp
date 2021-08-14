@@ -7,6 +7,7 @@
 #include "RunManager.h"
 #include "GdiplusElement.h"
 #include "Timer.h"
+#include "CSound.h"
 #include <ctime>
 
 #define MAX_LOADSTRING 100
@@ -32,6 +33,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance
 	GdiplusStartupInput gpsi;
 	GdiplusStartup(&token, &gpsi, NULL);
 
+	CSound::Init();
 	Timer::Reset();
 	InputManager::Reset();
 	DataLoadManager::Reset();
@@ -75,6 +77,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance
 	}
 
 	GE::Delete();
+	CSound::Release();
 
 	GdiplusShutdown(token);
 
@@ -131,7 +134,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 
 			gameManager.Init();
 
-			SetTimer(hWnd, 0, 8, NULL);
+			SetTimer(hWnd, 0, 15, NULL);
 		}
 		break;
 

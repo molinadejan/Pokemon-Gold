@@ -8,6 +8,9 @@
 #include "RunManager.h"
 #include "BagItemTossConfirm.h"
 #include "BattleScreen.h"
+#include "Intro.h"
+#include "GameStart.h"
+#include "CSound.h"
 
 GameManager:: GameManager() { }
 
@@ -21,6 +24,8 @@ GameManager::~GameManager()
 	delete bagItemToss;
 	delete bagItemTossConfirm;
 	delete battleScreen;
+	delete intro;
+	delete gameStart;
 }
 
 void GameManager::Init()
@@ -33,6 +38,8 @@ void GameManager::Init()
 	bagItemToss = new BagItemToss();
 	bagItemTossConfirm = new BagItemTossConfirm();
 	battleScreen = new BattleScreen();
+	intro = new Intro();
+	gameStart = new GameStart();
 
 	gamePlay->SetManager(this);
 	mainMenu->SetManager(this);
@@ -42,6 +49,8 @@ void GameManager::Init()
 	bagItemToss->SetManager(this);
 	bagItemTossConfirm->SetManager(this);
 	battleScreen->SetManager(this);
+	intro->SetManager(this);
+	gameStart->SetManager(this);
 
 	gamePlay->ResourceInit();
 	mainMenu->ResourceInit();
@@ -51,8 +60,13 @@ void GameManager::Init()
 	bagItemToss->ResourceInit();
 	bagItemTossConfirm->ResourceInit();
 	battleScreen->ResourceInit();
+	intro->ResourceInit();
+	gameStart->ResourceInit();
 
-	RunManager::SetTarget(gamePlay);
+	buttonSound = new CSound("data/sound/effect/button.mp3", false);
+	bagSound = new CSound("data/sound/effect/bagOpen.mp3", false);
+
+	RunManager::SetTarget(intro);
 }
 
 

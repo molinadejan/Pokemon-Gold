@@ -241,7 +241,7 @@ void DataLoadManager::DataLoad::Init()
 
 	LoadAnimRect();
 
-	playerData = new PlayerData;
+	//playerData = new PlayerData;
 
 	// others
 
@@ -253,10 +253,10 @@ void DataLoadManager::DataLoad::Init()
 
 
 	// test //
-	for (int i = 1; i <= 60; ++i)
+	/*for (int i = 1; i <= 60; ++i)
 		AddItemToInventory(i, rand() % 99 + 1);
 
-	playerData->pokemonInBag.push_back(new PokemonIndiv(1, 11));
+	playerData->pokemonInBag.push_back(new PokemonIndiv(1, 16));*/
 
 	// test //
 }
@@ -279,7 +279,7 @@ void DataLoadManager::DataLoad::AddItemToInventory(int code, int count)
 	playerData->iData[item->type].push_back(newData);
 }
 
-void DataLoadManager::DataLoad::RemoveItemFromInventory(int code, int count)
+bool DataLoadManager::DataLoad::RemoveItemFromInventory(int code, int count)
 {
 	ItemDesc* item = itemDescs[code];
 	vector<InventoryItemData*> &v = playerData->iData[item->type];
@@ -294,9 +294,10 @@ void DataLoadManager::DataLoad::RemoveItemFromInventory(int code, int count)
 			{
 				delete v[i];
 				v.erase(v.begin() + i);
+				return true;
 			}
 
-			break;
+			return false;
 		}
 	}
 }
@@ -304,6 +305,11 @@ void DataLoadManager::DataLoad::RemoveItemFromInventory(int code, int count)
 void DataLoadManager::Reset()
 {
 	dataLoad.Init();
+}
+
+void DataLoadManager::SetPlayerData(PlayerData* data)
+{
+	dataLoad.playerData = data;
 }
 
 Map* DataLoadManager::GetMapData(string ID)

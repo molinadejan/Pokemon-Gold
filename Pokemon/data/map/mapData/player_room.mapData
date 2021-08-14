@@ -1,16 +1,16 @@
 {
-	"ID" : "map4",
-	"mapSizeX" : 7,
-	"mapSizeY" : 7,
+	"ID" : "player_room",
+	"mapSizeX" : 8,
+	"mapSizeY" : 6,
 	"movePoints" : 
 	[
 		{
-			"moveType" : 3,
-			"posX" : 3,
-			"posY" : 6,
-			"targetID" : "map0",
-			"targetPosX" : 5,
-			"targetPosY" : 1
+			"moveType" : 6,
+			"posX" : 7,
+			"posY" : 0,
+			"targetID" : "player_house",
+			"targetPosX" : 9,
+			"targetPosY" : 0
 		}
 	],
 	"neighbors" : null,
@@ -21,392 +21,384 @@
 			"moveable" : 1,
 			"posX" : 0,
 			"posY" : 0,
-			"tilePosX" : 544,
-			"tilePosY" : 416
+			"tilePosX" : 0,
+			"tilePosY" : 0
 		},
 		{
 			"interact ID" : -1,
 			"moveable" : 1,
 			"posX" : 1,
 			"posY" : 0,
-			"tilePosX" : 544,
-			"tilePosY" : 416
+			"tilePosX" : 0,
+			"tilePosY" : 0
 		},
 		{
 			"interact ID" : -1,
 			"moveable" : 1,
 			"posX" : 2,
 			"posY" : 0,
-			"tilePosX" : 544,
-			"tilePosY" : 416
+			"tilePosX" : 256,
+			"tilePosY" : 32
 		},
 		{
 			"interact ID" : -1,
 			"moveable" : 1,
 			"posX" : 3,
 			"posY" : 0,
-			"tilePosX" : 544,
-			"tilePosY" : 416
+			"tilePosX" : 0,
+			"tilePosY" : 0
 		},
 		{
 			"interact ID" : -1,
 			"moveable" : 1,
 			"posX" : 4,
 			"posY" : 0,
-			"tilePosX" : 544,
-			"tilePosY" : 416
+			"tilePosX" : 32,
+			"tilePosY" : 0
 		},
 		{
 			"interact ID" : -1,
 			"moveable" : 1,
 			"posX" : 5,
 			"posY" : 0,
-			"tilePosX" : 544,
-			"tilePosY" : 416
-		},
-		{
-			"interact ID" : -1,
-			"moveable" : 1,
-			"posX" : 6,
-			"posY" : 0,
-			"tilePosX" : 544,
-			"tilePosY" : 416
-		},
-		{
-			"interact ID" : -1,
-			"moveable" : 1,
-			"posX" : 0,
-			"posY" : 1,
-			"tilePosX" : 544,
-			"tilePosY" : 416
-		},
-		{
-			"interact ID" : -1,
-			"moveable" : 0,
-			"posX" : 1,
-			"posY" : 1,
-			"tilePosX" : 0,
-			"tilePosY" : 0
-		},
-		{
-			"interact ID" : -1,
-			"moveable" : 0,
-			"posX" : 2,
-			"posY" : 1,
-			"tilePosX" : 0,
-			"tilePosY" : 0
-		},
-		{
-			"interact ID" : -1,
-			"moveable" : 0,
-			"posX" : 3,
-			"posY" : 1,
-			"tilePosX" : 0,
-			"tilePosY" : 0
-		},
-		{
-			"interact ID" : -1,
-			"moveable" : 0,
-			"posX" : 4,
-			"posY" : 1,
-			"tilePosX" : 0,
-			"tilePosY" : 0
-		},
-		{
-			"interact ID" : -1,
-			"moveable" : 0,
-			"posX" : 5,
-			"posY" : 1,
-			"tilePosX" : 0,
-			"tilePosY" : 0
-		},
-		{
-			"interact ID" : -1,
-			"moveable" : 1,
-			"posX" : 6,
-			"posY" : 1,
-			"tilePosX" : 544,
-			"tilePosY" : 416
-		},
-		{
-			"interact ID" : -1,
-			"moveable" : 1,
-			"posX" : 0,
-			"posY" : 2,
-			"tilePosX" : 544,
-			"tilePosY" : 416
-		},
-		{
-			"interact ID" : -1,
-			"moveable" : 0,
-			"posX" : 1,
-			"posY" : 2,
-			"tilePosX" : 0,
-			"tilePosY" : 0
-		},
-		{
-			"interact ID" : -1,
-			"moveable" : 0,
-			"posX" : 2,
-			"posY" : 2,
-			"tilePosX" : 0,
-			"tilePosY" : 0
-		},
-		{
-			"interact ID" : -1,
-			"moveable" : 0,
-			"posX" : 3,
-			"posY" : 2,
-			"tilePosX" : 0,
-			"tilePosY" : 0
-		},
-		{
-			"interact ID" : -1,
-			"moveable" : 0,
-			"posX" : 4,
-			"posY" : 2,
-			"tilePosX" : 0,
-			"tilePosY" : 0
-		},
-		{
-			"interact ID" : -1,
-			"moveable" : 0,
-			"posX" : 5,
-			"posY" : 2,
-			"tilePosX" : 0,
-			"tilePosY" : 0
-		},
-		{
-			"interact ID" : -1,
-			"moveable" : 1,
-			"posX" : 6,
-			"posY" : 2,
-			"tilePosX" : 544,
-			"tilePosY" : 416
-		},
-		{
-			"interact ID" : -1,
-			"moveable" : 1,
-			"posX" : 0,
-			"posY" : 3,
-			"tilePosX" : 544,
-			"tilePosY" : 416
-		},
-		{
-			"interact ID" : -1,
-			"moveable" : 0,
-			"posX" : 1,
-			"posY" : 3,
-			"tilePosX" : 0,
-			"tilePosY" : 0
-		},
-		{
-			"interact ID" : -1,
-			"moveable" : 0,
-			"posX" : 2,
-			"posY" : 3,
-			"tilePosX" : 0,
-			"tilePosY" : 0
-		},
-		{
-			"interact ID" : -1,
-			"moveable" : 0,
-			"posX" : 3,
-			"posY" : 3,
-			"tilePosX" : 0,
-			"tilePosY" : 0
-		},
-		{
-			"interact ID" : -1,
-			"moveable" : 0,
-			"posX" : 4,
-			"posY" : 3,
-			"tilePosX" : 0,
-			"tilePosY" : 0
-		},
-		{
-			"interact ID" : -1,
-			"moveable" : 0,
-			"posX" : 5,
-			"posY" : 3,
-			"tilePosX" : 0,
-			"tilePosY" : 0
-		},
-		{
-			"interact ID" : -1,
-			"moveable" : 1,
-			"posX" : 6,
-			"posY" : 3,
-			"tilePosX" : 544,
-			"tilePosY" : 416
-		},
-		{
-			"interact ID" : -1,
-			"moveable" : 1,
-			"posX" : 0,
-			"posY" : 4,
-			"tilePosX" : 544,
-			"tilePosY" : 416
-		},
-		{
-			"interact ID" : -1,
-			"moveable" : 0,
-			"posX" : 1,
-			"posY" : 4,
-			"tilePosX" : 0,
-			"tilePosY" : 0
-		},
-		{
-			"interact ID" : -1,
-			"moveable" : 0,
-			"posX" : 2,
-			"posY" : 4,
-			"tilePosX" : 0,
-			"tilePosY" : 0
-		},
-		{
-			"interact ID" : -1,
-			"moveable" : 0,
-			"posX" : 3,
-			"posY" : 4,
-			"tilePosX" : 0,
-			"tilePosY" : 0
-		},
-		{
-			"interact ID" : -1,
-			"moveable" : 0,
-			"posX" : 4,
-			"posY" : 4,
-			"tilePosX" : 0,
-			"tilePosY" : 0
-		},
-		{
-			"interact ID" : -1,
-			"moveable" : 0,
-			"posX" : 5,
-			"posY" : 4,
-			"tilePosX" : 0,
-			"tilePosY" : 0
-		},
-		{
-			"interact ID" : -1,
-			"moveable" : 1,
-			"posX" : 6,
-			"posY" : 4,
-			"tilePosX" : 544,
-			"tilePosY" : 416
-		},
-		{
-			"interact ID" : -1,
-			"moveable" : 1,
-			"posX" : 0,
-			"posY" : 5,
-			"tilePosX" : 544,
-			"tilePosY" : 416
-		},
-		{
-			"interact ID" : -1,
-			"moveable" : 0,
-			"posX" : 1,
-			"posY" : 5,
-			"tilePosX" : 0,
-			"tilePosY" : 0
-		},
-		{
-			"interact ID" : -1,
-			"moveable" : 0,
-			"posX" : 2,
-			"posY" : 5,
-			"tilePosX" : 0,
-			"tilePosY" : 0
-		},
-		{
-			"interact ID" : -1,
-			"moveable" : 0,
-			"posX" : 3,
-			"posY" : 5,
-			"tilePosX" : 0,
-			"tilePosY" : 0
-		},
-		{
-			"interact ID" : -1,
-			"moveable" : 0,
-			"posX" : 4,
-			"posY" : 5,
-			"tilePosX" : 0,
-			"tilePosY" : 0
-		},
-		{
-			"interact ID" : -1,
-			"moveable" : 0,
-			"posX" : 5,
-			"posY" : 5,
-			"tilePosX" : 0,
-			"tilePosY" : 0
-		},
-		{
-			"interact ID" : -1,
-			"moveable" : 1,
-			"posX" : 6,
-			"posY" : 5,
-			"tilePosX" : 544,
-			"tilePosY" : 416
-		},
-		{
-			"interact ID" : -1,
-			"moveable" : 1,
-			"posX" : 0,
-			"posY" : 6,
-			"tilePosX" : 544,
-			"tilePosY" : 416
-		},
-		{
-			"interact ID" : -1,
-			"moveable" : 1,
-			"posX" : 1,
-			"posY" : 6,
-			"tilePosX" : 544,
-			"tilePosY" : 416
-		},
-		{
-			"interact ID" : -1,
-			"moveable" : 1,
-			"posX" : 2,
-			"posY" : 6,
-			"tilePosX" : 544,
-			"tilePosY" : 416
-		},
-		{
-			"interact ID" : -1,
-			"moveable" : 0,
-			"posX" : 3,
-			"posY" : 6,
 			"tilePosX" : 48,
-			"tilePosY" : 112
-		},
-		{
-			"interact ID" : -1,
-			"moveable" : 1,
-			"posX" : 4,
-			"posY" : 6,
-			"tilePosX" : 544,
-			"tilePosY" : 416
-		},
-		{
-			"interact ID" : -1,
-			"moveable" : 1,
-			"posX" : 5,
-			"posY" : 6,
-			"tilePosX" : 544,
-			"tilePosY" : 416
+			"tilePosY" : 0
 		},
 		{
 			"interact ID" : -1,
 			"moveable" : 1,
 			"posX" : 6,
-			"posY" : 6,
-			"tilePosX" : 544,
-			"tilePosY" : 416
+			"posY" : 0,
+			"tilePosX" : 336,
+			"tilePosY" : 32
+		},
+		{
+			"interact ID" : -1,
+			"moveable" : 0,
+			"posX" : 7,
+			"posY" : 0,
+			"tilePosX" : 208,
+			"tilePosY" : 16
+		},
+		{
+			"interact ID" : -1,
+			"moveable" : 0,
+			"posX" : 0,
+			"posY" : 1,
+			"tilePosX" : 80,
+			"tilePosY" : 16
+		},
+		{
+			"interact ID" : -1,
+			"moveable" : 0,
+			"posX" : 1,
+			"posY" : 1,
+			"tilePosX" : 80,
+			"tilePosY" : 16
+		},
+		{
+			"interact ID" : -1,
+			"moveable" : 1,
+			"posX" : 2,
+			"posY" : 1,
+			"tilePosX" : 256,
+			"tilePosY" : 48
+		},
+		{
+			"interact ID" : -1,
+			"moveable" : 1,
+			"posX" : 3,
+			"posY" : 1,
+			"tilePosX" : 160,
+			"tilePosY" : 16
+		},
+		{
+			"interact ID" : -1,
+			"moveable" : 1,
+			"posX" : 4,
+			"posY" : 1,
+			"tilePosX" : 112,
+			"tilePosY" : 16
+		},
+		{
+			"interact ID" : -1,
+			"moveable" : 1,
+			"posX" : 5,
+			"posY" : 1,
+			"tilePosX" : 128,
+			"tilePosY" : 16
+		},
+		{
+			"interact ID" : -1,
+			"moveable" : 0,
+			"posX" : 6,
+			"posY" : 1,
+			"tilePosX" : 80,
+			"tilePosY" : 16
+		},
+		{
+			"interact ID" : -1,
+			"moveable" : 0,
+			"posX" : 7,
+			"posY" : 1,
+			"tilePosX" : 80,
+			"tilePosY" : 16
+		},
+		{
+			"interact ID" : -1,
+			"moveable" : 0,
+			"posX" : 0,
+			"posY" : 2,
+			"tilePosX" : 80,
+			"tilePosY" : 16
+		},
+		{
+			"interact ID" : -1,
+			"moveable" : 0,
+			"posX" : 1,
+			"posY" : 2,
+			"tilePosX" : 80,
+			"tilePosY" : 16
+		},
+		{
+			"interact ID" : -1,
+			"moveable" : 0,
+			"posX" : 2,
+			"posY" : 2,
+			"tilePosX" : 192,
+			"tilePosY" : 48
+		},
+		{
+			"interact ID" : -1,
+			"moveable" : 0,
+			"posX" : 3,
+			"posY" : 2,
+			"tilePosX" : 208,
+			"tilePosY" : 48
+		},
+		{
+			"interact ID" : -1,
+			"moveable" : 0,
+			"posX" : 4,
+			"posY" : 2,
+			"tilePosX" : 80,
+			"tilePosY" : 16
+		},
+		{
+			"interact ID" : -1,
+			"moveable" : 0,
+			"posX" : 5,
+			"posY" : 2,
+			"tilePosX" : 80,
+			"tilePosY" : 16
+		},
+		{
+			"interact ID" : -1,
+			"moveable" : 0,
+			"posX" : 6,
+			"posY" : 2,
+			"tilePosX" : 80,
+			"tilePosY" : 16
+		},
+		{
+			"interact ID" : -1,
+			"moveable" : 0,
+			"posX" : 7,
+			"posY" : 2,
+			"tilePosX" : 80,
+			"tilePosY" : 16
+		},
+		{
+			"interact ID" : -1,
+			"moveable" : 0,
+			"posX" : 0,
+			"posY" : 3,
+			"tilePosX" : 80,
+			"tilePosY" : 16
+		},
+		{
+			"interact ID" : -1,
+			"moveable" : 0,
+			"posX" : 1,
+			"posY" : 3,
+			"tilePosX" : 80,
+			"tilePosY" : 16
+		},
+		{
+			"interact ID" : -1,
+			"moveable" : 0,
+			"posX" : 2,
+			"posY" : 3,
+			"tilePosX" : 80,
+			"tilePosY" : 16
+		},
+		{
+			"interact ID" : -1,
+			"moveable" : 0,
+			"posX" : 3,
+			"posY" : 3,
+			"tilePosX" : 80,
+			"tilePosY" : 16
+		},
+		{
+			"interact ID" : -1,
+			"moveable" : 0,
+			"posX" : 4,
+			"posY" : 3,
+			"tilePosX" : 80,
+			"tilePosY" : 16
+		},
+		{
+			"interact ID" : -1,
+			"moveable" : 0,
+			"posX" : 5,
+			"posY" : 3,
+			"tilePosX" : 80,
+			"tilePosY" : 16
+		},
+		{
+			"interact ID" : -1,
+			"moveable" : 0,
+			"posX" : 6,
+			"posY" : 3,
+			"tilePosX" : 80,
+			"tilePosY" : 16
+		},
+		{
+			"interact ID" : -1,
+			"moveable" : 0,
+			"posX" : 7,
+			"posY" : 3,
+			"tilePosX" : 80,
+			"tilePosY" : 16
+		},
+		{
+			"interact ID" : -1,
+			"moveable" : 1,
+			"posX" : 0,
+			"posY" : 4,
+			"tilePosX" : 320,
+			"tilePosY" : 32
+		},
+		{
+			"interact ID" : -1,
+			"moveable" : 0,
+			"posX" : 1,
+			"posY" : 4,
+			"tilePosX" : 80,
+			"tilePosY" : 16
+		},
+		{
+			"interact ID" : -1,
+			"moveable" : 0,
+			"posX" : 2,
+			"posY" : 4,
+			"tilePosX" : 80,
+			"tilePosY" : 16
+		},
+		{
+			"interact ID" : -1,
+			"moveable" : 0,
+			"posX" : 3,
+			"posY" : 4,
+			"tilePosX" : 80,
+			"tilePosY" : 16
+		},
+		{
+			"interact ID" : -1,
+			"moveable" : 1,
+			"posX" : 4,
+			"posY" : 4,
+			"tilePosX" : 80,
+			"tilePosY" : 64
+		},
+		{
+			"interact ID" : -1,
+			"moveable" : 1,
+			"posX" : 5,
+			"posY" : 4,
+			"tilePosX" : 96,
+			"tilePosY" : 64
+		},
+		{
+			"interact ID" : -1,
+			"moveable" : 0,
+			"posX" : 6,
+			"posY" : 4,
+			"tilePosX" : 80,
+			"tilePosY" : 16
+		},
+		{
+			"interact ID" : -1,
+			"moveable" : 0,
+			"posX" : 7,
+			"posY" : 4,
+			"tilePosX" : 80,
+			"tilePosY" : 16
+		},
+		{
+			"interact ID" : -1,
+			"moveable" : 1,
+			"posX" : 0,
+			"posY" : 5,
+			"tilePosX" : 320,
+			"tilePosY" : 48
+		},
+		{
+			"interact ID" : -1,
+			"moveable" : 0,
+			"posX" : 1,
+			"posY" : 5,
+			"tilePosX" : 80,
+			"tilePosY" : 16
+		},
+		{
+			"interact ID" : -1,
+			"moveable" : 0,
+			"posX" : 2,
+			"posY" : 5,
+			"tilePosX" : 80,
+			"tilePosY" : 16
+		},
+		{
+			"interact ID" : -1,
+			"moveable" : 0,
+			"posX" : 3,
+			"posY" : 5,
+			"tilePosX" : 80,
+			"tilePosY" : 16
+		},
+		{
+			"interact ID" : -1,
+			"moveable" : 0,
+			"posX" : 4,
+			"posY" : 5,
+			"tilePosX" : 192,
+			"tilePosY" : 48
+		},
+		{
+			"interact ID" : -1,
+			"moveable" : 0,
+			"posX" : 5,
+			"posY" : 5,
+			"tilePosX" : 208,
+			"tilePosY" : 48
+		},
+		{
+			"interact ID" : -1,
+			"moveable" : 0,
+			"posX" : 6,
+			"posY" : 5,
+			"tilePosX" : 80,
+			"tilePosY" : 16
+		},
+		{
+			"interact ID" : -1,
+			"moveable" : 0,
+			"posX" : 7,
+			"posY" : 5,
+			"tilePosX" : 80,
+			"tilePosY" : 16
 		}
 	],
 	"worldPosX" : 0,

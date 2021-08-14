@@ -111,6 +111,15 @@
     <ClInclude Include="dist\json\json-forwards.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="Intro.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="CSound.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="GameStart.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Timer.cpp">
@@ -195,6 +204,15 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="dist\jsoncpp.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Intro.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="CSound.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="GameStart.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>

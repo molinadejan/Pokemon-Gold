@@ -14,7 +14,6 @@ private:
 private:
 
 	int tossCount;
-	Image* bag;
 
 private:
 
@@ -29,7 +28,7 @@ public:
 	int GetTossCount() const { return tossCount; }
 	void SetTossCount(int i) { tossCount = i; }
 
-	void ResourceInit() override;
+	void Init() override;
 	void Draw(Graphics& g) override;
 	void Update() override;
 };

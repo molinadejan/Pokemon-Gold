@@ -11,19 +11,25 @@ using namespace Gdiplus;
 class Player
 {
 private:
-
-	const int   DIR_RIGHT_IDX            = 0;
-	const int   DIR_LEFT_IDX             = 2;
-	const int   DIR_DOWN_IDX             = 4;
-	const int   DIR_UP_IDX               = 7;
-
-	const int   DIR_HORIZONTAL_FRAME_CNT = 2;
-	const int   DIR_VERTICAL_FRAME_CNT   = 4;
-
-	const int   MAX_FRAME                = 4;
-	const float FRAME_TIME               = 0.16f;
+	enum DIR
+	{
+		LEFT,
+		RIGHT,
+		UP,
+		DOWN
+	};
 
 private:
+
+	// 0 : left, 1 : right, 2 : up, 3 : down
+	vector<Rect> walkAnim[4];
+	const float FRAME_TIME = 0.15f;
+
+private:
+
+	DIR curDir;
+
+	Image* playerImg;
 
 	Point  pos;
 	PointF posF;
@@ -49,7 +55,6 @@ public:
 
 	void SetPos(int x, int y) { pos = { x, y }; posF = { (REAL)x, (REAL)y }; }
 	void SetPos(Point _pos) { pos = _pos; posF = { (REAL)_pos.X, (REAL)_pos.Y }; }
-	//void SetPosF(float x, float y) { posF = { x, y }; }
 
 	bool GetIsMoving() const { return isMoving; }
 

@@ -12,12 +12,6 @@
 BagItemSelect::BagItemSelect()
 	: curSelect(0) { }
 
-void BagItemSelect::ResourceInit()
-{
-	BaseClass::ResourceInit();
-	dialog = DM::GetDialogBase();
-}
-
 void BagItemSelect::DrawChoices(Graphics & g)
 {
 	UIManager::DrawDialogUI_IDX(g, 0, 1, 3, 5);
@@ -28,7 +22,7 @@ void BagItemSelect::DrawChoices(Graphics & g)
 		g.DrawString(buffer, -1, FONT_SMALL, GetChoiceRect(i), LEFT_ALIGN, BLACK);
 	}
 
-	g.DrawImage(dialog, GetCursorRect(curSelect), 3 * PIXEL, 0, PIXEL, PIXEL, UnitPixel);
+	g.DrawImage(DM::GetDialogBase(), GetCursorRect(curSelect), 3 * PIXEL, 0, PIXEL, PIXEL, UnitPixel);
 }
 
 void BagItemSelect::Draw(Graphics & g)
@@ -51,43 +45,43 @@ void BagItemSelect::Update()
 	else if (GET_KEY_DOWN && curSelect < 3)
 		++curSelect;
 
-	curState = (ChoiceState)curSelect;
-
 	if (GET_KEY_X)
 	{
+		gm->buttonSound->play();
+
 		curSelect = 0;
-		RunManager::SetTarget(gm->bagMenu);
+		RunManager::SetTargetWithoutFade(gm->bagMenu);
 	}
 
 	if (GET_KEY_Z)
 	{
-		switch (curState)
+		gm->buttonSound->play();
+
+		switch (curSelect)
 		{
 			case USE:
 			{
-				//curSelect = 0;
-				//RunManager::SetTarget(gm->bagMenu);
+
 			}
 			break;
 
 			case GIVE:
 			{
-				//curSelect = 0;
-				//RunManager::SetTarget(gm->bagMenu);
+
 			}
 			break;
 
 			case TOSS:
 			{
 				curSelect = 0;
-				RunManager::SetTarget(gm->bagItemToss);
+				RunManager::SetTargetWithoutFade(gm->bagItemToss);
 			}
 			break;
 
 			case QUIT:
 			{
 				curSelect = 0;
-				RunManager::SetTarget(gm->bagMenu);
+				RunManager::SetTargetWithoutFade(gm->bagMenu);
 			}
 			break;
 		}

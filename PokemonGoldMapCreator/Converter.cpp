@@ -14,6 +14,8 @@ void JsonToTile(Tile &tile, Json::Value &value)
 
 	tile.moveable = value["moveable"].asInt();
 	tile.interactID = value["interact ID"].asInt();
+
+	tile.isPokemon = value["isPokemon"].asInt();
 }
 
 void TileToJson(Tile &tile, Json::Value &value)
@@ -26,6 +28,8 @@ void TileToJson(Tile &tile, Json::Value &value)
 
 	value["moveable"] = tile.moveable;
 	value["interact ID"] = tile.interactID;
+
+	value["isPokemon"] = tile.isPokemon;
 }
 
 void JsonToMovePoint(MovePoint &mp, Json::Value &value)
@@ -136,14 +140,6 @@ void MapToJson(Map &map, Json::Value &value)
 	value["movePoints"] = m;
 }
 
-void JsonToItemDesc(ItemDesc *itemDesc, Json::Value &value)
-{
-	itemDesc->code = value["code"].asInt();
-	itemDesc->desc = value["desc"].asString();
-	itemDesc->name = value["name"].asString();
-	itemDesc->type = value["type"].asInt();
-}
-
 //https://docs.microsoft.com/ko-kr/windows/win32/gdiplus/-gdiplus-retrieving-the-class-identifier-for-an-encoder-use?redirectedfrom=MSDN
 int GetEncoderClsid(const WCHAR * format, CLSID * pClsid)
 {
@@ -174,33 +170,4 @@ int GetEncoderClsid(const WCHAR * format, CLSID * pClsid)
 
 	free(pImageCodecInfo);
 	return -1;
-}
-
-void JsonToPokemonData(PokemonData *pData, Json::Value &value)
-{
-	pData->id = value["id"].asInt();
-	pData->type1 = value["type1"].asInt();
-	pData->type2 = value["type2"].asInt();
-
-	pData->evo_id = value["evo_id"].asInt();
-	pData->height = value["height"].asInt();
-	pData->weight = value["weight"].asFloat();
-
-	pData->catch_rate = value["catch_rate"].asInt();
-	pData->base_exp = value["base_exp"].asInt();
-	pData->exp_growth_group = value["exp_growth_group"].asInt();
-
-	pData->HP = value["HP"].asInt();
-	pData->ATK = value["ATK"].asInt();
-	pData->DEF = value["DEF"].asInt();
-	pData->SPA = value["SPA"].asInt();
-	pData->SPD = value["SPD"].asInt();
-	pData->SPE = value["SPE"].asInt();
-}
-
-void JsonToPokemonDesc(PokemonDesc *pDesc, Json::Value &value)
-{
-	pDesc->id = value["id"].asInt();
-	pDesc->name = value["name"].asString();
-	pDesc->cc = value["cc"].asString();
 }

@@ -17,16 +17,14 @@ BagMenu::BagMenu() : poketSelect(0)
 	curSelectIdx[0] = curSelectIdx[1] = curSelectIdx[2] = curSelectIdx[3] = 0;
 }
 
-void BagMenu::ResourceInit()
+void BagMenu::Init()
 {
-	BaseClass::ResourceInit();
-	bag = DM::GetBagUI();
 	pData = DM::GetPlayerData();
 }
 
 void BagMenu::DrawBagUI(Graphics & g)
 {
-	g.DrawImage(bag, bagUIRect, bagUI.X, bagUI.Y, bagUI.Width, bagUI.Height, UnitPixel);
+	g.DrawImage(DM::GetBagUI(), bagUIRect, bagUI.X, bagUI.Y, bagUI.Width, bagUI.Height, UnitPixel);
 }
 
 void BagMenu::DrawBottomDialog(Graphics & g)
@@ -36,7 +34,7 @@ void BagMenu::DrawBottomDialog(Graphics & g)
 
 void BagMenu::DrawBagTypeAndText(Graphics & g)
 {
-	g.DrawImage(bag, poketImageRect, R(poketSelect * poketImage.X), R(poketImage.Y), R(poketImage.Width), R(poketImage.Height), UnitPixel);
+	g.DrawImage(DM::GetBagUI(), poketImageRect, R(poketSelect * poketImage.X), R(poketImage.Y), R(poketImage.Width), R(poketImage.Height), UnitPixel);
 
 	TransString(buffer, "poket_type_" + std::to_string(poketSelect));
 	g.DrawString(buffer, -1, FONT_BIG, poketTextRect, CENTER_ALIGN, WHITE);
@@ -64,7 +62,7 @@ void BagMenu::DrawItemList(Graphics & g)
 		g.DrawString(buffer, -1, FONT_BIG, GetItemTextRectF(i), LEFT_ALIGN, BLACK);
 
 		// X 출력
-		g.DrawImage(bag, GetXRect(i), X.X, X.Y, X.Width, X.Height, UnitPixel);
+		g.DrawImage(DM::GetBagUI(), GetXRect(i), X.X, X.Y, X.Width, X.Height, UnitPixel);
 
 		// 개수 출력
 		_stprintf_s(buffer, _T("%d"), count);
@@ -72,12 +70,12 @@ void BagMenu::DrawItemList(Graphics & g)
 	}
 }
 
-void BagMenu::DrawItemCursor(Graphics & g)
+void BagMenu::DrawItemCursor(Graphics& g)
 {
-	g.DrawImage(bag, GetCursorRect(curSelectIdx[poketSelect]), cursor.X, cursor.Y, cursor.Width, cursor.Height, UnitPixel);
+	g.DrawImage(DM::GetBagUI(), GetCursorRect(curSelectIdx[poketSelect]), cursor.X, cursor.Y, cursor.Width, cursor.Height, UnitPixel);
 }
 
-void BagMenu::DrawItemDesc(Graphics & g)
+void BagMenu::DrawItemDesc(Graphics& g)
 {
 	int code = pData->iData[poketSelect][curSelect[poketSelect]]->code;
 	string descStr = DM::GetItemDesc(code)->desc;
@@ -103,11 +101,15 @@ void BagMenu::UpdatePoketSelect()
 {
 	// 좌우 가방 종류 선택
 	if (GET_KEY_LEFT && poketSelect > 0)
+	{
+		gm->bagSound->play();
 		--poketSelect;
+	}
 	else if (GET_KEY_RIGHT && poketSelect < 3)
+	{
+		gm->bagSound->play();
 		++poketSelect;
-
-	//state = (BagState)curBagSelect;
+	}
 }
 
 void BagMenu::UpdateItemSelect()
@@ -137,11 +139,35 @@ void BagMenu::Update()
 
 	// 아이템 선택
 	if (GET_KEY_Z && pData->iData[poketSelect].size() > 0)
-		RunManager::SetTarget(gm->bagItemSelect);
+	{
+		gm->buttonSound->play();
+		RunManager::SetTargetWithoutFade(gm->bagItemSelect);
+	}
 
 	// 가방 나가기
 	if (GET_KEY_X)
-		RunManager::SetTarget(gm->mainMenu);
+	{
+		gm->buttonSound->play();
+		RunManager::SetTargetWithoutFade(gm->mainMenu);
+	}
+}
+
+void BagMenu::AdjustSelect()
+{
+	if (curSelect[poketSelect] >= pData->iData[poketSelect].size())
+	{
+		--curSelect[poketSelect];
+
+		if (curSelectIdx[poketSelect] > 0)
+		{
+			--curSelectIdx[poketSelect];
+		}
+		else
+		{
+			if (pData->iData[poketSelect].size() > 0)
+				curSelectIdx[poketSelect] = 4;
+		}
+	}
 }
 
 InventoryItemData* BagMenu::GetCurSelectInventoryItemData()

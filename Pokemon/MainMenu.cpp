@@ -6,18 +6,8 @@
 #include "TransDatas.h"
 #include "GdiplusElement.h"
 
-using std::to_string;
-using std::wstring;
-
 MainMenu::MainMenu()
-	: curSelect(1), state(Main)
-{ }
-
-void MainMenu::ResourceInit()
-{
-	BaseClass::ResourceInit();
-	dialog = DM::GetDialogBase();
-}
+	: curSelect(0) { }
 
 void MainMenu::DrawMain(Graphics & g)
 {
@@ -30,88 +20,79 @@ void MainMenu::DrawMain(Graphics & g)
 	// 메뉴 항목
 	for (int i = 0; i < MENU_COUNT; ++i)
 	{
-		TransString(buffer, "main_menu_" + to_string(i));
+		TransString(buffer, "main_menu_" + std::to_string(i));
 		g.DrawString(buffer, -1, FONT_BIG, GetMenuItemRect(i), LEFT_ALIGN, BLACK);
 	}
 
 	// 메뉴 설명
-	TransString(buffer, "main_menu_desc_" + to_string(curSelect - 1));
+	TransString(buffer, "main_menu_desc_" + std::to_string(curSelect));
 	g.DrawString(buffer, -1, FONT_BIG, menuDescRect, LEFT_ALIGN, BLACK);
 
 	// 커서
-	g.DrawImage(dialog, GetCursorRect(curSelect), 3 * PIXEL, 0, PIXEL, PIXEL, UnitPixel);
+	g.DrawImage(DM::GetDialogBase(), GetCursorRect(curSelect), 3 * PIXEL, 0, PIXEL, PIXEL, UnitPixel);
 }
 
 void MainMenu::Update()
 {
-	switch (state)
+	if (GET_KEY_DOWN && curSelect < MENU_COUNT - 1)
+		++curSelect;
+	else if (GET_KEY_UP && curSelect > 0)
+		--curSelect;
+
+	if (GET_KEY_Z)
 	{
-		case Main:
+		gm->buttonSound->play();
+
+		switch (curSelect)
 		{
-			if (GET_KEY_DOWN && curSelect < MENU_COUNT)
-				++curSelect;
-			else if (GET_KEY_UP && curSelect > 1)
-				--curSelect;
+			case PokeDex:
+			{
+			}
+			break;
 
-			if (GET_KEY_Z)
-				state = (MainMenuState)curSelect;
+			case Pokemon:
+			{
+			}
+			break;
 
-			if (GET_KEY_ENTER || GET_KEY_X)
-				RunManager::SetTarget(gm->gamePlay);
+			case Bag:
+			{
+				RunManager::SetTargetWithoutFade(gm->bagMenu);
+			}
+			break;
+
+			case Pokegear:
+			{
+			}
+			break;
+
+			case Player:
+			{
+			}
+			break;
+
+			case Report:
+			{
+			}
+			break;
+
+			case Option:
+			{
+			}
+			break;
+
+			case Exit:
+			{
+				RunManager::SetTargetWithoutFade(gm->gamePlay);
+			}
+			break;
 		}
-		break;
-
-		case PokeDex:
-		{
-			state = Main;
-		}
-		break;
-
-		case Pokemon:
-		{
-			state = Main;
-		}
-		break;
-
-		case Bag:
-		{
-			state = Main;
-			RunManager::SetTarget(gm->bagMenu);
-		}
-		break;
-
-		case Pokegear:
-		{
-			state = Main;
-		}
-		break;
-
-		case Player:
-		{
-			state = Main;
-		}
-		break;
-
-		case Report:
-		{
-			state = Main;
-		}
-		break;
-
-		case Option:
-		{
-			state = Main;
-		}
-		break;
-
-		case Exit:
-		{
-			state = Main;
-			RunManager::SetTarget(gm->gamePlay);
-		}
-		break;
 	}
+
+	if (GET_KEY_ENTER || GET_KEY_X)
+		RunManager::SetTargetWithoutFade(gm->gamePlay);	
 }
+
 
 void MainMenu::Draw(Graphics& g)
 {

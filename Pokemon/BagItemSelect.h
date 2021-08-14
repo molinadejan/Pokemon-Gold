@@ -35,15 +35,12 @@ private:
 private:
 
 	int curSelect;
-	ChoiceState curState;
-	Image* dialog;
 
 public:
 
 	BagItemSelect();
 	~BagItemSelect() = default;
 
-	void ResourceInit() override;
 	void Draw(Graphics& g) override;
 	void Update() override;
 };

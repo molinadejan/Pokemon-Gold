@@ -11,10 +11,11 @@ class GamePlay : public BaseClass
 {
 private:
 
-	Player player;
+	Player* player;
 	Map* curData;
 
 	bool isMapChange;
+	bool isFirstLoad;
 
 private:
 
@@ -28,6 +29,7 @@ public:
 	GamePlay();
 	~GamePlay();
 
+	void Init() override;
 	void Update() override;
 	void Draw(Graphics &g) override;
 };

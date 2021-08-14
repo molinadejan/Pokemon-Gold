@@ -261,6 +261,10 @@ bool BattleScreen::Step8()
 		{
 			int enemySelectSkillIdx;
 
+			--playerPokemon->pps[curSkillSelect];
+
+			// 이부분 수정 필요
+
 			do
 			{
 				enemySelectSkillIdx = rand() % 4;
@@ -303,11 +307,26 @@ bool BattleScreen::Step8()
 	return false;
 }
 
+bool BattleScreen::Step8_5()
+{
+
+
+	return true;
+}
+
 bool BattleScreen::Step9()
 {
 	dialogShow->Reset();
+	dialogShow->Start();
+	dialogShow->SetIsAuto(true);
+	dialogShowSwitch = true;
 
-	if (battleQ.front() == PlayerTurn)
+	if (battleQ.empty())
+	{
+		updateQ.push(&BattleScreen::Step7);
+		return true;
+	}
+	else if (battleQ.front() == PlayerTurn)
 	{
 		dialogShow->Push(TransString(NULL, "player_pokemon_attack", 2, TokenChange("pokemon_name", DM::GetPokemonDesc(playerPokemon->id)->name),
 			TokenChange("skill_name", DM::GetSkillDesc(playerSelectSkillID)->name)));
@@ -319,11 +338,15 @@ bool BattleScreen::Step9()
 
 		if (GetRandom(hitRatio))
 		{
-
+			updateQ.push(&BattleScreen::DialogShowing);
+			updateQ.push(&BattleScreen::Step10);
 		}
 		else
 		{
 			dialogShow->Push(TransString(NULL, "pokemon_attack_miss", 1, TokenChange("pokemon_name", DM::GetPokemonDesc(playerPokemon->id)->name)));
+			updateQ.push(&BattleScreen::DialogShowing);
+			updateQ.push(&BattleScreen::Step9);
+			battleQ.pop();
 		}
 	}
 	else if (battleQ.front() == EnemyTurn)
@@ -338,17 +361,17 @@ bool BattleScreen::Step9()
 
 		if (GetRandom(hitRatio))
 		{
-
+			updateQ.push(&BattleScreen::DialogShowing);
+			updateQ.push(&BattleScreen::Step10);
 		}
 		else
 		{
-			dialogShow->Push(TransString(NULL, "pokemon_attack_miss", 1, TokenChange("pokemon_name", DM::GetPokemonDesc(enemyPokemon->id)->name)));
+			dialogShow->Push(TransString(NULL, "enemy_pokemon_attack_miss", 1, TokenChange("pokemon_name", DM::GetPokemonDesc(enemyPokemon->id)->name)));
+			updateQ.push(&BattleScreen::DialogShowing);
+			updateQ.push(&BattleScreen::Step9);
+			battleQ.pop();
 		}
 	}
-
-	dialogShow->Start();
-	dialogShow->SetIsAuto(true);
-	dialogShowSwitch = true;
 
 	battleMenuDialogSwitch = false;
 	fightMenuDialogSwitch = false;
@@ -356,24 +379,14 @@ bool BattleScreen::Step9()
 	skillInfoSwitch = false;
 	battleMenuSkillCursorSwitch = false;
 
-	updateQ.push(&BattleScreen::DialogShowing);
-	updateQ.push(&BattleScreen::Step10);
 	return true;
 }
 
 bool BattleScreen::Step10()
 {
-	/*if (dialogShow->IsPlaying())
+	/*if (battleQ.front() == PlayerTurn)
 	{
-		dialogShowSwitch = true;
-		dialogShow->Update();
-		return false;
-	}*/
-
-	int vital = GetRandom(CalVitalRank(playerBattleData->vital_rank)) ? 2 : 1;
-
-	if (battleQ.front() == PlayerTurn)
-	{
+		int vital = GetRandom(CalVitalRank(playerBattleData->vital_rank)) ? 2 : 1;
 		int damage = CalDamage(playerSelectSkillID, playerPokemon, enemyPokemon, vital);
 		int newHP = enemyPokemon->hp - damage;
 		newHP = newHP < 0 ? 0 : newHP;
@@ -381,9 +394,12 @@ bool BattleScreen::Step10()
 		tweeningObject->SetTarget(&(enemyPokemon->hp));
 		tweeningObject->SetGoalValue(newHP);
 		tweeningObject->Start();
+
+		enemy->TwinkleStart();
 	}
 	else
 	{
+		int vital = GetRandom(CalVitalRank(enemyBattleData->vital_rank)) ? 2 : 1;
 		int damage = CalDamage(enemySelectSkillID, enemyPokemon, playerPokemon, vital);
 		int newHP = playerPokemon->hp - damage;
 		newHP = newHP < 0 ? 0 : newHP;
@@ -391,9 +407,9 @@ bool BattleScreen::Step10()
 		tweeningObject->SetTarget(&(playerPokemon->hp));
 		tweeningObject->SetGoalValue(newHP);
 		tweeningObject->Start();
-	}
 
-	battleQ.pop();
+		player->TwinkleStart();
+	}*/
 
 	updateQ.push(&BattleScreen::Step11);
 
@@ -402,6 +418,15 @@ bool BattleScreen::Step10()
 
 bool BattleScreen::Step11()
 {
+	if (!battleQ.empty() && battleQ.front() == PlayerTurn)
+	{
+		if (enemy->IsTwinkle())
+		{
+			enemy->Twinkle();
+			return false;
+		}
+	}
+
 	if (tweeningObject->IsPlaying())
 	{
 		tweeningObject->Update();
@@ -411,10 +436,63 @@ bool BattleScreen::Step11()
 	if (battleQ.empty())
 	{
 		dialogShowSwitch = false;
-
 		updateQ.push(&BattleScreen::Step7);
 	}
-	else updateQ.push(&BattleScreen::Step9);
+	else if (battleQ.front() == PlayerTurn)
+	{
+		if (enemyPokemon->hp == 0)
+			updateQ.push(&BattleScreen::Step12);
+		else if (battleQ.size() > 1)
+			updateQ.push(&BattleScreen::Step9);
+		else
+			updateQ.push(&BattleScreen::Step7);
+
+		battleQ.pop();
+	}
+	else if (battleQ.front() == EnemyTurn)
+	{
+		if (playerPokemon->hp == 0)
+			updateQ.push(&BattleScreen::Step13);
+		else if (battleQ.size() > 1)
+			updateQ.push(&BattleScreen::Step9);
+		else
+			updateQ.push(&BattleScreen::Step7);
+
+		battleQ.pop();
+	}
+
+	return true;
+}
+
+bool BattleScreen::Step12()
+{
+	dialogShowSwitch = true;
+	dialogShow->Reset();
+	dialogShow->SetIsAuto(true);
+	dialogShow->Push(TransString(NULL, "enemy_pokemon_fall_down", 1, TokenChange("pokemon_name", DM::GetPokemonDesc(enemyPokemon->id)->name)));
+
+	int exp = CalExp(battleType == Wild ? 1.0f : 1.5f, playerPokemon->id, enemyPokemon->level);
+
+	dialogShow->Push(TransString(NULL, "pokemon_get_exp", 2, TokenChange("pokemon_name", DM::GetPokemonDesc(enemyPokemon->id)->name), TokenChange("exp", std::to_string(exp))));
+
+	updateQ.push(&BattleScreen::DialogShowing);
+	updateQ.push(&BattleScreen::Step14);
+
+	return true;
+}
+
+bool BattleScreen::Step13()
+{
+	dialogShow->Reset();
+	dialogShow->Push(TransString(NULL, "pokemon_fall_down", 1, TokenChange("pokemon_name", DM::GetPokemonDesc(playerPokemon->id)->name)));
+
+	return true;
+}
+
+bool BattleScreen::Step14()
+{
+
+
 
 	return true;
 }
@@ -424,7 +502,6 @@ bool BattleScreen::DialogShowing()
 	if (dialogShow->IsPlaying())
 	{
 		dialogShow->Update();
-
 		return false;
 	}
 	else if(!dialogShow->IsPlaying() && dialogShow->RemainCount() > 0)
@@ -557,7 +634,7 @@ void BattleScreen::DrawEnemyPokemonInfo(Graphics &g)
 	_stprintf_s(buffer, _T("%d"), enemyPokemon->level);
 	g.DrawString(buffer, -1, FONT_MEDIUM, enemyPokemonLevelRect, LEFT_ALIGN, BLACK);
 
-	int maxHP = CalHP(data->HP, enemyPokemon->level);
+	int maxHP = enemyPokemon->maxHP;
 	int curHP = enemyPokemon->hp;
 
 	float ratio = curHP / (float)maxHP;
@@ -591,7 +668,7 @@ void BattleScreen::DrawPlayerPokemonInfo(Graphics &g)
 	_stprintf_s(buffer, _T("%d"), CalHP(data->HP, playerPokemon->level));
 	g.DrawString(buffer, -1, FONT_MEDIUM, playerPokemonMaxHPRect, RIGHT_ALIGN, BLACK);
 
-	int maxHP = CalHP(data->HP, playerPokemon->level);
+	int maxHP = playerPokemon->maxHP;
 	int curHP = playerPokemon->hp;
 
 	float ratio = curHP / (float)maxHP;
@@ -656,289 +733,6 @@ void BattleScreen::Update()
 		bool check = (this->*updateQ.front())();
 		if (check) updateQ.pop();
 	}
-
-	return;
-
-	switch (curState)
-	{
-		case InitToEncounter:
-		{
-			if (player->IsPlaying())
-			{
-				player->MoveTo();
-				enemy->MoveTo();
-			}
-			else
-			{
-				dialogShow->Reset();
-				dialogShow->Push(TransString(NULL, "wonder"));
-				dialogShow->Push(TransString(NULL, "wild_encounter", 1, TokenChange("pokemon_name", DM::GetPokemonDesc(enemyPokemon->id)->name)));
-				dialogShow->Start();
-				curState = Encounter;
-			}
-		}
-		break;
-
-		case Encounter:
-		{
-			if (dialogShow->IsPlaying())
-			{
-				dialogShow->Update();
-			}
-			else if (!dialogShow->IsPlaying() && dialogShow->RemainCount() > 0)
-			{
-				if (GET_KEY_Z || GET_KEY_X)
-					dialogShow->Start();
-			}
-			else if (!dialogShow->IsPlaying() && dialogShow->RemainCount() == 0)
-			{
-				if (GET_KEY_Z || GET_KEY_X)
-				{
-					player->MoveToInit(PointF(R(-3 * MUL), R(3 * MUL)), 0.5f);
-					player->Start();
-
-					dialogShow->Reset();
-					dialogShow->Push(TransString(NULL, "pokemon_dispatch", 1, TokenChange("pokemon_name", DM::GetPokemonDesc(playerPokemon->id)->name)));
-					dialogShow->Start();
-
-					curState = EncounterToDispatch;
-				}
-			}
-		}
-		break;
-
-		case EncounterToDispatch:
-		{
-			if (player->IsPlaying())
-			{
-				player->MoveTo();
-			}
-			else
-			{
-				if (dialogShow->IsPlaying())
-				{
-					dialogShow->Update();
-				}
-				else if (!dialogShow->IsPlaying() && dialogShow->RemainCount() > 0)
-				{
-					if (GET_KEY_Z || GET_KEY_X)
-						dialogShow->Start();
-				}
-				else if (!dialogShow->IsPlaying() && dialogShow->RemainCount() == 0)
-				{
-					anim->Start();
-
-					player->SetImage(pokemonPic);
-					player->SetPos(R(0.5f * MUL), R(3 * MUL));
-					player->SetImagePos(DM::GetBehindPokemonImageRect(playerPokemon->id));
-
-					curState = Dispatch;
-				}
-			}
-		}
-		break;
-
-		case Dispatch:
-		{
-			if (anim->IsPlaying())
-			{
-				anim->Update();
-			}
-			else if (GET_KEY_Z || GET_KEY_X || !anim->IsPlaying())
-			{
-				dialogShow->Reset();
-				dialogShow->Push("                 ");
-				dialogShow->Start();
-
-				curState = DispatchToSelectMenu;
-			}
-		}
-		break;
-
-		case DispatchToSelectMenu:
-		{
-			if (dialogShow->IsPlaying())
-			{
-				dialogShow->Update();
-			}
-			else
-			{
-				curState = SelectMenu;
-			}
-		}
-		break;
-
-		case SelectMenu:
-		{
-			if (GET_KEY_RIGHT && (curMenuSelect == 0 || curMenuSelect == 2))
-				++curMenuSelect;
-			else if (GET_KEY_LEFT && (curMenuSelect == 1 || curMenuSelect == 3))
-				--curMenuSelect;
-			else if (GET_KEY_DOWN && (curMenuSelect == 0 || curMenuSelect == 1))
-				curMenuSelect += 2;
-			else if (GET_KEY_UP && (curMenuSelect == 2 || curMenuSelect == 3))
-				curMenuSelect -= 2;
-
-			if (GET_KEY_Z)
-			{
-				if (curMenuSelect == 0)
-					curState = FightMenu;
-				else if (curMenuSelect == 1)
-					;
-				else if (curMenuSelect == 2)
-					;
-				else if (curMenuSelect == 3)
-				{
-					dialogShow->Reset();
-					dialogShow->Push(TransString(NULL, "run_success"));
-					dialogShow->Start();
-
-					curState = RunSuccess;
-				}
-			}
-		}
-		break;
-
-		case FightMenu:
-		{
-			if (GET_KEY_UP && curSkillSelect > 0)
-				--curSkillSelect;
-			else if (GET_KEY_DOWN && curSkillSelect < 3 && playerPokemon->skills[curSkillSelect + 1] != -1)
-				++curSkillSelect;
-
-			if (GET_KEY_Z)
-			{
-				if (playerPokemon->pps[curSkillSelect] > 0)
-				{
-					int enemySelectSkillIdx;
-
-					do
-					{
-						enemySelectSkillIdx = rand() % 4;
-					} while (enemyPokemon->skills[enemySelectSkillIdx] == -1);
-
-					playerSelectSkillID = playerPokemon->skills[curSkillSelect];
-					enemySelectSkillID = enemyPokemon->skills[enemySelectSkillIdx];
-
-					if (playerPokemon->SPE_stat > enemyPokemon->SPE_stat)
-					{
-						battleQ.push(PlayerTurn);
-						battleQ.push(EnemyTurn);
-					}
-					else
-					{
-						battleQ.push(EnemyTurn);
-						battleQ.push(PlayerTurn);
-					}
-
-					curState = FightMenuToFightProcess;
-				}
-			}
-
-			if (GET_KEY_X)
-			{
-				curState = SelectMenu;
-			}
-		}
-		break;
-
-		case FightMenuToFightProcess:
-		{
-			dialogShow->Reset();
-
-			if (battleQ.front() == PlayerTurn)
-			{
-				dialogShow->Push(TransString(NULL, "player_pokemon_attack", 2, TokenChange("pokemon_name", DM::GetPokemonDesc(playerPokemon->id)->name),
-					TokenChange("skill_name", DM::GetSkillDesc(playerSelectSkillID)->name)));
-
-				SkillData* sData = DM::GetSkillData(playerSelectSkillID);
-				
-				int x = playerBattleData->hit_rank - enemyBattleData->hit_rank;
-				float hitRatio = sData->ar * CalHitRateRank(x);
-
-				if (GetRandom(hitRatio))
-				{
-
-				}
-				else
-				{
-					dialogShow->Push(TransString(NULL, "pokemon_attack_miss", 1, TokenChange("pokemon_name", DM::GetPokemonDesc(playerPokemon->id)->name)));
-				}
-			}
-			else if (battleQ.front() == EnemyTurn)
-			{
-				dialogShow->Push(TransString(NULL, "enemy_pokemon_attack", 2, TokenChange("pokemon_name", DM::GetPokemonDesc(enemyPokemon->id)->name),
-					TokenChange("skill_name", DM::GetSkillDesc(enemySelectSkillID)->name)));
-
-				SkillData* sData = DM::GetSkillData(enemySelectSkillID);
-
-				int x = enemyBattleData->hit_rank - playerBattleData->hit_rank;
-				float hitRatio = sData->ar * CalHitRateRank(x);
-
-				if (GetRandom(hitRatio))
-				{
-
-				}
-				else
-				{
-					dialogShow->Push(TransString(NULL, "pokemon_attack_miss", 1, TokenChange("pokemon_name", DM::GetPokemonDesc(enemyPokemon->id)->name)));
-				}
-			}
-
-			dialogShow->Start();
-			curState = FightProcess;
-		}
-		break;
-
-		case FightProcess:
-		{
-			if (dialogShow->IsPlaying())
-			{
-				dialogShow->Update();
-			}
-			else
-			{
-				int vital = GetRandom(CalVitalRank(playerBattleData->vital_rank)) ? 2 : 1;
-
-				if (battleQ.front() == PlayerTurn)
-				{
-					int damage = CalDamage(playerSelectSkillID, playerPokemon, enemyPokemon, vital);
-					enemyPokemon->hp -= damage;
-
-					if (enemyPokemon->hp < 0)
-						enemyPokemon->hp = 0;
-				}
-				else
-				{
-					int damage = CalDamage(enemySelectSkillID, enemyPokemon, playerPokemon, vital);
-					playerPokemon->hp -= damage;
-
-					if (playerPokemon->hp < 0)
-						playerPokemon->hp = 0;
-				}
-
-				battleQ.pop();
-
-				if (battleQ.empty())
-					curState = SelectMenu;
-				else
-					curState = FightMenuToFightProcess;
-			}
-		}
-		break;
-
-		case RunSuccess:
-		{
-			dialogShow->Update();
-
-			if (!dialogShow->IsPlaying() && GET_KEY_Z)
-			{
-				Reset();
-				RunManager::SetTarget(gm->gamePlay);
-			}
-		}
-		break;
-	}
 }
 
 void BattleScreen::Draw(Graphics & g)
@@ -964,147 +758,5 @@ void BattleScreen::Draw(Graphics & g)
 	DrawSkillCursor(g);
 
 	DrawSkillInfo(g);
-
-	return;
-
-	switch (curState)
-	{
-		case InitToEncounter:
-		{
-			DrawBackground(g);
-
-			player->Draw(g);
-			enemy->Draw(g);
-
-			DrawMainDialog(g);
-		}
-		break;
-
-		case Encounter:
-		{
-			DrawBackground(g);
-			DrawMainDialog(g);
-
-			player->Draw(g);
-			enemy->Draw(g);
-
-			DrawPlayerInfo(g);
-
-			dialogShow->Draw(g);
-		}
-		break;
-
-		case EncounterToDispatch:
-		{
-			DrawBackground(g);
-			DrawMainDialog(g);
-
-			player->Draw(g);
-			enemy->Draw(g);
-
-			dialogShow->Draw(g);
-
-			DrawEnemyPokemonInfo(g);
-		}
-		break;
-
-		case Dispatch:
-		{
-			DrawBackground(g);
-
-			if (anim->IsPlaying())
-				anim->Draw(g);
-			else
-				player->Draw(g);
-
-			enemy->Draw(g);
-
-			DrawMainDialog(g);
-			DrawEnemyPokemonInfo(g);
-			dialogShow->Draw(g);
-		}
-		break;
-
-		case DispatchToSelectMenu:
-		{
-			DrawBackground(g);
-			player->Draw(g);
-			enemy->Draw(g);
-			DrawEnemyPokemonInfo(g);
-
-			DrawMainDialog(g);
-		}
-		break;
-
-		case SelectMenu:
-		{
-			DrawBackground(g);
-			DrawMainDialog(g);
-
-			player->Draw(g);
-			enemy->Draw(g);
-
-			DrawBattleMenuDialog(g);
-
-			DrawEnemyPokemonInfo(g);
-			DrawPlayerPokemonInfo(g);
-
-			DrawBattleMenu(g);
-			DrawMenuCursor(g);
-		}
-		break;
-
-		case FightMenu:
-		{
-			DrawBackground(g);
-
-			player->Draw(g);
-			enemy->Draw(g);
-
-			DrawEnemyPokemonInfo(g);
-			DrawPlayerPokemonInfo(g);
-
-			DrawFightMenuDialog(g);
-			DrawBattleMenuDialog(g);
-
-			DrawFightMenu(g);
-			DrawSkillCursor(g);
-
-			DrawSkillInfo(g);
-		}
-		break;
-
-		case FightMenuToFightProcess:
-		case FightProcess:
-		{
-			DrawBackground(g);
-			DrawMainDialog(g);
-
-			player->Draw(g);
-			enemy->Draw(g);
-
-			DrawEnemyPokemonInfo(g);
-			DrawPlayerPokemonInfo(g);
-
-			dialogShow->Draw(g);
-		}
-		break;
-
-		case RunSuccess:
-		{
-			DrawBackground(g);
-
-			player->Draw(g);
-			enemy->Draw(g);
-
-			DrawEnemyPokemonInfo(g);
-			DrawPlayerPokemonInfo(g);
-
-			DrawMainDialog(g);
-
-			dialogShow->Draw(g);
-		}
-		break;
-	}
 }
 

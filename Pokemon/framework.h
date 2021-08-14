@@ -20,7 +20,7 @@
 // string to TCHAR
 #include <atlstr.h>
 
-const int SCREEN_MUL = 4;
+const int SCREEN_MUL = 5;
 const int PIXEL = 16;
 const int POKE_PIXEL = 56;
 

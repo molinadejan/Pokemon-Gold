@@ -117,6 +117,8 @@ struct PokemonIndiv
 	int id;
 	int level;
 	int exp;
+	int nextExp;
+	int maxHP;
 	int hp;
 	int gender;
 
@@ -166,11 +168,32 @@ struct SkillDesc
 
 struct PlayerData
 {
-	int money;
+	//int money;
+
+	string locationID;
+	Point pos;
 
 	// 0 : tool, 1 : ball, 2 : important, 3 : machine
 	vector<InventoryItemData*> iData[4];
 	vector<PokemonIndiv*> pokemonInBag;
+
+	PlayerData();
+};
+
+struct AttackInfo
+{
+	int damage;
+
+	// 0 : 효과가 없다
+	// 1 : 보통
+	// 2 : 효과는 굉장했다.
+	int effect;
+
+	// 급소
+	bool vital;
+
+	// 기술 타입? 데미지 인지 상태이상인지...
+	// int type;
 };
 
 #endif // !__DATAS_H__

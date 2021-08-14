@@ -8,8 +8,10 @@ class TweeningObject
 private:
 
 	int* target;
-	int goalValue;
-	int curValue;
+	float goalValue;
+	float curValue;
+	float prevDiff;
+	float diff;
 
 	bool isPlaying;
 

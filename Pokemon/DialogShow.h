@@ -16,7 +16,8 @@ class DialogShow
 {
 private:
 
-	const float FRAME_LIMIT = 0.05f;
+	const float FRAME_TIME = 0.05f;
+	const float WAITING_TIME = 0.1f;
 	const RectF dialogRect = { REAL(0.5f * MUL), REAL(6.1f * MUL), REAL(9 * MUL), REAL(3 * MUL) };
 
 private:
@@ -27,12 +28,14 @@ private:
 	int textIdx;
 
 	float frameTimer;
+	float waitingTimer;
 
 	TCHAR buffer1[128];
 	TCHAR buffer2[128];
 
 	bool isPlaying;
 	bool isAuto;
+	bool isWaiting;
 
 public:
 

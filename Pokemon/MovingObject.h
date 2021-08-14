@@ -20,10 +20,14 @@ protected:
 	PointF dir;
 
 	bool isPlaying;
+	bool isTwinkle;
+
 	float timer;
 	float time;
 
 	PointF dest;
+
+	int twinkleCnt;
 
 public:
 
@@ -36,9 +40,14 @@ public:
 	void SetImagePos(Rect _rect);
 
 	bool IsPlaying();
+	bool IsTwinkle();
+
 	virtual void Draw(Graphics& g);
 
 	void Start();
+
+	void Twinkle();
+	void TwinkleStart();
 
 	void MoveToInit(PointF dest, float time);
 	void MoveTo();

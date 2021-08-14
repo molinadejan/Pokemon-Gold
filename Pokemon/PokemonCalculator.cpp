@@ -1,5 +1,6 @@
 #include "PokemonCalculator.h"
 #include <algorithm>
+#include <cmath>
 
 int CalHP(int HP, int level, int NOT_USE)
 {
@@ -62,7 +63,7 @@ int CalDEF(int DEFStat, int rank, float suicideBomb, float tool)
 	return int(DEFStat * CalStatRank(rank) * suicideBomb * tool);
 }
 
-int CalDamage(int skillID, PokemonIndiv* attackPoke, PokemonIndiv* hitPoke, int vital, float tool, float NOT_USE2)
+AttackInfo CalDamage(int skillID, PokemonIndiv* attackPoke, PokemonIndiv* hitPoke, int vital, float tool, float NOT_USE2)
 {
 	SkillData* sData = DM::GetSkillData(skillID);
 
@@ -93,17 +94,87 @@ int CalDamage(int skillID, PokemonIndiv* attackPoke, PokemonIndiv* hitPoke, int 
 	if (sData->type == aData->type1 || sData->type == aData->type2)
 		stab = 1.5f;
 
-	int ret = int(power * attack * (attackPoke->level * 2 * 0.2f + 2));
-	ret = int(ret / (float)def / 50.0f * vital * 2);
+	int damage = int(power * attack * (attackPoke->level * 2 * 0.2f + 2));
+	damage = int(damage / (float)def / 50.0f * vital * 2);
 
 	float type1Revise = DM::GetTypeRevision(sData->type, hData->type1);
 	float type2Revise = hData->type2 == -1 ? 1.0f : DM::GetTypeRevision(sData->type, hData->type2);
 
-	ret = int(ret * stab * type1Revise * type2Revise);
+	damage = int(damage * stab * type1Revise * type2Revise);
 
-	float random = (rand() % 39 + 217) * 100.0f / 255.0f / 255.0f;
+	float random = (rand() % 16 + 85) / 255.0f;
 
-	ret = (int)(ret * random);
+	damage = (int)(damage * random);
+
+	if (damage == 0)
+		damage = 1.0f;
+
+	AttackInfo ret;
+
+	ret.damage = damage;
+	
+	if (type1Revise * type2Revise == 0)
+		ret.effect = 0;
+	else if (type1Revise * type2Revise > 1.5f)
+		ret.effect = 2;
+	else
+		ret.effect = 1;
+
+	if (vital == 2)
+		ret.vital = true;
+	else
+		ret.vital = false;
 
 	return ret;
+}
+
+int CalExp(float battleType, int id, int enemyLevel, int s)
+{
+
+	float ret = battleType * DM::GetPokemonData(id)->base_exp * enemyLevel;
+	ret /= (7 * s);
+
+	return (int)ret;
+}
+
+int CalGrowthType0(int level)
+{
+	float ret = 0.8f * std::pow(level, 3);
+	return (int)ret;
+}
+
+int CalGrowthType1(int level)
+{
+	return (int)std::pow(level, 3);
+}
+
+int CalGrowthType2(int level)
+{
+	float ret = 8.3f * std::pow(level, 3) - 15.0f * std::pow(level, 2) + 100 * level - 140;
+
+	if (ret < 0) ret = 10;
+
+	return (int)ret;
+}
+
+int CalGrowthType3(int level)
+{
+	float ret = 1.25f * std::pow(level, 3);
+	return (int)ret;
+}
+
+int CalNextExp(int id, int nextLevel)
+{
+	int type = DM::GetPokemonData(id)->exp_growth_group;
+
+	if (type == 0)
+		return CalGrowthType0(nextLevel);
+	else if (type == 1)
+		return CalGrowthType1(nextLevel);
+	else if (type == 2)
+		return CalGrowthType2(nextLevel);
+	else if (type == 3)
+		return CalGrowthType3(nextLevel);
+
+	return 1;
 }

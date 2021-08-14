@@ -226,5 +226,45 @@
   {
 	"key": "pokemon_attack_miss",
     "value": "그러나 {pokemon_name}의\n공격은 빗나갔다!"
+  },
+  {
+	"key": "enemy_pokemon_attack_miss",
+    "value": "그러나 적 {pokemon_name}의\n공격은 빗나갔다!"
+  },
+  {
+	"key": "pokemon_fall_down",
+    "value": "{pokemon_name}는(은)\n쓰러졌다!"
+  },
+  {
+	"key": "enemy_pokemon_fall_down",
+    "value": "적 {pokemon_name}는(은)\n쓰러졌다!"
+  },
+  {
+	"key": "pokemon_get_exp",
+    "value": "{pokemon_name}는(은)\n{exp}의 경험치를 얻었다!"
+  },
+  {
+	"key": "skill_no_effect",
+    "value": "하지만\n아무런 효과가 없었다!"
+  },
+  {
+	"key": "skill_less_effect",
+    "value": "효과는 조금 부족했다."
+  },
+  {
+	"key": "skill_great_effect",
+    "value": "효과는 굉장했다!"
+  },
+  {
+	"key": "skill_hit_vital",
+    "value": "급소에 맞았다!"
+  },
+  {
+	"key": "game_start_menu_0",
+    "value": "모험을 계속하다"
+  },
+  {
+	"key": "game_start_menu_1",
+    "value": "새로운 모험을 시작하다"
   }
 ]

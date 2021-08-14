@@ -72,12 +72,17 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
+    <IncludePath>C:\Program Files %28x86%29\FMOD SoundSystem\FMOD Studio API Windows\api\core\inc;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Program Files %28x86%29\FMOD SoundSystem\FMOD Studio API Windows\api\core\lib\x86;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
+    <ExecutablePath>$(ExecutablePath)</ExecutablePath>
+    <IncludePath>C:\Program Files %28x86%29\FMOD SoundSystem\FMOD Studio API Windows\api\core\inc;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Program Files %28x86%29\FMOD SoundSystem\FMOD Studio API Windows\api\core\lib\x86;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
@@ -96,6 +101,7 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>fmod_vc.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -132,6 +138,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>fmod_vc.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -155,8 +162,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="AnimationObject.h" />
+    <ClInclude Include="CSound.h" />
     <ClInclude Include="dist\json\json-forwards.h" />
     <ClInclude Include="dist\json\json.h" />
+    <ClInclude Include="GameStart.h" />
+    <ClInclude Include="Intro.h" />
     <ClInclude Include="MovingObject.h" />
     <ClInclude Include="BagItemSelect.h" />
     <ClInclude Include="BagItemToss.h" />
@@ -191,7 +201,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AnimationObject.cpp" />
+    <ClCompile Include="CSound.cpp" />
     <ClCompile Include="dist\jsoncpp.cpp" />
+    <ClCompile Include="GameStart.cpp" />
+    <ClCompile Include="Intro.cpp" />
     <ClCompile Include="MovingObject.cpp" />
     <ClCompile Include="BagItemSelect.cpp" />
     <ClCompile Include="BagItemToss.cpp" />

@@ -142,12 +142,15 @@ private:
 	bool Step6();
 	bool Step7();
 	bool Step8();
+	bool Step8_5();
 	bool Step9();
 	bool Step10();
 	bool Step11();
 	bool Step12();
 	bool Step13();
 	bool Step14();
+	bool Step15();
+	bool Step16();
 
 
 	bool DialogShowing();

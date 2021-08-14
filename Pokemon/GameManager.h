@@ -15,10 +15,17 @@ class BagItemSelect;
 class BagItemToss;
 class BagItemTossConfirm;
 class BattleScreen;
+class Intro;
+class GameStart;
+class CSound;
 
 class GameManager
 {
 public:
+
+
+	CSound* buttonSound;
+	CSound* bagSound;
 
 	GamePlay *gamePlay;
 	MainMenu *mainMenu;
@@ -28,6 +35,8 @@ public:
 	BagItemToss* bagItemToss;
 	BagItemTossConfirm* bagItemTossConfirm;
 	BattleScreen* battleScreen;
+	Intro *intro;
+	GameStart* gameStart;
 
 public:
 

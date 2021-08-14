@@ -27,6 +27,8 @@ public:
 	~BaseClass();
 
 	virtual void ResourceInit();
+	virtual void Init() { };
+	virtual void Reset() { };
 
 	void SetManager(GameManager* _gm);
 	virtual void Update();

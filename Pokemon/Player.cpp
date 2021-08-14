@@ -6,7 +6,15 @@
 #include <cmath>
 
 Player::Player()
-	: pos{ 0, 0 }, posF{ (REAL)pos.X, (REAL)pos.Y }, moveDir{ 0, 0 }, inputDir(0, 0), speed(3.0f), isMoving(false) { }
+	: pos{ 0, 0 }, posF{ (REAL)pos.X, (REAL)pos.Y }, moveDir{ 0, 0 }, inputDir(0, 0), speed(4.0f), isMoving(false), frameChangeTime(0.0f) 
+{ 
+	playerImg = DM::GetPlayerInGame();
+
+	walkAnim[0] = DM::GetAnimRect("player_walk_left");
+	walkAnim[1] = DM::GetAnimRect("player_walk_right");
+	walkAnim[2] = DM::GetAnimRect("player_walk_up");
+	walkAnim[3] = DM::GetAnimRect("player_walk_down");
+}
 
 Player::~Player() { }
 
@@ -58,37 +66,25 @@ void Player::MovingPlayer()
 
 void Player::DrawPlayer(Graphics &g)
 {
-	Image *img = DM::GetPlayerInGame();
 	Rect r((COL / 2 - 1) * PIXEL * SCREEN_MUL, (ROW / 2 - 0.25f) * PIXEL * SCREEN_MUL, PIXEL * SCREEN_MUL, PIXEL * SCREEN_MUL);
 
-	int spriteTargetX = 0, curFrameCnt = 0;
+	Rect imagePos = walkAnim[curDir][frameCount % walkAnim[curDir].size()];
 
-	if (inputDir.X != 0 && inputDir.Y == 0)
-	{
-		spriteTargetX = inputDir.X == 1 ? 0 : 2;
-		curFrameCnt = isMoving ? frameCount % DIR_HORIZONTAL_FRAME_CNT : 0;
-	}
-	else if (inputDir.X == 0 && inputDir.Y != 0)
-	{
-		spriteTargetX = inputDir.Y == 1 ? 4 : 7;
-
-		if (isMoving)
-		{
-			curFrameCnt = frameCount % DIR_VERTICAL_FRAME_CNT;
-			curFrameCnt = curFrameCnt % 2 == 0 ? 0 : curFrameCnt / 2 + 1;
-		}
-		else curFrameCnt = 0;
-	}
-
-	g.DrawImage(img, r, (spriteTargetX + curFrameCnt) * PIXEL, 0, PIXEL, PIXEL, UnitPixel);
+	g.DrawImage(playerImg, r, imagePos.X, imagePos.Y, imagePos.Width, imagePos.Height, UnitPixel);
 }
 
 void Player::MovePlayer(Map*& m, Point dir)
 {
 	inputDir = dir;
 
-	if (inputDir == Point(0, 0))
-		return;
+	if (dir.X == 1)
+		curDir = RIGHT;
+	else if (dir.X == -1)
+		curDir = LEFT;
+	else if (dir.Y == 1)
+		curDir = DOWN;
+	else if (dir.Y == -1)
+		curDir = UP;
 
 	Point nextPos = pos + inputDir;
 	moveDir = inputDir;
@@ -106,15 +102,16 @@ void Player::MovePlayer(Map*& m, Point dir)
 
 void Player::FrameUpdate()
 {
-	if (isMoving)
+	if (isMoving || frameCount % 2 == 1)
 	{
-		frameChangeTime -= Timer::DeltaTime();
+		frameChangeTime += Timer::DeltaTime();
 
-		if (frameChangeTime <= 0.0f)
+		if (frameChangeTime >= FRAME_TIME)
 		{
-			frameChangeTime = FRAME_TIME;
+			frameChangeTime = 0.0f;
+
 			++frameCount;
-			frameCount %= MAX_FRAME;
+			frameCount %= (int)walkAnim[3].size();
 		}
 	}
 }

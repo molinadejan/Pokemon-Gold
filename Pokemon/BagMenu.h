@@ -7,6 +7,7 @@
 
 class BagMenu : public BaseClass
 {
+
 private:
 
 	const Rect  bagUIRect        = { 0                , 0                 , SCREEN_SIZE_X     , 6 * MUL            };
@@ -24,7 +25,6 @@ private:
 	RectF GetItemCountRectF (int i) { return RectF(R(8 * MUL), R((i + 1) * MUL), R(2 * MUL), R(MUL)); }
 	Rect  GetCursorRect     (int i) { return Rect (3 * MUL   , (i + 1) * MUL   , MUL       , MUL   ); }
 
-	Image* bag;
 	PlayerData* pData;
 
 public:
@@ -34,12 +34,11 @@ public:
 		Tool = 0,
 		Ball = 1,
 		Important = 2,
-		Machine = 3,
+		Machine = 3
 	};
 
 private:
 
-	//BagState state;
 	int poketSelect;
 
 	int curSelectIdx[4];
@@ -67,9 +66,11 @@ public:
 
 	InventoryItemData* GetCurSelectInventoryItemData();
 
-	void ResourceInit() override;
+	void Init() override;
 	void Draw(Graphics& g) override;
 	void Update() override;
+
+	void AdjustSelect();
 };
 
 #endif // !__BAGMENU_H__

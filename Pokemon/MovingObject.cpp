@@ -34,8 +34,16 @@ bool MovingObject::IsPlaying()
 	return isPlaying;
 }
 
+bool MovingObject::IsTwinkle()
+{
+	return isTwinkle;
+}
+
 void MovingObject::Draw(Graphics & g)
 {
+	if (isTwinkle && twinkleCnt % 2 == 1)
+		return;
+
 	g.DrawImage(image, Rect(pos.X, pos.Y, screenSize.X, screenSize.Y), imagePos.X, imagePos.Y, imagePos.Width, imagePos.Height, UnitPixel);
 }
 
@@ -44,10 +52,36 @@ void MovingObject::Start()
 	isPlaying = true;
 }
 
+void MovingObject::Twinkle()
+{
+	if (isTwinkle)
+	{
+		timer += Timer::DeltaTime();
+
+		if (timer >= time)
+		{
+			timer = 0.0f;
+			++twinkleCnt;
+
+			if (twinkleCnt == 10)
+				isTwinkle = false;
+		}
+	}
+}
+
+void MovingObject::TwinkleStart()
+{
+	isTwinkle = true;
+	time = 0.07f;
+	timer = 0.0f;
+	twinkleCnt = 0;
+}
+
 void MovingObject::MoveToInit(PointF _dest, float _time)
 {
 	dest = _dest;
 	time = _time;
+	timer = 0.0f;
 
 	dir.X = (dest.X - pos.X) / time;
 	dir.Y = (dest.Y - pos.Y) / time;

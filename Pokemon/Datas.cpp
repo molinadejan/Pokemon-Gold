@@ -67,9 +67,10 @@ PokemonIndiv::PokemonIndiv(int _id, int _level)
 	PokemonData* data = DM::GetPokemonData(_id);
 	level = _level + rand() % 3 - 1;
 	exp = 0;
+	nextExp = CalNextExp(id, level + 1);
 	gender = rand() % 2;
 
-	hp = CalHP(data->HP, level);
+	maxHP =	hp = CalHP(data->HP, level);
 
 	ATK_stat = CalStat(data->ATK, level);
 	DEF_stat = CalStat(data->DEF, level);
@@ -117,3 +118,5 @@ void PokemonBattleData::Reset()
 	hit_rank = 0;
 	vital_rank = 0;
 }
+
+PlayerData::PlayerData() {}

@@ -15,11 +15,8 @@ private:
 
 	enum TossConfirmState
 	{
-		Init,
 		OneMoreConfirm,
-		Confirm,
 		TossFinish,
-		Pause,
 	};
 
 private:
@@ -34,19 +31,19 @@ private:
 
 	TCHAR tmpBuffer[256];
 	TossConfirmState curState;
-	InventoryItemData curItemData;
-	Image *bag;
+	InventoryItemData* curItemData;
 
 private:
 
-	void Reset();
+	void DrawConfirmUI(Graphics& g);
 
 public:
 
 	BagItemTossConfirm();
 	~BagItemTossConfirm();
 
-	void ResourceInit() override;
+	void Init() override;
+	void Reset() override;
 	void Draw(Graphics& g) override;
 	void Update() override;
 };

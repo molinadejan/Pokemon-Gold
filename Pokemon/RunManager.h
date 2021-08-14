@@ -10,6 +10,11 @@
 #include "MainMenu.h"
 #include "GameFadeInOut.h"
 #include "BattleScreen.h"
+#include "GameStart.h"
+#include "Intro.h"
+
+#define SCENE_CHANGE_TIME 0.3f
+#define SCENE_CHANGE_TIME_HALF 0.15f
 
 class RunManager
 {
@@ -34,7 +39,9 @@ private:
 		drawPtr draw;
 		updatePtr update;
 		bool isPop;
+
 		BaseClass* target;
+		BaseClass* newTarget;
 
 	private:
 
@@ -44,16 +51,23 @@ private:
 private:
 
 	static Run run;
+	static bool isSceneChange;
+	static float sceneChangeTimer;
+	static float tp;
+	static float fadeSpeed;
 
 private:
 
 	RunManager() = delete;
 	~RunManager() = delete;
 
+	static void SetFunc();
+
 public:
 
 	static void Reset();
-	static void SetTarget(BaseClass* _base);
+	static void SetTarget(BaseClass* _base, float _fadeSpeed = 3000.0f);
+	static void SetTargetWithoutFade(BaseClass* _base);
 
 	static void Update();
 	static void Draw(HWND hWnd);

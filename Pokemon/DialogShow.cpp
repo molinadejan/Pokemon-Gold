@@ -41,27 +41,38 @@ bool DialogShow::IsAuto()
 
 bool DialogShow::IsPlaying()
 {
-	return isPlaying;
+	return isPlaying || isWaiting;
 }
 
 void DialogShow::Start()
 {
+	isWaiting = false;
 	isPlaying = true;
+
+	waitingTimer = 0.0f;
+	frameTimer = 0.0f;
 }
 
-// -1 : 아직 진행중
-// 나머지는 남은 대화의 수
-// 다른 클래스에서 값을 받아 각각한 처리를 해주면 됩니다.
 void DialogShow::Update()
 {
-	if (isPlaying)
+	if (isWaiting)
 	{
-		frameTimer -= Timer::DeltaTime();
+		waitingTimer += Timer::DeltaTime();
 
-		if (frameTimer <= 0.0f)
+		if (waitingTimer >= WAITING_TIME)
+		{
+			waitingTimer = 0.0f;
+			isWaiting = false;
+		}
+	}
+	else if (isPlaying)
+	{
+		frameTimer += Timer::DeltaTime();
+
+		if (frameTimer >= FRAME_TIME)
 		{
 			++textLen;
-			frameTimer = FRAME_LIMIT;
+			frameTimer = 0.0f;
 
 			int len = int(texts[textIdx].size());
 
@@ -72,10 +83,17 @@ void DialogShow::Update()
 			{
 				++textIdx;
 				textLen = 1;
-				isPlaying = false;
+
+				if (isAuto && textIdx < (int)texts.size())
+					isPlaying = true;
+				else
+					isPlaying = false;
+
+				isWaiting = true;
 			}
 		}
 	}
+	
 }
 
 void DialogShow::Draw(Graphics& g)
