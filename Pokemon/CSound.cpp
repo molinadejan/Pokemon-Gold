@@ -12,6 +12,8 @@ CSound::CSound(const char* path, bool loop)
 
 	m_channel = nullptr;
 	m_volume = SOUND_DEFAULT;
+
+
 }
 
 CSound::~CSound() 
@@ -34,6 +36,18 @@ int CSound::Release()
 	FMOD_System_Release(g_sound_system);
 
 	return 0;
+}
+
+float CSound::GetVolume()
+{
+	return m_volume;
+}
+
+void CSound::SetVolume(float _volume)
+{
+	m_volume = _volume;
+
+	FMOD_Channel_SetVolume(m_channel, m_volume);
 }
 
 
@@ -85,6 +99,14 @@ int CSound::volumeDown()
 	return 0;
 }
 
+int CSound::mute()
+{
+	m_volume = SOUND_MIN;
+
+	FMOD_Channel_SetVolume(m_channel, m_volume);
+
+	return 0;
+}
 
 int CSound::Update() 
 {

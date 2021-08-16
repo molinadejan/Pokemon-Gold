@@ -9,6 +9,7 @@
 #include "DialogShow.h"
 #include "AnimationObject.h"
 #include "TweeningObject.h"
+
 #include <queue>
 
 using std::queue;
@@ -25,6 +26,7 @@ public:
 
 	enum BattleState
 	{
+		EncounterAnimation,
 		Init,
 		InitToEncounter,
 		Encounter,
@@ -126,25 +128,30 @@ private:
 	int playerSelectSkillID;
 	int enemySelectSkillID;
 
+	AttackInfo playerAttackInfo;
+	AttackInfo enemyAttackInfo;
+
 	//BattleTurn battleTurn;
 	queue<BattleTurn> battleQ;
-
 	queue<bool(BattleScreen::*)()> updateQ;
 
 private:
-	void Reset();
 
 	bool Step1();
 	bool Step2();
 	bool Step3();
+	bool Step3_5();
 	bool Step4();
 	bool Step5();
+	bool Step5_5();
 	bool Step6();
 	bool Step7();
 	bool Step8();
-	bool Step8_5();
 	bool Step9();
+	bool Step9_5();
 	bool Step10();
+	bool Step10_5();
+	bool Step10_7();
 	bool Step11();
 	bool Step12();
 	bool Step13();
@@ -210,6 +217,7 @@ public:
 	BattleScreen();
 	~BattleScreen() = default;
 
+	void Reset() override;
 	void ResourceInit() override;
 	void Update() override;
 	void Draw(Graphics& g) override;

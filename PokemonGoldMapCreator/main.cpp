@@ -549,6 +549,7 @@ BOOL CALLBACK TileInfoDlgProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lPa
 					if (tile != NULL)
 					{
 						tile->interactID = GetDlgItemInt(hDlg, IDC_EDIT_INID, NULL, TRUE);
+						tile->isPokemon = GetDlgItemInt(hDlg, IDC_EDIT_ISPOKEMON, NULL, TRUE);
 					}
 
 					if (mp != NULL)
@@ -582,6 +583,7 @@ BOOL CALLBACK TileInfoDlgProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lPa
 				SetDlgItemText(hDlg, IDC_EDIT_TYPOS, _T(""));
 				SetDlgItemText(hDlg, IDC_EDIT_MOVEABLE, _T(""));
 				SetDlgItemText(hDlg, IDC_EDIT_INID, _T(""));
+				SetDlgItemText(hDlg, IDC_EDIT_ISPOKEMON, _T(""));
 			}
 			else
 			{
@@ -591,6 +593,7 @@ BOOL CALLBACK TileInfoDlgProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lPa
 				SetDlgItemInt(hDlg, IDC_EDIT_TYPOS, tile->tilePos.Y, TRUE);
 				SetDlgItemInt(hDlg, IDC_EDIT_MOVEABLE, tile->moveable, FALSE);
 				SetDlgItemInt(hDlg, IDC_EDIT_INID, tile->interactID, TRUE);
+				SetDlgItemInt(hDlg, IDC_EDIT_ISPOKEMON, tile->isPokemon, TRUE);
 			}
 
 			mp = mc.GetMP();

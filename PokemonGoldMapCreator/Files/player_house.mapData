@@ -1,5 +1,6 @@
 {
 	"ID" : "player_house",
+	"music" : "new_bark_town",
 	"mapSizeX" : 10,
 	"mapSizeY" : 8,
 	"movePoints" : 
@@ -18,7 +19,7 @@
 			"posY" : 7,
 			"targetID" : "new_bark_town",
 			"targetPosX" : 15,
-			"targetPosY" : 5
+			"targetPosY" : 7
 		},
 		{
 			"moveType" : 2,
@@ -26,7 +27,7 @@
 			"posY" : 7,
 			"targetID" : "new_bark_town",
 			"targetPosX" : 15,
-			"targetPosY" : 5
+			"targetPosY" : 7
 		}
 	],
 	"neighbors" : null,

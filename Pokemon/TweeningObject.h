@@ -31,6 +31,9 @@ public:
 	void Start();
 	
 	bool IsPlaying();
+
+	void _Tween(int* target, float goal);
+	void Tween(int* target, float goal);
 };
 
 #endif // !__TWEENINGOBJECT_H__

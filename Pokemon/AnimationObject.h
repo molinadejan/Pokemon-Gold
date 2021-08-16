@@ -5,29 +5,26 @@
 
 #include "MovingObject.h"
 #include <vector>
+#include <string>
 
 using std::vector;
+using std::string;
 
 class AnimationObject : public MovingObject
 {
 private:
 
-	float frameTime;
-	float frameTimer;
-
-	int frameCount;
+	int frameCnt;
 	vector<Rect> imagePosVec;
 
 public:
 
 	AnimationObject();
-	AnimationObject(Image* _image, PointF _pos, Point _screenSize, vector<Rect> _imagePosVec);
 
-	void SetImagePosVec(vector<Rect> _imagePosVec);
-	void Update();
-	void Reset();
-	int GetRemainCount();
 	void Draw(Graphics &g) override;
+
+	void _Playing();
+	void Playing(string animName);
 };
 
 #endif // !__ANIMATIONOBJECT_H__

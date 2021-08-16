@@ -10,8 +10,6 @@ class Intro : public BaseClass
 {
 private:
 
-	CSound *introBgm;
-
 	Image* introImg;
 
 	float backgroundTimer;

@@ -9,7 +9,6 @@ using namespace Gdiplus;
 
 class GamePlay;
 class MainMenu;
-class GameFadeInOut;
 class BagMenu;
 class BagItemSelect;
 class BagItemToss;
@@ -23,13 +22,8 @@ class GameManager
 {
 public:
 
-
-	CSound* buttonSound;
-	CSound* bagSound;
-
 	GamePlay *gamePlay;
 	MainMenu *mainMenu;
-	GameFadeInOut *gameFadeInOut;
 	BagMenu *bagMenu;
 	BagItemSelect *bagItemSelect;
 	BagItemToss* bagItemToss;

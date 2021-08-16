@@ -56,8 +56,3 @@ bool MovePoint::isCarpet()
 {
 	return moveType < 4;
 }
-
-PokemonIndiv::PokemonIndiv(int _id)
-{
-
-}

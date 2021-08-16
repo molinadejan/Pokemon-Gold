@@ -7,9 +7,7 @@
 #include "BagItemSelect.h"
 #include "TransDatas.h"
 #include "GdiplusElement.h"
-
-// 나중에 아이템이 없어지고 나서 커서 변수들을 조정해주는 
-// 기능 추가 필요로 할듯하다
+#include "SoundManager.h"
 
 BagMenu::BagMenu() : poketSelect(0)
 {
@@ -102,12 +100,12 @@ void BagMenu::UpdatePoketSelect()
 	// 좌우 가방 종류 선택
 	if (GET_KEY_LEFT && poketSelect > 0)
 	{
-		gm->bagSound->play();
+		SM::PlayEffect("bagOpen");
 		--poketSelect;
 	}
 	else if (GET_KEY_RIGHT && poketSelect < 3)
 	{
-		gm->bagSound->play();
+		SM::PlayEffect("bagOpen");
 		++poketSelect;
 	}
 }
@@ -140,14 +138,14 @@ void BagMenu::Update()
 	// 아이템 선택
 	if (GET_KEY_Z && pData->iData[poketSelect].size() > 0)
 	{
-		gm->buttonSound->play();
+		SM::PlayEffect("button");
 		RunManager::SetTargetWithoutFade(gm->bagItemSelect);
 	}
 
 	// 가방 나가기
 	if (GET_KEY_X)
 	{
-		gm->buttonSound->play();
+		SM::PlayEffect("button");
 		RunManager::SetTargetWithoutFade(gm->mainMenu);
 	}
 }

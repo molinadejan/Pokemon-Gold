@@ -9,6 +9,7 @@
 #include "DataLoadManager.h"
 #include "TransDatas.h"
 #include "GdiplusElement.h"
+#include "SoundManager.h"
 
 BagItemTossConfirm::BagItemTossConfirm() { }
 
@@ -100,7 +101,7 @@ void BagItemTossConfirm::Update()
 
 				if (GET_KEY_Z && confirmSelect == 0)
 				{
-					gm->buttonSound->play();
+					SM::PlayEffect("button");
 
 					string name = DM::GetItemDesc(curItemData->code)->name;
 
@@ -112,7 +113,7 @@ void BagItemTossConfirm::Update()
 				}
 				else if (GET_KEY_X || (GET_KEY_Z && confirmSelect == 1))
 				{
-					gm->buttonSound->play();
+					SM::PlayEffect("button");
 					RunManager::SetTargetWithoutFade(gm->bagMenu);
 				}
 			}
@@ -123,7 +124,7 @@ void BagItemTossConfirm::Update()
 		{
 			if (GET_KEY_Z)
 			{
-				gm->buttonSound->play();
+				SM::PlayEffect("button");
 				RunManager::SetTargetWithoutFade(gm->bagMenu);
 			}
 		}

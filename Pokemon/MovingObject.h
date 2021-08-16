@@ -17,17 +17,15 @@ protected:
 	Point screenSize;
 	Rect imagePos;
 
-	PointF dir;
-
 	bool isPlaying;
-	bool isTwinkle;
 
-	float timer;
-	float time;
+	bool twinkleSwitch;
 
-	PointF dest;
+private:
 
-	int twinkleCnt;
+	void _Moving(PointF target, float time);
+	void _Twinkling();
+	void _AttackMotion(int dir);
 
 public:
 
@@ -39,18 +37,16 @@ public:
 	void SetImage(Image* _image);
 	void SetImagePos(Rect _rect);
 
-	bool IsPlaying();
-	bool IsTwinkle();
-
 	virtual void Draw(Graphics& g);
 
-	void Start();
+	bool IsPlaying();
 
-	void Twinkle();
-	void TwinkleStart();
+	void Moving(PointF target, float time);
+	void Twinkling();
+	void AttackMotion(int dir);
 
-	void MoveToInit(PointF dest, float time);
-	void MoveTo();
+	void _FallDown();
+	void FallDown();
 };
 
 #endif // !__ANIMATIONOBJECT_H__

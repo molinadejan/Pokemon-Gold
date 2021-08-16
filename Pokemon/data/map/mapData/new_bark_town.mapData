@@ -1,47 +1,52 @@
 {
 	"ID" : "new_bark_town",
+	"music" : "new_bark_town",
 	"mapSizeX" : 24,
-	"mapSizeY" : 18,
+	"mapSizeY" : 22,
 	"movePoints" : 
 	[
 		{
 			"moveType" : 6,
-			"posX" : 5,
-			"posY" : 11,
-			"targetID" : "new_bark_town_house_1",
-			"targetPosX" : -1,
-			"targetPosY" : -1
-		},
-		{
-			"moveType" : 6,
 			"posX" : 8,
-			"posY" : 3,
+			"posY" : 5,
 			"targetID" : "elm_lab",
 			"targetPosX" : -1,
 			"targetPosY" : -1
 		},
 		{
 			"moveType" : 6,
-			"posX" : 15,
-			"posY" : 5,
-			"targetID" : "player_house",
-			"targetPosX" : 6,
-			"targetPosY" : 7
+			"posX" : 5,
+			"posY" : 13,
+			"targetID" : "new_bark_town_house_1",
+			"targetPosX" : -1,
+			"targetPosY" : -1
 		},
 		{
 			"moveType" : 6,
 			"posX" : 13,
-			"posY" : 13,
+			"posY" : 15,
 			"targetID" : "new_bark_town_house_0",
 			"targetPosX" : -1,
 			"targetPosY" : -1
+		},
+		{
+			"moveType" : 6,
+			"posX" : 15,
+			"posY" : 7,
+			"targetID" : "player_house",
+			"targetPosX" : 6,
+			"targetPosY" : 7
 		}
 	],
-	"neighbors" : null,
+	"neighbors" : 
+	[
+		"route_29"
+	],
 	"tiles" : 
 	[
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 0,
 			"posY" : 0,
@@ -50,6 +55,7 @@
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 1,
 			"posY" : 0,
@@ -58,6 +64,7 @@
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 2,
 			"posY" : 0,
@@ -66,6 +73,7 @@
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 3,
 			"posY" : 0,
@@ -74,6 +82,7 @@
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 4,
 			"posY" : 0,
@@ -82,6 +91,7 @@
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 5,
 			"posY" : 0,
@@ -90,2966 +100,3337 @@
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 6,
 			"posY" : 0,
+			"tilePosX" : 32,
+			"tilePosY" : 48
+		},
+		{
+			"interact ID" : -1,
+			"isPokemon" : 0,
+			"moveable" : 1,
+			"posX" : 7,
+			"posY" : 0,
+			"tilePosX" : 32,
+			"tilePosY" : 48
+		},
+		{
+			"interact ID" : -1,
+			"isPokemon" : 0,
+			"moveable" : 1,
+			"posX" : 8,
+			"posY" : 0,
+			"tilePosX" : 32,
+			"tilePosY" : 48
+		},
+		{
+			"interact ID" : -1,
+			"isPokemon" : 0,
+			"moveable" : 1,
+			"posX" : 9,
+			"posY" : 0,
+			"tilePosX" : 32,
+			"tilePosY" : 48
+		},
+		{
+			"interact ID" : -1,
+			"isPokemon" : 0,
+			"moveable" : 1,
+			"posX" : 10,
+			"posY" : 0,
+			"tilePosX" : 32,
+			"tilePosY" : 48
+		},
+		{
+			"interact ID" : -1,
+			"isPokemon" : 0,
+			"moveable" : 1,
+			"posX" : 11,
+			"posY" : 0,
+			"tilePosX" : 32,
+			"tilePosY" : 48
+		},
+		{
+			"interact ID" : -1,
+			"isPokemon" : 0,
+			"moveable" : 1,
+			"posX" : 12,
+			"posY" : 0,
+			"tilePosX" : 32,
+			"tilePosY" : 48
+		},
+		{
+			"interact ID" : -1,
+			"isPokemon" : 0,
+			"moveable" : 1,
+			"posX" : 13,
+			"posY" : 0,
+			"tilePosX" : 32,
+			"tilePosY" : 48
+		},
+		{
+			"interact ID" : -1,
+			"isPokemon" : 0,
+			"moveable" : 1,
+			"posX" : 14,
+			"posY" : 0,
+			"tilePosX" : 32,
+			"tilePosY" : 48
+		},
+		{
+			"interact ID" : -1,
+			"isPokemon" : 0,
+			"moveable" : 1,
+			"posX" : 15,
+			"posY" : 0,
+			"tilePosX" : 32,
+			"tilePosY" : 48
+		},
+		{
+			"interact ID" : -1,
+			"isPokemon" : 0,
+			"moveable" : 1,
+			"posX" : 16,
+			"posY" : 0,
+			"tilePosX" : 32,
+			"tilePosY" : 48
+		},
+		{
+			"interact ID" : -1,
+			"isPokemon" : 0,
+			"moveable" : 1,
+			"posX" : 17,
+			"posY" : 0,
+			"tilePosX" : 32,
+			"tilePosY" : 48
+		},
+		{
+			"interact ID" : -1,
+			"isPokemon" : 0,
+			"moveable" : 1,
+			"posX" : 18,
+			"posY" : 0,
+			"tilePosX" : 32,
+			"tilePosY" : 48
+		},
+		{
+			"interact ID" : -1,
+			"isPokemon" : 0,
+			"moveable" : 1,
+			"posX" : 19,
+			"posY" : 0,
+			"tilePosX" : 32,
+			"tilePosY" : 48
+		},
+		{
+			"interact ID" : -1,
+			"isPokemon" : 0,
+			"moveable" : 1,
+			"posX" : 20,
+			"posY" : 0,
+			"tilePosX" : 32,
+			"tilePosY" : 48
+		},
+		{
+			"interact ID" : -1,
+			"isPokemon" : 0,
+			"moveable" : 1,
+			"posX" : 21,
+			"posY" : 0,
+			"tilePosX" : 32,
+			"tilePosY" : 48
+		},
+		{
+			"interact ID" : -1,
+			"isPokemon" : 0,
+			"moveable" : 1,
+			"posX" : 22,
+			"posY" : 0,
+			"tilePosX" : 32,
+			"tilePosY" : 48
+		},
+		{
+			"interact ID" : -1,
+			"isPokemon" : 0,
+			"moveable" : 1,
+			"posX" : 23,
+			"posY" : 0,
+			"tilePosX" : 32,
+			"tilePosY" : 48
+		},
+		{
+			"interact ID" : -1,
+			"isPokemon" : 0,
+			"moveable" : 1,
+			"posX" : 0,
+			"posY" : 1,
+			"tilePosX" : 624,
+			"tilePosY" : 48
+		},
+		{
+			"interact ID" : -1,
+			"isPokemon" : 0,
+			"moveable" : 1,
+			"posX" : 1,
+			"posY" : 1,
+			"tilePosX" : 624,
+			"tilePosY" : 48
+		},
+		{
+			"interact ID" : -1,
+			"isPokemon" : 0,
+			"moveable" : 1,
+			"posX" : 2,
+			"posY" : 1,
+			"tilePosX" : 624,
+			"tilePosY" : 48
+		},
+		{
+			"interact ID" : -1,
+			"isPokemon" : 0,
+			"moveable" : 1,
+			"posX" : 3,
+			"posY" : 1,
+			"tilePosX" : 624,
+			"tilePosY" : 48
+		},
+		{
+			"interact ID" : -1,
+			"isPokemon" : 0,
+			"moveable" : 1,
+			"posX" : 4,
+			"posY" : 1,
+			"tilePosX" : 624,
+			"tilePosY" : 48
+		},
+		{
+			"interact ID" : -1,
+			"isPokemon" : 0,
+			"moveable" : 1,
+			"posX" : 5,
+			"posY" : 1,
+			"tilePosX" : 624,
+			"tilePosY" : 48
+		},
+		{
+			"interact ID" : -1,
+			"isPokemon" : 0,
+			"moveable" : 1,
+			"posX" : 6,
+			"posY" : 1,
+			"tilePosX" : 624,
+			"tilePosY" : 48
+		},
+		{
+			"interact ID" : -1,
+			"isPokemon" : 0,
+			"moveable" : 1,
+			"posX" : 7,
+			"posY" : 1,
+			"tilePosX" : 624,
+			"tilePosY" : 48
+		},
+		{
+			"interact ID" : -1,
+			"isPokemon" : 0,
+			"moveable" : 1,
+			"posX" : 8,
+			"posY" : 1,
+			"tilePosX" : 624,
+			"tilePosY" : 48
+		},
+		{
+			"interact ID" : -1,
+			"isPokemon" : 0,
+			"moveable" : 1,
+			"posX" : 9,
+			"posY" : 1,
+			"tilePosX" : 624,
+			"tilePosY" : 48
+		},
+		{
+			"interact ID" : -1,
+			"isPokemon" : 0,
+			"moveable" : 1,
+			"posX" : 10,
+			"posY" : 1,
+			"tilePosX" : 624,
+			"tilePosY" : 48
+		},
+		{
+			"interact ID" : -1,
+			"isPokemon" : 0,
+			"moveable" : 1,
+			"posX" : 11,
+			"posY" : 1,
+			"tilePosX" : 624,
+			"tilePosY" : 48
+		},
+		{
+			"interact ID" : -1,
+			"isPokemon" : 0,
+			"moveable" : 1,
+			"posX" : 12,
+			"posY" : 1,
+			"tilePosX" : 624,
+			"tilePosY" : 48
+		},
+		{
+			"interact ID" : -1,
+			"isPokemon" : 0,
+			"moveable" : 1,
+			"posX" : 13,
+			"posY" : 1,
+			"tilePosX" : 624,
+			"tilePosY" : 48
+		},
+		{
+			"interact ID" : -1,
+			"isPokemon" : 0,
+			"moveable" : 1,
+			"posX" : 14,
+			"posY" : 1,
+			"tilePosX" : 624,
+			"tilePosY" : 48
+		},
+		{
+			"interact ID" : -1,
+			"isPokemon" : 0,
+			"moveable" : 1,
+			"posX" : 15,
+			"posY" : 1,
+			"tilePosX" : 624,
+			"tilePosY" : 48
+		},
+		{
+			"interact ID" : -1,
+			"isPokemon" : 0,
+			"moveable" : 1,
+			"posX" : 16,
+			"posY" : 1,
+			"tilePosX" : 624,
+			"tilePosY" : 48
+		},
+		{
+			"interact ID" : -1,
+			"isPokemon" : 0,
+			"moveable" : 1,
+			"posX" : 17,
+			"posY" : 1,
+			"tilePosX" : 624,
+			"tilePosY" : 48
+		},
+		{
+			"interact ID" : -1,
+			"isPokemon" : 0,
+			"moveable" : 1,
+			"posX" : 18,
+			"posY" : 1,
+			"tilePosX" : 624,
+			"tilePosY" : 48
+		},
+		{
+			"interact ID" : -1,
+			"isPokemon" : 0,
+			"moveable" : 1,
+			"posX" : 19,
+			"posY" : 1,
+			"tilePosX" : 624,
+			"tilePosY" : 48
+		},
+		{
+			"interact ID" : -1,
+			"isPokemon" : 0,
+			"moveable" : 1,
+			"posX" : 20,
+			"posY" : 1,
+			"tilePosX" : 624,
+			"tilePosY" : 48
+		},
+		{
+			"interact ID" : -1,
+			"isPokemon" : 0,
+			"moveable" : 1,
+			"posX" : 21,
+			"posY" : 1,
+			"tilePosX" : 624,
+			"tilePosY" : 48
+		},
+		{
+			"interact ID" : -1,
+			"isPokemon" : 0,
+			"moveable" : 1,
+			"posX" : 22,
+			"posY" : 1,
+			"tilePosX" : 624,
+			"tilePosY" : 48
+		},
+		{
+			"interact ID" : -1,
+			"isPokemon" : 0,
+			"moveable" : 1,
+			"posX" : 23,
+			"posY" : 1,
+			"tilePosX" : 624,
+			"tilePosY" : 48
+		},
+		{
+			"interact ID" : -1,
+			"isPokemon" : 0,
+			"moveable" : 1,
+			"posX" : 0,
+			"posY" : 2,
+			"tilePosX" : 32,
+			"tilePosY" : 48
+		},
+		{
+			"interact ID" : -1,
+			"isPokemon" : 0,
+			"moveable" : 1,
+			"posX" : 1,
+			"posY" : 2,
+			"tilePosX" : 32,
+			"tilePosY" : 48
+		},
+		{
+			"interact ID" : -1,
+			"isPokemon" : 0,
+			"moveable" : 1,
+			"posX" : 2,
+			"posY" : 2,
+			"tilePosX" : 32,
+			"tilePosY" : 48
+		},
+		{
+			"interact ID" : -1,
+			"isPokemon" : 0,
+			"moveable" : 1,
+			"posX" : 3,
+			"posY" : 2,
+			"tilePosX" : 32,
+			"tilePosY" : 48
+		},
+		{
+			"interact ID" : -1,
+			"isPokemon" : 0,
+			"moveable" : 1,
+			"posX" : 4,
+			"posY" : 2,
+			"tilePosX" : 32,
+			"tilePosY" : 48
+		},
+		{
+			"interact ID" : -1,
+			"isPokemon" : 0,
+			"moveable" : 1,
+			"posX" : 5,
+			"posY" : 2,
+			"tilePosX" : 32,
+			"tilePosY" : 48
+		},
+		{
+			"interact ID" : -1,
+			"isPokemon" : 0,
+			"moveable" : 1,
+			"posX" : 6,
+			"posY" : 2,
 			"tilePosX" : 416,
 			"tilePosY" : 320
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 7,
-			"posY" : 0,
+			"posY" : 2,
 			"tilePosX" : 432,
 			"tilePosY" : 320
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 8,
-			"posY" : 0,
+			"posY" : 2,
 			"tilePosX" : 432,
 			"tilePosY" : 320
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 9,
-			"posY" : 0,
+			"posY" : 2,
 			"tilePosX" : 432,
 			"tilePosY" : 320
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 10,
-			"posY" : 0,
+			"posY" : 2,
 			"tilePosX" : 432,
 			"tilePosY" : 320
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 11,
-			"posY" : 0,
+			"posY" : 2,
 			"tilePosX" : 448,
 			"tilePosY" : 320
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 12,
-			"posY" : 0,
+			"posY" : 2,
 			"tilePosX" : 32,
 			"tilePosY" : 48
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 13,
-			"posY" : 0,
+			"posY" : 2,
 			"tilePosX" : 32,
 			"tilePosY" : 48
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 14,
-			"posY" : 0,
+			"posY" : 2,
 			"tilePosX" : 32,
 			"tilePosY" : 48
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 15,
-			"posY" : 0,
+			"posY" : 2,
 			"tilePosX" : 32,
 			"tilePosY" : 48
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 16,
-			"posY" : 0,
+			"posY" : 2,
 			"tilePosX" : 32,
 			"tilePosY" : 48
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 17,
-			"posY" : 0,
+			"posY" : 2,
 			"tilePosX" : 32,
 			"tilePosY" : 48
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 18,
-			"posY" : 0,
+			"posY" : 2,
 			"tilePosX" : 32,
 			"tilePosY" : 48
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 19,
-			"posY" : 0,
+			"posY" : 2,
 			"tilePosX" : 32,
 			"tilePosY" : 48
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 20,
-			"posY" : 0,
+			"posY" : 2,
 			"tilePosX" : 32,
 			"tilePosY" : 48
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 21,
-			"posY" : 0,
+			"posY" : 2,
 			"tilePosX" : 32,
 			"tilePosY" : 48
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 22,
-			"posY" : 0,
+			"posY" : 2,
 			"tilePosX" : 32,
 			"tilePosY" : 48
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 23,
-			"posY" : 0,
+			"posY" : 2,
 			"tilePosX" : 32,
 			"tilePosY" : 48
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 0,
-			"posY" : 1,
+			"posY" : 3,
 			"tilePosX" : 624,
 			"tilePosY" : 48
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 1,
-			"posY" : 1,
+			"posY" : 3,
 			"tilePosX" : 624,
 			"tilePosY" : 48
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 2,
-			"posY" : 1,
+			"posY" : 3,
 			"tilePosX" : 624,
 			"tilePosY" : 48
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 3,
-			"posY" : 1,
+			"posY" : 3,
 			"tilePosX" : 624,
 			"tilePosY" : 48
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 4,
-			"posY" : 1,
+			"posY" : 3,
 			"tilePosX" : 624,
 			"tilePosY" : 48
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 5,
-			"posY" : 1,
+			"posY" : 3,
 			"tilePosX" : 624,
 			"tilePosY" : 48
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 6,
-			"posY" : 1,
+			"posY" : 3,
 			"tilePosX" : 368,
 			"tilePosY" : 336
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 7,
-			"posY" : 1,
+			"posY" : 3,
 			"tilePosX" : 384,
 			"tilePosY" : 336
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 8,
-			"posY" : 1,
+			"posY" : 3,
 			"tilePosX" : 384,
 			"tilePosY" : 336
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 9,
-			"posY" : 1,
+			"posY" : 3,
 			"tilePosX" : 384,
 			"tilePosY" : 336
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 10,
-			"posY" : 1,
+			"posY" : 3,
 			"tilePosX" : 384,
 			"tilePosY" : 336
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 11,
-			"posY" : 1,
+			"posY" : 3,
 			"tilePosX" : 400,
 			"tilePosY" : 336
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 12,
-			"posY" : 1,
+			"posY" : 3,
 			"tilePosX" : 624,
 			"tilePosY" : 48
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 13,
-			"posY" : 1,
+			"posY" : 3,
 			"tilePosX" : 624,
 			"tilePosY" : 48
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 14,
-			"posY" : 1,
+			"posY" : 3,
 			"tilePosX" : 624,
 			"tilePosY" : 48
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 15,
-			"posY" : 1,
+			"posY" : 3,
 			"tilePosX" : 624,
 			"tilePosY" : 48
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 16,
-			"posY" : 1,
+			"posY" : 3,
 			"tilePosX" : 624,
 			"tilePosY" : 48
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 17,
-			"posY" : 1,
+			"posY" : 3,
 			"tilePosX" : 624,
 			"tilePosY" : 48
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 18,
-			"posY" : 1,
+			"posY" : 3,
 			"tilePosX" : 624,
 			"tilePosY" : 48
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 19,
-			"posY" : 1,
+			"posY" : 3,
 			"tilePosX" : 624,
 			"tilePosY" : 48
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 20,
-			"posY" : 1,
+			"posY" : 3,
 			"tilePosX" : 624,
 			"tilePosY" : 48
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 21,
-			"posY" : 1,
+			"posY" : 3,
 			"tilePosX" : 624,
 			"tilePosY" : 48
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 22,
-			"posY" : 1,
+			"posY" : 3,
 			"tilePosX" : 624,
 			"tilePosY" : 48
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 23,
-			"posY" : 1,
+			"posY" : 3,
 			"tilePosX" : 624,
 			"tilePosY" : 48
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 0,
-			"posY" : 2,
+			"posY" : 4,
 			"tilePosX" : 32,
 			"tilePosY" : 48
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 1,
-			"posY" : 2,
+			"posY" : 4,
 			"tilePosX" : 32,
 			"tilePosY" : 48
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 2,
-			"posY" : 2,
+			"posY" : 4,
 			"tilePosX" : 32,
 			"tilePosY" : 48
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 3,
-			"posY" : 2,
+			"posY" : 4,
 			"tilePosX" : 32,
 			"tilePosY" : 48
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 0,
 			"posX" : 4,
-			"posY" : 2,
-			"tilePosX" : 592,
-			"tilePosY" : 240
+			"posY" : 4,
+			"tilePosX" : 624,
+			"tilePosY" : 16
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 0,
 			"posX" : 5,
-			"posY" : 2,
-			"tilePosX" : 592,
-			"tilePosY" : 240
+			"posY" : 4,
+			"tilePosX" : 624,
+			"tilePosY" : 16
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 6,
-			"posY" : 2,
+			"posY" : 4,
 			"tilePosX" : 304,
 			"tilePosY" : 160
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 7,
-			"posY" : 2,
+			"posY" : 4,
 			"tilePosX" : 320,
 			"tilePosY" : 160
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 8,
-			"posY" : 2,
+			"posY" : 4,
 			"tilePosX" : 400,
 			"tilePosY" : 128
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 9,
-			"posY" : 2,
+			"posY" : 4,
 			"tilePosX" : 400,
 			"tilePosY" : 128
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 10,
-			"posY" : 2,
+			"posY" : 4,
 			"tilePosX" : 336,
 			"tilePosY" : 160
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 11,
-			"posY" : 2,
+			"posY" : 4,
 			"tilePosX" : 352,
 			"tilePosY" : 160
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 12,
-			"posY" : 2,
+			"posY" : 4,
 			"tilePosX" : 32,
 			"tilePosY" : 48
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 13,
-			"posY" : 2,
+			"posY" : 4,
 			"tilePosX" : 32,
 			"tilePosY" : 48
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 14,
-			"posY" : 2,
+			"posY" : 4,
 			"tilePosX" : 416,
 			"tilePosY" : 320
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 15,
-			"posY" : 2,
+			"posY" : 4,
 			"tilePosX" : 432,
 			"tilePosY" : 320
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 16,
-			"posY" : 2,
+			"posY" : 4,
 			"tilePosX" : 432,
 			"tilePosY" : 320
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 17,
-			"posY" : 2,
+			"posY" : 4,
 			"tilePosX" : 448,
 			"tilePosY" : 320
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 18,
-			"posY" : 2,
+			"posY" : 4,
 			"tilePosX" : 32,
 			"tilePosY" : 48
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 19,
-			"posY" : 2,
+			"posY" : 4,
 			"tilePosX" : 32,
 			"tilePosY" : 48
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 20,
-			"posY" : 2,
+			"posY" : 4,
 			"tilePosX" : 32,
 			"tilePosY" : 48
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 21,
-			"posY" : 2,
+			"posY" : 4,
 			"tilePosX" : 32,
 			"tilePosY" : 48
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 22,
-			"posY" : 2,
+			"posY" : 4,
 			"tilePosX" : 32,
 			"tilePosY" : 48
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 23,
-			"posY" : 2,
+			"posY" : 4,
 			"tilePosX" : 32,
 			"tilePosY" : 48
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 0,
-			"posY" : 3,
+			"posY" : 5,
 			"tilePosX" : 624,
 			"tilePosY" : 48
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 1,
-			"posY" : 3,
+			"posY" : 5,
 			"tilePosX" : 624,
 			"tilePosY" : 48
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 2,
-			"posY" : 3,
+			"posY" : 5,
 			"tilePosX" : 624,
 			"tilePosY" : 48
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 3,
-			"posY" : 3,
+			"posY" : 5,
 			"tilePosX" : 624,
 			"tilePosY" : 48
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 0,
 			"posX" : 4,
-			"posY" : 3,
-			"tilePosX" : 592,
-			"tilePosY" : 240
+			"posY" : 5,
+			"tilePosX" : 624,
+			"tilePosY" : 16
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 5,
-			"posY" : 3,
+			"posY" : 5,
 			"tilePosX" : 592,
 			"tilePosY" : 0
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 6,
-			"posY" : 3,
+			"posY" : 5,
 			"tilePosX" : 240,
 			"tilePosY" : 144
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 7,
-			"posY" : 3,
+			"posY" : 5,
 			"tilePosX" : 256,
 			"tilePosY" : 144
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 0,
 			"posX" : 8,
-			"posY" : 3,
+			"posY" : 5,
 			"tilePosX" : 64,
 			"tilePosY" : 128
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 9,
-			"posY" : 3,
+			"posY" : 5,
 			"tilePosX" : 256,
 			"tilePosY" : 144
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 10,
-			"posY" : 3,
+			"posY" : 5,
 			"tilePosX" : 256,
 			"tilePosY" : 144
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 11,
-			"posY" : 3,
+			"posY" : 5,
 			"tilePosX" : 272,
 			"tilePosY" : 144
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 12,
-			"posY" : 3,
+			"posY" : 5,
 			"tilePosX" : 624,
 			"tilePosY" : 48
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 13,
-			"posY" : 3,
+			"posY" : 5,
 			"tilePosX" : 624,
 			"tilePosY" : 48
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 14,
-			"posY" : 3,
+			"posY" : 5,
 			"tilePosX" : 368,
 			"tilePosY" : 336
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 15,
-			"posY" : 3,
+			"posY" : 5,
 			"tilePosX" : 384,
 			"tilePosY" : 336
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 16,
-			"posY" : 3,
+			"posY" : 5,
 			"tilePosX" : 384,
 			"tilePosY" : 336
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 17,
-			"posY" : 3,
+			"posY" : 5,
 			"tilePosX" : 400,
 			"tilePosY" : 336
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 18,
-			"posY" : 3,
+			"posY" : 5,
 			"tilePosX" : 624,
 			"tilePosY" : 48
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 19,
-			"posY" : 3,
+			"posY" : 5,
 			"tilePosX" : 624,
 			"tilePosY" : 48
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 20,
-			"posY" : 3,
+			"posY" : 5,
 			"tilePosX" : 624,
 			"tilePosY" : 48
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 21,
-			"posY" : 3,
+			"posY" : 5,
 			"tilePosX" : 624,
 			"tilePosY" : 48
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 22,
-			"posY" : 3,
+			"posY" : 5,
 			"tilePosX" : 624,
 			"tilePosY" : 48
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 23,
-			"posY" : 3,
+			"posY" : 5,
 			"tilePosX" : 624,
 			"tilePosY" : 48
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 0,
-			"posY" : 4,
+			"posY" : 6,
 			"tilePosX" : 32,
 			"tilePosY" : 48
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 1,
-			"posY" : 4,
+			"posY" : 6,
 			"tilePosX" : 32,
 			"tilePosY" : 48
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 2,
-			"posY" : 4,
+			"posY" : 6,
 			"tilePosX" : 32,
 			"tilePosY" : 48
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 3,
-			"posY" : 4,
+			"posY" : 6,
 			"tilePosX" : 32,
 			"tilePosY" : 48
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 0,
 			"posX" : 4,
-			"posY" : 4,
-			"tilePosX" : 592,
-			"tilePosY" : 240
+			"posY" : 6,
+			"tilePosX" : 624,
+			"tilePosY" : 16
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 0,
 			"posX" : 5,
-			"posY" : 4,
-			"tilePosX" : 592,
-			"tilePosY" : 240
+			"posY" : 6,
+			"tilePosX" : 624,
+			"tilePosY" : 16
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 0,
 			"posX" : 6,
-			"posY" : 4,
+			"posY" : 6,
 			"tilePosX" : 576,
 			"tilePosY" : 0
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 0,
 			"posX" : 7,
-			"posY" : 4,
+			"posY" : 6,
 			"tilePosX" : 576,
 			"tilePosY" : 0
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 0,
 			"posX" : 8,
-			"posY" : 4,
+			"posY" : 6,
 			"tilePosX" : 576,
 			"tilePosY" : 0
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 0,
 			"posX" : 9,
-			"posY" : 4,
+			"posY" : 6,
 			"tilePosX" : 576,
 			"tilePosY" : 0
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 0,
 			"posX" : 10,
-			"posY" : 4,
+			"posY" : 6,
 			"tilePosX" : 576,
 			"tilePosY" : 0
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 0,
 			"posX" : 11,
-			"posY" : 4,
+			"posY" : 6,
 			"tilePosX" : 576,
 			"tilePosY" : 0
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 0,
 			"posX" : 12,
-			"posY" : 4,
+			"posY" : 6,
 			"tilePosX" : 624,
 			"tilePosY" : 16
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 0,
 			"posX" : 13,
-			"posY" : 4,
+			"posY" : 6,
 			"tilePosX" : 624,
 			"tilePosY" : 16
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 14,
-			"posY" : 4,
+			"posY" : 6,
 			"tilePosX" : 384,
 			"tilePosY" : 128
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 15,
-			"posY" : 4,
+			"posY" : 6,
 			"tilePosX" : 400,
 			"tilePosY" : 128
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 16,
-			"posY" : 4,
+			"posY" : 6,
 			"tilePosX" : 336,
 			"tilePosY" : 160
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 17,
-			"posY" : 4,
+			"posY" : 6,
 			"tilePosX" : 352,
 			"tilePosY" : 160
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 18,
-			"posY" : 4,
+			"posY" : 6,
 			"tilePosX" : 32,
 			"tilePosY" : 48
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 19,
-			"posY" : 4,
+			"posY" : 6,
 			"tilePosX" : 32,
 			"tilePosY" : 48
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 20,
-			"posY" : 4,
+			"posY" : 6,
 			"tilePosX" : 32,
 			"tilePosY" : 48
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 21,
-			"posY" : 4,
+			"posY" : 6,
 			"tilePosX" : 32,
 			"tilePosY" : 48
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 22,
-			"posY" : 4,
+			"posY" : 6,
 			"tilePosX" : 32,
 			"tilePosY" : 48
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 23,
-			"posY" : 4,
+			"posY" : 6,
 			"tilePosX" : 32,
 			"tilePosY" : 48
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 0,
-			"posY" : 5,
+			"posY" : 7,
 			"tilePosX" : 624,
 			"tilePosY" : 48
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 1,
-			"posY" : 5,
+			"posY" : 7,
 			"tilePosX" : 624,
 			"tilePosY" : 48
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 2,
-			"posY" : 5,
+			"posY" : 7,
 			"tilePosX" : 624,
 			"tilePosY" : 48
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 3,
-			"posY" : 5,
+			"posY" : 7,
 			"tilePosX" : 624,
 			"tilePosY" : 48
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 0,
 			"posX" : 4,
-			"posY" : 5,
-			"tilePosX" : 592,
-			"tilePosY" : 240
-		},
-		{
-			"interact ID" : -1,
-			"moveable" : 0,
-			"posX" : 5,
-			"posY" : 5,
-			"tilePosX" : 592,
-			"tilePosY" : 240
-		},
-		{
-			"interact ID" : -1,
-			"moveable" : 0,
-			"posX" : 6,
-			"posY" : 5,
-			"tilePosX" : 576,
-			"tilePosY" : 0
-		},
-		{
-			"interact ID" : -1,
-			"moveable" : 0,
-			"posX" : 7,
-			"posY" : 5,
-			"tilePosX" : 576,
-			"tilePosY" : 0
-		},
-		{
-			"interact ID" : -1,
-			"moveable" : 0,
-			"posX" : 8,
-			"posY" : 5,
-			"tilePosX" : 576,
-			"tilePosY" : 0
-		},
-		{
-			"interact ID" : -1,
-			"moveable" : 0,
-			"posX" : 9,
-			"posY" : 5,
-			"tilePosX" : 576,
-			"tilePosY" : 0
-		},
-		{
-			"interact ID" : -1,
-			"moveable" : 0,
-			"posX" : 10,
-			"posY" : 5,
-			"tilePosX" : 576,
-			"tilePosY" : 0
-		},
-		{
-			"interact ID" : -1,
-			"moveable" : 0,
-			"posX" : 11,
-			"posY" : 5,
-			"tilePosX" : 576,
-			"tilePosY" : 0
-		},
-		{
-			"interact ID" : -1,
-			"moveable" : 0,
-			"posX" : 12,
-			"posY" : 5,
+			"posY" : 7,
 			"tilePosX" : 624,
 			"tilePosY" : 16
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
+			"moveable" : 0,
+			"posX" : 5,
+			"posY" : 7,
+			"tilePosX" : 624,
+			"tilePosY" : 16
+		},
+		{
+			"interact ID" : -1,
+			"isPokemon" : 0,
+			"moveable" : 0,
+			"posX" : 6,
+			"posY" : 7,
+			"tilePosX" : 576,
+			"tilePosY" : 0
+		},
+		{
+			"interact ID" : -1,
+			"isPokemon" : 0,
+			"moveable" : 0,
+			"posX" : 7,
+			"posY" : 7,
+			"tilePosX" : 576,
+			"tilePosY" : 0
+		},
+		{
+			"interact ID" : -1,
+			"isPokemon" : 0,
+			"moveable" : 0,
+			"posX" : 8,
+			"posY" : 7,
+			"tilePosX" : 576,
+			"tilePosY" : 0
+		},
+		{
+			"interact ID" : -1,
+			"isPokemon" : 0,
+			"moveable" : 0,
+			"posX" : 9,
+			"posY" : 7,
+			"tilePosX" : 576,
+			"tilePosY" : 0
+		},
+		{
+			"interact ID" : -1,
+			"isPokemon" : 0,
+			"moveable" : 0,
+			"posX" : 10,
+			"posY" : 7,
+			"tilePosX" : 576,
+			"tilePosY" : 0
+		},
+		{
+			"interact ID" : -1,
+			"isPokemon" : 0,
+			"moveable" : 0,
+			"posX" : 11,
+			"posY" : 7,
+			"tilePosX" : 576,
+			"tilePosY" : 0
+		},
+		{
+			"interact ID" : -1,
+			"isPokemon" : 0,
+			"moveable" : 0,
+			"posX" : 12,
+			"posY" : 7,
+			"tilePosX" : 624,
+			"tilePosY" : 16
+		},
+		{
+			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 13,
-			"posY" : 5,
+			"posY" : 7,
 			"tilePosX" : 592,
 			"tilePosY" : 0
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 14,
-			"posY" : 5,
+			"posY" : 7,
 			"tilePosX" : 240,
 			"tilePosY" : 144
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 0,
 			"posX" : 15,
-			"posY" : 5,
+			"posY" : 7,
 			"tilePosX" : 64,
 			"tilePosY" : 128
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 16,
-			"posY" : 5,
+			"posY" : 7,
 			"tilePosX" : 256,
 			"tilePosY" : 144
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 17,
-			"posY" : 5,
+			"posY" : 7,
 			"tilePosX" : 272,
 			"tilePosY" : 144
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 18,
-			"posY" : 5,
+			"posY" : 7,
 			"tilePosX" : 624,
 			"tilePosY" : 48
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 19,
-			"posY" : 5,
+			"posY" : 7,
 			"tilePosX" : 624,
 			"tilePosY" : 48
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 20,
-			"posY" : 5,
+			"posY" : 7,
 			"tilePosX" : 624,
 			"tilePosY" : 48
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 21,
-			"posY" : 5,
+			"posY" : 7,
 			"tilePosX" : 624,
 			"tilePosY" : 48
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 22,
-			"posY" : 5,
+			"posY" : 7,
 			"tilePosX" : 624,
 			"tilePosY" : 48
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 23,
-			"posY" : 5,
+			"posY" : 7,
 			"tilePosX" : 624,
 			"tilePosY" : 48
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 0,
-			"posY" : 6,
+			"posY" : 8,
 			"tilePosX" : 32,
 			"tilePosY" : 48
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 1,
-			"posY" : 6,
+			"posY" : 8,
 			"tilePosX" : 32,
 			"tilePosY" : 48
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 2,
-			"posY" : 6,
+			"posY" : 8,
 			"tilePosX" : 32,
 			"tilePosY" : 48
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 3,
-			"posY" : 6,
+			"posY" : 8,
 			"tilePosX" : 32,
 			"tilePosY" : 48
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 0,
 			"posX" : 4,
-			"posY" : 6,
+			"posY" : 8,
 			"tilePosX" : 576,
 			"tilePosY" : 0
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 0,
 			"posX" : 5,
-			"posY" : 6,
+			"posY" : 8,
 			"tilePosX" : 576,
 			"tilePosY" : 0
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 0,
 			"posX" : 6,
-			"posY" : 6,
+			"posY" : 8,
 			"tilePosX" : 576,
 			"tilePosY" : 0
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 0,
 			"posX" : 7,
-			"posY" : 6,
+			"posY" : 8,
 			"tilePosX" : 576,
 			"tilePosY" : 0
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 0,
 			"posX" : 8,
-			"posY" : 6,
+			"posY" : 8,
 			"tilePosX" : 576,
 			"tilePosY" : 0
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 0,
 			"posX" : 9,
-			"posY" : 6,
+			"posY" : 8,
 			"tilePosX" : 576,
 			"tilePosY" : 0
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 0,
 			"posX" : 10,
-			"posY" : 6,
+			"posY" : 8,
 			"tilePosX" : 576,
 			"tilePosY" : 0
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 0,
 			"posX" : 11,
-			"posY" : 6,
+			"posY" : 8,
 			"tilePosX" : 576,
 			"tilePosY" : 0
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 0,
 			"posX" : 12,
-			"posY" : 6,
+			"posY" : 8,
 			"tilePosX" : 576,
 			"tilePosY" : 0
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 0,
 			"posX" : 13,
-			"posY" : 6,
+			"posY" : 8,
 			"tilePosX" : 576,
 			"tilePosY" : 0
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 0,
 			"posX" : 14,
-			"posY" : 6,
+			"posY" : 8,
 			"tilePosX" : 576,
 			"tilePosY" : 0
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 0,
 			"posX" : 15,
-			"posY" : 6,
+			"posY" : 8,
 			"tilePosX" : 576,
 			"tilePosY" : 0
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 0,
 			"posX" : 16,
-			"posY" : 6,
+			"posY" : 8,
 			"tilePosX" : 576,
 			"tilePosY" : 0
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 0,
 			"posX" : 17,
-			"posY" : 6,
+			"posY" : 8,
 			"tilePosX" : 576,
 			"tilePosY" : 0
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 0,
 			"posX" : 18,
-			"posY" : 6,
+			"posY" : 8,
 			"tilePosX" : 576,
 			"tilePosY" : 0
 		},
 		{
 			"interact ID" : -1,
-			"moveable" : 0,
-			"posX" : 19,
-			"posY" : 6,
-			"tilePosX" : 576,
-			"tilePosY" : 0
-		},
-		{
-			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
-			"posX" : 20,
-			"posY" : 6,
+			"posX" : 19,
+			"posY" : 8,
 			"tilePosX" : 0,
 			"tilePosY" : 16
 		},
 		{
 			"interact ID" : -1,
-			"moveable" : 1,
+			"isPokemon" : 0,
+			"moveable" : 0,
+			"posX" : 20,
+			"posY" : 8,
+			"tilePosX" : 80,
+			"tilePosY" : 48
+		},
+		{
+			"interact ID" : -1,
+			"isPokemon" : 0,
+			"moveable" : 0,
 			"posX" : 21,
-			"posY" : 6,
+			"posY" : 8,
 			"tilePosX" : 80,
 			"tilePosY" : 48
 		},
 		{
 			"interact ID" : -1,
-			"moveable" : 1,
+			"isPokemon" : 0,
+			"moveable" : 0,
 			"posX" : 22,
-			"posY" : 6,
+			"posY" : 8,
 			"tilePosX" : 80,
 			"tilePosY" : 48
 		},
 		{
 			"interact ID" : -1,
-			"moveable" : 1,
+			"isPokemon" : 0,
+			"moveable" : 0,
 			"posX" : 23,
-			"posY" : 6,
+			"posY" : 8,
 			"tilePosX" : 80,
 			"tilePosY" : 48
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 0,
-			"posY" : 7,
+			"posY" : 9,
 			"tilePosX" : 624,
 			"tilePosY" : 48
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 1,
-			"posY" : 7,
+			"posY" : 9,
 			"tilePosX" : 624,
 			"tilePosY" : 48
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 2,
-			"posY" : 7,
+			"posY" : 9,
 			"tilePosX" : 624,
 			"tilePosY" : 48
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 3,
-			"posY" : 7,
+			"posY" : 9,
 			"tilePosX" : 624,
 			"tilePosY" : 48
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 0,
 			"posX" : 4,
-			"posY" : 7,
+			"posY" : 9,
 			"tilePosX" : 576,
 			"tilePosY" : 0
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 0,
 			"posX" : 5,
-			"posY" : 7,
+			"posY" : 9,
 			"tilePosX" : 576,
 			"tilePosY" : 0
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 0,
 			"posX" : 6,
-			"posY" : 7,
+			"posY" : 9,
 			"tilePosX" : 576,
 			"tilePosY" : 0
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 0,
 			"posX" : 7,
-			"posY" : 7,
+			"posY" : 9,
 			"tilePosX" : 576,
 			"tilePosY" : 0
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 0,
 			"posX" : 8,
-			"posY" : 7,
+			"posY" : 9,
 			"tilePosX" : 576,
 			"tilePosY" : 0
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 0,
 			"posX" : 9,
-			"posY" : 7,
+			"posY" : 9,
 			"tilePosX" : 576,
 			"tilePosY" : 0
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 0,
 			"posX" : 10,
-			"posY" : 7,
+			"posY" : 9,
 			"tilePosX" : 576,
 			"tilePosY" : 0
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 0,
 			"posX" : 11,
-			"posY" : 7,
+			"posY" : 9,
 			"tilePosX" : 576,
 			"tilePosY" : 0
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 0,
 			"posX" : 12,
-			"posY" : 7,
+			"posY" : 9,
 			"tilePosX" : 576,
 			"tilePosY" : 0
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 0,
 			"posX" : 13,
-			"posY" : 7,
+			"posY" : 9,
 			"tilePosX" : 576,
 			"tilePosY" : 0
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 0,
 			"posX" : 14,
-			"posY" : 7,
+			"posY" : 9,
 			"tilePosX" : 576,
 			"tilePosY" : 0
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 0,
 			"posX" : 15,
-			"posY" : 7,
+			"posY" : 9,
 			"tilePosX" : 576,
 			"tilePosY" : 0
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 0,
 			"posX" : 16,
-			"posY" : 7,
+			"posY" : 9,
 			"tilePosX" : 576,
 			"tilePosY" : 0
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 0,
 			"posX" : 17,
-			"posY" : 7,
+			"posY" : 9,
 			"tilePosX" : 576,
 			"tilePosY" : 0
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 0,
 			"posX" : 18,
-			"posY" : 7,
+			"posY" : 9,
 			"tilePosX" : 576,
 			"tilePosY" : 0
 		},
 		{
 			"interact ID" : -1,
-			"moveable" : 0,
-			"posX" : 19,
-			"posY" : 7,
-			"tilePosX" : 576,
-			"tilePosY" : 0
-		},
-		{
-			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
-			"posX" : 20,
-			"posY" : 7,
+			"posX" : 19,
+			"posY" : 9,
 			"tilePosX" : 80,
 			"tilePosY" : 32
 		},
 		{
 			"interact ID" : -1,
-			"moveable" : 1,
+			"isPokemon" : 0,
+			"moveable" : 0,
+			"posX" : 20,
+			"posY" : 9,
+			"tilePosX" : 0,
+			"tilePosY" : 32
+		},
+		{
+			"interact ID" : -1,
+			"isPokemon" : 0,
+			"moveable" : 0,
 			"posX" : 21,
-			"posY" : 7,
+			"posY" : 9,
 			"tilePosX" : 0,
 			"tilePosY" : 32
 		},
 		{
 			"interact ID" : -1,
-			"moveable" : 1,
+			"isPokemon" : 0,
+			"moveable" : 0,
 			"posX" : 22,
-			"posY" : 7,
+			"posY" : 9,
 			"tilePosX" : 0,
 			"tilePosY" : 32
 		},
 		{
 			"interact ID" : -1,
-			"moveable" : 1,
+			"isPokemon" : 0,
+			"moveable" : 0,
 			"posX" : 23,
-			"posY" : 7,
+			"posY" : 9,
 			"tilePosX" : 0,
 			"tilePosY" : 32
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 0,
 			"posX" : 0,
-			"posY" : 8,
+			"posY" : 10,
 			"tilePosX" : 576,
 			"tilePosY" : 0
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 0,
 			"posX" : 1,
-			"posY" : 8,
+			"posY" : 10,
 			"tilePosX" : 576,
 			"tilePosY" : 0
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 0,
 			"posX" : 2,
-			"posY" : 8,
-			"tilePosX" : 32,
-			"tilePosY" : 32
+			"posY" : 10,
+			"tilePosX" : 576,
+			"tilePosY" : 0
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 0,
 			"posX" : 3,
-			"posY" : 8,
-			"tilePosX" : 32,
-			"tilePosY" : 32
+			"posY" : 10,
+			"tilePosX" : 576,
+			"tilePosY" : 0
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 0,
 			"posX" : 4,
-			"posY" : 8,
-			"tilePosX" : 32,
-			"tilePosY" : 32
+			"posY" : 10,
+			"tilePosX" : 576,
+			"tilePosY" : 0
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 0,
 			"posX" : 5,
-			"posY" : 8,
+			"posY" : 10,
 			"tilePosX" : 576,
 			"tilePosY" : 0
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 0,
 			"posX" : 6,
-			"posY" : 8,
-			"tilePosX" : 560,
-			"tilePosY" : 16
+			"posY" : 10,
+			"tilePosX" : 576,
+			"tilePosY" : 0
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 0,
 			"posX" : 7,
-			"posY" : 8,
+			"posY" : 10,
 			"tilePosX" : 576,
 			"tilePosY" : 0
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 0,
 			"posX" : 8,
-			"posY" : 8,
+			"posY" : 10,
 			"tilePosX" : 576,
 			"tilePosY" : 0
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 0,
 			"posX" : 9,
-			"posY" : 8,
+			"posY" : 10,
 			"tilePosX" : 576,
 			"tilePosY" : 0
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 10,
-			"posY" : 8,
+			"posY" : 10,
 			"tilePosX" : 592,
 			"tilePosY" : 0
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 0,
 			"posX" : 11,
-			"posY" : 8,
+			"posY" : 10,
 			"tilePosX" : 576,
 			"tilePosY" : 0
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 0,
 			"posX" : 12,
-			"posY" : 8,
+			"posY" : 10,
 			"tilePosX" : 576,
 			"tilePosY" : 0
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 0,
 			"posX" : 13,
-			"posY" : 8,
+			"posY" : 10,
 			"tilePosX" : 576,
 			"tilePosY" : 0
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 0,
 			"posX" : 14,
-			"posY" : 8,
+			"posY" : 10,
 			"tilePosX" : 576,
 			"tilePosY" : 0
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 0,
 			"posX" : 15,
-			"posY" : 8,
+			"posY" : 10,
 			"tilePosX" : 576,
 			"tilePosY" : 0
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 0,
 			"posX" : 16,
-			"posY" : 8,
+			"posY" : 10,
 			"tilePosX" : 576,
 			"tilePosY" : 0
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 0,
 			"posX" : 17,
-			"posY" : 8,
+			"posY" : 10,
 			"tilePosX" : 576,
 			"tilePosY" : 0
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 0,
 			"posX" : 18,
-			"posY" : 8,
+			"posY" : 10,
 			"tilePosX" : 576,
 			"tilePosY" : 0
 		},
 		{
 			"interact ID" : -1,
-			"moveable" : 0,
-			"posX" : 19,
-			"posY" : 8,
-			"tilePosX" : 576,
-			"tilePosY" : 0
-		},
-		{
-			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
-			"posX" : 20,
-			"posY" : 8,
+			"posX" : 19,
+			"posY" : 10,
 			"tilePosX" : 80,
 			"tilePosY" : 32
 		},
 		{
 			"interact ID" : -1,
-			"moveable" : 1,
+			"isPokemon" : 0,
+			"moveable" : 0,
+			"posX" : 20,
+			"posY" : 10,
+			"tilePosX" : 0,
+			"tilePosY" : 32
+		},
+		{
+			"interact ID" : -1,
+			"isPokemon" : 0,
+			"moveable" : 0,
 			"posX" : 21,
-			"posY" : 8,
+			"posY" : 10,
 			"tilePosX" : 0,
 			"tilePosY" : 32
 		},
 		{
 			"interact ID" : -1,
-			"moveable" : 1,
+			"isPokemon" : 0,
+			"moveable" : 0,
 			"posX" : 22,
-			"posY" : 8,
+			"posY" : 10,
 			"tilePosX" : 0,
 			"tilePosY" : 32
 		},
 		{
 			"interact ID" : -1,
-			"moveable" : 1,
+			"isPokemon" : 0,
+			"moveable" : 0,
 			"posX" : 23,
-			"posY" : 8,
+			"posY" : 10,
 			"tilePosX" : 0,
 			"tilePosY" : 32
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 0,
 			"posX" : 0,
-			"posY" : 9,
+			"posY" : 11,
 			"tilePosX" : 576,
 			"tilePosY" : 0
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 0,
 			"posX" : 1,
-			"posY" : 9,
+			"posY" : 11,
 			"tilePosX" : 576,
 			"tilePosY" : 0
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 0,
 			"posX" : 2,
-			"posY" : 9,
-			"tilePosX" : 32,
-			"tilePosY" : 32
+			"posY" : 11,
+			"tilePosX" : 576,
+			"tilePosY" : 0
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 0,
 			"posX" : 3,
-			"posY" : 9,
-			"tilePosX" : 32,
-			"tilePosY" : 32
+			"posY" : 11,
+			"tilePosX" : 576,
+			"tilePosY" : 0
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 0,
 			"posX" : 4,
-			"posY" : 9,
-			"tilePosX" : 32,
-			"tilePosY" : 32
+			"posY" : 11,
+			"tilePosX" : 576,
+			"tilePosY" : 0
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 0,
 			"posX" : 5,
-			"posY" : 9,
+			"posY" : 11,
 			"tilePosX" : 576,
 			"tilePosY" : 0
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 0,
 			"posX" : 6,
-			"posY" : 9,
+			"posY" : 11,
 			"tilePosX" : 576,
 			"tilePosY" : 0
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 0,
 			"posX" : 7,
-			"posY" : 9,
+			"posY" : 11,
 			"tilePosX" : 576,
 			"tilePosY" : 0
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 0,
 			"posX" : 8,
-			"posY" : 9,
+			"posY" : 11,
 			"tilePosX" : 576,
 			"tilePosY" : 0
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 0,
 			"posX" : 9,
-			"posY" : 9,
+			"posY" : 11,
 			"tilePosX" : 576,
 			"tilePosY" : 0
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 0,
 			"posX" : 10,
-			"posY" : 9,
+			"posY" : 11,
 			"tilePosX" : 576,
 			"tilePosY" : 0
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 0,
 			"posX" : 11,
-			"posY" : 9,
+			"posY" : 11,
 			"tilePosX" : 576,
 			"tilePosY" : 0
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 0,
 			"posX" : 12,
-			"posY" : 9,
+			"posY" : 11,
 			"tilePosX" : 576,
 			"tilePosY" : 0
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 0,
 			"posX" : 13,
-			"posY" : 9,
+			"posY" : 11,
 			"tilePosX" : 576,
 			"tilePosY" : 0
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 0,
 			"posX" : 14,
-			"posY" : 9,
+			"posY" : 11,
 			"tilePosX" : 576,
 			"tilePosY" : 0
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 0,
 			"posX" : 15,
-			"posY" : 9,
+			"posY" : 11,
 			"tilePosX" : 576,
 			"tilePosY" : 0
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 0,
 			"posX" : 16,
-			"posY" : 9,
+			"posY" : 11,
 			"tilePosX" : 576,
 			"tilePosY" : 0
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 0,
 			"posX" : 17,
-			"posY" : 9,
+			"posY" : 11,
 			"tilePosX" : 576,
 			"tilePosY" : 0
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 0,
 			"posX" : 18,
-			"posY" : 9,
+			"posY" : 11,
 			"tilePosX" : 576,
 			"tilePosY" : 0
 		},
 		{
 			"interact ID" : -1,
-			"moveable" : 0,
-			"posX" : 19,
-			"posY" : 9,
-			"tilePosX" : 576,
-			"tilePosY" : 0
-		},
-		{
-			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
-			"posX" : 20,
-			"posY" : 9,
+			"posX" : 19,
+			"posY" : 11,
 			"tilePosX" : 80,
 			"tilePosY" : 32
 		},
 		{
 			"interact ID" : -1,
-			"moveable" : 1,
+			"isPokemon" : 0,
+			"moveable" : 0,
+			"posX" : 20,
+			"posY" : 11,
+			"tilePosX" : 0,
+			"tilePosY" : 32
+		},
+		{
+			"interact ID" : -1,
+			"isPokemon" : 0,
+			"moveable" : 0,
 			"posX" : 21,
-			"posY" : 9,
+			"posY" : 11,
 			"tilePosX" : 0,
 			"tilePosY" : 32
 		},
 		{
 			"interact ID" : -1,
-			"moveable" : 1,
+			"isPokemon" : 0,
+			"moveable" : 0,
 			"posX" : 22,
-			"posY" : 9,
+			"posY" : 11,
 			"tilePosX" : 0,
 			"tilePosY" : 32
 		},
 		{
 			"interact ID" : -1,
-			"moveable" : 1,
+			"isPokemon" : 0,
+			"moveable" : 0,
 			"posX" : 23,
-			"posY" : 9,
+			"posY" : 11,
 			"tilePosX" : 0,
 			"tilePosY" : 32
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 0,
-			"posY" : 10,
+			"posY" : 12,
 			"tilePosX" : 32,
 			"tilePosY" : 48
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 1,
-			"posY" : 10,
+			"posY" : 12,
 			"tilePosX" : 32,
 			"tilePosY" : 48
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 2,
-			"posY" : 10,
+			"posY" : 12,
 			"tilePosX" : 32,
 			"tilePosY" : 48
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 3,
-			"posY" : 10,
+			"posY" : 12,
 			"tilePosX" : 32,
 			"tilePosY" : 48
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 4,
-			"posY" : 10,
+			"posY" : 12,
 			"tilePosX" : 368,
 			"tilePosY" : 320
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 5,
-			"posY" : 10,
+			"posY" : 12,
 			"tilePosX" : 384,
 			"tilePosY" : 320
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 6,
-			"posY" : 10,
+			"posY" : 12,
 			"tilePosX" : 384,
 			"tilePosY" : 320
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 7,
-			"posY" : 10,
+			"posY" : 12,
 			"tilePosX" : 400,
 			"tilePosY" : 320
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 0,
 			"posX" : 8,
-			"posY" : 10,
+			"posY" : 12,
 			"tilePosX" : 576,
 			"tilePosY" : 0
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 0,
 			"posX" : 9,
-			"posY" : 10,
+			"posY" : 12,
 			"tilePosX" : 576,
 			"tilePosY" : 0
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 0,
 			"posX" : 10,
-			"posY" : 10,
+			"posY" : 12,
 			"tilePosX" : 576,
 			"tilePosY" : 0
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 0,
 			"posX" : 11,
-			"posY" : 10,
+			"posY" : 12,
 			"tilePosX" : 576,
 			"tilePosY" : 0
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 0,
 			"posX" : 12,
-			"posY" : 10,
+			"posY" : 12,
 			"tilePosX" : 576,
 			"tilePosY" : 0
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 0,
 			"posX" : 13,
-			"posY" : 10,
+			"posY" : 12,
 			"tilePosX" : 576,
 			"tilePosY" : 0
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 0,
 			"posX" : 14,
-			"posY" : 10,
+			"posY" : 12,
 			"tilePosX" : 576,
 			"tilePosY" : 0
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 0,
 			"posX" : 15,
-			"posY" : 10,
+			"posY" : 12,
 			"tilePosX" : 576,
 			"tilePosY" : 0
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 0,
 			"posX" : 16,
-			"posY" : 10,
+			"posY" : 12,
 			"tilePosX" : 576,
 			"tilePosY" : 0
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 0,
 			"posX" : 17,
-			"posY" : 10,
+			"posY" : 12,
 			"tilePosX" : 576,
 			"tilePosY" : 0
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 0,
 			"posX" : 18,
-			"posY" : 10,
+			"posY" : 12,
 			"tilePosX" : 624,
 			"tilePosY" : 16
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 19,
-			"posY" : 10,
+			"posY" : 12,
 			"tilePosX" : 672,
 			"tilePosY" : 16
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 20,
-			"posY" : 10,
+			"posY" : 12,
 			"tilePosX" : 32,
 			"tilePosY" : 48
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 21,
-			"posY" : 10,
+			"posY" : 12,
 			"tilePosX" : 32,
 			"tilePosY" : 48
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 22,
-			"posY" : 10,
+			"posY" : 12,
 			"tilePosX" : 32,
 			"tilePosY" : 48
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 23,
-			"posY" : 10,
+			"posY" : 12,
 			"tilePosX" : 32,
 			"tilePosY" : 48
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 0,
-			"posY" : 11,
+			"posY" : 13,
 			"tilePosX" : 624,
 			"tilePosY" : 48
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 1,
-			"posY" : 11,
+			"posY" : 13,
 			"tilePosX" : 624,
 			"tilePosY" : 48
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 2,
-			"posY" : 11,
+			"posY" : 13,
 			"tilePosX" : 624,
 			"tilePosY" : 48
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 3,
-			"posY" : 11,
+			"posY" : 13,
 			"tilePosX" : 624,
 			"tilePosY" : 48
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 4,
-			"posY" : 11,
+			"posY" : 13,
 			"tilePosX" : 240,
 			"tilePosY" : 144
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 0,
 			"posX" : 5,
-			"posY" : 11,
+			"posY" : 13,
 			"tilePosX" : 64,
 			"tilePosY" : 128
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 6,
-			"posY" : 11,
+			"posY" : 13,
 			"tilePosX" : 256,
 			"tilePosY" : 144
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 7,
-			"posY" : 11,
+			"posY" : 13,
 			"tilePosX" : 272,
 			"tilePosY" : 144
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 0,
 			"posX" : 8,
-			"posY" : 11,
+			"posY" : 13,
 			"tilePosX" : 576,
 			"tilePosY" : 0
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 0,
 			"posX" : 9,
-			"posY" : 11,
+			"posY" : 13,
 			"tilePosX" : 576,
 			"tilePosY" : 0
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 0,
 			"posX" : 10,
-			"posY" : 11,
+			"posY" : 13,
 			"tilePosX" : 576,
 			"tilePosY" : 0
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 0,
 			"posX" : 11,
-			"posY" : 11,
+			"posY" : 13,
 			"tilePosX" : 576,
 			"tilePosY" : 0
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 0,
 			"posX" : 12,
-			"posY" : 11,
+			"posY" : 13,
 			"tilePosX" : 576,
 			"tilePosY" : 0
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 0,
 			"posX" : 13,
-			"posY" : 11,
+			"posY" : 13,
 			"tilePosX" : 576,
 			"tilePosY" : 0
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 0,
 			"posX" : 14,
-			"posY" : 11,
+			"posY" : 13,
 			"tilePosX" : 576,
 			"tilePosY" : 0
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 0,
 			"posX" : 15,
-			"posY" : 11,
+			"posY" : 13,
 			"tilePosX" : 576,
 			"tilePosY" : 0
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 0,
 			"posX" : 16,
-			"posY" : 11,
+			"posY" : 13,
 			"tilePosX" : 576,
 			"tilePosY" : 0
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 0,
 			"posX" : 17,
-			"posY" : 11,
+			"posY" : 13,
 			"tilePosX" : 576,
 			"tilePosY" : 0
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 0,
 			"posX" : 18,
-			"posY" : 11,
+			"posY" : 13,
 			"tilePosX" : 624,
 			"tilePosY" : 16
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 19,
-			"posY" : 11,
+			"posY" : 13,
 			"tilePosX" : 672,
 			"tilePosY" : 16
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 20,
-			"posY" : 11,
+			"posY" : 13,
 			"tilePosX" : 624,
 			"tilePosY" : 48
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 21,
-			"posY" : 11,
+			"posY" : 13,
 			"tilePosX" : 624,
 			"tilePosY" : 48
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 22,
-			"posY" : 11,
+			"posY" : 13,
 			"tilePosX" : 624,
 			"tilePosY" : 48
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 23,
-			"posY" : 11,
+			"posY" : 13,
 			"tilePosX" : 624,
 			"tilePosY" : 48
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 0,
-			"posY" : 12,
+			"posY" : 14,
 			"tilePosX" : 32,
 			"tilePosY" : 48
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 1,
-			"posY" : 12,
+			"posY" : 14,
 			"tilePosX" : 32,
 			"tilePosY" : 48
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 0,
 			"posX" : 2,
-			"posY" : 12,
+			"posY" : 14,
 			"tilePosX" : 16,
 			"tilePosY" : 16
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 0,
 			"posX" : 3,
-			"posY" : 12,
-			"tilePosX" : 544,
-			"tilePosY" : 0
+			"posY" : 14,
+			"tilePosX" : 16,
+			"tilePosY" : 16
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 0,
 			"posX" : 4,
-			"posY" : 12,
+			"posY" : 14,
 			"tilePosX" : 576,
 			"tilePosY" : 0
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 0,
 			"posX" : 5,
-			"posY" : 12,
+			"posY" : 14,
 			"tilePosX" : 576,
 			"tilePosY" : 0
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 0,
 			"posX" : 6,
-			"posY" : 12,
+			"posY" : 14,
 			"tilePosX" : 576,
 			"tilePosY" : 0
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 0,
 			"posX" : 7,
-			"posY" : 12,
+			"posY" : 14,
 			"tilePosX" : 576,
 			"tilePosY" : 0
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 0,
 			"posX" : 8,
-			"posY" : 12,
+			"posY" : 14,
 			"tilePosX" : 576,
 			"tilePosY" : 0
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 0,
 			"posX" : 9,
-			"posY" : 12,
+			"posY" : 14,
 			"tilePosX" : 576,
 			"tilePosY" : 0
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 0,
 			"posX" : 10,
-			"posY" : 12,
+			"posY" : 14,
 			"tilePosX" : 624,
 			"tilePosY" : 16
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 0,
 			"posX" : 11,
-			"posY" : 12,
+			"posY" : 14,
 			"tilePosX" : 624,
 			"tilePosY" : 16
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 12,
-			"posY" : 12,
+			"posY" : 14,
 			"tilePosX" : 368,
 			"tilePosY" : 320
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 13,
-			"posY" : 12,
+			"posY" : 14,
 			"tilePosX" : 384,
 			"tilePosY" : 320
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 14,
-			"posY" : 12,
+			"posY" : 14,
 			"tilePosX" : 384,
 			"tilePosY" : 320
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 15,
-			"posY" : 12,
+			"posY" : 14,
 			"tilePosX" : 400,
 			"tilePosY" : 320
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 0,
 			"posX" : 16,
-			"posY" : 12,
+			"posY" : 14,
 			"tilePosX" : 576,
 			"tilePosY" : 0
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 0,
 			"posX" : 17,
-			"posY" : 12,
+			"posY" : 14,
 			"tilePosX" : 576,
 			"tilePosY" : 0
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 0,
 			"posX" : 18,
-			"posY" : 12,
+			"posY" : 14,
 			"tilePosX" : 624,
 			"tilePosY" : 16
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 19,
-			"posY" : 12,
+			"posY" : 14,
 			"tilePosX" : 672,
 			"tilePosY" : 16
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 20,
-			"posY" : 12,
+			"posY" : 14,
 			"tilePosX" : 32,
 			"tilePosY" : 48
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 21,
-			"posY" : 12,
+			"posY" : 14,
 			"tilePosX" : 32,
 			"tilePosY" : 48
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 22,
-			"posY" : 12,
+			"posY" : 14,
 			"tilePosX" : 32,
 			"tilePosY" : 48
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 23,
-			"posY" : 12,
+			"posY" : 14,
 			"tilePosX" : 32,
 			"tilePosY" : 48
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 0,
-			"posY" : 13,
+			"posY" : 15,
 			"tilePosX" : 624,
 			"tilePosY" : 48
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 1,
-			"posY" : 13,
+			"posY" : 15,
 			"tilePosX" : 624,
 			"tilePosY" : 48
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 0,
 			"posX" : 2,
-			"posY" : 13,
-			"tilePosX" : 608,
-			"tilePosY" : 16
+			"posY" : 15,
+			"tilePosX" : 96,
+			"tilePosY" : 32
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 0,
 			"posX" : 3,
-			"posY" : 13,
-			"tilePosX" : 608,
-			"tilePosY" : 16
+			"posY" : 15,
+			"tilePosX" : 96,
+			"tilePosY" : 32
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 0,
 			"posX" : 4,
-			"posY" : 13,
+			"posY" : 15,
 			"tilePosX" : 576,
 			"tilePosY" : 0
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 0,
 			"posX" : 5,
-			"posY" : 13,
+			"posY" : 15,
 			"tilePosX" : 576,
 			"tilePosY" : 0
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 0,
 			"posX" : 6,
-			"posY" : 13,
+			"posY" : 15,
 			"tilePosX" : 576,
 			"tilePosY" : 0
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 0,
 			"posX" : 7,
-			"posY" : 13,
+			"posY" : 15,
 			"tilePosX" : 576,
 			"tilePosY" : 0
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 0,
 			"posX" : 8,
-			"posY" : 13,
+			"posY" : 15,
 			"tilePosX" : 576,
 			"tilePosY" : 0
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 0,
 			"posX" : 9,
-			"posY" : 13,
+			"posY" : 15,
 			"tilePosX" : 576,
 			"tilePosY" : 0
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 0,
 			"posX" : 10,
-			"posY" : 13,
+			"posY" : 15,
 			"tilePosX" : 624,
 			"tilePosY" : 16
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 11,
-			"posY" : 13,
+			"posY" : 15,
 			"tilePosX" : 592,
 			"tilePosY" : 0
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 12,
-			"posY" : 13,
+			"posY" : 15,
 			"tilePosX" : 240,
 			"tilePosY" : 144
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 0,
 			"posX" : 13,
-			"posY" : 13,
+			"posY" : 15,
 			"tilePosX" : 64,
 			"tilePosY" : 128
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 14,
-			"posY" : 13,
+			"posY" : 15,
 			"tilePosX" : 256,
 			"tilePosY" : 144
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 15,
-			"posY" : 13,
+			"posY" : 15,
 			"tilePosX" : 272,
 			"tilePosY" : 144
 		},
 		{
 			"interact ID" : -1,
-			"moveable" : 0,
-			"posX" : 16,
-			"posY" : 13,
-			"tilePosX" : 576,
-			"tilePosY" : 0
-		},
-		{
-			"interact ID" : -1,
-			"moveable" : 0,
-			"posX" : 17,
-			"posY" : 13,
-			"tilePosX" : 576,
-			"tilePosY" : 0
-		},
-		{
-			"interact ID" : -1,
-			"moveable" : 0,
-			"posX" : 18,
-			"posY" : 13,
-			"tilePosX" : 624,
-			"tilePosY" : 16
-		},
-		{
-			"interact ID" : -1,
-			"moveable" : 1,
-			"posX" : 19,
-			"posY" : 13,
-			"tilePosX" : 672,
-			"tilePosY" : 16
-		},
-		{
-			"interact ID" : -1,
-			"moveable" : 1,
-			"posX" : 20,
-			"posY" : 13,
-			"tilePosX" : 624,
-			"tilePosY" : 48
-		},
-		{
-			"interact ID" : -1,
-			"moveable" : 1,
-			"posX" : 21,
-			"posY" : 13,
-			"tilePosX" : 624,
-			"tilePosY" : 48
-		},
-		{
-			"interact ID" : -1,
-			"moveable" : 1,
-			"posX" : 22,
-			"posY" : 13,
-			"tilePosX" : 624,
-			"tilePosY" : 48
-		},
-		{
-			"interact ID" : -1,
-			"moveable" : 1,
-			"posX" : 23,
-			"posY" : 13,
-			"tilePosX" : 624,
-			"tilePosY" : 48
-		},
-		{
-			"interact ID" : -1,
-			"moveable" : 1,
-			"posX" : 0,
-			"posY" : 14,
-			"tilePosX" : 32,
-			"tilePosY" : 48
-		},
-		{
-			"interact ID" : -1,
-			"moveable" : 1,
-			"posX" : 1,
-			"posY" : 14,
-			"tilePosX" : 32,
-			"tilePosY" : 48
-		},
-		{
-			"interact ID" : -1,
-			"moveable" : 1,
-			"posX" : 2,
-			"posY" : 14,
-			"tilePosX" : 32,
-			"tilePosY" : 48
-		},
-		{
-			"interact ID" : -1,
-			"moveable" : 1,
-			"posX" : 3,
-			"posY" : 14,
-			"tilePosX" : 32,
-			"tilePosY" : 48
-		},
-		{
-			"interact ID" : -1,
-			"moveable" : 0,
-			"posX" : 4,
-			"posY" : 14,
-			"tilePosX" : 624,
-			"tilePosY" : 16
-		},
-		{
-			"interact ID" : -1,
-			"moveable" : 0,
-			"posX" : 5,
-			"posY" : 14,
-			"tilePosX" : 624,
-			"tilePosY" : 16
-		},
-		{
-			"interact ID" : -1,
-			"moveable" : 0,
-			"posX" : 6,
-			"posY" : 14,
-			"tilePosX" : 624,
-			"tilePosY" : 16
-		},
-		{
-			"interact ID" : -1,
-			"moveable" : 0,
-			"posX" : 7,
-			"posY" : 14,
-			"tilePosX" : 624,
-			"tilePosY" : 16
-		},
-		{
-			"interact ID" : -1,
-			"moveable" : 0,
-			"posX" : 8,
-			"posY" : 14,
-			"tilePosX" : 576,
-			"tilePosY" : 0
-		},
-		{
-			"interact ID" : -1,
-			"moveable" : 0,
-			"posX" : 9,
-			"posY" : 14,
-			"tilePosX" : 576,
-			"tilePosY" : 0
-		},
-		{
-			"interact ID" : -1,
-			"moveable" : 0,
-			"posX" : 10,
-			"posY" : 14,
-			"tilePosX" : 576,
-			"tilePosY" : 0
-		},
-		{
-			"interact ID" : -1,
-			"moveable" : 0,
-			"posX" : 11,
-			"posY" : 14,
-			"tilePosX" : 576,
-			"tilePosY" : 0
-		},
-		{
-			"interact ID" : -1,
-			"moveable" : 0,
-			"posX" : 12,
-			"posY" : 14,
-			"tilePosX" : 576,
-			"tilePosY" : 0
-		},
-		{
-			"interact ID" : -1,
-			"moveable" : 0,
-			"posX" : 13,
-			"posY" : 14,
-			"tilePosX" : 576,
-			"tilePosY" : 0
-		},
-		{
-			"interact ID" : -1,
-			"moveable" : 0,
-			"posX" : 14,
-			"posY" : 14,
-			"tilePosX" : 576,
-			"tilePosY" : 0
-		},
-		{
-			"interact ID" : -1,
-			"moveable" : 0,
-			"posX" : 15,
-			"posY" : 14,
-			"tilePosX" : 576,
-			"tilePosY" : 0
-		},
-		{
-			"interact ID" : -1,
-			"moveable" : 0,
-			"posX" : 16,
-			"posY" : 14,
-			"tilePosX" : 576,
-			"tilePosY" : 0
-		},
-		{
-			"interact ID" : -1,
-			"moveable" : 0,
-			"posX" : 17,
-			"posY" : 14,
-			"tilePosX" : 576,
-			"tilePosY" : 0
-		},
-		{
-			"interact ID" : -1,
-			"moveable" : 0,
-			"posX" : 18,
-			"posY" : 14,
-			"tilePosX" : 624,
-			"tilePosY" : 16
-		},
-		{
-			"interact ID" : -1,
-			"moveable" : 1,
-			"posX" : 19,
-			"posY" : 14,
-			"tilePosX" : 672,
-			"tilePosY" : 16
-		},
-		{
-			"interact ID" : -1,
-			"moveable" : 1,
-			"posX" : 20,
-			"posY" : 14,
-			"tilePosX" : 32,
-			"tilePosY" : 48
-		},
-		{
-			"interact ID" : -1,
-			"moveable" : 1,
-			"posX" : 21,
-			"posY" : 14,
-			"tilePosX" : 32,
-			"tilePosY" : 48
-		},
-		{
-			"interact ID" : -1,
-			"moveable" : 1,
-			"posX" : 22,
-			"posY" : 14,
-			"tilePosX" : 32,
-			"tilePosY" : 48
-		},
-		{
-			"interact ID" : -1,
-			"moveable" : 1,
-			"posX" : 23,
-			"posY" : 14,
-			"tilePosX" : 32,
-			"tilePosY" : 48
-		},
-		{
-			"interact ID" : -1,
-			"moveable" : 1,
-			"posX" : 0,
-			"posY" : 15,
-			"tilePosX" : 624,
-			"tilePosY" : 48
-		},
-		{
-			"interact ID" : -1,
-			"moveable" : 1,
-			"posX" : 1,
-			"posY" : 15,
-			"tilePosX" : 624,
-			"tilePosY" : 48
-		},
-		{
-			"interact ID" : -1,
-			"moveable" : 1,
-			"posX" : 2,
-			"posY" : 15,
-			"tilePosX" : 624,
-			"tilePosY" : 48
-		},
-		{
-			"interact ID" : -1,
-			"moveable" : 1,
-			"posX" : 3,
-			"posY" : 15,
-			"tilePosX" : 624,
-			"tilePosY" : 48
-		},
-		{
-			"interact ID" : -1,
-			"moveable" : 1,
-			"posX" : 4,
-			"posY" : 15,
-			"tilePosX" : 672,
-			"tilePosY" : 16
-		},
-		{
-			"interact ID" : -1,
-			"moveable" : 1,
-			"posX" : 5,
-			"posY" : 15,
-			"tilePosX" : 672,
-			"tilePosY" : 16
-		},
-		{
-			"interact ID" : -1,
-			"moveable" : 1,
-			"posX" : 6,
-			"posY" : 15,
-			"tilePosX" : 672,
-			"tilePosY" : 16
-		},
-		{
-			"interact ID" : -1,
-			"moveable" : 1,
-			"posX" : 7,
-			"posY" : 15,
-			"tilePosX" : 672,
-			"tilePosY" : 16
-		},
-		{
-			"interact ID" : -1,
-			"moveable" : 0,
-			"posX" : 8,
-			"posY" : 15,
-			"tilePosX" : 576,
-			"tilePosY" : 0
-		},
-		{
-			"interact ID" : -1,
-			"moveable" : 0,
-			"posX" : 9,
-			"posY" : 15,
-			"tilePosX" : 576,
-			"tilePosY" : 0
-		},
-		{
-			"interact ID" : -1,
-			"moveable" : 0,
-			"posX" : 10,
-			"posY" : 15,
-			"tilePosX" : 576,
-			"tilePosY" : 0
-		},
-		{
-			"interact ID" : -1,
-			"moveable" : 0,
-			"posX" : 11,
-			"posY" : 15,
-			"tilePosX" : 576,
-			"tilePosY" : 0
-		},
-		{
-			"interact ID" : -1,
-			"moveable" : 0,
-			"posX" : 12,
-			"posY" : 15,
-			"tilePosX" : 576,
-			"tilePosY" : 0
-		},
-		{
-			"interact ID" : -1,
-			"moveable" : 0,
-			"posX" : 13,
-			"posY" : 15,
-			"tilePosX" : 576,
-			"tilePosY" : 0
-		},
-		{
-			"interact ID" : -1,
-			"moveable" : 0,
-			"posX" : 14,
-			"posY" : 15,
-			"tilePosX" : 576,
-			"tilePosY" : 0
-		},
-		{
-			"interact ID" : -1,
-			"moveable" : 0,
-			"posX" : 15,
-			"posY" : 15,
-			"tilePosX" : 576,
-			"tilePosY" : 0
-		},
-		{
-			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 0,
 			"posX" : 16,
 			"posY" : 15,
@@ -3058,6 +3439,7 @@
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 0,
 			"posX" : 17,
 			"posY" : 15,
@@ -3066,6 +3448,7 @@
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 0,
 			"posX" : 18,
 			"posY" : 15,
@@ -3074,6 +3457,7 @@
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 19,
 			"posY" : 15,
@@ -3082,6 +3466,7 @@
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 20,
 			"posY" : 15,
@@ -3090,6 +3475,7 @@
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 21,
 			"posY" : 15,
@@ -3098,6 +3484,7 @@
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 22,
 			"posY" : 15,
@@ -3106,6 +3493,7 @@
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 23,
 			"posY" : 15,
@@ -3114,6 +3502,7 @@
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 0,
 			"posY" : 16,
@@ -3122,6 +3511,7 @@
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 1,
 			"posY" : 16,
@@ -3130,6 +3520,7 @@
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 2,
 			"posY" : 16,
@@ -3138,6 +3529,7 @@
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 3,
 			"posY" : 16,
@@ -3146,134 +3538,151 @@
 		},
 		{
 			"interact ID" : -1,
-			"moveable" : 1,
+			"isPokemon" : 0,
+			"moveable" : 0,
 			"posX" : 4,
 			"posY" : 16,
-			"tilePosX" : 32,
-			"tilePosY" : 48
+			"tilePosX" : 624,
+			"tilePosY" : 16
 		},
 		{
 			"interact ID" : -1,
-			"moveable" : 1,
+			"isPokemon" : 0,
+			"moveable" : 0,
 			"posX" : 5,
 			"posY" : 16,
-			"tilePosX" : 32,
-			"tilePosY" : 48
+			"tilePosX" : 624,
+			"tilePosY" : 16
 		},
 		{
 			"interact ID" : -1,
-			"moveable" : 1,
+			"isPokemon" : 0,
+			"moveable" : 0,
 			"posX" : 6,
 			"posY" : 16,
-			"tilePosX" : 32,
-			"tilePosY" : 48
+			"tilePosX" : 624,
+			"tilePosY" : 16
 		},
 		{
 			"interact ID" : -1,
-			"moveable" : 1,
+			"isPokemon" : 0,
+			"moveable" : 0,
 			"posX" : 7,
 			"posY" : 16,
-			"tilePosX" : 32,
-			"tilePosY" : 48
+			"tilePosX" : 624,
+			"tilePosY" : 16
 		},
 		{
 			"interact ID" : -1,
-			"moveable" : 1,
+			"isPokemon" : 0,
+			"moveable" : 0,
 			"posX" : 8,
 			"posY" : 16,
-			"tilePosX" : 32,
-			"tilePosY" : 48
+			"tilePosX" : 576,
+			"tilePosY" : 0
 		},
 		{
 			"interact ID" : -1,
-			"moveable" : 1,
+			"isPokemon" : 0,
+			"moveable" : 0,
 			"posX" : 9,
 			"posY" : 16,
-			"tilePosX" : 32,
-			"tilePosY" : 48
+			"tilePosX" : 576,
+			"tilePosY" : 0
 		},
 		{
 			"interact ID" : -1,
-			"moveable" : 1,
+			"isPokemon" : 0,
+			"moveable" : 0,
 			"posX" : 10,
 			"posY" : 16,
-			"tilePosX" : 32,
-			"tilePosY" : 48
+			"tilePosX" : 576,
+			"tilePosY" : 0
 		},
 		{
 			"interact ID" : -1,
-			"moveable" : 1,
+			"isPokemon" : 0,
+			"moveable" : 0,
 			"posX" : 11,
 			"posY" : 16,
-			"tilePosX" : 32,
-			"tilePosY" : 48
+			"tilePosX" : 576,
+			"tilePosY" : 0
 		},
 		{
 			"interact ID" : -1,
-			"moveable" : 1,
+			"isPokemon" : 0,
+			"moveable" : 0,
 			"posX" : 12,
 			"posY" : 16,
-			"tilePosX" : 32,
-			"tilePosY" : 48
+			"tilePosX" : 576,
+			"tilePosY" : 0
 		},
 		{
 			"interact ID" : -1,
-			"moveable" : 1,
+			"isPokemon" : 0,
+			"moveable" : 0,
 			"posX" : 13,
 			"posY" : 16,
-			"tilePosX" : 32,
-			"tilePosY" : 48
+			"tilePosX" : 576,
+			"tilePosY" : 0
 		},
 		{
 			"interact ID" : -1,
-			"moveable" : 1,
+			"isPokemon" : 0,
+			"moveable" : 0,
 			"posX" : 14,
 			"posY" : 16,
-			"tilePosX" : 32,
-			"tilePosY" : 48
+			"tilePosX" : 576,
+			"tilePosY" : 0
 		},
 		{
 			"interact ID" : -1,
-			"moveable" : 1,
+			"isPokemon" : 0,
+			"moveable" : 0,
 			"posX" : 15,
 			"posY" : 16,
-			"tilePosX" : 32,
-			"tilePosY" : 48
+			"tilePosX" : 576,
+			"tilePosY" : 0
 		},
 		{
 			"interact ID" : -1,
-			"moveable" : 1,
+			"isPokemon" : 0,
+			"moveable" : 0,
 			"posX" : 16,
 			"posY" : 16,
-			"tilePosX" : 32,
-			"tilePosY" : 48
+			"tilePosX" : 576,
+			"tilePosY" : 0
 		},
 		{
 			"interact ID" : -1,
-			"moveable" : 1,
+			"isPokemon" : 0,
+			"moveable" : 0,
 			"posX" : 17,
 			"posY" : 16,
-			"tilePosX" : 32,
-			"tilePosY" : 48
+			"tilePosX" : 576,
+			"tilePosY" : 0
 		},
 		{
 			"interact ID" : -1,
-			"moveable" : 1,
+			"isPokemon" : 0,
+			"moveable" : 0,
 			"posX" : 18,
 			"posY" : 16,
-			"tilePosX" : 32,
-			"tilePosY" : 48
+			"tilePosX" : 624,
+			"tilePosY" : 16
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 19,
 			"posY" : 16,
-			"tilePosX" : 32,
-			"tilePosY" : 48
+			"tilePosX" : 672,
+			"tilePosY" : 16
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 20,
 			"posY" : 16,
@@ -3282,6 +3691,7 @@
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 21,
 			"posY" : 16,
@@ -3290,6 +3700,7 @@
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 22,
 			"posY" : 16,
@@ -3298,6 +3709,7 @@
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 23,
 			"posY" : 16,
@@ -3306,6 +3718,7 @@
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 0,
 			"posY" : 17,
@@ -3314,6 +3727,7 @@
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 1,
 			"posY" : 17,
@@ -3322,6 +3736,7 @@
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 2,
 			"posY" : 17,
@@ -3330,6 +3745,7 @@
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 3,
 			"posY" : 17,
@@ -3338,134 +3754,151 @@
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 4,
 			"posY" : 17,
-			"tilePosX" : 624,
-			"tilePosY" : 48
+			"tilePosX" : 672,
+			"tilePosY" : 16
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 5,
 			"posY" : 17,
-			"tilePosX" : 624,
-			"tilePosY" : 48
+			"tilePosX" : 672,
+			"tilePosY" : 16
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 6,
 			"posY" : 17,
-			"tilePosX" : 624,
-			"tilePosY" : 48
+			"tilePosX" : 672,
+			"tilePosY" : 16
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 7,
 			"posY" : 17,
-			"tilePosX" : 624,
-			"tilePosY" : 48
+			"tilePosX" : 672,
+			"tilePosY" : 16
 		},
 		{
 			"interact ID" : -1,
-			"moveable" : 1,
+			"isPokemon" : 0,
+			"moveable" : 0,
 			"posX" : 8,
 			"posY" : 17,
-			"tilePosX" : 624,
-			"tilePosY" : 48
+			"tilePosX" : 576,
+			"tilePosY" : 0
 		},
 		{
 			"interact ID" : -1,
-			"moveable" : 1,
+			"isPokemon" : 0,
+			"moveable" : 0,
 			"posX" : 9,
 			"posY" : 17,
-			"tilePosX" : 624,
-			"tilePosY" : 48
+			"tilePosX" : 576,
+			"tilePosY" : 0
 		},
 		{
 			"interact ID" : -1,
-			"moveable" : 1,
+			"isPokemon" : 0,
+			"moveable" : 0,
 			"posX" : 10,
 			"posY" : 17,
-			"tilePosX" : 624,
-			"tilePosY" : 48
+			"tilePosX" : 576,
+			"tilePosY" : 0
 		},
 		{
 			"interact ID" : -1,
-			"moveable" : 1,
+			"isPokemon" : 0,
+			"moveable" : 0,
 			"posX" : 11,
 			"posY" : 17,
-			"tilePosX" : 624,
-			"tilePosY" : 48
+			"tilePosX" : 576,
+			"tilePosY" : 0
 		},
 		{
 			"interact ID" : -1,
-			"moveable" : 1,
+			"isPokemon" : 0,
+			"moveable" : 0,
 			"posX" : 12,
 			"posY" : 17,
-			"tilePosX" : 624,
-			"tilePosY" : 48
+			"tilePosX" : 576,
+			"tilePosY" : 0
 		},
 		{
 			"interact ID" : -1,
-			"moveable" : 1,
+			"isPokemon" : 0,
+			"moveable" : 0,
 			"posX" : 13,
 			"posY" : 17,
-			"tilePosX" : 624,
-			"tilePosY" : 48
+			"tilePosX" : 576,
+			"tilePosY" : 0
 		},
 		{
 			"interact ID" : -1,
-			"moveable" : 1,
+			"isPokemon" : 0,
+			"moveable" : 0,
 			"posX" : 14,
 			"posY" : 17,
-			"tilePosX" : 624,
-			"tilePosY" : 48
+			"tilePosX" : 576,
+			"tilePosY" : 0
 		},
 		{
 			"interact ID" : -1,
-			"moveable" : 1,
+			"isPokemon" : 0,
+			"moveable" : 0,
 			"posX" : 15,
 			"posY" : 17,
-			"tilePosX" : 624,
-			"tilePosY" : 48
+			"tilePosX" : 576,
+			"tilePosY" : 0
 		},
 		{
 			"interact ID" : -1,
-			"moveable" : 1,
+			"isPokemon" : 0,
+			"moveable" : 0,
 			"posX" : 16,
 			"posY" : 17,
-			"tilePosX" : 624,
-			"tilePosY" : 48
+			"tilePosX" : 576,
+			"tilePosY" : 0
 		},
 		{
 			"interact ID" : -1,
-			"moveable" : 1,
+			"isPokemon" : 0,
+			"moveable" : 0,
 			"posX" : 17,
 			"posY" : 17,
-			"tilePosX" : 624,
-			"tilePosY" : 48
+			"tilePosX" : 576,
+			"tilePosY" : 0
 		},
 		{
 			"interact ID" : -1,
-			"moveable" : 1,
+			"isPokemon" : 0,
+			"moveable" : 0,
 			"posX" : 18,
 			"posY" : 17,
 			"tilePosX" : 624,
-			"tilePosY" : 48
+			"tilePosY" : 16
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 19,
 			"posY" : 17,
-			"tilePosX" : 624,
-			"tilePosY" : 48
+			"tilePosX" : 672,
+			"tilePosY" : 16
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 20,
 			"posY" : 17,
@@ -3474,6 +3907,7 @@
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 21,
 			"posY" : 17,
@@ -3482,6 +3916,7 @@
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 22,
 			"posY" : 17,
@@ -3490,9 +3925,874 @@
 		},
 		{
 			"interact ID" : -1,
+			"isPokemon" : 0,
 			"moveable" : 1,
 			"posX" : 23,
 			"posY" : 17,
+			"tilePosX" : 624,
+			"tilePosY" : 48
+		},
+		{
+			"interact ID" : -1,
+			"isPokemon" : 0,
+			"moveable" : 1,
+			"posX" : 0,
+			"posY" : 18,
+			"tilePosX" : 32,
+			"tilePosY" : 48
+		},
+		{
+			"interact ID" : -1,
+			"isPokemon" : 0,
+			"moveable" : 1,
+			"posX" : 1,
+			"posY" : 18,
+			"tilePosX" : 32,
+			"tilePosY" : 48
+		},
+		{
+			"interact ID" : -1,
+			"isPokemon" : 0,
+			"moveable" : 1,
+			"posX" : 2,
+			"posY" : 18,
+			"tilePosX" : 32,
+			"tilePosY" : 48
+		},
+		{
+			"interact ID" : -1,
+			"isPokemon" : 0,
+			"moveable" : 1,
+			"posX" : 3,
+			"posY" : 18,
+			"tilePosX" : 32,
+			"tilePosY" : 48
+		},
+		{
+			"interact ID" : -1,
+			"isPokemon" : 0,
+			"moveable" : 1,
+			"posX" : 4,
+			"posY" : 18,
+			"tilePosX" : 32,
+			"tilePosY" : 48
+		},
+		{
+			"interact ID" : -1,
+			"isPokemon" : 0,
+			"moveable" : 1,
+			"posX" : 5,
+			"posY" : 18,
+			"tilePosX" : 32,
+			"tilePosY" : 48
+		},
+		{
+			"interact ID" : -1,
+			"isPokemon" : 0,
+			"moveable" : 1,
+			"posX" : 6,
+			"posY" : 18,
+			"tilePosX" : 32,
+			"tilePosY" : 48
+		},
+		{
+			"interact ID" : -1,
+			"isPokemon" : 0,
+			"moveable" : 1,
+			"posX" : 7,
+			"posY" : 18,
+			"tilePosX" : 32,
+			"tilePosY" : 48
+		},
+		{
+			"interact ID" : -1,
+			"isPokemon" : 0,
+			"moveable" : 1,
+			"posX" : 8,
+			"posY" : 18,
+			"tilePosX" : 32,
+			"tilePosY" : 48
+		},
+		{
+			"interact ID" : -1,
+			"isPokemon" : 0,
+			"moveable" : 1,
+			"posX" : 9,
+			"posY" : 18,
+			"tilePosX" : 32,
+			"tilePosY" : 48
+		},
+		{
+			"interact ID" : -1,
+			"isPokemon" : 0,
+			"moveable" : 1,
+			"posX" : 10,
+			"posY" : 18,
+			"tilePosX" : 32,
+			"tilePosY" : 48
+		},
+		{
+			"interact ID" : -1,
+			"isPokemon" : 0,
+			"moveable" : 1,
+			"posX" : 11,
+			"posY" : 18,
+			"tilePosX" : 32,
+			"tilePosY" : 48
+		},
+		{
+			"interact ID" : -1,
+			"isPokemon" : 0,
+			"moveable" : 1,
+			"posX" : 12,
+			"posY" : 18,
+			"tilePosX" : 32,
+			"tilePosY" : 48
+		},
+		{
+			"interact ID" : -1,
+			"isPokemon" : 0,
+			"moveable" : 1,
+			"posX" : 13,
+			"posY" : 18,
+			"tilePosX" : 32,
+			"tilePosY" : 48
+		},
+		{
+			"interact ID" : -1,
+			"isPokemon" : 0,
+			"moveable" : 1,
+			"posX" : 14,
+			"posY" : 18,
+			"tilePosX" : 32,
+			"tilePosY" : 48
+		},
+		{
+			"interact ID" : -1,
+			"isPokemon" : 0,
+			"moveable" : 1,
+			"posX" : 15,
+			"posY" : 18,
+			"tilePosX" : 32,
+			"tilePosY" : 48
+		},
+		{
+			"interact ID" : -1,
+			"isPokemon" : 0,
+			"moveable" : 1,
+			"posX" : 16,
+			"posY" : 18,
+			"tilePosX" : 32,
+			"tilePosY" : 48
+		},
+		{
+			"interact ID" : -1,
+			"isPokemon" : 0,
+			"moveable" : 1,
+			"posX" : 17,
+			"posY" : 18,
+			"tilePosX" : 32,
+			"tilePosY" : 48
+		},
+		{
+			"interact ID" : -1,
+			"isPokemon" : 0,
+			"moveable" : 1,
+			"posX" : 18,
+			"posY" : 18,
+			"tilePosX" : 32,
+			"tilePosY" : 48
+		},
+		{
+			"interact ID" : -1,
+			"isPokemon" : 0,
+			"moveable" : 1,
+			"posX" : 19,
+			"posY" : 18,
+			"tilePosX" : 32,
+			"tilePosY" : 48
+		},
+		{
+			"interact ID" : -1,
+			"isPokemon" : 0,
+			"moveable" : 1,
+			"posX" : 20,
+			"posY" : 18,
+			"tilePosX" : 32,
+			"tilePosY" : 48
+		},
+		{
+			"interact ID" : -1,
+			"isPokemon" : 0,
+			"moveable" : 1,
+			"posX" : 21,
+			"posY" : 18,
+			"tilePosX" : 32,
+			"tilePosY" : 48
+		},
+		{
+			"interact ID" : -1,
+			"isPokemon" : 0,
+			"moveable" : 1,
+			"posX" : 22,
+			"posY" : 18,
+			"tilePosX" : 32,
+			"tilePosY" : 48
+		},
+		{
+			"interact ID" : -1,
+			"isPokemon" : 0,
+			"moveable" : 1,
+			"posX" : 23,
+			"posY" : 18,
+			"tilePosX" : 32,
+			"tilePosY" : 48
+		},
+		{
+			"interact ID" : -1,
+			"isPokemon" : 0,
+			"moveable" : 1,
+			"posX" : 0,
+			"posY" : 19,
+			"tilePosX" : 624,
+			"tilePosY" : 48
+		},
+		{
+			"interact ID" : -1,
+			"isPokemon" : 0,
+			"moveable" : 1,
+			"posX" : 1,
+			"posY" : 19,
+			"tilePosX" : 624,
+			"tilePosY" : 48
+		},
+		{
+			"interact ID" : -1,
+			"isPokemon" : 0,
+			"moveable" : 1,
+			"posX" : 2,
+			"posY" : 19,
+			"tilePosX" : 624,
+			"tilePosY" : 48
+		},
+		{
+			"interact ID" : -1,
+			"isPokemon" : 0,
+			"moveable" : 1,
+			"posX" : 3,
+			"posY" : 19,
+			"tilePosX" : 624,
+			"tilePosY" : 48
+		},
+		{
+			"interact ID" : -1,
+			"isPokemon" : 0,
+			"moveable" : 1,
+			"posX" : 4,
+			"posY" : 19,
+			"tilePosX" : 624,
+			"tilePosY" : 48
+		},
+		{
+			"interact ID" : -1,
+			"isPokemon" : 0,
+			"moveable" : 1,
+			"posX" : 5,
+			"posY" : 19,
+			"tilePosX" : 624,
+			"tilePosY" : 48
+		},
+		{
+			"interact ID" : -1,
+			"isPokemon" : 0,
+			"moveable" : 1,
+			"posX" : 6,
+			"posY" : 19,
+			"tilePosX" : 624,
+			"tilePosY" : 48
+		},
+		{
+			"interact ID" : -1,
+			"isPokemon" : 0,
+			"moveable" : 1,
+			"posX" : 7,
+			"posY" : 19,
+			"tilePosX" : 624,
+			"tilePosY" : 48
+		},
+		{
+			"interact ID" : -1,
+			"isPokemon" : 0,
+			"moveable" : 1,
+			"posX" : 8,
+			"posY" : 19,
+			"tilePosX" : 624,
+			"tilePosY" : 48
+		},
+		{
+			"interact ID" : -1,
+			"isPokemon" : 0,
+			"moveable" : 1,
+			"posX" : 9,
+			"posY" : 19,
+			"tilePosX" : 624,
+			"tilePosY" : 48
+		},
+		{
+			"interact ID" : -1,
+			"isPokemon" : 0,
+			"moveable" : 1,
+			"posX" : 10,
+			"posY" : 19,
+			"tilePosX" : 624,
+			"tilePosY" : 48
+		},
+		{
+			"interact ID" : -1,
+			"isPokemon" : 0,
+			"moveable" : 1,
+			"posX" : 11,
+			"posY" : 19,
+			"tilePosX" : 624,
+			"tilePosY" : 48
+		},
+		{
+			"interact ID" : -1,
+			"isPokemon" : 0,
+			"moveable" : 1,
+			"posX" : 12,
+			"posY" : 19,
+			"tilePosX" : 624,
+			"tilePosY" : 48
+		},
+		{
+			"interact ID" : -1,
+			"isPokemon" : 0,
+			"moveable" : 1,
+			"posX" : 13,
+			"posY" : 19,
+			"tilePosX" : 624,
+			"tilePosY" : 48
+		},
+		{
+			"interact ID" : -1,
+			"isPokemon" : 0,
+			"moveable" : 1,
+			"posX" : 14,
+			"posY" : 19,
+			"tilePosX" : 624,
+			"tilePosY" : 48
+		},
+		{
+			"interact ID" : -1,
+			"isPokemon" : 0,
+			"moveable" : 1,
+			"posX" : 15,
+			"posY" : 19,
+			"tilePosX" : 624,
+			"tilePosY" : 48
+		},
+		{
+			"interact ID" : -1,
+			"isPokemon" : 0,
+			"moveable" : 1,
+			"posX" : 16,
+			"posY" : 19,
+			"tilePosX" : 624,
+			"tilePosY" : 48
+		},
+		{
+			"interact ID" : -1,
+			"isPokemon" : 0,
+			"moveable" : 1,
+			"posX" : 17,
+			"posY" : 19,
+			"tilePosX" : 624,
+			"tilePosY" : 48
+		},
+		{
+			"interact ID" : -1,
+			"isPokemon" : 0,
+			"moveable" : 1,
+			"posX" : 18,
+			"posY" : 19,
+			"tilePosX" : 624,
+			"tilePosY" : 48
+		},
+		{
+			"interact ID" : -1,
+			"isPokemon" : 0,
+			"moveable" : 1,
+			"posX" : 19,
+			"posY" : 19,
+			"tilePosX" : 624,
+			"tilePosY" : 48
+		},
+		{
+			"interact ID" : -1,
+			"isPokemon" : 0,
+			"moveable" : 1,
+			"posX" : 20,
+			"posY" : 19,
+			"tilePosX" : 624,
+			"tilePosY" : 48
+		},
+		{
+			"interact ID" : -1,
+			"isPokemon" : 0,
+			"moveable" : 1,
+			"posX" : 21,
+			"posY" : 19,
+			"tilePosX" : 624,
+			"tilePosY" : 48
+		},
+		{
+			"interact ID" : -1,
+			"isPokemon" : 0,
+			"moveable" : 1,
+			"posX" : 22,
+			"posY" : 19,
+			"tilePosX" : 624,
+			"tilePosY" : 48
+		},
+		{
+			"interact ID" : -1,
+			"isPokemon" : 0,
+			"moveable" : 1,
+			"posX" : 23,
+			"posY" : 19,
+			"tilePosX" : 624,
+			"tilePosY" : 48
+		},
+		{
+			"interact ID" : -1,
+			"isPokemon" : 0,
+			"moveable" : 1,
+			"posX" : 0,
+			"posY" : 20,
+			"tilePosX" : 32,
+			"tilePosY" : 48
+		},
+		{
+			"interact ID" : -1,
+			"isPokemon" : 0,
+			"moveable" : 1,
+			"posX" : 1,
+			"posY" : 20,
+			"tilePosX" : 32,
+			"tilePosY" : 48
+		},
+		{
+			"interact ID" : -1,
+			"isPokemon" : 0,
+			"moveable" : 1,
+			"posX" : 2,
+			"posY" : 20,
+			"tilePosX" : 32,
+			"tilePosY" : 48
+		},
+		{
+			"interact ID" : -1,
+			"isPokemon" : 0,
+			"moveable" : 1,
+			"posX" : 3,
+			"posY" : 20,
+			"tilePosX" : 32,
+			"tilePosY" : 48
+		},
+		{
+			"interact ID" : -1,
+			"isPokemon" : 0,
+			"moveable" : 1,
+			"posX" : 4,
+			"posY" : 20,
+			"tilePosX" : 32,
+			"tilePosY" : 48
+		},
+		{
+			"interact ID" : -1,
+			"isPokemon" : 0,
+			"moveable" : 1,
+			"posX" : 5,
+			"posY" : 20,
+			"tilePosX" : 32,
+			"tilePosY" : 48
+		},
+		{
+			"interact ID" : -1,
+			"isPokemon" : 0,
+			"moveable" : 1,
+			"posX" : 6,
+			"posY" : 20,
+			"tilePosX" : 32,
+			"tilePosY" : 48
+		},
+		{
+			"interact ID" : -1,
+			"isPokemon" : 0,
+			"moveable" : 1,
+			"posX" : 7,
+			"posY" : 20,
+			"tilePosX" : 32,
+			"tilePosY" : 48
+		},
+		{
+			"interact ID" : -1,
+			"isPokemon" : 0,
+			"moveable" : 1,
+			"posX" : 8,
+			"posY" : 20,
+			"tilePosX" : 32,
+			"tilePosY" : 48
+		},
+		{
+			"interact ID" : -1,
+			"isPokemon" : 0,
+			"moveable" : 1,
+			"posX" : 9,
+			"posY" : 20,
+			"tilePosX" : 32,
+			"tilePosY" : 48
+		},
+		{
+			"interact ID" : -1,
+			"isPokemon" : 0,
+			"moveable" : 1,
+			"posX" : 10,
+			"posY" : 20,
+			"tilePosX" : 32,
+			"tilePosY" : 48
+		},
+		{
+			"interact ID" : -1,
+			"isPokemon" : 0,
+			"moveable" : 1,
+			"posX" : 11,
+			"posY" : 20,
+			"tilePosX" : 32,
+			"tilePosY" : 48
+		},
+		{
+			"interact ID" : -1,
+			"isPokemon" : 0,
+			"moveable" : 1,
+			"posX" : 12,
+			"posY" : 20,
+			"tilePosX" : 32,
+			"tilePosY" : 48
+		},
+		{
+			"interact ID" : -1,
+			"isPokemon" : 0,
+			"moveable" : 1,
+			"posX" : 13,
+			"posY" : 20,
+			"tilePosX" : 32,
+			"tilePosY" : 48
+		},
+		{
+			"interact ID" : -1,
+			"isPokemon" : 0,
+			"moveable" : 1,
+			"posX" : 14,
+			"posY" : 20,
+			"tilePosX" : 32,
+			"tilePosY" : 48
+		},
+		{
+			"interact ID" : -1,
+			"isPokemon" : 0,
+			"moveable" : 1,
+			"posX" : 15,
+			"posY" : 20,
+			"tilePosX" : 32,
+			"tilePosY" : 48
+		},
+		{
+			"interact ID" : -1,
+			"isPokemon" : 0,
+			"moveable" : 1,
+			"posX" : 16,
+			"posY" : 20,
+			"tilePosX" : 32,
+			"tilePosY" : 48
+		},
+		{
+			"interact ID" : -1,
+			"isPokemon" : 0,
+			"moveable" : 1,
+			"posX" : 17,
+			"posY" : 20,
+			"tilePosX" : 32,
+			"tilePosY" : 48
+		},
+		{
+			"interact ID" : -1,
+			"isPokemon" : 0,
+			"moveable" : 1,
+			"posX" : 18,
+			"posY" : 20,
+			"tilePosX" : 32,
+			"tilePosY" : 48
+		},
+		{
+			"interact ID" : -1,
+			"isPokemon" : 0,
+			"moveable" : 1,
+			"posX" : 19,
+			"posY" : 20,
+			"tilePosX" : 32,
+			"tilePosY" : 48
+		},
+		{
+			"interact ID" : -1,
+			"isPokemon" : 0,
+			"moveable" : 1,
+			"posX" : 20,
+			"posY" : 20,
+			"tilePosX" : 32,
+			"tilePosY" : 48
+		},
+		{
+			"interact ID" : -1,
+			"isPokemon" : 0,
+			"moveable" : 1,
+			"posX" : 21,
+			"posY" : 20,
+			"tilePosX" : 32,
+			"tilePosY" : 48
+		},
+		{
+			"interact ID" : -1,
+			"isPokemon" : 0,
+			"moveable" : 1,
+			"posX" : 22,
+			"posY" : 20,
+			"tilePosX" : 32,
+			"tilePosY" : 48
+		},
+		{
+			"interact ID" : -1,
+			"isPokemon" : 0,
+			"moveable" : 1,
+			"posX" : 23,
+			"posY" : 20,
+			"tilePosX" : 32,
+			"tilePosY" : 48
+		},
+		{
+			"interact ID" : -1,
+			"isPokemon" : 0,
+			"moveable" : 1,
+			"posX" : 0,
+			"posY" : 21,
+			"tilePosX" : 624,
+			"tilePosY" : 48
+		},
+		{
+			"interact ID" : -1,
+			"isPokemon" : 0,
+			"moveable" : 1,
+			"posX" : 1,
+			"posY" : 21,
+			"tilePosX" : 624,
+			"tilePosY" : 48
+		},
+		{
+			"interact ID" : -1,
+			"isPokemon" : 0,
+			"moveable" : 1,
+			"posX" : 2,
+			"posY" : 21,
+			"tilePosX" : 624,
+			"tilePosY" : 48
+		},
+		{
+			"interact ID" : -1,
+			"isPokemon" : 0,
+			"moveable" : 1,
+			"posX" : 3,
+			"posY" : 21,
+			"tilePosX" : 624,
+			"tilePosY" : 48
+		},
+		{
+			"interact ID" : -1,
+			"isPokemon" : 0,
+			"moveable" : 1,
+			"posX" : 4,
+			"posY" : 21,
+			"tilePosX" : 624,
+			"tilePosY" : 48
+		},
+		{
+			"interact ID" : -1,
+			"isPokemon" : 0,
+			"moveable" : 1,
+			"posX" : 5,
+			"posY" : 21,
+			"tilePosX" : 624,
+			"tilePosY" : 48
+		},
+		{
+			"interact ID" : -1,
+			"isPokemon" : 0,
+			"moveable" : 1,
+			"posX" : 6,
+			"posY" : 21,
+			"tilePosX" : 624,
+			"tilePosY" : 48
+		},
+		{
+			"interact ID" : -1,
+			"isPokemon" : 0,
+			"moveable" : 1,
+			"posX" : 7,
+			"posY" : 21,
+			"tilePosX" : 624,
+			"tilePosY" : 48
+		},
+		{
+			"interact ID" : -1,
+			"isPokemon" : 0,
+			"moveable" : 1,
+			"posX" : 8,
+			"posY" : 21,
+			"tilePosX" : 624,
+			"tilePosY" : 48
+		},
+		{
+			"interact ID" : -1,
+			"isPokemon" : 0,
+			"moveable" : 1,
+			"posX" : 9,
+			"posY" : 21,
+			"tilePosX" : 624,
+			"tilePosY" : 48
+		},
+		{
+			"interact ID" : -1,
+			"isPokemon" : 0,
+			"moveable" : 1,
+			"posX" : 10,
+			"posY" : 21,
+			"tilePosX" : 624,
+			"tilePosY" : 48
+		},
+		{
+			"interact ID" : -1,
+			"isPokemon" : 0,
+			"moveable" : 1,
+			"posX" : 11,
+			"posY" : 21,
+			"tilePosX" : 624,
+			"tilePosY" : 48
+		},
+		{
+			"interact ID" : -1,
+			"isPokemon" : 0,
+			"moveable" : 1,
+			"posX" : 12,
+			"posY" : 21,
+			"tilePosX" : 624,
+			"tilePosY" : 48
+		},
+		{
+			"interact ID" : -1,
+			"isPokemon" : 0,
+			"moveable" : 1,
+			"posX" : 13,
+			"posY" : 21,
+			"tilePosX" : 624,
+			"tilePosY" : 48
+		},
+		{
+			"interact ID" : -1,
+			"isPokemon" : 0,
+			"moveable" : 1,
+			"posX" : 14,
+			"posY" : 21,
+			"tilePosX" : 624,
+			"tilePosY" : 48
+		},
+		{
+			"interact ID" : -1,
+			"isPokemon" : 0,
+			"moveable" : 1,
+			"posX" : 15,
+			"posY" : 21,
+			"tilePosX" : 624,
+			"tilePosY" : 48
+		},
+		{
+			"interact ID" : -1,
+			"isPokemon" : 0,
+			"moveable" : 1,
+			"posX" : 16,
+			"posY" : 21,
+			"tilePosX" : 624,
+			"tilePosY" : 48
+		},
+		{
+			"interact ID" : -1,
+			"isPokemon" : 0,
+			"moveable" : 1,
+			"posX" : 17,
+			"posY" : 21,
+			"tilePosX" : 624,
+			"tilePosY" : 48
+		},
+		{
+			"interact ID" : -1,
+			"isPokemon" : 0,
+			"moveable" : 1,
+			"posX" : 18,
+			"posY" : 21,
+			"tilePosX" : 624,
+			"tilePosY" : 48
+		},
+		{
+			"interact ID" : -1,
+			"isPokemon" : 0,
+			"moveable" : 1,
+			"posX" : 19,
+			"posY" : 21,
+			"tilePosX" : 624,
+			"tilePosY" : 48
+		},
+		{
+			"interact ID" : -1,
+			"isPokemon" : 0,
+			"moveable" : 1,
+			"posX" : 20,
+			"posY" : 21,
+			"tilePosX" : 624,
+			"tilePosY" : 48
+		},
+		{
+			"interact ID" : -1,
+			"isPokemon" : 0,
+			"moveable" : 1,
+			"posX" : 21,
+			"posY" : 21,
+			"tilePosX" : 624,
+			"tilePosY" : 48
+		},
+		{
+			"interact ID" : -1,
+			"isPokemon" : 0,
+			"moveable" : 1,
+			"posX" : 22,
+			"posY" : 21,
+			"tilePosX" : 624,
+			"tilePosY" : 48
+		},
+		{
+			"interact ID" : -1,
+			"isPokemon" : 0,
+			"moveable" : 1,
+			"posX" : 23,
+			"posY" : 21,
 			"tilePosX" : 624,
 			"tilePosY" : 48
 		}

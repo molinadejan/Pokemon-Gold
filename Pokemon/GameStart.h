@@ -15,7 +15,6 @@ private:
 
 private:
 
-	CSound* gameStartBgm;
 	Image* dialogImg;
 
 	int curSelectMenu;

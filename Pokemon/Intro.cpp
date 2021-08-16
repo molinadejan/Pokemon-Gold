@@ -3,6 +3,7 @@
 #include "DataLoadManager.h"
 #include "InputManager.h"
 #include "RunManager.h"
+#include "SoundManager.h"
 
 Intro::Intro() : introImg(NULL) { }
 
@@ -21,20 +22,16 @@ void Intro::Init()
 	for (int i = 0; i < 5; ++i)
 		pos[i] = particles[i];
 
-	introBgm = new CSound("data/sound/bgm/intro.mp3", true);
-	introBgm->play();
+	SM::ChangeBgmWithoutFade("intro", true);
 }
 
 void Intro::Reset()
 {
 	delete introImg;
-	delete introBgm;
 }
 
 void Intro::Update()
 {
-	introBgm->Update();
-
 	backgroundTimer += Timer::DeltaTime();
 	turquiseTimer += Timer::DeltaTime();
 
@@ -69,7 +66,7 @@ void Intro::Update()
 	
 	if (GET_KEY_Z)
 	{
-		RunManager::SetTarget(gm->gameStart);
+		RunManager::SetTarget(gm->gameStart, 2.0f);
 	}
 }
 

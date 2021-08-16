@@ -3,12 +3,12 @@
 #include "DataLoadManager.h"
 
 Tile::Tile() 
-	: pos{ 0, 0 }, tilePos{ -1, -1 }, moveable(0), interactID(-1) { }
+	: pos{ 0, 0 }, tilePos{ -1, -1 }, moveable(0), interactID(-1), isPokemon(0) { }
 
 Map::Map()
-	: ID(""), worldPos{ 0, 0 }, mapSize{ -1, -1 } { }
+	: ID(""), music(""),  worldPos{ 0, 0 }, mapSize{ -1, -1 } { }
 
-Map::Map(string _ID, int x, int y) : ID(_ID), worldPos{ 0, 0 }, mapSize{ x, y }
+Map::Map(string _ID, int x, int y) : ID(_ID), music(""), worldPos{ 0, 0 }, mapSize{ x, y }
 {
 	tiles = vector<vector<Tile>>(y, vector<Tile>(x, Tile()));
 	neighbors = vector<string>();

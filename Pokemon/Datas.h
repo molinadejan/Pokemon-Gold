@@ -22,8 +22,7 @@ struct Tile
 	// 1 : 이동 가능
 	int moveable;
 	int interactID;
-
-	// bool isPokeMon?
+	int isPokemon;
 
 	Tile();
 };
@@ -44,6 +43,7 @@ struct MovePoint
 struct Map
 {
 	string ID;
+	string music;
 	Point worldPos;
 	Point mapSize;
 	vector<vector<Tile>> tiles;
@@ -185,8 +185,9 @@ struct AttackInfo
 	int damage;
 
 	// 0 : 효과가 없다
-	// 1 : 보통
-	// 2 : 효과는 굉장했다.
+	// 1 : 부족
+	// 2 : 보통
+	// 3 : 효과는 굉장했다
 	int effect;
 
 	// 급소

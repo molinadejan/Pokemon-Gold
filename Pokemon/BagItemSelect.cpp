@@ -8,6 +8,7 @@
 #include "BagItemToss.h"
 #include "TransDatas.h"
 #include "GdiplusElement.h"
+#include "SoundManager.h"
 
 BagItemSelect::BagItemSelect()
 	: curSelect(0) { }
@@ -47,7 +48,7 @@ void BagItemSelect::Update()
 
 	if (GET_KEY_X)
 	{
-		gm->buttonSound->play();
+		SM::PlayEffect("button");
 
 		curSelect = 0;
 		RunManager::SetTargetWithoutFade(gm->bagMenu);
@@ -55,8 +56,7 @@ void BagItemSelect::Update()
 
 	if (GET_KEY_Z)
 	{
-		gm->buttonSound->play();
-
+		SM::PlayEffect("button");
 		switch (curSelect)
 		{
 			case USE:

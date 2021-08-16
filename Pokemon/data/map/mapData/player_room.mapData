@@ -1,5 +1,6 @@
 {
 	"ID" : "player_room",
+	"music" : "new_bark_town",
 	"mapSizeX" : 8,
 	"mapSizeY" : 6,
 	"movePoints" : 

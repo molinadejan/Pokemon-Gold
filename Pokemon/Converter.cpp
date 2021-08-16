@@ -15,6 +15,8 @@ void JsonToTile(Tile &tile, Json::Value &value)
 
 	tile.moveable = value["moveable"].asInt();
 	tile.interactID = value["interact ID"].asInt();
+
+	tile.isPokemon = value["isPokemon"].asInt();
 }
 
 void TileToJson(Tile &tile, Json::Value &value)
@@ -27,6 +29,8 @@ void TileToJson(Tile &tile, Json::Value &value)
 
 	value["moveable"] = tile.moveable;
 	value["interact ID"] = tile.interactID;
+
+	value["isPokemon"] = tile.isPokemon;
 }
 
 void JsonToMovePoint(MovePoint &mp, Json::Value &value)
@@ -58,6 +62,7 @@ void MovePointToJson(MovePoint &mp, Json::Value &value)
 void JsonToMap(Map &map, Json::Value &value)
 {
 	map.ID = value["ID"].asString();
+	map.music = value["music"].asString();
 
 	map.worldPos.X = value["worldPosX"].asInt();
 	map.worldPos.Y = value["worldPosY"].asInt();
@@ -97,6 +102,8 @@ void JsonToMap(Map &map, Json::Value &value)
 void MapToJson(Map &map, Json::Value &value)
 {
 	value["ID"] = map.ID;
+
+	value["music"] = map.music;
 
 	value["worldPosX"] = map.worldPos.X;
 	value["worldPosY"] = map.worldPos.Y;

@@ -3,34 +3,109 @@
 #include "MyUtils.h"
 #include "DataLoadManager.h"
 #include "Timer.h"
+#include <thread>
+#include <chrono>
+#include <mutex>
+
+using std::thread;
+using namespace std::chrono;
 
 RunManager::Run RunManager::run = RunManager::Run();
-bool RunManager::isSceneChange = false;
-float RunManager::sceneChangeTimer = 0.0f;
 float RunManager::tp = 0.0f;
-float RunManager::fadeSpeed;
 
-RunManager::Run::Run() { }
+RunManager::Run::Run() 
+	: target(NULL), oldTarget(NULL), isChange(false), isFading(false)
+{ }
 RunManager::Run::~Run() { }
+
+void RunManager::Run::setFunc()
+{
+	auto funcUpdate = &BaseClass::Update;
+	update = static_cast<void(BaseClass::*)()>(funcUpdate);
+
+	auto funcDraw = &BaseClass::Draw;
+	draw = static_cast<void(BaseClass::*)(Graphics&)>(funcDraw);
+}
+
+void RunManager::Run::_setTarget(BaseClass * _base, float _fadeTime)
+{
+	double timer = 0.0f;
+	double half = _fadeTime / 2;
+	bool check = false;
+
+	auto prevClock = high_resolution_clock::now();
+
+	std::mutex m;
+
+
+
+	while (timer < _fadeTime)
+	{
+		auto nextClock = high_resolution_clock::now();
+		double deltaTime = (nextClock - prevClock).count() / 1e9;
+
+		timer += deltaTime;
+
+		if (timer < half)
+		{
+			tp = timer / half * 255;
+		}
+		else
+		{
+			if (!check)
+			{
+				m.lock();
+
+				check = true;
+				
+				oldTarget = target;
+
+				target = _base;
+				target->Init();
+				setFunc();
+
+				if (oldTarget != NULL)
+					oldTarget->Reset();
+
+				isChange = false;
+
+				m.unlock();
+			}
+
+			tp = (1 - (timer - half) / half) * 255;
+			tp = tp < 0.0f ? 0.0f : tp;
+		}
+		
+		auto frameClock = high_resolution_clock::now();
+		double sleepSecs = 1.0 / 80 - (frameClock - nextClock).count() / 1e9;
+
+		if (sleepSecs > 0)
+			std::this_thread::sleep_for(nanoseconds((int64_t)(sleepSecs * 1e9)));
+
+		prevClock = nextClock;
+	}
+
+	isFading = false;
+}
+
+void RunManager::Run::setTarget(BaseClass * _base, float _fadeTime)
+{
+	if (!isFading)
+	{
+		isChange = true;
+		isFading = true;
+
+		thread t(&RunManager::Run::_setTarget, this, _base, _fadeTime);
+		t.detach();
+	}
+}
 
 void RunManager::Run::reset()
 {
 	update = NULL;
 	draw = NULL;
 	target = NULL;
-	newTarget = NULL;
-
-	isSceneChange = false;
-	sceneChangeTimer = 0.0f;
-}
-
-void RunManager::SetFunc()
-{
-	auto funcUpdate = &BaseClass::Update;
-	run.update = static_cast<void(BaseClass::*)()>(funcUpdate);
-
-	auto funcDraw = &BaseClass::Draw;
-	run.draw = static_cast<void(BaseClass::*)(Graphics&)>(funcDraw);
+	oldTarget = NULL;
 }
 
 void RunManager::Reset()
@@ -38,29 +113,19 @@ void RunManager::Reset()
 	run.reset();
 }
 
-void RunManager::SetTarget(BaseClass * _base, float _fadeSpeed)
+void RunManager::SetTarget(BaseClass * _base, float _fadeTime)
 {
-	if (run.target == NULL)
-	{
-		run.target = _base;
-		run.target->Init();
-		SetFunc();
-	}
-	else
-	{
-		fadeSpeed = _fadeSpeed;
-		sceneChangeTimer = 0.0f;
-		isSceneChange = true;
-		run.newTarget = _base;
-	}
+	run.setTarget(_base, _fadeTime);
 }
 
 void RunManager::SetTargetWithoutFade(BaseClass* _base)
 {
-	run.target->Reset();
+	if(run.target != NULL)
+		run.target->Reset();
+
 	run.target = _base;
 	run.target->Init();
-	SetFunc();
+	run.setFunc();
 }
 
 void RunManager::Update()
@@ -68,28 +133,8 @@ void RunManager::Update()
 	if (run.target == NULL)
 		return;
 
-	if (isSceneChange)
-	{
-		tp += Timer::DeltaTime() * fadeSpeed;
-
-		if (tp >= 255.0f)
-		{
-			tp = 255.0f;
-			fadeSpeed *= -1;
-
-			run.target->Reset();
-			run.target = run.newTarget;
-			SetFunc();
-			run.target->Init();
-		}
-		else if (tp <= 0.0f)
-		{
-			tp = 0.0f;
-			isSceneChange = false;
-			fadeSpeed *= -1;
-		}
-	}
-	else (run.target->*(run.update))();
+	if(!run.isChange)
+		(run.target->*(run.update))();
 }
 
 void RunManager::Draw(HWND hWnd)
@@ -116,7 +161,7 @@ void RunManager::Draw(HWND hWnd)
 
 	(run.target->*(run.draw))(graphic);
 
-	if (isSceneChange)
+	if (run.isFading)
 	{
 		SolidBrush brush(Color((int)tp, 248, 248, 248));
 		graphic.FillRectangle(&brush, 0, 0, SCREEN_SIZE_X, SCREEN_SIZE_Y);

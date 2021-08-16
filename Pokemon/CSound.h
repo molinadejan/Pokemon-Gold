@@ -29,12 +29,16 @@ public:
 	static int Init();
 	static int Release();
 
+	float GetVolume();
+	void  SetVolume(float _volume);
+
 	int play();
 	int pause();
 	int resume();
 	int stop();
 	int volumeUp();
 	int volumeDown();
+	int mute();
 
 	int Update();
 };

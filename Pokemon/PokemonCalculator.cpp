@@ -113,12 +113,16 @@ AttackInfo CalDamage(int skillID, PokemonIndiv* attackPoke, PokemonIndiv* hitPok
 
 	ret.damage = damage;
 	
-	if (type1Revise * type2Revise == 0)
-		ret.effect = 0;
-	else if (type1Revise * type2Revise > 1.5f)
+	float revise = type1Revise * type2Revise;
+
+	if (revise >= 1.5f)
+		ret.effect = 3;
+	else if (revise >= 0.9f)
 		ret.effect = 2;
-	else
+	else if (revise > 0.1f)
 		ret.effect = 1;
+	else
+		ret.effect = 0;
 
 	if (vital == 2)
 		ret.vital = true;

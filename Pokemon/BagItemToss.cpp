@@ -8,6 +8,7 @@
 #include "BagItemTossConfirm.h"
 #include "TransDatas.h"
 #include "GdiplusElement.h"
+#include "SoundManager.h"
 
 BagItemToss::BagItemToss() { }
 
@@ -61,14 +62,14 @@ void BagItemToss::Update()
 
 	if (GET_KEY_Z)
 	{
-		gm->buttonSound->play();
+		SM::PlayEffect("button");
 		RunManager::SetTargetWithoutFade(gm->bagItemTossConfirm);
 	}
 
 	if (GET_KEY_X)
 	{
 		tossCount = 1;
-		gm->buttonSound->play();
+		SM::PlayEffect("button");
 		RunManager::SetTargetWithoutFade(gm->bagMenu);
 	}
 }

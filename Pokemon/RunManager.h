@@ -13,9 +13,6 @@
 #include "GameStart.h"
 #include "Intro.h"
 
-#define SCENE_CHANGE_TIME 0.3f
-#define SCENE_CHANGE_TIME_HALF 0.15f
-
 class RunManager
 {
 private:
@@ -41,9 +38,17 @@ private:
 		bool isPop;
 
 		BaseClass* target;
-		BaseClass* newTarget;
+		BaseClass* oldTarget;
+
+		bool isChange;
+		bool isFading;
 
 	private:
+
+		void setFunc();
+
+		void _setTarget(BaseClass* _base, float _fadeTime = 1.0f);
+		void setTarget(BaseClass* _base, float _fadeTime = 1.0f);
 
 		void reset();
 	};
@@ -51,26 +56,23 @@ private:
 private:
 
 	static Run run;
-	static bool isSceneChange;
-	static float sceneChangeTimer;
 	static float tp;
-	static float fadeSpeed;
 
 private:
 
 	RunManager() = delete;
 	~RunManager() = delete;
 
-	static void SetFunc();
-
 public:
 
 	static void Reset();
-	static void SetTarget(BaseClass* _base, float _fadeSpeed = 3000.0f);
+	static void SetTarget(BaseClass* _base, float _fadeTime = 1.0f);
 	static void SetTargetWithoutFade(BaseClass* _base);
 
 	static void Update();
 	static void Draw(HWND hWnd);
 };
+
+#define RM RunManager
 
 #endif

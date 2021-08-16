@@ -6,6 +6,7 @@
 #include "GdiplusElement.h"
 #include "TransDatas.h"
 #include "DataLoadManager.h"
+#include "SoundManager.h"
 #include <fstream>
 
 using std::fstream;
@@ -14,9 +15,6 @@ GameStart::GameStart() { }
 
 void GameStart::Init()
 {
-	gameStartBgm = new CSound("data/sound/bgm/gameStart.mp3", true);
-	gameStartBgm->play();
-
 	dialogImg = DM::GetDialogBase();
 
 	fstream openFile("data/save/save.json");
@@ -30,17 +28,17 @@ void GameStart::Init()
 
 	curSelectMenu = 0;
 	menuCount = isSaveFile ? 2 : 1;
+
+	SM::ChangeBgmWithoutFade("gameStart", true);
 }
 
 void GameStart::Reset()
 {
-	delete gameStartBgm;
+
 }
 
 void GameStart::Update()
 {
-	gameStartBgm->Update();
-
 	if (GET_KEY_UP && curSelectMenu > 0)
 		--curSelectMenu;
 	else if (GET_KEY_DOWN && curSelectMenu < menuCount - 1)
@@ -49,7 +47,7 @@ void GameStart::Update()
 	if (GET_KEY_Z)
 	{
 		PlayerData* data = new PlayerData();
-		gm->buttonSound->play();
+		SM::PlayEffect("button");
 
 		if (isSaveFile)
 		{
@@ -57,8 +55,8 @@ void GameStart::Update()
 		}
 		else
 		{
-			data->locationID = "new_bark_town";
-			data->pos = { 0, 8 };
+			data->locationID = "player_room";
+			data->pos = { 1, 4 };
 			data->pokemonInBag.push_back(new PokemonIndiv(1, 16));
 
 			DM::SetPlayerData(data);
@@ -71,7 +69,7 @@ void GameStart::Update()
 	}
 
 	if (GET_KEY_X)
-		RunManager::SetTarget(gm->intro);
+		RunManager::SetTarget(gm->intro, 2.0f);
 }
 
 void GameStart::Draw(Graphics & g)

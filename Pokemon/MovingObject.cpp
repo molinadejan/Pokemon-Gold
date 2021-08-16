@@ -1,12 +1,17 @@
 #include "MovingObject.h"
 #include "Timer.h"
+#include <thread>
+#include <chrono>
+
+using std::thread;
+using namespace std::chrono;
 
 MovingObject::MovingObject()
-	: image(NULL), pos{ 0, 0 }, screenSize{ 0, 0 }, imagePos{ 0,0,0,0 }, dir{ 0, 0 }, isPlaying(false), timer(0), time(0), dest{ 0, 0 }
+	: image(NULL), pos{ 0, 0 }, screenSize{ 0, 0 }, imagePos{ 0,0,0,0 }, isPlaying(false), twinkleSwitch(false)
 { }
 
 MovingObject::MovingObject(Image * _image, PointF _pos, Point _screenSize, Rect _imagePos)
-	: image(_image), pos(_pos), screenSize(_screenSize), imagePos(_imagePos), dir{ 0, 0 }, isPlaying(false), timer(0), time(0), dest{ 0, 0 } 
+	: image(_image), pos(_pos), screenSize(_screenSize), imagePos(_imagePos), isPlaying(false)
 { }
 
 void MovingObject::SetPos(float _x, float _y)
@@ -34,73 +39,181 @@ bool MovingObject::IsPlaying()
 	return isPlaying;
 }
 
-bool MovingObject::IsTwinkle()
-{
-	return isTwinkle;
-}
-
 void MovingObject::Draw(Graphics & g)
 {
-	if (isTwinkle && twinkleCnt % 2 == 1)
-		return;
-
-	g.DrawImage(image, Rect(pos.X, pos.Y, screenSize.X, screenSize.Y), imagePos.X, imagePos.Y, imagePos.Width, imagePos.Height, UnitPixel);
+	if(!twinkleSwitch)
+		g.DrawImage(image, Rect(INT(pos.X), INT(pos.Y), screenSize.X, screenSize.Y), imagePos.X, imagePos.Y, imagePos.Width, imagePos.Height, UnitPixel);
 }
 
-void MovingObject::Start()
+void MovingObject::_Moving(PointF target, float time)
+{
+	PointF dir = target - pos;
+
+	dir.X /= time;
+	dir.Y /= time;
+
+	double timer = 0.0f;
+
+	auto prevClock = high_resolution_clock::now();
+
+	while (true)
+	{
+		auto nextClock = high_resolution_clock::now();
+		double deltaTime = (nextClock - prevClock).count() / 1e9;
+
+		timer += deltaTime;
+
+		pos.X += dir.X * float(deltaTime);
+		pos.Y += dir.Y * float(deltaTime);
+
+		if (timer >= time)
+			break;
+
+		auto frameClock = high_resolution_clock::now();
+		double sleepSecs = 1.0 / 80 - (frameClock - nextClock).count() / 1e9;
+
+		if (sleepSecs > 0)
+			std::this_thread::sleep_for(nanoseconds((int64_t)(sleepSecs * 1e9)));
+
+		prevClock = nextClock;
+	}
+
+	pos = target;
+
+	isPlaying = false;
+}
+
+void MovingObject::Moving(PointF target, float time)
 {
 	isPlaying = true;
+
+	thread t(&MovingObject::_Moving, this, target, time);
+	t.detach();
 }
 
-void MovingObject::Twinkle()
+void MovingObject::_Twinkling()
 {
-	if (isTwinkle)
-	{
-		timer += Timer::DeltaTime();
+	double frameTimer = 0.0;
+	int twinkleCnt = 0;
 
-		if (timer >= time)
+	auto prevClock = high_resolution_clock::now();
+
+	while (twinkleCnt < 10)
+	{
+		auto nextClock = high_resolution_clock::now();
+		double deltaTime = (nextClock - prevClock).count() / 1e9;
+
+		frameTimer += deltaTime;
+
+		if (frameTimer >= 0.05f)
 		{
-			timer = 0.0f;
+			frameTimer = 0.0f;
 			++twinkleCnt;
 
-			if (twinkleCnt == 10)
-				isTwinkle = false;
+			twinkleSwitch = !twinkleSwitch;
 		}
+
+		auto frameClock = high_resolution_clock::now();
+		double sleepSecs = 1.0 / 80 - (frameClock - nextClock).count() / 1e9;
+
+		if (sleepSecs > 0)
+			std::this_thread::sleep_for(nanoseconds((int64_t)(sleepSecs * 1e9)));
+
+		prevClock = nextClock;
 	}
+
+	isPlaying = false;
 }
 
-void MovingObject::TwinkleStart()
+void MovingObject::Twinkling()
 {
-	isTwinkle = true;
-	time = 0.07f;
-	timer = 0.0f;
-	twinkleCnt = 0;
+	isPlaying = true;
+	
+	thread t(&MovingObject::_Twinkling, this);
+	t.detach();
 }
 
-void MovingObject::MoveToInit(PointF _dest, float _time)
+void MovingObject::_AttackMotion(int dir)
 {
-	dest = _dest;
-	time = _time;
-	timer = 0.0f;
+	PointF curPos = pos;
 
-	dir.X = (dest.X - pos.X) / time;
-	dir.Y = (dest.Y - pos.Y) / time;
-}
+	double frameTimer = 0.0f;
+	double speed = 500.0f;
 
-void MovingObject::MoveTo()
-{
-	if (isPlaying)
+	bool check = false;
+
+	auto prevClock = high_resolution_clock::now();
+
+	while (frameTimer < 0.2f)
 	{
-		timer += Timer::DeltaTime();
+		auto nextClock = high_resolution_clock::now();
+		double deltaTime = (nextClock - prevClock).count() / 1e9;
 
-		pos.X += dir.X * Timer::DeltaTime();
-		pos.Y += dir.Y * Timer::DeltaTime();
+		frameTimer += deltaTime;
 
-		if (timer >= time)
+		if (frameTimer >= 0.1f && !check)
 		{
-			pos = dest;
-			timer = 0.0f;
-			isPlaying = false;
+			check = true;
+			dir *= -1;
 		}
+
+		pos.X += float(deltaTime * speed * dir);
+
+		auto frameClock = high_resolution_clock::now();
+		double sleepSecs = 1.0 / 80 - (frameClock - nextClock).count() / 1e9;
+
+		if (sleepSecs > 0)
+			std::this_thread::sleep_for(nanoseconds((int64_t)(sleepSecs * 1e9)));
+
+		prevClock = nextClock;
 	}
+
+	pos = curPos;
+
+	isPlaying = false;
+}
+
+void MovingObject::AttackMotion(int dir)
+{
+	isPlaying = true;
+
+	thread t(&MovingObject::_AttackMotion, this, dir);
+	t.detach();
+}
+
+void MovingObject::_FallDown()
+{
+	int curY = INT(pos.Y);
+	int targetY = INT(pos.Y + screenSize.Y);
+
+	auto prevClock = high_resolution_clock::now();
+
+	while (pos.Y < targetY)
+	{
+		auto nextClock = high_resolution_clock::now();
+		double deltaTime = (nextClock - prevClock).count() / 1e9;
+
+		pos.Y += 16;
+		screenSize.Y -= 16;
+
+		auto frameClock = high_resolution_clock::now();
+		double sleepSecs = 1.0 / 80 - (frameClock - nextClock).count() / 1e9;
+
+		if (sleepSecs > 0)
+			std::this_thread::sleep_for(nanoseconds((int64_t)(sleepSecs * 1e9)));
+
+		prevClock = nextClock;
+	}
+
+	pos.Y = float(targetY);
+
+	isPlaying = false;
+}
+
+void MovingObject::FallDown()
+{
+	isPlaying = true;
+
+	thread t(&MovingObject::_FallDown, this);
+	t.detach();
 }

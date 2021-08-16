@@ -179,7 +179,6 @@
     <ClInclude Include="Datas.h" />
     <ClInclude Include="DialogShow.h" />
     <ClInclude Include="framework.h" />
-    <ClInclude Include="GameFadeInOut.h" />
     <ClInclude Include="GdiplusElement.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClInclude>
@@ -192,6 +191,7 @@
     <ClInclude Include="Player.h" />
     <ClInclude Include="Pokemon.h" />
     <ClInclude Include="Resource.h" />
+    <ClInclude Include="SoundManager.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="Timer.h" />
     <ClInclude Include="GameManager.h" />
@@ -216,7 +216,6 @@
     <ClCompile Include="DataLoadManager.cpp" />
     <ClCompile Include="Datas.cpp" />
     <ClCompile Include="DialogShow.cpp" />
-    <ClCompile Include="GameFadeInOut.cpp" />
     <ClCompile Include="GdiplusElement.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClCompile>
@@ -228,6 +227,7 @@
     <ClCompile Include="MyUtils.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="SoundManager.cpp" />
     <ClCompile Include="Timer.cpp" />
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="TransDatas.cpp" />

@@ -9,6 +9,9 @@
 #include "TransDatas.h"
 #include "GdiplusElement.h"
 #include "PokemonCalculator.h"
+#include "SoundManager.h"
+
+#include <thread>
 
 BattleScreen::BattleScreen()
 {
@@ -75,6 +78,23 @@ void BattleScreen::Reset()
 	{
 
 	}
+
+	while (!battleQ.empty()) battleQ.pop();
+	while (!updateQ.empty()) updateQ.pop();
+
+	battleMenuDialogSwitch = false;
+	battleMenuSwitch = false;
+	battleMenuCursorSwitch = false;
+	battleMenuSkillCursorSwitch = false;
+	fightMenuDialogSwitch = false;
+	fightMenuSwitch = false;
+	skillInfoSwitch = false;
+	enemyPokemonInfoSwitch = false;
+	playerPokemonInfoSwitch = false;
+	playerInfoSwitch = false;
+	enemyInfoSwtich = false;
+	animationSwitch = false;
+	dialogShowSwitch = false;
 }
 
 // 각종 초기화
@@ -84,15 +104,14 @@ bool BattleScreen::Step1()
 	player->SetPos(R(10 * MUL), R(3 * MUL));
 	player->SetScreenSize(3 * MUL, 3 * MUL);
 	player->SetImagePos(Rect(9 * PIXEL, 4 * PIXEL, 3 * PIXEL, 3 * PIXEL));
-	player->MoveToInit(PointF(R(0.5f * MUL), R(3 * MUL)), 1.2f);
-	player->Start();
 
 	enemy->SetImage(pokemonPic);
 	enemy->SetPos(R(-3 * MUL), R(0));
 	enemy->SetScreenSize(3 * MUL, 3 * MUL);
 	enemy->SetImagePos(DM::GetFrontPokemonImageRect(enemyPokemon->id));
-	enemy->MoveToInit(PointF(R(6.5f * MUL), R(0)), 1.2f);
-	enemy->Start();
+
+	player->Moving(PointF(0.5f * MUL, R(3 * MUL)), 1.2f);
+	enemy->Moving(PointF(6.5f * MUL, 0.0f), 1.2f);
 
 	updateQ.push(&BattleScreen::Step2);
 
@@ -102,19 +121,16 @@ bool BattleScreen::Step1()
 bool BattleScreen::Step2()
 {
 	// 좌우에서 플레이어와 적이 이동
-	if (player->IsPlaying())
+	if (!player->IsPlaying())
 	{
-		player->MoveTo();
-		enemy->MoveTo();
-
-		return false;
+		updateQ.push(&BattleScreen::Step3);
+		return true;
 	}
 
-	updateQ.push(&BattleScreen::Step3);
-
-	return true;
+	return false;
 }
 
+// 포켓몬 출현 대화 추가
 bool BattleScreen::Step3()
 {
 	dialogShow->Reset();
@@ -122,32 +138,36 @@ bool BattleScreen::Step3()
 	dialogShow->Push(TransString(NULL, "wild_encounter", 1, TokenChange("pokemon_name", DM::GetPokemonDesc(enemyPokemon->id)->name)));
 	dialogShow->SetIsAuto(false);
 	dialogShow->Start();
-
 	dialogShowSwitch = true;
 
-	player->MoveToInit(PointF(R(-3 * MUL), R(3 * MUL)), 0.5f);
-	player->Start();
-
 	updateQ.push(&BattleScreen::DialogShowing);
-	updateQ.push(&BattleScreen::Step4);
+	updateQ.push(&BattleScreen::Step3_5);
 
 	return true;
 }
 
+bool BattleScreen::Step3_5()
+{
+	player->Moving(PointF(R(-3 * MUL), R(3 * MUL)), 0.5f);
+	updateQ.push(&BattleScreen::Step4);
+	return true;
+}
+
+// 플레이어 빠지고
 bool BattleScreen::Step4()
 {
-	if (player->IsPlaying())
+	if (!player->IsPlaying())
 	{
-		player->MoveTo();
-		return false;
+		enemyPokemonInfoSwitch = true;
+		updateQ.push(&BattleScreen::Step5);
+
+		return true;
 	}
 
-	enemyPokemonInfoSwitch = true;
-	updateQ.push(&BattleScreen::Step5);
-
-	return true;
+	return false;
 }
 
+// 포켓몬 투입
 bool BattleScreen::Step5()
 {
 	dialogShow->Reset();
@@ -155,52 +175,54 @@ bool BattleScreen::Step5()
 	dialogShow->SetIsAuto(true);
 	dialogShow->Start();
 
-	anim->Reset();
 	anim->SetImage(battleUI);
 	anim->SetPos(0.5f * MUL, 3.5f * MUL);
 	anim->SetScreenSize(3 * MUL, 3 * MUL);
-	anim->SetImagePosVec(DM::GetAnimRect("pokemon_dispatch"));
-	anim->Start();
 
 	updateQ.push(&BattleScreen::DialogShowing);
-	updateQ.push(&BattleScreen::Step6);
+	updateQ.push(&BattleScreen::Step5_5);
 
 	dialogShowSwitch = true;
 
 	return true;
 }
 
-bool BattleScreen::Step6()
+bool BattleScreen::Step5_5()
 {
-	if (anim->IsPlaying())
-	{
-		animationSwitch = true;
-		anim->Update();
+	anim->Playing("pokemon_dispatch");
+	updateQ.push(&BattleScreen::Step6);
 
-		if (anim->GetRemainCount() == 1)
-		{
-			player->SetImage(pokemonPic);
-			player->SetPos(R(0.5f * MUL), R(3 * MUL));
-			player->SetImagePos(DM::GetBehindPokemonImageRect(playerPokemon->id));
-		}
-
-		return false;
-	}
-
-	animationSwitch = false;
-	dialogShowSwitch = false;
-	battleMenuDialogSwitch = true;
-	battleMenuSwitch = true;
-	battleMenuCursorSwitch = true;
-
-	playerPokemonInfoSwitch = true;
-
-	updateQ.push(&BattleScreen::Step7);
 	return true;
 }
 
+// 포켓몬 투입
+bool BattleScreen::Step6()
+{
+	if (!anim->IsPlaying())
+	{
+		player->SetImage(pokemonPic);
+		player->SetPos(R(0.5f * MUL), R(3 * MUL));
+		player->SetImagePos(DM::GetBehindPokemonImageRect(playerPokemon->id));
+
+		playerPokemonInfoSwitch = true;
+
+		// delay
+		enemy->Moving(PointF(6.5f * MUL, 0.0f), 2.0f);
+		
+		updateQ.push(&BattleScreen::Step7);
+
+		return true;
+	}
+
+	return false;
+}
+
+// 메뉴 선택
 bool BattleScreen::Step7()
 {
+	if (enemy->IsPlaying())
+		return false;
+
 	dialogShowSwitch = false;
 	battleMenuSwitch = true;
 	battleMenuCursorSwitch = true;
@@ -219,6 +241,7 @@ bool BattleScreen::Step7()
 	{
 		if (curMenuSelect == 0)
 		{
+			SM::PlayEffect("button");
 			updateQ.push(&BattleScreen::Step8);
 
 			battleMenuSwitch = false;
@@ -248,6 +271,7 @@ bool BattleScreen::Step7()
 	return false;
 }
 
+// 플레이어와 적의 기술을 결정한다.
 bool BattleScreen::Step8()
 {
 	if (GET_KEY_UP && curSkillSelect > 0)
@@ -257,13 +281,15 @@ bool BattleScreen::Step8()
 
 	if (GET_KEY_Z)
 	{
+		SM::PlayEffect("button");
+
 		if (playerPokemon->pps[curSkillSelect] > 0)
 		{
-			int enemySelectSkillIdx;
-
 			--playerPokemon->pps[curSkillSelect];
 
 			// 이부분 수정 필요
+
+			int enemySelectSkillIdx;
 
 			do
 			{
@@ -291,6 +317,8 @@ bool BattleScreen::Step8()
 
 	if (GET_KEY_X)
 	{
+		SM::PlayEffect("button");
+
 		battleMenuSwitch = true;
 		battleMenuCursorSwitch = true;
 
@@ -307,17 +335,10 @@ bool BattleScreen::Step8()
 	return false;
 }
 
-bool BattleScreen::Step8_5()
-{
-
-
-	return true;
-}
-
+// 대화상자와 설정
 bool BattleScreen::Step9()
 {
 	dialogShow->Reset();
-	dialogShow->Start();
 	dialogShow->SetIsAuto(true);
 	dialogShowSwitch = true;
 
@@ -339,11 +360,12 @@ bool BattleScreen::Step9()
 		if (GetRandom(hitRatio))
 		{
 			updateQ.push(&BattleScreen::DialogShowing);
-			updateQ.push(&BattleScreen::Step10);
+			updateQ.push(&BattleScreen::Step9_5);
 		}
 		else
 		{
 			dialogShow->Push(TransString(NULL, "pokemon_attack_miss", 1, TokenChange("pokemon_name", DM::GetPokemonDesc(playerPokemon->id)->name)));
+
 			updateQ.push(&BattleScreen::DialogShowing);
 			updateQ.push(&BattleScreen::Step9);
 			battleQ.pop();
@@ -362,7 +384,7 @@ bool BattleScreen::Step9()
 		if (GetRandom(hitRatio))
 		{
 			updateQ.push(&BattleScreen::DialogShowing);
-			updateQ.push(&BattleScreen::Step10);
+			updateQ.push(&BattleScreen::Step9_5);
 		}
 		else
 		{
@@ -379,60 +401,167 @@ bool BattleScreen::Step9()
 	skillInfoSwitch = false;
 	battleMenuSkillCursorSwitch = false;
 
+	dialogShow->Start();
 	return true;
 }
 
+// attack motion
+
+bool BattleScreen::Step9_5()
+{
+	if (battleQ.front() == PlayerTurn)
+		player->AttackMotion(1);
+	else if (battleQ.front() == EnemyTurn)
+		enemy->AttackMotion(-1);
+
+	SM::PlayEffect("tackle");
+	updateQ.push(&BattleScreen::Step10);
+
+	return true;
+}
+
+// set twinkleing
 bool BattleScreen::Step10()
 {
-	/*if (battleQ.front() == PlayerTurn)
+	if (battleQ.front() == PlayerTurn)
 	{
-		int vital = GetRandom(CalVitalRank(playerBattleData->vital_rank)) ? 2 : 1;
-		int damage = CalDamage(playerSelectSkillID, playerPokemon, enemyPokemon, vital);
-		int newHP = enemyPokemon->hp - damage;
-		newHP = newHP < 0 ? 0 : newHP;
-
-		tweeningObject->SetTarget(&(enemyPokemon->hp));
-		tweeningObject->SetGoalValue(newHP);
-		tweeningObject->Start();
-
-		enemy->TwinkleStart();
-	}
-	else
-	{
-		int vital = GetRandom(CalVitalRank(enemyBattleData->vital_rank)) ? 2 : 1;
-		int damage = CalDamage(enemySelectSkillID, enemyPokemon, playerPokemon, vital);
-		int newHP = playerPokemon->hp - damage;
-		newHP = newHP < 0 ? 0 : newHP;
-
-		tweeningObject->SetTarget(&(playerPokemon->hp));
-		tweeningObject->SetGoalValue(newHP);
-		tweeningObject->Start();
-
-		player->TwinkleStart();
-	}*/
-
-	updateQ.push(&BattleScreen::Step11);
-
-	return true;
-}
-
-bool BattleScreen::Step11()
-{
-	if (!battleQ.empty() && battleQ.front() == PlayerTurn)
-	{
-		if (enemy->IsTwinkle())
+		if (!player->IsPlaying())
 		{
-			enemy->Twinkle();
-			return false;
+			int vital = GetRandom(CalVitalRank(playerBattleData->vital_rank)) ? 2 : 1;
+			playerAttackInfo = CalDamage(playerSelectSkillID, playerPokemon, enemyPokemon, vital);
+
+			if (playerAttackInfo.effect == 0)
+			{
+				dialogShow->Reset();
+				dialogShow->Push(TransString(NULL, "skill_no_effect"));
+				dialogShow->Start();
+
+				battleQ.pop();
+
+				updateQ.push(&BattleScreen::DialogShowing);
+				updateQ.push(&BattleScreen::Step9);
+			}
+			else
+			{
+				enemy->Twinkling();
+				updateQ.push(&BattleScreen::Step10_5);
+			}
+
+			return true;
+		}
+	}
+	else if (battleQ.front() == EnemyTurn)
+	{
+		if (!enemy->IsPlaying())
+		{
+			int vital = GetRandom(CalVitalRank(enemyBattleData->vital_rank)) ? 2 : 1;
+			enemyAttackInfo = CalDamage(enemySelectSkillID, enemyPokemon, playerPokemon, vital);
+
+			if (enemyAttackInfo.effect == 0)
+			{
+				dialogShow->Reset();
+				dialogShow->Push(TransString(NULL, "skill_no_effect"));
+				dialogShow->Start();
+
+				battleQ.pop();
+
+				updateQ.push(&BattleScreen::DialogShowing);
+				updateQ.push(&BattleScreen::Step9);
+			}
+			else
+			{
+				player->Twinkling();
+				updateQ.push(&BattleScreen::Step10_5);
+			}
+
+			return true;
 		}
 	}
 
-	if (tweeningObject->IsPlaying())
+	return false;
+}
+
+// 반짝반짝
+bool BattleScreen::Step10_5()
+{
+	if (battleQ.front() == PlayerTurn)
 	{
-		tweeningObject->Update();
-		return false;
+		if (!enemy->IsPlaying())
+		{
+			int newHp = enemyPokemon->hp - playerAttackInfo.damage;
+			newHp = newHp < 0 ? 0 : newHp;
+
+			tweeningObject->Tween(&enemyPokemon->hp, newHp);
+
+			dialogShow->Reset();
+		
+			if (playerAttackInfo.effect == 2)
+			{
+				updateQ.push(&BattleScreen::Step10_7);
+				return true;
+			}
+
+			if (playerAttackInfo.effect == 1)
+				dialogShow->Push(TransString(NULL, "skill_less_effect"));
+			else if (playerAttackInfo.effect == 3)
+				dialogShow->Push(TransString(NULL, "skill_great_effect"));
+
+			dialogShow->SetIsAuto(false);
+			dialogShow->Start();
+
+			updateQ.push(&BattleScreen::Step10_7);
+			updateQ.push(&BattleScreen::DialogShowing);
+		}
+		else return false;
+	}
+	else if (battleQ.front() == EnemyTurn)
+	{
+		if (!player->IsPlaying())
+		{
+			int newHp = playerPokemon->hp - enemyAttackInfo.damage;
+			newHp = newHp < 0 ? 0 : newHp;
+
+			dialogShow->Reset();
+
+			tweeningObject->Tween(&playerPokemon->hp, newHp);
+
+			if (enemyAttackInfo.effect == 2)
+			{
+				updateQ.push(&BattleScreen::Step10_7);
+				return true;
+			}
+
+			if (enemyAttackInfo.effect == 1)
+				dialogShow->Push(TransString(NULL, "skill_less_effect"));
+			else if (enemyAttackInfo.effect == 3)
+				dialogShow->Push(TransString(NULL, "skill_great_effect"));
+
+			dialogShow->SetIsAuto(false);
+			dialogShow->Start();
+
+			updateQ.push(&BattleScreen::Step10_7);
+			updateQ.push(&BattleScreen::DialogShowing);
+		}
+		else return false;
 	}
 
+	return true;
+}
+
+bool BattleScreen::Step10_7()
+{
+	if (tweeningObject->IsPlaying())
+		return false;
+
+	updateQ.push(&BattleScreen::Step11);
+	dialogShow->Start();
+	return true;
+}
+
+// twinkle
+
+bool BattleScreen::Step11()
+{
 	if (battleQ.empty())
 	{
 		dialogShowSwitch = false;
@@ -441,7 +570,10 @@ bool BattleScreen::Step11()
 	else if (battleQ.front() == PlayerTurn)
 	{
 		if (enemyPokemon->hp == 0)
+		{
+			enemy->FallDown();
 			updateQ.push(&BattleScreen::Step12);
+		}
 		else if (battleQ.size() > 1)
 			updateQ.push(&BattleScreen::Step9);
 		else
@@ -452,7 +584,10 @@ bool BattleScreen::Step11()
 	else if (battleQ.front() == EnemyTurn)
 	{
 		if (playerPokemon->hp == 0)
+		{
+			player->FallDown();
 			updateQ.push(&BattleScreen::Step13);
+		}
 		else if (battleQ.size() > 1)
 			updateQ.push(&BattleScreen::Step9);
 		else
@@ -464,21 +599,30 @@ bool BattleScreen::Step11()
 	return true;
 }
 
+// 적 쓰러짐
 bool BattleScreen::Step12()
 {
-	dialogShowSwitch = true;
-	dialogShow->Reset();
-	dialogShow->SetIsAuto(true);
-	dialogShow->Push(TransString(NULL, "enemy_pokemon_fall_down", 1, TokenChange("pokemon_name", DM::GetPokemonDesc(enemyPokemon->id)->name)));
+	if (!enemy->IsPlaying())
+	{
+		dialogShowSwitch = true;
+		dialogShow->Reset();
+		dialogShow->SetIsAuto(false);
+		dialogShow->Push(TransString(NULL, "enemy_pokemon_fall_down", 1, TokenChange("pokemon_name", DM::GetPokemonDesc(enemyPokemon->id)->name)));
 
-	int exp = CalExp(battleType == Wild ? 1.0f : 1.5f, playerPokemon->id, enemyPokemon->level);
+		int exp = CalExp(battleType == Wild ? 1.0f : 1.5f, playerPokemon->id, enemyPokemon->level);
 
-	dialogShow->Push(TransString(NULL, "pokemon_get_exp", 2, TokenChange("pokemon_name", DM::GetPokemonDesc(enemyPokemon->id)->name), TokenChange("exp", std::to_string(exp))));
+		dialogShow->Push(TransString(NULL, "pokemon_get_exp", 2, TokenChange("pokemon_name", DM::GetPokemonDesc(enemyPokemon->id)->name), TokenChange("exp", std::to_string(exp))));
 
-	updateQ.push(&BattleScreen::DialogShowing);
-	updateQ.push(&BattleScreen::Step14);
+		updateQ.push(&BattleScreen::DialogShowing);
+		updateQ.push(&BattleScreen::Step14);
 
-	return true;
+		SM::ChangeBgmWithoutFade("battle_wild_win", true);
+
+		dialogShow->Start();
+		return true;
+	}
+
+	return false;
 }
 
 bool BattleScreen::Step13()
@@ -491,10 +635,13 @@ bool BattleScreen::Step13()
 
 bool BattleScreen::Step14()
 {
+	if (GET_KEY_Z || GET_KEY_X)
+	{
+		RunManager::SetTarget(gm->gamePlay);
+		return true;
+	}
 
-
-
-	return true;
+	return false;
 }
 
 bool BattleScreen::DialogShowing()
@@ -507,14 +654,23 @@ bool BattleScreen::DialogShowing()
 	else if(!dialogShow->IsPlaying() && dialogShow->RemainCount() > 0)
 	{
 		if (GET_KEY_Z || GET_KEY_X)
+		{
+			SM::PlayEffect("button");
 			dialogShow->Start();
+		}
 
 		return false;
 	}
 	else if (!dialogShow->IsPlaying() && dialogShow->RemainCount() == 0)
 	{
-		if (dialogShow->IsAuto() || GET_KEY_Z || GET_KEY_X)
+		if (dialogShow->IsAuto())
 			return true;
+		
+		if(GET_KEY_Z || GET_KEY_X)
+		{
+			SM::PlayEffect("button");
+			return true;
+		}
 
 		return false;
 	}
@@ -706,9 +862,6 @@ void BattleScreen::DrawEnemy(Graphics &g)
 
 void BattleScreen::DrawAnimation(Graphics &g)
 {
-	if (!animationSwitch)
-		return;
-
 	anim->Draw(g);
 }
 

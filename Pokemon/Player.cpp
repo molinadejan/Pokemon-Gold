@@ -6,7 +6,7 @@
 #include <cmath>
 
 Player::Player()
-	: pos{ 0, 0 }, posF{ (REAL)pos.X, (REAL)pos.Y }, moveDir{ 0, 0 }, inputDir(0, 0), speed(4.0f), isMoving(false), frameChangeTime(0.0f) 
+	: pos{ 0, 0 }, posF{ (REAL)pos.X, (REAL)pos.Y }, moveDir{ 0, 0 }, inputDir(0, 0), speed(3.5f), isMoving(false), frameChangeTime(0.0f) 
 { 
 	playerImg = DM::GetPlayerInGame();
 

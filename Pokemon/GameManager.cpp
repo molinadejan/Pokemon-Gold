@@ -1,7 +1,6 @@
 #include "GameManager.h"
 #include "GamePlay.h"
 #include "MainMenu.h"
-#include "GameFadeInOut.h"
 #include "BagMenu.h"
 #include "BagItemSelect.h"
 #include "BagItemToss.h"
@@ -11,6 +10,7 @@
 #include "Intro.h"
 #include "GameStart.h"
 #include "CSound.h"
+#include "SoundManager.h"
 
 GameManager:: GameManager() { }
 
@@ -18,7 +18,6 @@ GameManager::~GameManager()
 {
 	delete gamePlay;
 	delete mainMenu;
-	delete gameFadeInOut;
 	delete bagMenu;
 	delete bagItemSelect;
 	delete bagItemToss;
@@ -32,7 +31,6 @@ void GameManager::Init()
 {
 	gamePlay = new GamePlay();
 	mainMenu = new MainMenu();
-	gameFadeInOut = new GameFadeInOut();
 	bagMenu = new BagMenu();
 	bagItemSelect = new BagItemSelect();
 	bagItemToss = new BagItemToss();
@@ -43,7 +41,6 @@ void GameManager::Init()
 
 	gamePlay->SetManager(this);
 	mainMenu->SetManager(this);
-	gameFadeInOut->SetManager(this);
 	bagMenu->SetManager(this);
 	bagItemSelect->SetManager(this);
 	bagItemToss->SetManager(this);
@@ -54,7 +51,6 @@ void GameManager::Init()
 
 	gamePlay->ResourceInit();
 	mainMenu->ResourceInit();
-	gameFadeInOut->ResourceInit();
 	bagMenu->ResourceInit();
 	bagItemSelect->ResourceInit();
 	bagItemToss->ResourceInit();
@@ -63,10 +59,7 @@ void GameManager::Init()
 	intro->ResourceInit();
 	gameStart->ResourceInit();
 
-	buttonSound = new CSound("data/sound/effect/button.mp3", false);
-	bagSound = new CSound("data/sound/effect/bagOpen.mp3", false);
-
-	RunManager::SetTarget(intro);
+	RunManager::SetTargetWithoutFade(intro);
 }
 
 

@@ -5,36 +5,66 @@
 #include "RunManager.h"
 #include "GdiplusElement.h"
 #include "BattleScreen.h"
+#include "SoundManager.h"
+#include "PokemonCalculator.h"
 
 #include <cmath>
+#include <thread>
+#include <chrono>
+
+using std::thread;
+using namespace std::chrono;
 
 GamePlay::GamePlay() 
-	: curData(NULL), isMapChange(false), isFirstLoad(false) 
+	: curData(NULL), isMapChange(false), isFirstLoad(false), checkCnt(0), tp(0)
 { }
 
-GamePlay::~GamePlay() { }
+GamePlay::~GamePlay() { delete encounterImg; }
 
-void GamePlay::DrawMap(Graphics & g, PointF origin)
+void GamePlay::DrawMap(Graphics& g)
 {
 	Image* img = DM::GetMapImage(curData->ID);
 
-	Rect expansion((INT)round(-origin.X * MUL), (INT)round(-origin.Y * MUL), img->GetWidth() * SCREEN_MUL, img->GetHeight() * SCREEN_MUL);
+	PointF pos = player->GetPosF();
 
-	g.DrawImage(img, expansion);
+	Point rectOrigin  = Point( INT((4 - pos.X) * PIXEL), INT((4 - pos.Y) * PIXEL) );
+	Point imageOrigin = Point( INT((pos.X - 5) * PIXEL), INT((pos.Y - 5) * PIXEL) );
 
 	for (string& nID : curData->neighbors)
 	{
 		Image *nImg = DM::GetMapImage(nID);
 		Map* n = DM::GetMapData(nID);
-
+		
 		Point diff = curData->worldPos - n->worldPos;
 
-		Rect expansion2((INT)round(-(origin.X + diff.X) * MUL), (INT)round(-(origin.Y + diff.Y) * MUL), nImg->GetWidth() * SCREEN_MUL, nImg->GetHeight() * SCREEN_MUL);
-		g.DrawImage(nImg, expansion2);
+		Point nRectOrigin  = rectOrigin  - diff * PIXEL;
+		Point nImageOrigin = imageOrigin + diff * PIXEL;
+
+		Clamp(nRectOrigin.X, -PIXEL, 11 * PIXEL);
+		Clamp(nRectOrigin.Y, -PIXEL, 10 * PIXEL);
+
+		Clamp(nImageOrigin.X, 0, n->mapSize.X * PIXEL);
+		Clamp(nImageOrigin.Y, 0, n->mapSize.Y * PIXEL);
+
+		Rect nRect = { nRectOrigin.X * SCREEN_MUL, nRectOrigin.Y * SCREEN_MUL,  (11 * PIXEL - nRectOrigin.X) * SCREEN_MUL, (10 * PIXEL - nRectOrigin.Y) * SCREEN_MUL };
+
+		if (nImageOrigin.X >= nImg->GetWidth() || nImageOrigin.Y >= nImg->GetHeight())
+			continue;
+
+		g.DrawImage(nImg, nRect, nImageOrigin.X, nImageOrigin.Y, 11 * PIXEL - nRectOrigin.X, 10 * PIXEL - nRectOrigin.Y, UnitPixel);
 	}
+
+	Clamp(rectOrigin.X, -PIXEL, 11 * PIXEL);
+	Clamp(rectOrigin.Y, -PIXEL, 10 * PIXEL);
+
+	Clamp(imageOrigin.X, 0, curData->mapSize.X * PIXEL);
+	Clamp(imageOrigin.Y, 0, curData->mapSize.Y * PIXEL);
+
+	Rect rect = { rectOrigin.X * SCREEN_MUL, rectOrigin.Y * SCREEN_MUL,  (11 * PIXEL - rectOrigin.X) * SCREEN_MUL, (10 * PIXEL - rectOrigin.Y) * SCREEN_MUL };
+	g.DrawImage(img, rect, imageOrigin.X, imageOrigin.Y, 11 * PIXEL - rectOrigin.X, 10 * PIXEL - rectOrigin.Y, UnitPixel);
 }
 
-void GamePlay::DrawDebug(Graphics & g)
+void GamePlay::DrawDebug(Graphics& g)
 {
 	_tcscpy_s(buffer, CA2T(curData->ID.c_str()));
 	
@@ -52,6 +82,78 @@ void GamePlay::DrawDebug(Graphics & g)
 	g.DrawString(buffer, -1, FONT_SMALL, rectF3, NULL, WHITE);
 }
 
+void GamePlay::DrawEncounterAnimation(Graphics & g)
+{
+	Rect imageRect = encounterRect[frameCnt];
+	g.DrawImage(encounterImg, Rect(0, 0, SCREEN_SIZE_X, SCREEN_SIZE_Y), imageRect.X, imageRect.Y, imageRect.Width, imageRect.Height, UnitPixel);
+}
+
+void GamePlay::_Encounter()
+{
+	SM::ChangeBgmWithoutFade("battle_encounter", false);
+
+	int twinkleCnt = 0;
+	int _add = 25;
+
+	auto prevClock = high_resolution_clock::now();
+
+	while (twinkleCnt < 4)
+	{
+		auto nextClock = high_resolution_clock::now();
+		double deltaTime = (nextClock - prevClock).count() / 1e9;
+
+		auto frameClock = high_resolution_clock::now();
+		double sleepSecs = 1.0 / 80 - (frameClock - nextClock).count() / 1e9;
+
+		tp += _add;
+
+		if (tp >= 255)
+		{
+			tp = 255;
+			_add *= -1;
+		}
+		else if (tp <= 0)
+		{
+			++twinkleCnt;
+
+			tp = 0;
+			_add *= -1;
+		}
+
+		if (sleepSecs > 0)
+			std::this_thread::sleep_for(nanoseconds((int64_t)(sleepSecs * 1e9)));
+
+		prevClock = nextClock;
+	}
+
+	double timer = 0.0f;
+
+	prevClock = high_resolution_clock::now();
+
+	while (frameCnt < (int)encounterRect.size() - 1)
+	{
+		auto nextClock = high_resolution_clock::now();
+		double deltaTime = (nextClock - prevClock).count() / 1e9;
+
+		auto frameClock = high_resolution_clock::now();
+		double sleepSecs = 1.0 / 60 - (frameClock - nextClock).count() / 1e9;
+
+		++frameCnt;
+
+		if (sleepSecs > 0)
+			std::this_thread::sleep_for(nanoseconds((int64_t)(sleepSecs * 1e9)));
+
+		prevClock = nextClock;
+	}
+
+	SM::ChangeBgmWithoutFade("battle_battle", true);
+	isEncounter = false;
+
+	frameCnt = 0;
+	gm->battleScreen->InitWildBattle(1, 5);
+	RunManager::SetTargetWithoutFade(gm->battleScreen);
+}
+
 void GamePlay::UpdatePlayer()
 {
 	player->FrameUpdate();
@@ -67,8 +169,14 @@ void GamePlay::UpdatePlayer()
 		{
 			player->SetPos(player->GetPos() + curData->worldPos - nMap->worldPos);
 			curData = nMap;
+
+			SM::ChangeBgmWithFade(curData->music);
+
 			return;
 		}
+
+		if (isMapChange)
+			SM::ChangeBgmWithFade(curData->music);
 
 		//// Move To Door
 		MovePoint* mpDoor = NULL;
@@ -86,7 +194,9 @@ void GamePlay::UpdatePlayer()
 				player->SetPos(mpDoor->targetPos);
 				isMapChange = true;
 
-				RunManager::SetTarget(gm->gamePlay);
+				SM::PlayEffect("door");
+
+				RunManager::SetTarget(gm->gamePlay, 0.3f);
 			}
 
 			return;
@@ -111,7 +221,9 @@ void GamePlay::UpdatePlayer()
 				player->SetPos(mpCarpet->targetPos);
 				isMapChange = true;
 
-				RunManager::SetTarget(gm->gamePlay);
+				SM::PlayEffect("carpet");
+
+				RunManager::SetTarget(gm->gamePlay, 0.3f);
 				return;
 			}
 		}
@@ -130,34 +242,61 @@ void GamePlay::Init()
 		player->SetPos(data->pos);
 		curData = DM::GetMapData(data->locationID);
 		isFirstLoad = true;
+		encounterImg = new Image(_T("data/sprite/UI/encounter.png"));
+		encounterRect = DM::GetAnimRect("encounter");
 	}
+
+	SM::ChangeBgmWithFade(curData->music);
 }
 
 void GamePlay::Update()
 {
+	if (isEncounter)
+		return;
+
 	UpdatePlayer();
 
 	if (GET_KEY_ENTER && !player->GetIsMoving())
 	{
-		gm->bagSound->play();
+		SM::PlayEffect("bagOpen");
 		RunManager::SetTargetWithoutFade(gm->mainMenu);
 	}
 
-	// test
-	/*if (IM::GetKeyUp('P'))
+	if (player->GetIsMoving())
 	{
-		gm->battleScreen->InitWildBattle(1, 5);
-		RunManager::SetTarget(gm->battleScreen);
-	}*/
+		checkCnt = 0;
+	}
+	else
+	{
+		if (checkCnt == 0)
+		{
+			Tile* tile = GetTile(curData, player->GetPos());
+
+			if (tile != NULL && tile->isPokemon == 1 && GetRandom(3.0f))
+			{
+				isEncounter = true;
+
+				std::thread t(&GamePlay::_Encounter, this);
+				t.detach();
+			}
+		}
+
+		checkCnt = 1;
+	}
 }
 
 void GamePlay::Draw(Graphics& g)
 {
-	PointF playerPos = player->GetPosF();
-	PointF mapOrigin(playerPos.X - REAL(COL / 2 - 1), playerPos.Y - REAL(ROW / 2));
-
-	DrawMap(g, mapOrigin);
+	DrawMap(g);
 	player->DrawPlayer(g);
 
-	DrawDebug(g);
+	if (isEncounter)
+	{
+		DrawEncounterAnimation(g);
+
+		SolidBrush brush(Color(tp, 0, 0, 0));
+		g.FillRectangle(&brush, 0, 0, SCREEN_SIZE_X, SCREEN_SIZE_Y);
+	}
+
+	//DrawDebug(g);
 }

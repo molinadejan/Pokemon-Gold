@@ -5,6 +5,7 @@
 #include "RunManager.h"
 #include "TransDatas.h"
 #include "GdiplusElement.h"
+#include "SoundManager.h"
 
 MainMenu::MainMenu()
 	: curSelect(0) { }
@@ -41,7 +42,7 @@ void MainMenu::Update()
 
 	if (GET_KEY_Z)
 	{
-		gm->buttonSound->play();
+		SM::PlayEffect("button");
 
 		switch (curSelect)
 		{
