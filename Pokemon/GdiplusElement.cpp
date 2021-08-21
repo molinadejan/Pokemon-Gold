@@ -9,10 +9,6 @@ GdiplusElement::Element::Element()
 	  black(NULL), white(NULL)
 { }
 
-GdiplusElement::Element::~Element()
-{ }
-
-
 //https://m.blog.naver.com/codbs7/221441864531
 void GdiplusElement::Element::LoadMyFont()
 {
@@ -58,7 +54,16 @@ void GdiplusElement::Element::CreateBrush()
 	white = new SolidBrush(Color(248, 248, 248));
 }
 
-void GdiplusElement::Element::DeleteElements()
+void GdiplusElement::Element::Init()
+{
+	e.LoadMyFont();
+	e.CreateMyFont();
+
+	e.CreateStrFormat();
+	e.CreateBrush();
+}
+
+void GdiplusElement::Element::Reset()
 {
 	delete fontS;
 	delete fontM;
@@ -74,81 +79,4 @@ void GdiplusElement::Element::DeleteElements()
 
 	delete white;
 	delete black;
-}
-
-void GdiplusElement::Init()
-{
-	e.LoadMyFont();
-	e.CreateMyFont();
-
-	e.CreateStrFormat();
-	e.CreateBrush();
-}
-
-void GdiplusElement::Delete()
-{
-	e.DeleteElements();
-}
-
-Font * GdiplusElement::GetFontS()
-{
-	return e.fontS;
-}
-
-Font * GdiplusElement::GetFontM()
-{
-	return e.fontM;
-}
-
-Font * GdiplusElement::GetFontB()
-{
-	return e.fontB;
-}
-
-
-StringFormat * GdiplusElement::GetLeftAlign()
-{
-	e.leftAlign->SetLineAlignment(StringAlignmentCenter);
-	return e.leftAlign;
-}
-
-StringFormat * GdiplusElement::GetCenterAlign()
-{
-	e.centerAlign->SetLineAlignment(StringAlignmentCenter);
-	return e.centerAlign;
-}
-
-StringFormat * GdiplusElement::GetRightAlign()
-{
-	e.rightAlign->SetLineAlignment(StringAlignmentCenter);
-	return e.rightAlign;
-}
-
-
-StringFormat * GdiplusElement::GetLeftBottomAlign()
-{
-	e.leftAlign->SetLineAlignment(StringAlignmentFar);
-	return e.leftAlign;
-}
-
-StringFormat * GdiplusElement::GetCenterBott0mAlign()
-{
-	e.centerAlign->SetLineAlignment(StringAlignmentFar);
-	return e.centerAlign;
-}
-
-StringFormat * GdiplusElement::GetRightBottomAlign()
-{
-	e.rightAlign->SetLineAlignment(StringAlignmentFar);
-	return e.rightAlign;
-}
-
-SolidBrush * GdiplusElement::GetBlack()
-{
-	return e.black;
-}
-
-SolidBrush * GdiplusElement::GetWhite()
-{
-	return e.white;
 }

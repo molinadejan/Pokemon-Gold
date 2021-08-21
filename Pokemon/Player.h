@@ -22,7 +22,7 @@ private:
 private:
 
 	// 0 : left, 1 : right, 2 : up, 3 : down
-	vector<Rect> walkAnim[4];
+	vector<Rect>* walkAnim[4];
 	const float FRAME_TIME = 0.15f;
 
 private:

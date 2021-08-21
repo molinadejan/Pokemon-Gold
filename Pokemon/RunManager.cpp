@@ -13,12 +13,7 @@ using namespace std::chrono;
 RunManager::Run RunManager::run = RunManager::Run();
 float RunManager::tp = 0.0f;
 
-RunManager::Run::Run() 
-	: target(NULL), oldTarget(NULL), isChange(false), isFading(false)
-{ }
-RunManager::Run::~Run() { }
-
-void RunManager::Run::setFunc()
+void RunManager::Run::SetFunc()
 {
 	auto funcUpdate = &BaseClass::Update;
 	update = static_cast<void(BaseClass::*)()>(funcUpdate);
@@ -27,7 +22,7 @@ void RunManager::Run::setFunc()
 	draw = static_cast<void(BaseClass::*)(Graphics&)>(funcDraw);
 }
 
-void RunManager::Run::_setTarget(BaseClass * _base, float _fadeTime)
+void RunManager::Run::_SetTarget(BaseClass * _base, float _fadeTime)
 {
 	double timer = 0.0f;
 	double half = _fadeTime / 2;
@@ -36,8 +31,6 @@ void RunManager::Run::_setTarget(BaseClass * _base, float _fadeTime)
 	auto prevClock = high_resolution_clock::now();
 
 	std::mutex m;
-
-
 
 	while (timer < _fadeTime)
 	{
@@ -62,7 +55,7 @@ void RunManager::Run::_setTarget(BaseClass * _base, float _fadeTime)
 
 				target = _base;
 				target->Init();
-				setFunc();
+				SetFunc();
 
 				if (oldTarget != NULL)
 					oldTarget->Reset();
@@ -88,44 +81,39 @@ void RunManager::Run::_setTarget(BaseClass * _base, float _fadeTime)
 	isFading = false;
 }
 
-void RunManager::Run::setTarget(BaseClass * _base, float _fadeTime)
+void RunManager::Run::SetTarget(BaseClass * _base, float _fadeTime)
 {
 	if (!isFading)
 	{
 		isChange = true;
 		isFading = true;
 
-		thread t(&RunManager::Run::_setTarget, this, _base, _fadeTime);
+		thread t(&RunManager::Run::_SetTarget, this, _base, _fadeTime);
 		t.detach();
 	}
 }
 
-void RunManager::Run::reset()
+void RunManager::Run::SetTargetWithoutFade(BaseClass * _base)
+{
+	oldTarget = target;
+
+	target = _base;
+	target->Init();
+	SetFunc();
+
+	if (oldTarget != NULL)
+		oldTarget->Reset();
+}
+
+void RunManager::Run::Init()
 {
 	update = NULL;
 	draw = NULL;
 	target = NULL;
 	oldTarget = NULL;
-}
 
-void RunManager::Reset()
-{
-	run.reset();
-}
-
-void RunManager::SetTarget(BaseClass * _base, float _fadeTime)
-{
-	run.setTarget(_base, _fadeTime);
-}
-
-void RunManager::SetTargetWithoutFade(BaseClass* _base)
-{
-	if(run.target != NULL)
-		run.target->Reset();
-
-	run.target = _base;
-	run.target->Init();
-	run.setFunc();
+	isChange = false;
+	isFading = false;
 }
 
 void RunManager::Update()

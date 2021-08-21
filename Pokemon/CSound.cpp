@@ -30,7 +30,7 @@ int CSound::Init()
 	return 0;
 }
 
-int CSound::Release()
+int CSound::Reset()
 {
 	FMOD_System_Close(g_sound_system);
 	FMOD_System_Release(g_sound_system);

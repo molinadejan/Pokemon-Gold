@@ -11,35 +11,6 @@ using namespace std::chrono;
 
 SoundManager::Sound SoundManager::sound = SoundManager::Sound();
 
-void SoundManager::Sound::SoundFadeIn(void)
-{
-	while (bgm->GetVolume() < 0.5f)
-	{
-		bgm->volumeUp();
-		Sleep(200);
-	}
-
-	isFading = false;
-}
-
-void SoundManager::Sound::SoundFadeOut(std::string _bgmName)
-{
-	while (bgm->GetVolume() > 0.0f)
-	{
-		bgm->volumeDown();
-		Sleep(200);
-	}
-
-	delete bgm;
-
-	bgmName = _bgmName;
-	bgm = new CSound(GetPath(_bgmName).c_str(), true);
-	bgm->play();
-
-	thread t(&SoundManager::Sound::SoundFadeIn, this);
-	t.detach();
-}
-
 std::string SoundManager::Sound::GetPath(std::string name)
 {
 	std::string ret = path + name + ".mp3";

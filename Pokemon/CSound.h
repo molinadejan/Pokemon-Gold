@@ -27,7 +27,7 @@ public:
 	~CSound();
 
 	static int Init();
-	static int Release();
+	static int Reset();
 
 	float GetVolume();
 	void  SetVolume(float _volume);

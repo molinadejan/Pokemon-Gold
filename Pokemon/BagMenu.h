@@ -7,7 +7,6 @@
 
 class BagMenu : public BaseClass
 {
-
 private:
 
 	const Rect  bagUIRect        = { 0                , 0                 , SCREEN_SIZE_X     , 6 * MUL            };
@@ -24,8 +23,6 @@ private:
 	Rect  GetXRect          (int i) { return Rect (7 * MUL   , (i + 1) * MUL   , MUL       , MUL   ); }
 	RectF GetItemCountRectF (int i) { return RectF(R(8 * MUL), R((i + 1) * MUL), R(2 * MUL), R(MUL)); }
 	Rect  GetCursorRect     (int i) { return Rect (3 * MUL   , (i + 1) * MUL   , MUL       , MUL   ); }
-
-	PlayerData* pData;
 
 public:
 
@@ -65,12 +62,10 @@ public:
 	~BagMenu() = default;
 
 	InventoryItemData* GetCurSelectInventoryItemData();
+	void AdjustSelect();
 
-	void Init() override;
 	void Draw(Graphics& g) override;
 	void Update() override;
-
-	void AdjustSelect();
 };
 
 #endif // !__BAGMENU_H__

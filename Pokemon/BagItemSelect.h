@@ -38,7 +38,7 @@ private:
 
 public:
 
-	BagItemSelect();
+	BagItemSelect() : curSelect(0) { }
 	~BagItemSelect() = default;
 
 	void Draw(Graphics& g) override;

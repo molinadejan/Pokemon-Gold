@@ -107,7 +107,7 @@ AttackInfo CalDamage(int skillID, PokemonIndiv* attackPoke, PokemonIndiv* hitPok
 	damage = (int)(damage * random);
 
 	if (damage == 0)
-		damage = 1.0f;
+		damage = 1;
 
 	AttackInfo ret;
 
@@ -143,7 +143,7 @@ int CalExp(float battleType, int id, int enemyLevel, int s)
 
 int CalGrowthType0(int level)
 {
-	float ret = 0.8f * std::pow(level, 3);
+	double ret = 0.8f * std::pow(level, 3);
 	return (int)ret;
 }
 
@@ -154,16 +154,14 @@ int CalGrowthType1(int level)
 
 int CalGrowthType2(int level)
 {
-	float ret = 8.3f * std::pow(level, 3) - 15.0f * std::pow(level, 2) + 100 * level - 140;
-
+	double ret = 8.3f * std::pow(level, 3) - 15.0f * std::pow(level, 2) + 100 * level - 140;
 	if (ret < 0) ret = 10;
-
 	return (int)ret;
 }
 
 int CalGrowthType3(int level)
 {
-	float ret = 1.25f * std::pow(level, 3);
+	double ret = 1.25f * std::pow(level, 3);
 	return (int)ret;
 }
 

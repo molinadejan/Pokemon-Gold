@@ -26,6 +26,7 @@ private:
 	void _Moving(PointF target, float time);
 	void _Twinkling();
 	void _AttackMotion(int dir);
+	void _FallDown();
 
 public:
 
@@ -41,11 +42,10 @@ public:
 
 	bool IsPlaying();
 
+	// MovingObject Class
 	void Moving(PointF target, float time);
 	void Twinkling();
 	void AttackMotion(int dir);
-
-	void _FallDown();
 	void FallDown();
 };
 

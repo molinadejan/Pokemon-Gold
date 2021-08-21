@@ -36,7 +36,6 @@
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v141</PlatformToolset>
-    <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
@@ -132,6 +131,7 @@
       <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>C:\Users\rbtjr\Desktop\Pokemon-Gold\Pokemon\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -196,7 +196,7 @@
     <ClInclude Include="Timer.h" />
     <ClInclude Include="GameManager.h" />
     <ClInclude Include="TransDatas.h" />
-    <ClInclude Include="TweeningObject.h" />
+    <ClInclude Include="ValueVariation.h" />
     <ClInclude Include="UIManager.h" />
   </ItemGroup>
   <ItemGroup>
@@ -210,7 +210,6 @@
     <ClCompile Include="BagItemToss.cpp" />
     <ClCompile Include="BagItemTossConfirm.cpp" />
     <ClCompile Include="BagMenu.cpp" />
-    <ClCompile Include="BaseClass.cpp" />
     <ClCompile Include="BattleScreen.cpp" />
     <ClCompile Include="Converter.cpp" />
     <ClCompile Include="DataLoadManager.cpp" />
@@ -231,7 +230,7 @@
     <ClCompile Include="Timer.cpp" />
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="TransDatas.cpp" />
-    <ClCompile Include="TweeningObject.cpp" />
+    <ClCompile Include="ValueVariation.cpp" />
     <ClCompile Include="UIManager.cpp" />
   </ItemGroup>
   <ItemGroup>

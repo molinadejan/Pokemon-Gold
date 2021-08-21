@@ -10,8 +10,6 @@
 #include "GdiplusElement.h"
 #include "SoundManager.h"
 
-BagItemToss::BagItemToss() { }
-
 void BagItemToss::DrawTossText(Graphics & g)
 {
 	TransString(buffer, "bag_item_toss");
@@ -20,14 +18,14 @@ void BagItemToss::DrawTossText(Graphics & g)
 
 void BagItemToss::DrawTossCount(Graphics & g)
 {
-	UIManager::DrawDialogUI_IDX(g, 7, 4, 3, 2);
+	UM::DrawDialogUI_IDX(g, 7, 4, 3, 2);
 
 	RectF tossCountRect(7 * MUL, 4 * MUL, 2.5f * MUL, 2 * MUL);
 	_stprintf_s(buffer, _T("%02d"), tossCount);
 	g.DrawString(buffer, -1, FONT_BIG, tossCountRect, RIGHT_ALIGN, BLACK);
 
 	Rect tossXRect(7 * MUL, (INT)(4.5f * MUL), MUL, MUL);
-	g.DrawImage(DM::GetBagUI(), tossXRect, 10 * PIXEL, 2 * PIXEL, PIXEL, PIXEL, UnitPixel);
+	g.DrawImage(DM::GetUIImage("bagUI"), tossXRect, 10 * PIXEL, 2 * PIXEL, PIXEL, PIXEL, UnitPixel);
 }
 
 void BagItemToss::Init()
@@ -37,7 +35,7 @@ void BagItemToss::Init()
 
 void BagItemToss::Draw(Graphics & g)
 {
-	BagMenu* bagMenu = gm->bagMenu;
+	BagMenu* bagMenu = GM::game.bagMenu;
 
 	bagMenu->DrawBagUI(g);
 	bagMenu->DrawBottomDialog(g);
@@ -53,7 +51,7 @@ void BagItemToss::Draw(Graphics & g)
 
 void BagItemToss::Update()
 {
-	int maxCount = gm->bagMenu->GetCurSelectInventoryItemData()->count;
+	int maxCount = GM::game.bagMenu->GetCurSelectInventoryItemData()->count;
 
 	if (GET_KEY_UP && tossCount < maxCount)
 		++tossCount;
@@ -63,13 +61,13 @@ void BagItemToss::Update()
 	if (GET_KEY_Z)
 	{
 		SM::PlayEffect("button");
-		RunManager::SetTargetWithoutFade(gm->bagItemTossConfirm);
+		RM::SetTargetWithoutFade(GM::game.bagItemTossConfirm);
 	}
 
 	if (GET_KEY_X)
 	{
 		tossCount = 1;
 		SM::PlayEffect("button");
-		RunManager::SetTargetWithoutFade(gm->bagMenu);
+		RM::SetTargetWithoutFade(GM::game.bagMenu);
 	}
 }

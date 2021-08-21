@@ -3,8 +3,6 @@
 #include "GdiplusElement.h"
 #include "Timer.h"
 
-DialogShow::DialogShow() { }
-
 void DialogShow::Reset()
 {
 	texts.clear();

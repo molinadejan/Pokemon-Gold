@@ -59,35 +59,35 @@ void MovePointToJson(MovePoint &mp, Json::Value &value)
 	value["moveType"] = mp.moveType;
 }
 
-void JsonToMap(Map &map, Json::Value &value)
+void JsonToMap(Map *map, Json::Value &value)
 {
-	map.ID = value["ID"].asString();
-	map.music = value["music"].asString();
+	map->ID = value["ID"].asString();
+	map->music = value["music"].asString();
 
-	map.worldPos.X = value["worldPosX"].asInt();
-	map.worldPos.Y = value["worldPosY"].asInt();
+	map->worldPos.X = value["worldPosX"].asInt();
+	map->worldPos.Y = value["worldPosY"].asInt();
 
-	map.mapSize.X = value["mapSizeX"].asInt();
-	map.mapSize.Y = value["mapSizeY"].asInt();
+	map->mapSize.X = value["mapSizeX"].asInt();
+	map->mapSize.Y = value["mapSizeY"].asInt();
 
-	map.tiles = vector<vector<Tile>>(map.mapSize.Y, vector<Tile>(map.mapSize.X, Tile()));
+	map->tiles = vector<vector<Tile>>(map->mapSize.Y, vector<Tile>(map->mapSize.X, Tile()));
 
 	Json::Value saveTiles = value["tiles"];
 
 	for (int i = 0; i < (int)saveTiles.size(); ++i)
 	{
-		Tile &tile = map.tiles[i / map.mapSize.X][i % map.mapSize.X];
+		Tile &tile = map->tiles[i / map->mapSize.X][i % map->mapSize.X];
 		JsonToTile(tile, saveTiles[i]);
 	}
 
-	map.neighbors = vector<string>();
+	map->neighbors = vector<string>();
 
 	Json::Value n = value["neighbors"];
 
 	for (int i = 0; i < (int)n.size(); ++i)
-		map.neighbors.push_back(n[i].asString());
+		map->neighbors.push_back(n[i].asString());
 
-	map.movePoints = vector<MovePoint>();
+	map->movePoints = vector<MovePoint>();
 
 	Json::Value m = value["movePoints"];
 
@@ -95,30 +95,30 @@ void JsonToMap(Map &map, Json::Value &value)
 	{
 		MovePoint newMp;
 		JsonToMovePoint(newMp, m[i]);
-		map.movePoints.push_back(newMp);
+		map->movePoints.push_back(newMp);
 	}
 }
 
-void MapToJson(Map &map, Json::Value &value)
+void MapToJson(Map *map, Json::Value &value)
 {
-	value["ID"] = map.ID;
+	value["ID"] = map->ID;
 
-	value["music"] = map.music;
+	value["music"] = map->music;
 
-	value["worldPosX"] = map.worldPos.X;
-	value["worldPosY"] = map.worldPos.Y;
+	value["worldPosX"] = map->worldPos.X;
+	value["worldPosY"] = map->worldPos.Y;
 
-	value["mapSizeX"] = map.mapSize.X;
-	value["mapSizeY"] = map.mapSize.Y;
+	value["mapSizeX"] = map->mapSize.X;
+	value["mapSizeY"] = map->mapSize.Y;
 
 	Json::Value saveTiles;
 
-	for (int i = 0; i < map.mapSize.Y; ++i)
+	for (int i = 0; i < map->mapSize.Y; ++i)
 	{
-		for (int j = 0; j < map.mapSize.X; ++j)
+		for (int j = 0; j < map->mapSize.X; ++j)
 		{
 			Json::Value tileJson;
-			TileToJson(map.tiles[i][j], tileJson);
+			TileToJson(map->tiles[i][j], tileJson);
 			saveTiles.append(tileJson);
 		}
 	}
@@ -127,17 +127,17 @@ void MapToJson(Map &map, Json::Value &value)
 
 	Json::Value n;
 
-	for (int i = 0; i < (int)map.neighbors.size(); ++i)
-		n.append(map.neighbors[i]);
+	for (int i = 0; i < (int)map->neighbors.size(); ++i)
+		n.append(map->neighbors[i]);
 
 	value["neighbors"] = n;
 
 	Json::Value m;
 
-	for (int i = 0; i < (int)map.movePoints.size(); ++i)
+	for (int i = 0; i < (int)map->movePoints.size(); ++i)
 	{
 		Json::Value mp;
-		MovePointToJson(map.movePoints[i], mp);
+		MovePointToJson(map->movePoints[i], mp);
 		m.append(mp);
 	}
 
@@ -240,13 +240,13 @@ void JsonToSkillDesc(SkillDesc * sDesc, Json::Value & value)
 	sDesc->name = value["name"].asString();
 }
 
-void JsonToAnimRect(vector<Rect>& rectVec, Json::Value& value)
+void JsonToAnimRect(vector<Rect>* rectVec, Json::Value& value)
 {
 	Json::Value e = value["rect"];
 
 	for (int i = 0; i < (int)e.size(); ++i)
 	{
 		Rect newRect(e[i]["x"].asInt(), e[i]["y"].asInt(), e[i]["w"].asInt(), e[i]["h"].asInt());
-		rectVec.push_back(newRect);
+		rectVec->push_back(newRect);
 	}
 }

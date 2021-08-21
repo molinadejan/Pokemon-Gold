@@ -8,12 +8,14 @@
 Player::Player()
 	: pos{ 0, 0 }, posF{ (REAL)pos.X, (REAL)pos.Y }, moveDir{ 0, 0 }, inputDir(0, 0), speed(3.5f), isMoving(false), frameChangeTime(0.0f) 
 { 
-	playerImg = DM::GetPlayerInGame();
+	playerImg = DM::GetPlayerInGameImage();
 
 	walkAnim[0] = DM::GetAnimRect("player_walk_left");
 	walkAnim[1] = DM::GetAnimRect("player_walk_right");
 	walkAnim[2] = DM::GetAnimRect("player_walk_up");
 	walkAnim[3] = DM::GetAnimRect("player_walk_down");
+
+	int i = 0;
 }
 
 Player::~Player() { }
@@ -68,7 +70,7 @@ void Player::DrawPlayer(Graphics &g)
 {
 	Rect r((COL / 2 - 1) * PIXEL * SCREEN_MUL, (ROW / 2 - 0.25f) * PIXEL * SCREEN_MUL, PIXEL * SCREEN_MUL, PIXEL * SCREEN_MUL);
 
-	Rect imagePos = walkAnim[curDir][frameCount % walkAnim[curDir].size()];
+	Rect imagePos = (*walkAnim[curDir])[frameCount % (*walkAnim[curDir]).size()];
 
 	g.DrawImage(playerImg, r, imagePos.X, imagePos.Y, imagePos.Width, imagePos.Height, UnitPixel);
 }
@@ -111,7 +113,7 @@ void Player::FrameUpdate()
 			frameChangeTime = 0.0f;
 
 			++frameCount;
-			frameCount %= (int)walkAnim[3].size();
+			frameCount %= (int)walkAnim[3]->size();
 		}
 	}
 }

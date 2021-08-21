@@ -3,13 +3,14 @@
 
 UIManager::UI UIManager::ui = UIManager::UI();
 
-UIManager::UI::UI() { }
-UIManager::UI::~UI() { }
-
-// UI
-
-void UIManager::UI::_Reset()
+void UIManager::UI::Reset()
 {
+
+}
+
+void UIManager::UI::Init()
+{
+
 }
 
 void UIManager::UI::_DrawDialogUI_IDX(Graphics& g, int idxX, int idxY, int col, int row)
@@ -19,7 +20,7 @@ void UIManager::UI::_DrawDialogUI_IDX(Graphics& g, int idxX, int idxY, int col, 
 
 	g.FillRectangle(&brush, rect);
 
-	Image* dialog = DataLoadManager::GetDialogBase();
+	Image* dialog = DataLoadManager::DM::GetUIImage("dialogBase");
 	
 	Rect LT(idxX * MUL, idxY * MUL, MUL, MUL);
 	g.DrawImage(dialog, LT, 0, 0, PIXEL, PIXEL, UnitPixel);
@@ -59,7 +60,7 @@ void UIManager::UI::_DrawDialogUI_IDX(Graphics & g, float idxX, float idxY, floa
 
 	g.FillRectangle(&brush, rect);
 
-	Image* dialog = DataLoadManager::GetDialogBase();
+	Image* dialog = DataLoadManager::DM::GetUIImage("dialogBase");
 
 	Rect LT(INT(idxX * MUL), INT(idxY * MUL), MUL, MUL);
 	g.DrawImage(dialog, LT, 0, 0, PIXEL, PIXEL, UnitPixel);
@@ -94,7 +95,12 @@ void UIManager::UI::_DrawDialogUI_IDX(Graphics & g, float idxX, float idxY, floa
 
 void UIManager::Reset()
 {
-	ui._Reset();
+	ui.Reset();
+}
+
+void UIManager::Init()
+{
+	ui.Init();
 }
 
 void UIManager::DrawDialogUI_IDX(Graphics & g, int idxX, int idxY, int col, int row)

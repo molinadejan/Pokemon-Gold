@@ -20,8 +20,8 @@ private:
 
 	private:
 
-		DataLoad();
-		~DataLoad();
+		DataLoad() = default;
+		~DataLoad() = default;
 
 	private:
 
@@ -37,11 +37,15 @@ private:
 
 		void LoadAnimRect();
 
+		void LoadUIImage(); 
+
 		void Init();
+		void Reset();
 
 		void AddItemToInventory(int code, int count);
 		bool RemoveItemFromInventory(int code, int count);
 
+		float GetTypeRevision(int skillType, int pokeType);
 	private:
 
 		const float typeTable[17][17] = 
@@ -69,8 +73,8 @@ private:
 	private:
 
 		unordered_map<string, Image*> mapImages;
+		unordered_map<string, Map*> mapDatas;
 
-		unordered_map<string, Map> mapDatas;
 		unordered_map<int, ItemDesc*> itemDescs;
 
 		unordered_map<int, PokemonData*> pokemonDatas;
@@ -79,16 +83,12 @@ private:
 		unordered_map<int, SkillData*> skillDatas;
 		unordered_map<int, SkillDesc*> skillDescs;
 
-		unordered_map<string, vector<Rect>> animRects;
-
+		unordered_map<string, vector<Rect>*> animRects;
 		unordered_map<string, string> transDatas;
 
-		Image* playerInGame;
-		Image* dialogBase;
-		Image* bagUI;
-		Image* battleUI;
-		Image* pokemonPicture;
+		unordered_map<string, Image*> uiImages;
 
+		Image* playerInGame;
 		PlayerData* playerData;
 	};
 
@@ -96,21 +96,21 @@ private:
 
 	static DataLoad dataLoad;
 
+	DataLoadManager() = delete;
+	~DataLoadManager() = delete;
+
 public:
 
-	static void Reset();
+	static void Init() { dataLoad.Init(); }
+	static void Reset() { dataLoad.Reset(); }
 
-	static void SetPlayerData(PlayerData* data);
-	//static void CreatePlayerData();
+	static void SetPlayerData(PlayerData* data) { dataLoad.playerData = data; }
 
-	static Map* GetMapData(string ID);
-	static Image* GetMapImage(string ID);
+	static Map* GetMapData(string ID) { return dataLoad.mapDatas[ID]; }
+	static Image* GetMapImage(string ID) { return dataLoad.mapImages[ID]; }
 
-	static Image* GetPlayerInGame() { return dataLoad.playerInGame; }
-	static Image* GetBagUI() { return dataLoad.bagUI; }
-	static Image* GetDialogBase() { return dataLoad.dialogBase; }
-	static Image* GetBattleUI() { return dataLoad.battleUI; }
-	static Image* GetPokemonPicture() { return dataLoad.pokemonPicture; }
+	static Image* GetPlayerInGameImage() { return dataLoad.playerInGame; }
+	static Image* GetUIImage(string name) { return dataLoad.uiImages[name]; }
 
 	static ItemDesc* GetItemDesc(int code) { return dataLoad.itemDescs[code]; }
 	static PlayerData* GetPlayerData() { return dataLoad.playerData; }
@@ -121,7 +121,7 @@ public:
 	static SkillData* GetSkillData(int id) { return dataLoad.skillDatas[id]; }
 	static SkillDesc* GetSkillDesc(int id) { return dataLoad.skillDescs[id]; }
 
-	static vector<Rect> GetAnimRect(string id) { return dataLoad.animRects[id]; }
+	static vector<Rect>* GetAnimRect(string id) { return dataLoad.animRects[id]; }
 
 	static Rect GetFrontPokemonImageRect(int id);
 	static Rect GetBehindPokemonImageRect(int id);
@@ -129,8 +129,7 @@ public:
 	static void AddItemToInventory(int code, int count = 1) { dataLoad.AddItemToInventory(code, count); }
 	static bool RemoveItemFromInventory(int code, int count = 1) { return dataLoad.RemoveItemFromInventory(code, count); }
 
-	static float GetTypeRevision(int skillType, int pokeType) { return dataLoad.typeTable[skillType][pokeType]; }
-
+	static float GetTypeRevision(int skillType, int pokeType) { return dataLoad.GetTypeRevision(skillType, pokeType); }
 	static string GetStringData(string key) { return dataLoad.transDatas[key]; }
 };
 

@@ -16,7 +16,7 @@ private:
 	float turquiseTimer;
 	int cloudPosX;
 
-	vector<Rect> turquoiseVec;
+	vector<Rect>* turquoiseVec;
 	int turquiseFrameCnt;
 
 	PointF particles[5] = { PointF(R(5 * MUL), R(3.5 * MUL)), PointF(R(5 * MUL), R(4 * MUL)) , PointF(R(5 * MUL), R(5 * MUL)) , PointF(R(4 * MUL), R(5 * MUL)), PointF(R(4.5f* MUL), R(5 * MUL)) };
@@ -32,11 +32,9 @@ private:
 
 public:
 
-	Intro();
+	Intro() : introImg(NULL) { }
 
 	void Init() override;
-	void Reset() override;
-
 	void Update() override;
 	void Draw(Graphics& g) override;
 };

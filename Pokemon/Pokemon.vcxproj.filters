@@ -13,207 +13,240 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="소스 파일\Singletons">
+      <UniqueIdentifier>{c9e9b38e-2f92-40d3-98c8-bd4462b3e947}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="헤더 파일\Singletons">
+      <UniqueIdentifier>{6b97b0ce-f3aa-42d2-ae04-78067f693c75}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\External Lib">
+      <UniqueIdentifier>{fdad2bc6-610e-4952-8d54-2c64cfbc9135}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="헤더 파일\External Lib">
+      <UniqueIdentifier>{fee901d3-d448-4fa4-8e89-16f5a2f3da58}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="헤더 파일\Project">
+      <UniqueIdentifier>{a435198a-53c1-4c71-8755-4af088e9381a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Project">
+      <UniqueIdentifier>{d91a65cc-442f-4efc-9027-2f5c770ee072}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Utils">
+      <UniqueIdentifier>{a1b8faa6-d33d-4b46-99d9-2c07b523b340}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="헤더 파일\Utils">
+      <UniqueIdentifier>{37acec26-f8f3-4f6d-bccd-e9f8f3643463}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Objects">
+      <UniqueIdentifier>{52ff9a80-c01d-481f-83db-908163e1c33e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="헤더 파일\Objects">
+      <UniqueIdentifier>{7c55b8da-ff00-4a9c-8f75-f6197622265d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\BaseClasses">
+      <UniqueIdentifier>{d2b7b575-4932-45e5-9e52-9738b166a00c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="헤더 파일\BaseClasses">
+      <UniqueIdentifier>{a71ad86a-24b8-4050-bdbb-0c58fc4eefa8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="framework.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="targetver.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="Resource.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="Pokemon.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="Timer.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="Player.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="InputManager.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="DataLoadManager.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="MyUtils.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="BagMenu.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="MainMenu.h">
-      <Filter>헤더 파일</Filter>
+      <Filter>헤더 파일\Singletons</Filter>
     </ClInclude>
     <ClInclude Include="UIManager.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="GamePlay.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="BaseClass.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="GameManager.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="RunManager.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="BagItemSelect.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="BagItemToss.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="BagItemTossConfirm.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="DialogShow.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="TransDatas.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="GdiplusElement.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="BattleScreen.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="PokemonCalculator.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="Datas.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="Converter.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="MovingObject.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="AnimationObject.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="TweeningObject.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="dist\json\json.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="dist\json\json-forwards.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="Intro.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="CSound.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="GameStart.h">
-      <Filter>헤더 파일</Filter>
+      <Filter>헤더 파일\Singletons</Filter>
     </ClInclude>
     <ClInclude Include="SoundManager.h">
-      <Filter>헤더 파일</Filter>
+      <Filter>헤더 파일\Singletons</Filter>
+    </ClInclude>
+    <ClInclude Include="RunManager.h">
+      <Filter>헤더 파일\Singletons</Filter>
+    </ClInclude>
+    <ClInclude Include="GdiplusElement.h">
+      <Filter>헤더 파일\Singletons</Filter>
+    </ClInclude>
+    <ClInclude Include="Timer.h">
+      <Filter>헤더 파일\Singletons</Filter>
+    </ClInclude>
+    <ClInclude Include="InputManager.h">
+      <Filter>헤더 파일\Singletons</Filter>
+    </ClInclude>
+    <ClInclude Include="dist\json\json.h">
+      <Filter>헤더 파일\External Lib</Filter>
+    </ClInclude>
+    <ClInclude Include="dist\json\json-forwards.h">
+      <Filter>헤더 파일\External Lib</Filter>
+    </ClInclude>
+    <ClInclude Include="CSound.h">
+      <Filter>헤더 파일\External Lib</Filter>
+    </ClInclude>
+    <ClInclude Include="Pokemon.h">
+      <Filter>헤더 파일\Project</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource.h">
+      <Filter>헤더 파일\Project</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>헤더 파일\Project</Filter>
+    </ClInclude>
+    <ClInclude Include="Converter.h">
+      <Filter>헤더 파일\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Datas.h">
+      <Filter>헤더 파일\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="MyUtils.h">
+      <Filter>헤더 파일\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="PokemonCalculator.h">
+      <Filter>헤더 파일\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="TransDatas.h">
+      <Filter>헤더 파일\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="framework.h">
+      <Filter>헤더 파일\Project</Filter>
+    </ClInclude>
+    <ClInclude Include="GameManager.h">
+      <Filter>헤더 파일\Singletons</Filter>
+    </ClInclude>
+    <ClInclude Include="AnimationObject.h">
+      <Filter>헤더 파일\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="DialogShow.h">
+      <Filter>헤더 파일\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="MovingObject.h">
+      <Filter>헤더 파일\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>헤더 파일\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="ValueVariation.h">
+      <Filter>헤더 파일\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="BagItemSelect.h">
+      <Filter>헤더 파일\BaseClasses</Filter>
+    </ClInclude>
+    <ClInclude Include="GamePlay.h">
+      <Filter>헤더 파일\BaseClasses</Filter>
+    </ClInclude>
+    <ClInclude Include="GameStart.h">
+      <Filter>헤더 파일\BaseClasses</Filter>
+    </ClInclude>
+    <ClInclude Include="Intro.h">
+      <Filter>헤더 파일\BaseClasses</Filter>
+    </ClInclude>
+    <ClInclude Include="MainMenu.h">
+      <Filter>헤더 파일\BaseClasses</Filter>
+    </ClInclude>
+    <ClInclude Include="BagItemToss.h">
+      <Filter>헤더 파일\BaseClasses</Filter>
+    </ClInclude>
+    <ClInclude Include="BagItemTossConfirm.h">
+      <Filter>헤더 파일\BaseClasses</Filter>
+    </ClInclude>
+    <ClInclude Include="BagMenu.h">
+      <Filter>헤더 파일\BaseClasses</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseClass.h">
+      <Filter>헤더 파일\BaseClasses</Filter>
+    </ClInclude>
+    <ClInclude Include="BattleScreen.h">
+      <Filter>헤더 파일\BaseClasses</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Timer.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="InputManager.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="Player.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="DataLoadManager.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="main.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="MyUtils.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="BagMenu.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="MainMenu.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="UIManager.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="GamePlay.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="GameManager.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="RunManager.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="BaseClass.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="BagItemSelect.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="BagItemToss.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="BagItemTossConfirm.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="DialogShow.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="TransDatas.cpp">
-      <Filter>소스 파일</Filter>
+      <Filter>소스 파일\Singletons</Filter>
     </ClCompile>
     <ClCompile Include="GdiplusElement.cpp">
-      <Filter>소스 파일</Filter>
+      <Filter>소스 파일\Singletons</Filter>
     </ClCompile>
-    <ClCompile Include="BattleScreen.cpp">
-      <Filter>소스 파일</Filter>
+    <ClCompile Include="InputManager.cpp">
+      <Filter>소스 파일\Singletons</Filter>
     </ClCompile>
-    <ClCompile Include="PokemonCalculator.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="Datas.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="Converter.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="MovingObject.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="AnimationObject.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="TweeningObject.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="dist\jsoncpp.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="Intro.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="CSound.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="GameStart.cpp">
-      <Filter>소스 파일</Filter>
+    <ClCompile Include="RunManager.cpp">
+      <Filter>소스 파일\Singletons</Filter>
     </ClCompile>
     <ClCompile Include="SoundManager.cpp">
-      <Filter>소스 파일</Filter>
+      <Filter>소스 파일\Singletons</Filter>
+    </ClCompile>
+    <ClCompile Include="Timer.cpp">
+      <Filter>소스 파일\Singletons</Filter>
+    </ClCompile>
+    <ClCompile Include="UIManager.cpp">
+      <Filter>소스 파일\Singletons</Filter>
+    </ClCompile>
+    <ClCompile Include="CSound.cpp">
+      <Filter>소스 파일\External Lib</Filter>
+    </ClCompile>
+    <ClCompile Include="dist\jsoncpp.cpp">
+      <Filter>소스 파일\External Lib</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>소스 파일\Project</Filter>
+    </ClCompile>
+    <ClCompile Include="Converter.cpp">
+      <Filter>소스 파일\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="Datas.cpp">
+      <Filter>소스 파일\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="MyUtils.cpp">
+      <Filter>소스 파일\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="PokemonCalculator.cpp">
+      <Filter>소스 파일\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="TransDatas.cpp">
+      <Filter>소스 파일\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="GameManager.cpp">
+      <Filter>소스 파일\Singletons</Filter>
+    </ClCompile>
+    <ClCompile Include="AnimationObject.cpp">
+      <Filter>소스 파일\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="DialogShow.cpp">
+      <Filter>소스 파일\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="MovingObject.cpp">
+      <Filter>소스 파일\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>소스 파일\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="ValueVariation.cpp">
+      <Filter>소스 파일\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="Intro.cpp">
+      <Filter>소스 파일\BaseClasses</Filter>
+    </ClCompile>
+    <ClCompile Include="GameStart.cpp">
+      <Filter>소스 파일\BaseClasses</Filter>
+    </ClCompile>
+    <ClCompile Include="MainMenu.cpp">
+      <Filter>소스 파일\BaseClasses</Filter>
+    </ClCompile>
+    <ClCompile Include="GamePlay.cpp">
+      <Filter>소스 파일\BaseClasses</Filter>
+    </ClCompile>
+    <ClCompile Include="BagItemSelect.cpp">
+      <Filter>소스 파일\BaseClasses</Filter>
+    </ClCompile>
+    <ClCompile Include="BagItemToss.cpp">
+      <Filter>소스 파일\BaseClasses</Filter>
+    </ClCompile>
+    <ClCompile Include="BagItemTossConfirm.cpp">
+      <Filter>소스 파일\BaseClasses</Filter>
+    </ClCompile>
+    <ClCompile Include="BagMenu.cpp">
+      <Filter>소스 파일\BaseClasses</Filter>
+    </ClCompile>
+    <ClCompile Include="BattleScreen.cpp">
+      <Filter>소스 파일\BaseClasses</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

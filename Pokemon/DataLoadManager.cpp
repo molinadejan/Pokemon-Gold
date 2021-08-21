@@ -13,36 +13,6 @@ DataLoadManager::DataLoad DataLoadManager::dataLoad = DataLoadManager::DataLoad(
 TCHAR dataFile[128];
 TCHAR imageFile[128], *token;
 
-DataLoadManager::DataLoad::DataLoad()
-{
-	//Reset();
-}
-
-DataLoadManager::DataLoad::~DataLoad()
-{
-	/*delete collection;
-	delete fm;
-	delete fontS;
-	delete fontM;
-	delete fontB;*/
-
-	/*for (auto &e : mapImages)
-	{
-		delete e.second;
-	}*/
-
-	for (auto &e : itemDescs)
-		delete e.second;
-
-	for (auto &e : pokemonDatas)
-		delete e.second;
-
-	for (auto &e : pokemonDescs)
-		delete e.second;
-
-	delete playerData;
-}
-
 void DataLoadManager::DataLoad::LoadMap()
 {
 	WIN32_FIND_DATA findData;
@@ -69,17 +39,17 @@ void DataLoadManager::DataLoad::LoadMap()
 
 			if (readFile.is_open())
 			{
-				Map newMap;
+				Map* newMap = new Map();;
 
 				readFile >> root;
 				readFile.close();
 
 				JsonToMap(newMap, root);
 
-				mapDatas[newMap.ID] = newMap;
+				mapDatas[newMap->ID] = newMap;
 
 				Image* newImage = new Image(imageFile);
-				mapImages[newMap.ID] = newImage;
+				mapImages[newMap->ID] = newImage;
 			}
 		}
 	}
@@ -219,10 +189,41 @@ void DataLoadManager::DataLoad::LoadAnimRect()
 		for (int i = 0; i < (int)root.size(); ++i)
 		{
 			Json::Value jsonData = root[i];
-			vector<Rect> rectVec;
+			vector<Rect>* rectVec = new vector<Rect>;
 
 			JsonToAnimRect(rectVec, jsonData);
 			animRects[jsonData["name"].asString()] = rectVec;
+		}
+	}
+}
+
+void DataLoadManager::DataLoad::LoadUIImage()
+{
+	WIN32_FIND_DATA findData;
+	HANDLE hFind = INVALID_HANDLE_VALUE;
+
+	TCHAR fullPath[] = _T("data/sprite/UI/*.*");
+	TCHAR imageFilePath[256], *token;
+	char imageFileName[256];
+
+	hFind = FindFirstFile(fullPath, &findData);
+
+	if (hFind == INVALID_HANDLE_VALUE)
+		throw std::runtime_error("Invalid handle value! Please check your path...");
+
+	while (FindNextFile(hFind, &findData))
+	{
+		if (!(findData.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY))
+		{
+			TCHAR *imageName = wcstok_s(findData.cFileName, _T("."), &token);
+			_stprintf_s(imageFilePath, _T("data/sprite/UI/%s.png"), imageName);
+
+			WideCharToMultiByte(CP_ACP, 0, findData.cFileName, 256, imageFileName, 256, NULL, NULL);
+
+			std::string nameStr(imageFileName);
+
+			Image* image = new Image(imageFilePath);
+			uiImages[nameStr] = image;
 		}
 	}
 }
@@ -240,25 +241,42 @@ void DataLoadManager::DataLoad::Init()
 	LoadSkillDesc();
 
 	LoadAnimRect();
-
-	//playerData = new PlayerData;
-
-	// others
+	LoadUIImage();
 
 	playerInGame = new Image(_T("data/sprite/player/playerInGame.png"));
-	bagUI = new Image(_T("data/sprite/UI/bagUI.png"));
-	dialogBase = new Image(_T("data/sprite/UI/dialogBase.png"));
-	battleUI = new Image(_T("data/sprite/UI/battleUI.png"));
-	pokemonPicture = new Image(_T("data/sprite/pokemon/pokemonPicture.png"));
+}
 
+void DataLoadManager::DataLoad::Reset()
+{
+	for (auto &e : mapImages)
+		delete e.second;
 
-	// test //
-	/*for (int i = 1; i <= 60; ++i)
-		AddItemToInventory(i, rand() % 99 + 1);
+	for (auto &e : itemDescs)
+		delete e.second;
 
-	playerData->pokemonInBag.push_back(new PokemonIndiv(1, 16));*/
+	for (auto &e : pokemonDatas)
+		delete e.second;
 
-	// test //
+	for (auto &e : pokemonDescs)
+		delete e.second;
+
+	for (auto &e : skillDatas)
+		delete e.second;
+
+	for (auto &e : skillDescs)
+		delete e.second;
+
+	for (auto &e : mapDatas)
+		delete e.second;
+
+	for (auto &e : animRects)
+		delete e.second;
+
+	for (auto &e : uiImages)
+		delete e.second;
+
+	delete playerInGame;
+	delete playerData;
 }
 
 void DataLoadManager::DataLoad::AddItemToInventory(int code, int count)
@@ -297,29 +315,16 @@ bool DataLoadManager::DataLoad::RemoveItemFromInventory(int code, int count)
 				return true;
 			}
 
-			return false;
+			break;
 		}
 	}
+
+	return false;
 }
 
-void DataLoadManager::Reset()
+float DataLoadManager::DataLoad::GetTypeRevision(int skillType, int pokeType)
 {
-	dataLoad.Init();
-}
-
-void DataLoadManager::SetPlayerData(PlayerData* data)
-{
-	dataLoad.playerData = data;
-}
-
-Map* DataLoadManager::GetMapData(string ID)
-{
-	return &(dataLoad.mapDatas[ID]);
-}
-
-Image* DataLoadManager::GetMapImage(string ID)
-{
-	return dataLoad.mapImages[ID];
+	return typeTable[skillType][pokeType];
 }
 
 Rect DataLoadManager::GetFrontPokemonImageRect(int id)

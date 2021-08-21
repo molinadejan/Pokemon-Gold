@@ -9,25 +9,11 @@
 #include "BattleScreen.h"
 #include "Intro.h"
 #include "GameStart.h"
-#include "CSound.h"
 #include "SoundManager.h"
 
-GameManager:: GameManager() { }
+GameManager::Game GameManager::game = GameManager::Game();
 
-GameManager::~GameManager() 
-{
-	delete gamePlay;
-	delete mainMenu;
-	delete bagMenu;
-	delete bagItemSelect;
-	delete bagItemToss;
-	delete bagItemTossConfirm;
-	delete battleScreen;
-	delete intro;
-	delete gameStart;
-}
-
-void GameManager::Init()
+void GameManager::Game::Init()
 {
 	gamePlay = new GamePlay();
 	mainMenu = new MainMenu();
@@ -38,16 +24,6 @@ void GameManager::Init()
 	battleScreen = new BattleScreen();
 	intro = new Intro();
 	gameStart = new GameStart();
-
-	gamePlay->SetManager(this);
-	mainMenu->SetManager(this);
-	bagMenu->SetManager(this);
-	bagItemSelect->SetManager(this);
-	bagItemToss->SetManager(this);
-	bagItemTossConfirm->SetManager(this);
-	battleScreen->SetManager(this);
-	intro->SetManager(this);
-	gameStart->SetManager(this);
 
 	gamePlay->ResourceInit();
 	mainMenu->ResourceInit();
@@ -62,4 +38,15 @@ void GameManager::Init()
 	RunManager::SetTargetWithoutFade(intro);
 }
 
-
+void GameManager::Game::Reset()
+{
+	delete gamePlay;
+	delete mainMenu;
+	delete bagMenu;
+	delete bagItemSelect;
+	delete bagItemToss;
+	delete bagItemTossConfirm;
+	delete battleScreen;
+	delete intro;
+	delete gameStart;
+}

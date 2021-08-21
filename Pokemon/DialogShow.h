@@ -12,7 +12,7 @@ using std::string;
 
 using namespace Gdiplus;
 
-class DialogShow
+class DialogShow 
 {
 private:
 
@@ -39,7 +39,7 @@ private:
 
 public:
 
-	DialogShow();
+	DialogShow() = default;
 	~DialogShow() = default;
 
 	void Reset();

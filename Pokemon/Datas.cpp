@@ -1,6 +1,7 @@
 #include "Datas.h"
 #include "PokemonCalculator.h"
 #include "DataLoadManager.h"
+#include "MyUtils.h"
 
 Tile::Tile() 
 	: pos{ 0, 0 }, tilePos{ -1, -1 }, moveable(0), interactID(-1), isPokemon(0) { }
@@ -59,7 +60,7 @@ bool MovePoint::isCarpet()
 	return moveType < 4;
 }
 
-// 야생포켓몬 개체 데이터 생성
+// 포켓몬 개체 데이터 생성
 PokemonIndiv::PokemonIndiv(int _id, int _level)
 {
 	id = _id;
@@ -120,3 +121,37 @@ void PokemonBattleData::Reset()
 }
 
 PlayerData::PlayerData() {}
+
+Tile* GetTile(Map* m, Point pos)
+{
+	if (IsIn(pos, m->mapSize))
+		return &(m->tiles[pos.Y][pos.X]);
+
+	Point worldPos = pos + m->worldPos;
+
+	for (const string& n : m->neighbors)
+	{
+		Map* nMap = DataLoadManager::GetMapData(n);
+		Point nLocal = worldPos - nMap->worldPos;
+
+		if (IsIn(nLocal, nMap->mapSize))
+			return &(nMap->tiles[nLocal.Y][nLocal.X]);
+	}
+
+	return NULL;
+}
+
+Map* GetNMap(Map* m, Point pos)
+{
+	Point worldPos = pos + m->worldPos;
+
+	for (const string& nID : m->neighbors)
+	{
+		Map* n = DataLoadManager::GetMapData(nID);
+
+		if (IsIn(worldPos, n->worldPos, n->mapSize))
+			return n;
+	}
+
+	return NULL;
+}

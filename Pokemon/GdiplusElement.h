@@ -18,16 +18,15 @@ private:
 	private:
 
 		Element();
-		~Element();
+		~Element() = default;
 
 		void LoadMyFont();
 		void CreateMyFont();
-
 		void CreateStrFormat();
-
 		void CreateBrush();
 
-		void DeleteElements();
+		void Init();
+		void Reset();
 
 	private:
 
@@ -50,25 +49,24 @@ private:
 
 	static Element e;
 
+	GdiplusElement() = delete;
+	~GdiplusElement() = delete;
+
 public:
 
-	static void Init();
-	static void Delete();
+	static void Init() { e.Init(); }
+	static void Reset() { e.Reset(); }
 
-	static Font* GetFontS();
-	static Font* GetFontM();
-	static Font* GetFontB();
+	static Font* GetFontS() { return e.fontS; }
+	static Font* GetFontM() { return e.fontM; }
+	static Font* GetFontB() { return e.fontB; }
 
-	static StringFormat* GetLeftAlign();
-	static StringFormat* GetCenterAlign();
-	static StringFormat* GetRightAlign();
+	static StringFormat* GetLeftAlign() { return e.leftAlign; }
+	static StringFormat* GetCenterAlign() { return e.centerAlign; }
+	static StringFormat* GetRightAlign() { return e.rightAlign; }
 
-	static StringFormat* GetLeftBottomAlign();
-	static StringFormat* GetCenterBott0mAlign();
-	static StringFormat* GetRightBottomAlign();
-
-	static SolidBrush* GetBlack();
-	static SolidBrush* GetWhite();
+	static SolidBrush* GetBlack() { return e.black; }
+	static SolidBrush* GetWhite() { return e.white; }
 };
 
 #define GE			GdiplusElement
@@ -80,10 +78,6 @@ public:
 #define LEFT_ALIGN   GdiplusElement::GetLeftAlign()
 #define CENTER_ALIGN GdiplusElement::GetCenterAlign()
 #define RIGHT_ALIGN  GdiplusElement::GetRightAlign()
-
-#define LEFT_BOTTOM_ALIGN   GdiplusElement::GetLeftBottomAlign()
-#define CENTER_BOTTOM_ALIGN GdiplusElement::GetCenterBottomAlign()
-#define RIGHT_BOTTOM_ALIGN  GdiplusElement::GetRightBottomAlign()
 
 #define BLACK GdiplusElement::GetBlack()
 #define WHITE GdiplusElement::GetWhite()

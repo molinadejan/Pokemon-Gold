@@ -39,8 +39,8 @@ private:
 
 public:
 
-	BagItemTossConfirm();
-	~BagItemTossConfirm();
+	BagItemTossConfirm() = default;
+	~BagItemTossConfirm() = default;
 
 	void Init() override;
 	void Reset() override;

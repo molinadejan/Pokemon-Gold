@@ -15,10 +15,10 @@ private:
 
 	private:
 
-		Input();
+		Input() = default;
 		~Input() = default;
 
-		void Reset();
+		void Init();
 		void Update();
 
 	private:
@@ -26,35 +26,27 @@ private:
 		bool is_key_down;
 		bool is_key_left;
 		bool is_key_right;
-
-		bool is_key_z;
-		bool is_key_x;
-		bool is_key_enter;
 	};
 
 private:
 
-	static Input s_MainInput;
+	static Input input;
+
+	InputManager() = delete;
+	~InputManager() = delete;
 
 public:
 
-	static bool GetUp();
-	static bool GetDown();
-	static bool GetLeft();
-	static bool GetRight();
-	static bool GetZ();
-	static bool GetX();
-	static bool GetEnter();
-
 	static int GetHorizontal();
 	static int GetVertical();
-	static void Update();
-	static void Reset();
 
-	static bool GetKeyUp(int _key);
+	static void Update() { input.Update(); }
+	static void Init() { input.Init(); }
+
+	static bool GetKeyUp(int _key) { return GetAsyncKeyState(_key) & 0x0001 ? true : false; }
 };
 
-#define IM        InputManager
+#define IM            InputManager
 
 #define GET_KEY_Z     InputManager::GetKeyUp('Z')
 #define GET_KEY_X     InputManager::GetKeyUp('X')

@@ -15,7 +15,7 @@ void AnimationObject::Draw(Graphics & g)
 {
 	if (isPlaying)
 	{
-		Rect& curRect = imagePosVec[frameCnt];
+		Rect& curRect = (*imagePosVec)[frameCnt];
 		g.DrawImage(image, Rect(pos.X, pos.Y, screenSize.X, screenSize.Y), curRect.X, curRect.Y, curRect.Width, curRect.Height, UnitPixel);
 	}
 }
@@ -26,7 +26,7 @@ void AnimationObject::_Playing()
 
 	auto prevClock = high_resolution_clock::now();
 
-	while (frameCnt < imagePosVec.size() - 1)
+	while (frameCnt < (int)imagePosVec->size() - 1)
 	{
 		auto nextClock = high_resolution_clock::now();
 		double deltaTime = (nextClock - prevClock).count() / 1e9;

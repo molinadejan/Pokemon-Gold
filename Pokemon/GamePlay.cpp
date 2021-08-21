@@ -19,8 +19,6 @@ GamePlay::GamePlay()
 	: curData(NULL), isMapChange(false), isFirstLoad(false), checkCnt(0), tp(0)
 { }
 
-GamePlay::~GamePlay() { delete encounterImg; }
-
 void GamePlay::DrawMap(Graphics& g)
 {
 	Image* img = DM::GetMapImage(curData->ID);
@@ -48,7 +46,7 @@ void GamePlay::DrawMap(Graphics& g)
 
 		Rect nRect = { nRectOrigin.X * SCREEN_MUL, nRectOrigin.Y * SCREEN_MUL,  (11 * PIXEL - nRectOrigin.X) * SCREEN_MUL, (10 * PIXEL - nRectOrigin.Y) * SCREEN_MUL };
 
-		if (nImageOrigin.X >= nImg->GetWidth() || nImageOrigin.Y >= nImg->GetHeight())
+		if (nImageOrigin.X >= (int)nImg->GetWidth() || nImageOrigin.Y >= (int)nImg->GetHeight() || nImageOrigin.X + 11 * PIXEL - nRectOrigin.X <= 0 || nImageOrigin.Y + 10 * PIXEL - nRectOrigin.Y <= 0)
 			continue;
 
 		g.DrawImage(nImg, nRect, nImageOrigin.X, nImageOrigin.Y, 11 * PIXEL - nRectOrigin.X, 10 * PIXEL - nRectOrigin.Y, UnitPixel);
@@ -84,7 +82,7 @@ void GamePlay::DrawDebug(Graphics& g)
 
 void GamePlay::DrawEncounterAnimation(Graphics & g)
 {
-	Rect imageRect = encounterRect[frameCnt];
+	Rect imageRect = (*encounterRect)[frameCnt];
 	g.DrawImage(encounterImg, Rect(0, 0, SCREEN_SIZE_X, SCREEN_SIZE_Y), imageRect.X, imageRect.Y, imageRect.Width, imageRect.Height, UnitPixel);
 }
 
@@ -130,7 +128,7 @@ void GamePlay::_Encounter()
 
 	prevClock = high_resolution_clock::now();
 
-	while (frameCnt < (int)encounterRect.size() - 1)
+	while (frameCnt < (int)encounterRect->size() - 1)
 	{
 		auto nextClock = high_resolution_clock::now();
 		double deltaTime = (nextClock - prevClock).count() / 1e9;
@@ -150,8 +148,8 @@ void GamePlay::_Encounter()
 	isEncounter = false;
 
 	frameCnt = 0;
-	gm->battleScreen->InitWildBattle(1, 5);
-	RunManager::SetTargetWithoutFade(gm->battleScreen);
+	GM::game.battleScreen->InitWildBattle(1, 5);
+	RM::SetTargetWithoutFade(GM::game.battleScreen);
 }
 
 void GamePlay::UpdatePlayer()
@@ -195,8 +193,7 @@ void GamePlay::UpdatePlayer()
 				isMapChange = true;
 
 				SM::PlayEffect("door");
-
-				RunManager::SetTarget(gm->gamePlay, 0.3f);
+				RM::SetTarget(GM::game.gamePlay, 0.3f);
 			}
 
 			return;
@@ -222,8 +219,7 @@ void GamePlay::UpdatePlayer()
 				isMapChange = true;
 
 				SM::PlayEffect("carpet");
-
-				RunManager::SetTarget(gm->gamePlay, 0.3f);
+				RM::SetTarget(GM::game.gamePlay, 0.3f);
 				return;
 			}
 		}
@@ -237,12 +233,11 @@ void GamePlay::Init()
 {
 	if (!isFirstLoad)
 	{
-		PlayerData* data = DM::GetPlayerData();
 		player = new Player();
-		player->SetPos(data->pos);
-		curData = DM::GetMapData(data->locationID);
+		player->SetPos(DM::GetPlayerData()->pos);
+		curData = DM::GetMapData(DM::GetPlayerData()->locationID);
 		isFirstLoad = true;
-		encounterImg = new Image(_T("data/sprite/UI/encounter.png"));
+		encounterImg = DM::GetUIImage("encounter");
 		encounterRect = DM::GetAnimRect("encounter");
 	}
 
@@ -259,7 +254,7 @@ void GamePlay::Update()
 	if (GET_KEY_ENTER && !player->GetIsMoving())
 	{
 		SM::PlayEffect("bagOpen");
-		RunManager::SetTargetWithoutFade(gm->mainMenu);
+		RM::SetTargetWithoutFade(GM::game.mainMenu);
 	}
 
 	if (player->GetIsMoving())

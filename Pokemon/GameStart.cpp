@@ -11,11 +11,9 @@
 
 using std::fstream;
 
-GameStart::GameStart() { }
-
 void GameStart::Init()
 {
-	dialogImg = DM::GetDialogBase();
+	dialogImg = DM::GetUIImage("dialogBase");
 
 	fstream openFile("data/save/save.json");
 
@@ -32,11 +30,6 @@ void GameStart::Init()
 	SM::ChangeBgmWithoutFade("gameStart", true);
 }
 
-void GameStart::Reset()
-{
-
-}
-
 void GameStart::Update()
 {
 	if (GET_KEY_UP && curSelectMenu > 0)
@@ -51,31 +44,32 @@ void GameStart::Update()
 
 		if (isSaveFile)
 		{
-
+			// 미구현 상태
 		}
 		else
 		{
 			data->locationID = "player_room";
 			data->pos = { 1, 4 };
-			data->pokemonInBag.push_back(new PokemonIndiv(1, 16));
+			data->pokemonInBag.push_back(new PokemonIndiv(2, 16));
 
 			DM::SetPlayerData(data);
 
-			for (int i = 1; i <= 60; ++i)
-				DM::AddItemToInventory(i, rand() % 99 + 1);
+			for (int i = 1; i <= 7; ++i)
+				DM::AddItemToInventory(i, rand() % 10 + 1);
 
-			RunManager::SetTarget(gm->gamePlay);
+			DM::AddItemToInventory(59, 10);
+			RM::SetTarget(GM::game.gamePlay);
 		}
 	}
 
 	if (GET_KEY_X)
-		RunManager::SetTarget(gm->intro, 2.0f);
+		RM::SetTarget(GM::game.intro, 2.0f);
 }
 
 void GameStart::Draw(Graphics & g)
 {
 	g.FillRectangle(WHITE, 0, 0, SCREEN_SIZE_X, SCREEN_SIZE_Y);
-	UIManager::DrawDialogUI_IDX(g, 0, 0, 8, isSaveFile ? 3 : 2);
+	UM::DrawDialogUI_IDX(g, 0, 0, 8, isSaveFile ? 3 : 2);
 
 	if (isSaveFile)
 	{

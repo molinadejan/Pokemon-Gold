@@ -13,11 +13,11 @@ void TileToJson(Tile &tile, Json::Value &value);
 
 void JsonToMovePoint(MovePoint &mp, Json::Value &value);
 
-void MovePointToJson(MovePoint &mp, Json::Value &value);
+void MovePointToJson(MovePoint &mp, Json::Value &value); 
 
-void JsonToMap(Map &map, Json::Value &value);
+void JsonToMap(Map *map, Json::Value &value);
 
-void MapToJson(Map &map, Json::Value &value);
+void MapToJson(Map *map, Json::Value &value);
 
 void JsonToItemDesc(ItemDesc* itemDesc, Json::Value &value);
 
@@ -32,6 +32,6 @@ void JsonToSkillData(SkillData* sData, Json::Value &value);
 
 void JsonToSkillDesc(SkillDesc* sDesc, Json::Value &value);
 
-void JsonToAnimRect(vector<Rect>& rectVec, Json::Value &value);
+void JsonToAnimRect(vector<Rect>* rectVec, Json::Value &value);
 
 #endif // !__CONVERTER_HPP_

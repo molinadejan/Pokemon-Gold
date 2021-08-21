@@ -11,18 +11,14 @@
 #include "GdiplusElement.h"
 #include "SoundManager.h"
 
-BagItemTossConfirm::BagItemTossConfirm() { }
-
-BagItemTossConfirm::~BagItemTossConfirm() { }
-
 void BagItemTossConfirm::Init()
 {
 	dialogShow = new DialogShow();
 
-	curItemData = gm->bagMenu->GetCurSelectInventoryItemData();
+	curItemData = GM::game.bagMenu->GetCurSelectInventoryItemData();
 
 	string itemName = DM::GetItemDesc(curItemData->code)->name;
-	int count = gm->bagItemToss->GetTossCount();
+	int count = GM::game.bagItemToss->GetTossCount();
 
 	dialogShow->Reset();
 	dialogShow->Push(TransString(NULL, "bag_item_toss_confirm", 2, TokenChange("item_name", itemName), TokenChange("item_count", std::to_string(count))));
@@ -42,7 +38,7 @@ void BagItemTossConfirm::Reset()
 
 void BagItemTossConfirm::DrawConfirmUI(Graphics& g)
 {
-	UIManager::DrawDialogUI_IDX(g, 7, 3, 3, 3);
+	UM::DrawDialogUI_IDX(g, 7, 3, 3, 3);
 
 	for (int i = 0; i < 2; ++i)
 	{
@@ -52,12 +48,12 @@ void BagItemTossConfirm::DrawConfirmUI(Graphics& g)
 	}
 
 	Rect cursorRect(7 * MUL, (INT)((3.5f + confirmSelect) * MUL), MUL, MUL);
-	g.DrawImage(DM::GetBagUI(), cursorRect, 10 * PIXEL, 1 * PIXEL, PIXEL, PIXEL, UnitPixel);
+	g.DrawImage(DM::GetUIImage("bagUI"), cursorRect, 10 * PIXEL, 1 * PIXEL, PIXEL, PIXEL, UnitPixel);
 }
 
 void BagItemTossConfirm::Draw(Graphics& g)
 {
-	BagMenu* bagMenu = gm->bagMenu;
+	BagMenu* bagMenu = GM::game.bagMenu;
 
 	bagMenu->DrawBagUI(g);
 	bagMenu->DrawBagTypeAndText(g);
@@ -105,8 +101,8 @@ void BagItemTossConfirm::Update()
 
 					string name = DM::GetItemDesc(curItemData->code)->name;
 
-					if (DM::RemoveItemFromInventory(curItemData->code, gm->bagItemToss->GetTossCount()))
-						gm->bagMenu->AdjustSelect();
+					if (DM::RemoveItemFromInventory(curItemData->code, GM::game.bagItemToss->GetTossCount()))
+						GM::game.bagMenu->AdjustSelect();
 					
 					TransString(buffer, "bag_item_toss_finish", 1, TokenChange("item_name", name));
 					curState = TossFinish;
@@ -114,7 +110,7 @@ void BagItemTossConfirm::Update()
 				else if (GET_KEY_X || (GET_KEY_Z && confirmSelect == 1))
 				{
 					SM::PlayEffect("button");
-					RunManager::SetTargetWithoutFade(gm->bagMenu);
+					RM::SetTargetWithoutFade(GM::game.bagMenu);
 				}
 			}
 		}
@@ -125,7 +121,7 @@ void BagItemTossConfirm::Update()
 			if (GET_KEY_Z)
 			{
 				SM::PlayEffect("button");
-				RunManager::SetTargetWithoutFade(gm->bagMenu);
+				RM::SetTargetWithoutFade(GM::game.bagMenu);
 			}
 		}
 		break;

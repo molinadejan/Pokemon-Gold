@@ -15,7 +15,7 @@ private:
 	Map* curData;
 
 	Image* encounterImg;
-	vector<Rect> encounterRect;
+	vector<Rect>* encounterRect;
 	int frameCnt;
 
 	bool isMapChange;
@@ -37,7 +37,7 @@ private:
 public:
 
 	GamePlay();
-	~GamePlay();
+	~GamePlay() = default;
 
 	void Init() override;
 	void Update() override;

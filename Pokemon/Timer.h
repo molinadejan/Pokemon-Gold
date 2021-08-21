@@ -10,36 +10,40 @@
 class Timer
 {
 private:
+
 	class Time
 	{
 		friend Timer;
 
 	private:
 
-		Time();
+		Time() = default;
 		~Time() = default;
 
-		void Reset();
-		float Update();
+		void Init();
+		void Update();
 
 	private:
-		LARGE_INTEGER m_CountTime;
-		LARGE_INTEGER m_CurTime;
-		LARGE_INTEGER m_PrevTime;
-		double m_dDeltaTime;
-		float m_fDeltaTime;
+
+		LARGE_INTEGER countTime;
+		LARGE_INTEGER curTime;
+		LARGE_INTEGER prevTime;
+
+		float deltaTime;
 	};
 
 private:
-	static Time s_MainTimer;
 
-public:
+	static Time timer;
+
 	Timer() = delete;
 	~Timer() = delete;
 
-	static float DeltaTime();
-	static void Update();
-	static void Reset();
+public:
+
+	static float DeltaTime() { return timer.deltaTime; }
+	static void Update() { timer.Update(); }
+	static void Init() { timer.Init(); }
 };
 
 #endif // !__DELTA_TIME_H__

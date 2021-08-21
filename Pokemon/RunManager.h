@@ -28,14 +28,13 @@ private:
 
 	private:
 
-		Run();
-		~Run();
+		Run() = default;
+		~Run() = default;
 
 	private:
 
 		drawPtr draw;
 		updatePtr update;
-		bool isPop;
 
 		BaseClass* target;
 		BaseClass* oldTarget;
@@ -45,12 +44,14 @@ private:
 
 	private:
 
-		void setFunc();
+		void SetFunc();
 
-		void _setTarget(BaseClass* _base, float _fadeTime = 1.0f);
-		void setTarget(BaseClass* _base, float _fadeTime = 1.0f);
+		void _SetTarget(BaseClass* _base, float _fadeTime = 1.0f);
+		void SetTarget(BaseClass* _base, float _fadeTime = 1.0f);
 
-		void reset();
+		void SetTargetWithoutFade(BaseClass* _base);
+
+		void Init();
 	};
 
 private:
@@ -65,10 +66,10 @@ private:
 
 public:
 
-	static void Reset();
-	static void SetTarget(BaseClass* _base, float _fadeTime = 1.0f);
-	static void SetTargetWithoutFade(BaseClass* _base);
+	static void SetTarget(BaseClass* _base, float _fadeTime = 1.0f) { run.SetTarget(_base, _fadeTime); }
+	static void SetTargetWithoutFade(BaseClass* _base) { run.SetTargetWithoutFade(_base); }
 
+	static void Init() { run.Init(); }
 	static void Update();
 	static void Draw(HWND hWnd);
 };

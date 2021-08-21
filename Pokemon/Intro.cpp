@@ -5,11 +5,9 @@
 #include "RunManager.h"
 #include "SoundManager.h"
 
-Intro::Intro() : introImg(NULL) { }
-
 void Intro::Init()
 {
-	introImg = new Image(_T("data/sprite/Intro/intro.png"));
+	introImg = DM::GetUIImage("intro");
 
 	backgroundTimer = 0.0f;
 	turquiseTimer = 0.0f;
@@ -23,11 +21,6 @@ void Intro::Init()
 		pos[i] = particles[i];
 
 	SM::ChangeBgmWithoutFade("intro", true);
-}
-
-void Intro::Reset()
-{
-	delete introImg;
 }
 
 void Intro::Update()
@@ -51,7 +44,7 @@ void Intro::Update()
 
 		++turquiseFrameCnt;
 
-		if (turquiseFrameCnt == (int)turquoiseVec.size())
+		if (turquiseFrameCnt == (int)turquoiseVec->size())
 			turquiseFrameCnt = 0;
 	}
 
@@ -65,9 +58,7 @@ void Intro::Update()
 	}
 	
 	if (GET_KEY_Z)
-	{
-		RunManager::SetTarget(gm->gameStart, 2.0f);
-	}
+		RM::SetTarget(GM::game.gameStart, 2.0f);
 }
 
 void Intro::Draw(Graphics & g)
@@ -75,10 +66,10 @@ void Intro::Draw(Graphics & g)
 	g.DrawImage(introImg, TitleRect, 0, 0, 10 * PIXEL, 6 * PIXEL, UnitPixel);
 	g.DrawImage(introImg, CloudRect, cloudPosX, 6 * PIXEL, 10 * PIXEL, 2 * PIXEL, UnitPixel);
 	g.DrawImage(introImg, CompanyRect, 0, 8 * PIXEL, 10 * PIXEL, PIXEL, UnitPixel);
-	g.DrawImage(introImg, turquiseRect, turquoiseVec[turquiseFrameCnt].X, turquoiseVec[turquiseFrameCnt].Y, turquoiseVec[turquiseFrameCnt].Width, turquoiseVec[turquiseFrameCnt].Height, UnitPixel);
+	g.DrawImage(introImg, turquiseRect, (*turquoiseVec)[turquiseFrameCnt].X, (*turquoiseVec)[turquiseFrameCnt].Y, (*turquoiseVec)[turquiseFrameCnt].Width, (*turquoiseVec)[turquiseFrameCnt].Height, UnitPixel);
 
 	for (int i = 0; i < 5; ++i)
 	{
-		g.DrawImage(introImg, Rect(pos[i].X, pos[i].Y, 18 * SCREEN_MUL, 16 * SCREEN_MUL), 11 * PIXEL, 4 * PIXEL, 18, 16, UnitPixel);
+		g.DrawImage(introImg, Rect(INT(pos[i].X), INT(pos[i].Y), 18 * SCREEN_MUL, 16 * SCREEN_MUL), 11 * PIXEL, 4 * PIXEL, 18, 16, UnitPixel);
 	}
 }

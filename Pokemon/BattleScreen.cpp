@@ -48,7 +48,7 @@ void BattleScreen::InitWildBattle(int pokemonID, int level)
 
 	playerBattleData = new PokemonBattleData();
 	enemyBattleData = new PokemonBattleData();
-	tweeningObject = new TweeningObject();
+	valueVariation = new ValueVariation();
 
 	updateQ.push(&BattleScreen::Step1);
 }
@@ -72,7 +72,7 @@ void BattleScreen::Reset()
 
 		delete playerBattleData;
 		delete enemyBattleData;
-		delete tweeningObject;
+		delete valueVariation;
 	}
 	else if (battleType == Trainer)
 	{
@@ -491,7 +491,7 @@ bool BattleScreen::Step10_5()
 			int newHp = enemyPokemon->hp - playerAttackInfo.damage;
 			newHp = newHp < 0 ? 0 : newHp;
 
-			tweeningObject->Tween(&enemyPokemon->hp, newHp);
+			valueVariation->Variation(&enemyPokemon->hp, newHp);
 
 			dialogShow->Reset();
 		
@@ -523,7 +523,7 @@ bool BattleScreen::Step10_5()
 
 			dialogShow->Reset();
 
-			tweeningObject->Tween(&playerPokemon->hp, newHp);
+			valueVariation->Variation(&playerPokemon->hp, newHp);
 
 			if (enemyAttackInfo.effect == 2)
 			{
@@ -550,7 +550,7 @@ bool BattleScreen::Step10_5()
 
 bool BattleScreen::Step10_7()
 {
-	if (tweeningObject->IsPlaying())
+	if (valueVariation->IsPlaying())
 		return false;
 
 	updateQ.push(&BattleScreen::Step11);
@@ -637,7 +637,7 @@ bool BattleScreen::Step14()
 {
 	if (GET_KEY_Z || GET_KEY_X)
 	{
-		RunManager::SetTarget(gm->gamePlay);
+		RM::SetTarget(GM::game.gamePlay);
 		return true;
 	}
 
@@ -685,7 +685,7 @@ void BattleScreen::DrawBackground(Graphics & g)
 
 void BattleScreen::DrawMainDialog(Graphics & g)
 {
-	UIManager::DrawDialogUI_IDX(g, 0, 6, COL, 3);
+	UM::DrawDialogUI_IDX(g, 0, 6, COL, 3);
 }
 
 void BattleScreen::DrawBattleMenuDialog(Graphics & g)
@@ -693,7 +693,7 @@ void BattleScreen::DrawBattleMenuDialog(Graphics & g)
 	if (!battleMenuDialogSwitch)
 		return;
 
-	UIManager::DrawDialogUI_IDX(g, 4, 6, COL - 4, 3);
+	UM::DrawDialogUI_IDX(g, 4, 6, COL - 4, 3);
 }
 
 void BattleScreen::DrawBattleMenu(Graphics & g)
@@ -729,7 +729,7 @@ void BattleScreen::DrawFightMenuDialog(Graphics &g)
 	if (!fightMenuDialogSwitch)
 		return;
 
-	UIManager::DrawDialogUI_IDX(g, 0.0f, 4.0f, 4.5f, 5.0f);
+	UM::DrawDialogUI_IDX(g, 0.0f, 4.0f, 4.5f, 5.0f);
 }
 
 void BattleScreen::DrawFightMenu(Graphics &g)
@@ -875,8 +875,8 @@ void BattleScreen::DrawDialogShow(Graphics &g)
 
 void BattleScreen::ResourceInit()
 {
-	battleUI = DM::GetBattleUI();
-	pokemonPic = DM::GetPokemonPicture();
+	battleUI = DM::GetUIImage("battleUI");
+	pokemonPic = DM::GetUIImage("pokemonPicture");
 }
 
 void BattleScreen::Update()

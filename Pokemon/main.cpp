@@ -18,7 +18,6 @@ HINSTANCE hInst;
 WCHAR szTitle[MAX_LOADSTRING];
 WCHAR szWindowClass[MAX_LOADSTRING];
 
-GameManager gameManager;
 ULONG_PTR token;
 
 ATOM                MyRegisterClass(HINSTANCE hInstance);
@@ -34,14 +33,15 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance
 	GdiplusStartup(&token, &gpsi, NULL);
 
 	CSound::Init();
-	Timer::Reset();
-	IM::Reset();
-	DM::Reset();
-	UIManager::Reset();
-	RunManager::Reset();
+	Timer::Init();
 
+	IM::Init();
+	DM::Init();
+	UM::Init();
 	GE::Init();
 	SM::Init();
+	RM::Init();
+	GM::Init();
 
     UNREFERENCED_PARAMETER(hPrevInstance);
     UNREFERENCED_PARAMETER(lpCmdLine);
@@ -72,14 +72,18 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance
 		else
 		{
 			Timer::Update();
-			InputManager::Update();
-			RunManager::Update();
+			IM::Update();
+			RM::Update();
 		}
 	}
 
-	GE::Delete();
-	SM::Delete();
-	CSound::Release();
+	DM::Reset();
+	UM::Reset();
+	SM::Reset();
+	GE::Reset();
+	GM::Reset();
+
+	CSound::Reset();
 
 	GdiplusShutdown(token);
 
@@ -134,9 +138,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 			AdjustWindowRect(&rect, WS_OVERLAPPED | WS_CAPTION | WS_SYSMENU | WS_THICKFRAME, FALSE);
 			MoveWindow(hWnd, 100, 100, rect.right - rect.left, rect.bottom - rect.top, TRUE);
 
-			gameManager.Init();
-
-			SetTimer(hWnd, 0, 14, NULL);
+			SetTimer(hWnd, 0, 12, NULL);
 		}
 		break;
 
@@ -173,7 +175,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 
 		case WM_PAINT:
 		{
-			RunManager::Draw(hWnd);
+			RM::Draw(hWnd);
 		}
 		break;
 

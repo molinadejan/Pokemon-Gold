@@ -15,7 +15,7 @@ class AnimationObject : public MovingObject
 private:
 
 	int frameCnt;
-	vector<Rect> imagePosVec;
+	vector<Rect>* imagePosVec;
 
 public:
 

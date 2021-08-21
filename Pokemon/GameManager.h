@@ -16,29 +16,53 @@ class BagItemTossConfirm;
 class BattleScreen;
 class Intro;
 class GameStart;
-class CSound;
 
 class GameManager
 {
+private:
+
+	class Game
+	{
+		friend GameManager;
+
+	private:
+
+		Game() = default;
+		~Game() = default;
+
+	public:
+
+		GamePlay *gamePlay;
+		MainMenu *mainMenu;
+		BagMenu *bagMenu;
+		BagItemSelect *bagItemSelect;
+		BagItemToss* bagItemToss;
+		BagItemTossConfirm* bagItemTossConfirm;
+		BattleScreen* battleScreen;
+		Intro *intro;
+		GameStart* gameStart;
+
+	private:
+
+		void Init();
+		void Reset();
+	};
+
 public:
 
-	GamePlay *gamePlay;
-	MainMenu *mainMenu;
-	BagMenu *bagMenu;
-	BagItemSelect *bagItemSelect;
-	BagItemToss* bagItemToss;
-	BagItemTossConfirm* bagItemTossConfirm;
-	BattleScreen* battleScreen;
-	Intro *intro;
-	GameStart* gameStart;
+	static Game game;
+
+private:
+
+	GameManager() = delete;
+	~GameManager() = delete;
 
 public:
 
-	GameManager();
-	~GameManager();
-
-	void Init();
+	static void Init() { game.Init(); }
+	static void Reset() { game.Reset(); }
 };
 
+#define GM GameManager
 
 #endif

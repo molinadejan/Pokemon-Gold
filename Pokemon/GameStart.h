@@ -23,11 +23,9 @@ private:
 
 public:
 
-	GameStart();
+	GameStart() = default;
 
 	void Init() override;
-	void Reset() override;
-
 	void Update() override;
 	void Draw(Graphics &g) override;
 };

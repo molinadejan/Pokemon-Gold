@@ -7,7 +7,7 @@
 TokenChange::TokenChange(string _token, string _change)
 	: token(_token), change(_change) { }
 
-void StringReplaceMent(string & str, const string & from, const string & to)
+void StringReplaceMent(string& str, const string& from, const string& to)
 {
 	size_t startPos = 0;
 

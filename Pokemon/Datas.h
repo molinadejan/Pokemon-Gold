@@ -18,8 +18,8 @@ struct Tile
 	Point pos;
 	Point tilePos;
 
-	// 0 : 이동 불가능
-	// 1 : 이동 가능
+	// 0 : 이동 가능
+	// 1 이상 : 이동 불가능
 	int moveable;
 	int interactID;
 	int isPokemon;
@@ -49,12 +49,10 @@ struct Map
 	vector<vector<Tile>> tiles;
 	vector<string> neighbors;
 	vector<MovePoint> movePoints;
-
-	// 맵에서 등장하는 포켓몬 아이디
-	// vector<???> pokeData;
+	vector<int> pokemons;
 
 	// 맵에서 등장하는 엔피씨 아이디
-	// vector<???> npcData
+	// vector<???> npcs
 
 	Map();
 	Map(string _ID, int x, int y);
@@ -196,6 +194,10 @@ struct AttackInfo
 	// 기술 타입? 데미지 인지 상태이상인지...
 	// int type;
 };
+
+Tile* GetTile(Map *m, Point pos);
+
+Map* GetNMap(Map* m, Point pos);
 
 #endif // !__DATAS_H__
 

@@ -11,28 +11,23 @@
 
 using namespace Gdiplus;
 
-class GameManager;
-
 class BaseClass
 {
 protected:
-
-	GameManager* gm;
 
 	TCHAR buffer[256];
 
 public:
 
-	BaseClass();
-	~BaseClass();
+	BaseClass() = default;
+	~BaseClass() = default;
 
-	virtual void ResourceInit();
-	virtual void Init() { };
-	virtual void Reset() { };
+	virtual void ResourceInit() { }
+	virtual void Init() { }
+	virtual void Reset() { }
 
-	void SetManager(GameManager* _gm);
-	virtual void Update();
-	virtual void Draw(Graphics& g);
+	virtual void Update() { }
+	virtual void Draw(Graphics& g) { }
 };
 
 #endif

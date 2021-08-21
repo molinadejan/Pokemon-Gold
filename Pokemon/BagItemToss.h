@@ -22,7 +22,7 @@ private:
 
 public:
 
-	BagItemToss();
+	BagItemToss() = default;
 	~BagItemToss() = default;
 
 	int GetTossCount() const { return tossCount; }

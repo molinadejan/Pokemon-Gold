@@ -8,7 +8,7 @@
 #include "MovingObject.h"
 #include "DialogShow.h"
 #include "AnimationObject.h"
-#include "TweeningObject.h"
+#include "ValueVariation.h"
 
 #include <queue>
 
@@ -122,7 +122,7 @@ private:
 	AnimationObject* anim;
 	DialogShow* dialogShow;
 
-	TweeningObject* tweeningObject;
+	ValueVariation* valueVariation;
 
 	//int battleCount;
 	int playerSelectSkillID;
@@ -156,8 +156,8 @@ private:
 	bool Step12();
 	bool Step13();
 	bool Step14();
-	bool Step15();
-	bool Step16();
+	//bool Step15();
+	//bool Step16();
 
 
 	bool DialogShowing();

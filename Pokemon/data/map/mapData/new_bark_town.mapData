@@ -1199,7 +1199,7 @@
 		{
 			"interact ID" : -1,
 			"isPokemon" : 0,
-			"moveable" : 0,
+			"moveable" : 1,
 			"posX" : 8,
 			"posY" : 5,
 			"tilePosX" : 64,
@@ -2900,7 +2900,7 @@
 		{
 			"interact ID" : -1,
 			"isPokemon" : 0,
-			"moveable" : 0,
+			"moveable" : 1,
 			"posX" : 5,
 			"posY" : 13,
 			"tilePosX" : 64,
@@ -3404,7 +3404,7 @@
 		{
 			"interact ID" : -1,
 			"isPokemon" : 0,
-			"moveable" : 0,
+			"moveable" : 1,
 			"posX" : 13,
 			"posY" : 15,
 			"tilePosX" : 64,
